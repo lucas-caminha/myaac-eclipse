@@ -732,3 +732,88 @@ body {
   content: "Criar Conta";
   font-size: 11px;
 }
+
+/* Hard center account/download button text inside the actual 206px button boxes. */
+#Loginbox #LoginButton,
+#Loginbox #LoginButton > div,
+#DownloadBox #PlayNowContainer,
+#DownloadBox .MediumButtonBackground {
+  box-sizing: border-box !important;
+  width: 206px !important;
+  height: 38px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+#Loginbox #LoginButton #ButtonText,
+#DownloadBox .MediumButtonText {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 206px !important;
+  height: 38px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-align: center !important;
+  background: none !important;
+  transform: none !important;
+}
+
+#Loginbox #LoginButton #ButtonText::before,
+#DownloadBox .MediumButtonText::before {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 206px;
+  height: 38px;
+  color: #fff2cf;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 38px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  text-shadow: 0 1px 0 #000, 0 0 8px rgba(255, 88, 24, .50);
+  pointer-events: none;
+}
+
+#Loginbox #LoginButton #ButtonText::before {
+  content: "ENTRAR";
+}
+
+#Loginbox #LoginButton #ButtonText.account::before {
+  content: "MINHA CONTA";
+}
+
+#DownloadBox .MediumButtonText::before {
+  content: "DOWNLOAD";
+}
+
+#LoginstatusText_2 {
+  position: relative !important;
+  width: 206px !important;
+  height: 27px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#LoginstatusText_2::before {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 206px;
+  height: 27px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
