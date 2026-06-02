@@ -893,3 +893,111 @@ body {
     margin-left: 0 !important;
   }
 }
+
+/* Final sidebar rhythm: smaller centered controls with consistent vertical spacing. */
+:root {
+  --eclipse-side-width: 190px;
+  --eclipse-side-column: 220px;
+}
+
+#MenuColumn {
+  width: var(--eclipse-side-column) !important;
+  align-items: center !important;
+}
+
+#LeftArtwork {
+  width: var(--eclipse-side-column) !important;
+}
+
+#LeftArtwork #TibiaLogoArtworkTop {
+  width: 286px !important;
+  height: 208px !important;
+}
+
+#Loginbox,
+#DownloadBox,
+#Menu,
+.menuitem,
+.MenuButton,
+.Submenu {
+  box-sizing: border-box !important;
+}
+
+#Loginbox,
+#DownloadBox,
+#Menu,
+.menuitem,
+.MenuButton {
+  width: var(--eclipse-side-width) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+#Loginbox #LoginButton,
+#Loginbox #LoginButton > div,
+#Loginbox #LoginButtonContainer,
+#DownloadBox #PlayNowContainer,
+#DownloadBox .MediumButtonBackground,
+#DownloadBox .SmallBoxButtonContainer {
+  width: var(--eclipse-side-width) !important;
+}
+
+#Loginbox #LoginButton #ButtonText,
+#Loginbox #LoginButton #ButtonText::before,
+#DownloadBox .MediumButtonText,
+#DownloadBox .MediumButtonText::before {
+  width: var(--eclipse-side-width) !important;
+}
+
+#Loginbox .Loginstatus,
+#LoginstatusText_2,
+#LoginstatusText_2::before {
+  width: var(--eclipse-side-width) !important;
+}
+
+#Loginbox {
+  margin-bottom: 0 !important;
+}
+
+#Loginbox #LoginButtonContainer {
+  margin-bottom: 3px !important;
+}
+
+#DownloadBox {
+  margin-top: 12px !important;
+  margin-bottom: 14px !important;
+}
+
+#Menu {
+  padding-top: 0 !important;
+}
+
+.menuitem {
+  margin-bottom: 7px !important;
+}
+
+.Submenu {
+  width: calc(var(--eclipse-side-width) - 10px) !important;
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+}
+
+.MenuButton .Icon,
+.Icon {
+  left: 10px !important;
+}
+
+.MenuButton .Label,
+.Label {
+  left: 44px !important;
+  width: 126px !important;
+}
+
+.MenuButton .Extend,
+.Extend {
+  right: 7px !important;
+}
+
+#ContentColumn {
+  margin-left: 226px !important;
+}
