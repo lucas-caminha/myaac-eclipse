@@ -679,3 +679,56 @@ body {
   margin-top: 10px !important;
   margin-bottom: 14px !important;
 }
+
+/* Text cleanup pass: no accent on NOTICIAS and no duplicated legacy button images. */
+#news_Label::before { content: "Noticias"; }
+
+#Loginbox #ButtonText,
+#DownloadBox .MediumButtonText {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100% !important;
+  height: 100% !important;
+  color: #fff2cf !important;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1 !important;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  text-shadow: 0 1px 0 #000, 0 0 8px rgba(255, 88, 24, .50);
+  background: none !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+#Loginbox #ButtonText::before {
+  content: "Entrar";
+  display: block;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-shadow: inherit;
+}
+
+#Loginbox #ButtonText.account::before {
+  content: "Minha Conta";
+}
+
+#DownloadBox .MediumButtonBackground::after {
+  content: none !important;
+}
+
+#DownloadBox .MediumButtonText {
+  position: relative !important;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+#LoginstatusText_2::before {
+  content: "Criar Conta";
+  font-size: 11px;
+}
