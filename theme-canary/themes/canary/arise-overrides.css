@@ -482,3 +482,200 @@ body {
   visibility: hidden !important;
   opacity: 0 !important;
 }
+
+/* Portuguese menu labels and polished account/download boxes. */
+#news_Label,
+#account_Label,
+#community_Label,
+#library_Label,
+#charactertrade_Label,
+#shops_Label,
+#support_Label,
+#events_Label,
+#wars_Label {
+  background-image: none !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #fff0c6;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  text-shadow:
+    0 1px 0 #000,
+    0 0 6px rgba(255, 93, 25, .55),
+    0 0 12px rgba(0, 0, 0, .85);
+}
+
+#news_Label::before { content: "Not?cias"; }
+#account_Label::before { content: "Conta"; }
+#community_Label::before { content: "Comunidade"; }
+#library_Label::before { content: "Biblioteca"; }
+#charactertrade_Label::before { content: "Bazaar"; }
+#shops_Label::before { content: "Loja"; }
+#support_Label::before { content: "Suporte"; }
+#events_Label::before { content: "Eventos"; }
+#wars_Label::before { content: "Guerras"; }
+
+#Loginbox,
+#DownloadBox {
+  width: 206px !important;
+  filter: drop-shadow(0 10px 16px rgba(0,0,0,.72)) !important;
+}
+
+#Loginbox #LoginTop,
+#Loginbox #LoginBottom,
+#Loginbox .LoginBorder,
+#DownloadBox .SmallBoxTop,
+#DownloadBox .SmallBoxBottom,
+#DownloadBox .SmallBoxBorder {
+  display: none !important;
+}
+
+#Loginbox #LoginButtonContainer,
+#Loginbox .Loginstatus,
+#DownloadBox .SmallBoxButtonContainer {
+  width: 206px !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 0 6px !important;
+  padding: 0 !important;
+  background-image: none !important;
+  background: transparent !important;
+}
+
+#Loginbox #LoginButton,
+#DownloadBox #PlayNowContainer,
+#DownloadBox .MediumButtonBackground {
+  width: 206px !important;
+  height: 38px !important;
+  position: relative;
+  background-image: none !important;
+}
+
+#Loginbox #LoginButton > div,
+#DownloadBox .MediumButtonBackground {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 206px !important;
+  height: 38px !important;
+  border: 1px solid rgba(255, 136, 42, .78);
+  border-radius: 4px;
+  background:
+    linear-gradient(180deg, rgba(107, 24, 12, .98), rgba(45, 8, 6, .98));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 220, 140, .36),
+    inset 0 -2px 0 rgba(0, 0, 0, .60),
+    0 2px 0 rgba(0, 0, 0, .70),
+    0 0 14px rgba(184, 31, 14, .30);
+  cursor: pointer;
+}
+
+#Loginbox #LoginButton > div:hover,
+#DownloadBox .MediumButtonBackground:hover {
+  background:
+    linear-gradient(180deg, rgba(150, 34, 14, .98), rgba(65, 11, 7, .98));
+  border-color: rgba(255, 184, 67, .95);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 230, 160, .42),
+    inset 0 -2px 0 rgba(0, 0, 0, .62),
+    0 2px 0 rgba(0, 0, 0, .72),
+    0 0 18px rgba(255, 58, 22, .40);
+}
+
+#Loginbox #LoginButton .Button,
+#DownloadBox .MediumButtonOver,
+#Loginbox #ButtonText,
+#LoginstatusText_2_1,
+#LoginstatusText_2_2,
+#DownloadBox .MediumButtonText {
+  background-image: none !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+#Loginbox #ButtonText,
+#DownloadBox .MediumButtonText {
+  width: auto !important;
+  height: auto !important;
+  position: static !important;
+  border: 0 !important;
+  color: transparent !important;
+}
+
+#Loginbox #ButtonText::before,
+#DownloadBox .MediumButtonBackground::after {
+  display: block;
+  color: #fff2cf;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 38px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  text-shadow: 0 1px 0 #000, 0 0 8px rgba(255, 88, 24, .50);
+}
+
+#Loginbox #ButtonText.login::before,
+#Loginbox #ButtonText::before {
+  content: "Entrar";
+}
+
+#Loginbox #ButtonText.account::before {
+  content: "Minha Conta";
+}
+
+#DownloadBox .MediumButtonBackground::after {
+  content: "Download";
+}
+
+#Loginbox .Loginstatus {
+  box-sizing: border-box;
+  width: 206px !important;
+  min-height: 27px !important;
+  border: 1px solid rgba(115, 52, 21, .72);
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg, rgba(49, 22, 12, .94), rgba(21, 8, 5, .96)) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 220, 140, .16), 0 1px 0 rgba(0,0,0,.55);
+}
+
+#LoginstatusText_2 {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  height: 27px !important;
+  cursor: pointer;
+  background-image: none !important;
+}
+
+#LoginstatusText_2::before {
+  content: "Criar Conta";
+  color: #f7d9a0;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 #000;
+}
+
+#LoginstatusText_2.logout::before {
+  content: "Sair";
+}
+
+#LoginstatusText_2:hover::before {
+  color: #fff3c7;
+  text-shadow: 0 1px 0 #000, 0 0 8px rgba(255, 103, 31, .55);
+}
+
+#DownloadBox {
+  margin-top: 10px !important;
+  margin-bottom: 14px !important;
+}
