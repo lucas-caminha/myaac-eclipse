@@ -1001,3 +1001,97 @@ body {
 #ContentColumn {
   margin-left: 226px !important;
 }
+
+/* Final single-axis alignment for the whole left sidebar. */
+:root {
+  --eclipse-side-width: 206px;
+  --eclipse-side-column: 230px;
+}
+
+#MenuColumn {
+  width: var(--eclipse-side-column) !important;
+  min-width: var(--eclipse-side-column) !important;
+  max-width: var(--eclipse-side-column) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+#Loginbox,
+#DownloadBox,
+#Menu {
+  width: var(--eclipse-side-width) !important;
+  min-width: var(--eclipse-side-width) !important;
+  max-width: var(--eclipse-side-width) !important;
+  align-self: center !important;
+  position: relative !important;
+  left: 0 !important;
+  right: auto !important;
+  transform: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+#Loginbox #LoginButtonContainer,
+#Loginbox #LoginButton,
+#Loginbox #LoginButton > div,
+#Loginbox .Loginstatus,
+#LoginstatusText_2,
+#DownloadBox .SmallBoxButtonContainer,
+#DownloadBox #PlayNowContainer,
+#DownloadBox .MediumButtonBackground,
+#Menu .menuitem,
+#Menu .MenuButton {
+  width: var(--eclipse-side-width) !important;
+  min-width: var(--eclipse-side-width) !important;
+  max-width: var(--eclipse-side-width) !important;
+  position: relative !important;
+  left: 0 !important;
+  right: auto !important;
+  transform: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+#Loginbox #LoginButton #ButtonText,
+#Loginbox #LoginButton #ButtonText::before,
+#DownloadBox .MediumButtonText,
+#DownloadBox .MediumButtonText::before,
+#LoginstatusText_2::before {
+  width: var(--eclipse-side-width) !important;
+  min-width: var(--eclipse-side-width) !important;
+  max-width: var(--eclipse-side-width) !important;
+  left: 0 !important;
+  right: auto !important;
+  transform: none !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+#Loginbox #LoginButtonContainer,
+#Loginbox .Loginstatus,
+#DownloadBox .SmallBoxButtonContainer,
+#Menu .menuitem {
+  display: block !important;
+}
+
+#DownloadBox {
+  margin-top: 12px !important;
+  margin-bottom: 14px !important;
+}
+
+#Menu .Submenu {
+  width: var(--eclipse-side-width) !important;
+  min-width: var(--eclipse-side-width) !important;
+  max-width: var(--eclipse-side-width) !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box !important;
+}
