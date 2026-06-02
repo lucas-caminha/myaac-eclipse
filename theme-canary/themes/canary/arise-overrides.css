@@ -1568,18 +1568,9 @@ body {
   gap: 26px !important;
 }
 
-/* Move right sidebar farther from the center content. */
-#ThemeboxesColumn {
-  margin-left: 0 !important;
-}
 
-/* Real horizontal offset for the absolutely positioned right sidebar. */
+/* Fixed theme-grid placement for the right sidebar: content right edge + small gap. */
 #ThemeboxesColumn {
-  margin-left: 0 !important;
-}
-
-/* Responsive right sidebar placement: keep it outside the central content on wide screens. */
-#ThemeboxesColumn {
-  left: clamp(900px, calc(100vw - 420px), 1520px) !important;
+  left: 814px !important;
   margin-left: 0 !important;
 }
