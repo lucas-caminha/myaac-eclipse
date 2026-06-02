@@ -1,0 +1,11 @@
+<?php
+// Example only. Do not commit real production secrets.
+return [
+    'database_host' => '127.0.0.1',
+    'database_port' => 3306,
+    'database_name' => 'canary',
+    'database_user' => 'canary',
+    'database_password' => 'CHANGE_ME',
+    'server_ip' => 'YOUR_SERVER_IP',
+    'template' => 'canary',
+];

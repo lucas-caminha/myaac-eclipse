@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1050" viewBox="0 0 1920 1050" preserveAspectRatio="xMidYMin slice">
+  <defs>
+    <radialGradient id="portal" cx="50%" cy="21%" r="45%">
+      <stop offset="0" stop-color="#67f3ff" stop-opacity=".62"/>
+      <stop offset=".18" stop-color="#4e79ff" stop-opacity=".36"/>
+      <stop offset=".39" stop-color="#7a35ff" stop-opacity=".22"/>
+      <stop offset=".68" stop-color="#060919" stop-opacity=".72"/>
+      <stop offset="1" stop-color="#02030a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#02030a"/>
+      <stop offset=".28" stop-color="#070a18"/>
+      <stop offset=".62" stop-color="#03040a"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="2.4"/></filter>
+  </defs>
+  <rect width="1920" height="1050" fill="url(#sky)"/>
+  <rect width="1920" height="1050" fill="url(#portal)"/>
+  <g opacity=".52" fill="none" stroke="#4beaff" stroke-width="2">
+    <ellipse cx="960" cy="231" rx="375" ry="202" opacity=".22"/>
+    <ellipse cx="960" cy="235" rx="474" ry="257" opacity=".14"/>
+    <ellipse cx="960" cy="235" rx="584" ry="318" opacity=".08"/>
+    <path d="M960 25v105M813 52l45 96M1126 52l-45 96M642 191h138M1279 191h138" opacity=".28"/>
+  </g>
+  <g opacity=".42" filter="url(#blur)">
+    <path d="M0 526 84 471l102 44 112-94 115 85 126-117 111 91 115-70 119 78 117-125 122 98 106-71 133 92 91-58 142 92 107-67 113 76 91-48 116 84v489H0Z" fill="#050710"/>
+    <path d="M0 650 88 605l85 41 131-82 99 63 128-92 88 69 143-81 89 69 139-110 103 78 119-72 98 65 126-83 103 82 133-73 93 62 155-77v586H0Z" fill="#020309"/>
+  </g>
+  <g opacity=".18" stroke="#7c5cff" stroke-width="1.2">
+    <path d="M267 0 838 1050M512 0 1023 1050M1440 0 1042 1050M1701 0 1185 1050"/>
+  </g>
+  <rect width="1920" height="1050" fill="rgba(0,0,0,.18)"/>
+</svg>

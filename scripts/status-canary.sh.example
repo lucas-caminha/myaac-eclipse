@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+printf '== Services ==\n'
+systemctl --no-pager --full status canary nginx php8.2-fpm mariadb | sed -n '1,80p'
+printf '\n== Ports ==\n'
+ss -ltnp | grep -E ':80|:7171|:7172|:22022|:3306' || true
+printf '\n== Resources ==\n'
+free -h
+df -h /
+printf '\n== Recent Canary Logs ==\n'
+journalctl -u canary -n 30 --no-pager

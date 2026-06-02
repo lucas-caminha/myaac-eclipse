@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="210" viewBox="0 0 360 210" role="img" aria-label="Arise OT">
+  <defs>
+    <radialGradient id="aura" cx="50%" cy="48%" r="62%">
+      <stop offset="0" stop-color="#75f0ff" stop-opacity=".62"/>
+      <stop offset=".35" stop-color="#6c42ff" stop-opacity=".34"/>
+      <stop offset=".78" stop-color="#071024" stop-opacity=".92"/>
+      <stop offset="1" stop-color="#02030a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="steel" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".28" stop-color="#bdeeff"/>
+      <stop offset=".56" stop-color="#6d7cff"/>
+      <stop offset="1" stop-color="#f2fbff"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" x2="1">
+      <stop offset="0" stop-color="#1cf0ff"/>
+      <stop offset=".5" stop-color="#8c5cff"/>
+      <stop offset="1" stop-color="#1cf0ff"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.18 0 0 0 0 0.84 0 0 0 0 1 0 0 0 .95 0" result="cyan"/>
+      <feMerge><feMergeNode in="cyan"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="hardShadow" x="-35%" y="-35%" width="170%" height="170%">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#000" flood-opacity=".9"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#56eaff" flood-opacity=".65"/>
+    </filter>
+  </defs>
+  <rect width="360" height="210" fill="none"/>
+  <ellipse cx="180" cy="106" rx="154" ry="88" fill="url(#aura)"/>
+  <g filter="url(#hardShadow)">
+    <path d="M44 105 79 39h202l35 66-35 66H79Z" fill="#070b17" stroke="#121a2e" stroke-width="10"/>
+    <path d="M55 105 86 51h188l31 54-31 54H86Z" fill="#0a1021" stroke="url(#edge)" stroke-width="3"/>
+    <path d="M83 105 104 67h152l21 38-21 38H104Z" fill="#040813" stroke="#2d3d78" stroke-width="2" opacity=".95"/>
+    <path d="M180 27 192 88 255 97 199 121 214 177 180 132 146 177 161 121 105 97 168 88Z" fill="none" stroke="#55efff" stroke-width="2" opacity=".58" filter="url(#glow)"/>
+    <path d="M42 104h278M74 51l43 32m209 21-43 32M74 159l43-32m209-23-43-32" stroke="#7c5cff" stroke-width="1.3" opacity=".45"/>
+  </g>
+  <g filter="url(#glow)">
+    <text x="180" y="121" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="700" letter-spacing="2" fill="url(#steel)" stroke="#050713" stroke-width="3" paint-order="stroke">ARISE</text>
+    <text x="180" y="151" text-anchor="middle" font-family="Verdana, Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="7" fill="#e8fbff" stroke="#050713" stroke-width="2" paint-order="stroke">OT</text>
+  </g>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="220" viewBox="0 0 380 220" role="img" aria-label="Eclipse OT">
+  <defs>
+    <radialGradient id="corona" cx="50%" cy="48%" r="58%">
+      <stop offset="0" stop-color="#fff1b8" stop-opacity=".95"/>
+      <stop offset=".11" stop-color="#ff9a24" stop-opacity=".95"/>
+      <stop offset=".24" stop-color="#f12d16" stop-opacity=".78"/>
+      <stop offset=".43" stop-color="#6b0808" stop-opacity=".50"/>
+      <stop offset=".76" stop-color="#080202" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff8df"/>
+      <stop offset=".26" stop-color="#e3b45e"/>
+      <stop offset=".52" stop-color="#fb3b22"/>
+      <stop offset=".78" stop-color="#5f0907"/>
+      <stop offset="1" stop-color="#fff1c8"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0" x2="1">
+      <stop offset="0" stop-color="#2a0604"/>
+      <stop offset=".18" stop-color="#ff5a21"/>
+      <stop offset=".5" stop-color="#ffbb58"/>
+      <stop offset=".82" stop-color="#ff3b22"/>
+      <stop offset="1" stop-color="#260403"/>
+    </linearGradient>
+    <filter id="emberGlow" x="-45%" y="-45%" width="190%" height="190%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0.8 0 0 0 0 0.12 0 0 0 0 0.02 0 0 0 .85 0" result="red"/>
+      <feMerge><feMergeNode in="red"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="12" stdDeviation="9" flood-color="#000" flood-opacity=".95"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#ff3a1c" flood-opacity=".72"/>
+    </filter>
+  </defs>
+  <rect width="380" height="220" fill="none"/>
+  <ellipse cx="190" cy="105" rx="160" ry="95" fill="url(#corona)" opacity=".95"/>
+  <g filter="url(#shadow)">
+    <circle cx="190" cy="92" r="72" fill="#050202" stroke="url(#rim)" stroke-width="7"/>
+    <circle cx="202" cy="82" r="63" fill="#080303" opacity=".96"/>
+    <path d="M190 21 C211 55 246 71 287 75 C247 87 219 111 205 156 C194 119 161 92 101 84 C144 75 175 55 190 21Z" fill="none" stroke="#ff5722" stroke-width="2.2" opacity=".68" filter="url(#emberGlow)"/>
+    <path d="M44 122 L82 70 H298 L336 122 L298 174 H82Z" fill="#080303" stroke="#130605" stroke-width="9" opacity=".95"/>
+    <path d="M57 122 L89 80 H291 L323 122 L291 164 H89Z" fill="#120505" stroke="url(#rim)" stroke-width="3"/>
+    <path d="M74 122 H306 M99 82 L132 111 M281 82 L248 111 M99 164 L132 135 M281 164 L248 135" stroke="#6f1009" stroke-width="1.8" opacity=".75"/>
+  </g>
+  <g filter="url(#emberGlow)">
+    <text x="190" y="134" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700" letter-spacing="1.5" fill="url(#steel)" stroke="#050202" stroke-width="3" paint-order="stroke">ECLIPSE</text>
+    <text x="190" y="160" text-anchor="middle" font-family="Verdana, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="8" fill="#fff0cb" stroke="#070202" stroke-width="2" paint-order="stroke">OT</text>
+  </g>
+</svg>

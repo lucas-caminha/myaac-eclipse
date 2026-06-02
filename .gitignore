@@ -1,0 +1,28 @@
+# Secrets and local runtime files
+config.local.php
+*.local.php
+.env
+.env.*
+!.env.example
+
+# MyAAC runtime/cache/logs/uploads/backups
+system/cache/
+system/logs/
+cache/
+logs/
+backup/
+backups/
+*.sql.gz
+*.dump
+*.bak
+*.log
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Generated local scratch
+/tmp/
+*.tmp

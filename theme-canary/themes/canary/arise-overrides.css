@@ -1,0 +1,259 @@
+/* Eclipse OT identity layer: red/black dark-fantasy background over classic Canary. */
+:root {
+  --arise-void: #020101;
+  --arise-night: #080303;
+  --arise-panel: #120606;
+  --arise-ink: #1a0a08;
+  --arise-red: #b41414;
+  --arise-red-bright: #ff3b24;
+  --arise-ember: #ff7a18;
+  --arise-blood: #550808;
+  --arise-ivory: #fff0d4;
+  --arise-parchment: #f4e3bf;
+  --arise-parchment-2: #e5c58e;
+}
+
+html, body {
+  min-height: 100%;
+  background-color: var(--arise-void) !important;
+}
+
+body {
+  background-image:
+    linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.34) 46%, rgba(0,0,0,.90) 100%),
+    linear-gradient(90deg, rgba(0,0,0,.16), transparent 18%, transparent 82%, rgba(0,0,0,.16)),
+    url("images/header/bgs/arise-red-fortress.png") !important;
+  background-position: top center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  color: var(--arise-ivory);
+}
+
+
+#Bodycontainer {
+  max-width: 1500px !important;
+  width: 100% !important;
+}
+
+#ContentColumn {
+  margin-left: 205px !important;
+  margin-right: 205px !important;
+}
+
+#ArtworkHelper {
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.34), rgba(0,0,0,.03) 30%, rgba(0,0,0,.03) 70%, rgba(0,0,0,.34)),
+    linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.42) 620px, rgba(0,0,0,.88));
+}
+
+#ContentRow { top: 232px; }
+#LeftArtwork { top: -220px; height: 218px; }
+#LeftArtwork #LogoLink { display: none; }
+#LeftArtwork #TibiaLogoArtworkTop {
+  top: -16px;
+  left: -73px;
+  width: 318px;
+  height: 226px;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 22px rgba(0,0,0,.96)) drop-shadow(0 0 20px rgba(255,54,24,.58));
+}
+
+#MenuColumn,
+#ThemeboxesColumn,
+#ContentColumn {
+  filter: drop-shadow(0 14px 22px rgba(0,0,0,.78));
+}
+
+/* Push legacy Canary/Tibia image chrome toward red iron instead of blue/green. */
+.MenuButton,
+.SmallMenuBox .SmallBoxButtonContainer,
+#Loginbox,
+#DownloadBox,
+#ThemeboxesColumn .Themebox,
+#ThemeboxesColumn .SmallBox,
+#ThemeboxesColumn [class*="Box"],
+.NewsHeadlineBackground,
+.TableHeadline,
+.CaptionContainer,
+.CaptionInnerContainer,
+.Border_1,
+.Border_2,
+.Border_3,
+.Border_4,
+.Border_5,
+.Border_6,
+.Border_7,
+.Border_8,
+.Border_9 {
+  filter: hue-rotate(326deg) saturate(.82) brightness(.72) contrast(1.18);
+}
+
+#Loginbox img,
+#DownloadBox img,
+.MenuButton img,
+.SmallMenuBox img,
+#ThemeboxesColumn img {
+  filter: saturate(.80) brightness(.88) contrast(1.12);
+}
+
+.MenuButton .Label,
+.MenuButtonLabel,
+.BigButtonText,
+.MediumButtonText,
+.SmallButtonText,
+#Loginbox #ButtonText,
+#DownloadBox #ButtonText {
+  filter: sepia(.35) saturate(1.25) brightness(1.32) drop-shadow(0 0 7px rgba(255,68,28,.72));
+}
+
+.Submenu {
+  background: linear-gradient(180deg, rgba(18,5,5,.98), rgba(5,2,2,.98)) !important;
+  border-left: 1px solid rgba(255,70,32,.34) !important;
+  border-right: 1px solid rgba(255,122,24,.22) !important;
+  box-shadow: inset 0 0 24px rgba(180,20,20,.09);
+}
+
+.SubmenuitemLabel,
+.SubmenuItemLabel {
+  border-bottom-color: rgba(255, 95, 45, .22) !important;
+}
+
+.Submenu a:link,
+.Submenu a:visited,
+.SubmenuitemLabel,
+.SubmenuItemLabel {
+  color: #ffe7ca !important;
+}
+
+.Submenu a:hover,
+.Submenu a:active {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(255,66,28,.90), 0 0 14px rgba(255,122,24,.42);
+}
+
+.InfoBar {
+  background: linear-gradient(90deg, #130404, #3a0808 28%, #641010 50%, #3a0808 72%, #130404) !important;
+  border: 1px solid rgba(255,70,32,.36) !important;
+  border-radius: 3px;
+  box-shadow: inset 0 0 18px rgba(255,80,30,.14), 0 10px 24px rgba(0,0,0,.62);
+}
+
+.InfoBar a,
+.InfoBar div,
+.InfoBar span {
+  color: #fff2de !important;
+  text-shadow: 0 0 8px rgba(255,70,32,.46);
+}
+
+.Content .Box {
+  background-color: #100504 !important;
+  border-left-color: #3a0b08 !important;
+  border-right-color: #3a0b08 !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,.66), 0 0 0 1px rgba(255,70,32,.10), 0 0 28px rgba(180,20,20,.09);
+}
+
+.Content .BoxContent {
+  background:
+    linear-gradient(180deg, rgba(255,246,224,.96), rgba(244,225,187,.98) 34%, rgba(229,197,142,.98)) !important;
+  color: #32190c !important;
+}
+
+.Content th,
+.Content .TableHeadline,
+.Content .CaptionContainer,
+.Content .CaptionInnerContainer {
+  background-color: #2a0907 !important;
+}
+
+.Content a { color: #8a170f; }
+.Content a:hover { color: #d52a18; }
+
+#Footer {
+  color: #ffe6c2 !important;
+  text-shadow: 0 0 8px rgba(255,70,32,.48);
+}
+
+#Footer::before {
+  content: "ECLIPSE OT - AWAKEN. HUNT. DOMINATE.";
+  display: block;
+  margin: 12px auto 6px;
+  color: #ffd6b0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(255,70,32,.78);
+}
+
+.arise-news-intro {
+  position: relative;
+  overflow: hidden;
+  padding: 20px 18px 14px;
+  border: 1px solid rgba(110, 28, 14, .34);
+  background:
+    linear-gradient(135deg, rgba(255,247,229,.78), rgba(240,213,164,.91)),
+    radial-gradient(circle at top right, rgba(255,85,30,.18), transparent 34%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.42);
+}
+
+.arise-news-intro::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(255,66,28,.82), rgba(255,122,24,.58), transparent);
+}
+
+.arise-news-intro h1 {
+  margin: 0 0 8px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 32px;
+  line-height: 1.06;
+  color: #2b0b07;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255,255,255,.82);
+}
+
+.arise-news-intro .lead {
+  max-width: 700px;
+  margin: 0 auto 16px;
+  text-align: center;
+  color: #4b2817;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.arise-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.arise-feature-grid div {
+  min-height: 78px;
+  padding: 12px;
+  border: 1px solid rgba(92, 28, 12, .34);
+  background: linear-gradient(180deg, #fff5df, #e6c58f);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.44);
+}
+
+.arise-feature-grid strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #3a0905;
+  font-size: 13px;
+}
+
+.arise-feature-grid span {
+  display: block;
+  color: #4b2817;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+@media (max-width: 980px) {
+  #ContentRow { top: 190px; }
+  .arise-feature-grid { grid-template-columns: 1fr; }
+  .arise-news-intro h1 { font-size: 26px; }
+}
