@@ -1473,7 +1473,7 @@ body {
 
 /* Right column final arrangement: Donate, Boosted, Highscores, Discord. */
 #ThemeboxesColumn {
-  margin-left: 48px !important;
+  margin-left: 0 !important;
 }
 
 #Themeboxes .donate { order: 1 !important; }
@@ -1570,11 +1570,16 @@ body {
 
 /* Move right sidebar farther from the center content. */
 #ThemeboxesColumn {
-  margin-left: 48px !important;
+  margin-left: 0 !important;
 }
 
 /* Real horizontal offset for the absolutely positioned right sidebar. */
 #ThemeboxesColumn {
-  left: 770px !important;
-  margin-left: 48px !important;
+  margin-left: 0 !important;
+}
+
+/* Responsive right sidebar placement: keep it outside the central content on wide screens. */
+#ThemeboxesColumn {
+  left: clamp(900px, calc(100vw - 420px), 1520px) !important;
+  margin-left: 0 !important;
 }
