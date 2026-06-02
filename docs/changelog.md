@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-06-02 - Menu Cleanup
+
+- Improved submenu hover behavior to avoid JavaScript background artifacts.
+- Removed News Archive, Changelog, Polls, Bans, Forum, Gallery and FAQ from the public menu.
+- Added a theme override for `news.html.twig` to hide forum comment links.
+- Added SQL migration `sql/002-clean-eclipse-menu.sql`.
+
 ## 2026-06-02
 
 - Rebranded site/server identity from Arise OT to Eclipse OT.

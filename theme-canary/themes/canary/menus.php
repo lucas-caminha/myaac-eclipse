@@ -3,8 +3,6 @@
 return [
 	MENU_CATEGORY_NEWS => [
 		'Latest News' => 'news',
-		'News Archive' => 'news/archive',
-		'Changelog' => 'change-log',
 		'Event Schedule' => 'event-schedule',
 	],
 	MENU_CATEGORY_ACCOUNT => [
@@ -21,21 +19,14 @@ return [
 		'Last Kills' => 'last-kills',
 		'Houses' => 'houses',
 		'Guilds' => 'guilds',
-		'Polls' => 'polls',
-		'Bans' => 'bans',
 		'Support List' => 'team',
-	],
-	MENU_CATEGORY_FORUM => [
-		'Forum' => 'forum',
 	],
 	MENU_CATEGORY_LIBRARY => [
 		'Monsters' => 'monsters',
 		'Spells' => 'spells',
 		'Commands' => 'commands',
-		'Gallery' => 'gallery',
 		'Server Info' => 'ots-info',
 		'Exp Table' => 'exp-table',
-		'FAQ' => 'faq',
 	],
 	MENU_CATEGORY_SHOP => [
 		'Buy Points' => 'points',
