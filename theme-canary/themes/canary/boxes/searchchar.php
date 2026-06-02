@@ -58,7 +58,7 @@
         border: 0;
     }
 </style>
-<form method="post" action="<?= getLink('characters'); ?>" style="margin-bottom: 0;">
+<form class="searchchar-form" method="post" action="<?= getLink('characters'); ?>" style="margin-bottom: 0;">
 <div class="searchchar">
     <div class="searchchar_header">Search Char</div>
     <div class="searchchar_content">

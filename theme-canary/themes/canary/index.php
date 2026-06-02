@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=18" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=19" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -704,6 +704,49 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 </div>
 <?= template_place_holder('body_end'); ?>
 
+<style id="eclipse-right-sidebar-final">
+	#ThemeboxesColumn { width: 210px !important; min-width: 210px !important; display: flex !important; flex-direction: column !important; align-items: center !important; }
+	#Themeboxes { width: 188px !important; display: flex !important; flex-direction: column !important; align-items: center !important; gap: 14px !important; margin: 0 auto !important; }
+	#RightArtwork { display: none !important; }
+	#Themeboxes > br, #Themeboxes .rank_bottom, #Themeboxes .discord_bottom, #Themeboxes .donate_bottom, #Themeboxes .serversave_bottom, #Themeboxes .searchchar_bottom, #Themeboxes .rashid_bottom { display: none !important; }
+	#Themeboxes .donate { order: 1 !important; }
+	#Themeboxes .eclipse-boosted { order: 2 !important; }
+	#Themeboxes .discord { order: 3 !important; }
+	#Themeboxes .eclipse-wiki { order: 4 !important; }
+	#Themeboxes .serversave { order: 5 !important; }
+	#Themeboxes .searchchar-form { order: 6 !important; width: 188px !important; margin: 0 !important; }
+	#Themeboxes .rank { order: 7 !important; }
+	#Themeboxes .eclipse-rightbox, #Themeboxes .donate, #Themeboxes .discord, #Themeboxes .serversave, #Themeboxes .searchchar, #Themeboxes .rank { width: 188px !important; min-width: 188px !important; max-width: 188px !important; height: auto !important; margin: 0 !important; box-sizing: border-box !important; text-align: center !important; position: relative !important; }
+	#Themeboxes .eclipse-rightbox-title, #Themeboxes .donate_header, #Themeboxes .discord_header, #Themeboxes .serversave_header, #Themeboxes .searchchar_header, #Themeboxes .rank_header { width: 188px !important; height: 32px !important; line-height: 31px !important; box-sizing: border-box !important; background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important; border: 2px solid #a86b23 !important; border-radius: 4px 4px 0 0 !important; color: #f7e7bd !important; font-family: Georgia, 'Times New Roman', serif !important; font-size: 15px !important; font-weight: 800 !important; text-transform: uppercase !important; text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important; margin: 0 !important; padding: 0 !important; background-image: none !important; }
+	#Themeboxes .eclipse-rightbox-title::before, #Themeboxes .eclipse-rightbox-title::after, #Themeboxes .donate_header::before, #Themeboxes .donate_header::after, #Themeboxes .discord_header::before, #Themeboxes .discord_header::after, #Themeboxes .serversave_header::before, #Themeboxes .serversave_header::after, #Themeboxes .searchchar_header::before, #Themeboxes .searchchar_header::after, #Themeboxes .rank_header::before, #Themeboxes .rank_header::after { content: '*'; color: #ffcb66; font-size: 12px; padding: 0 5px; }
+	#Themeboxes .eclipse-rightbox-content, #Themeboxes .donate_content, #Themeboxes .discord_content, #Themeboxes .serversave_content, #Themeboxes .searchchar_content, #Themeboxes .rank_content { width: 188px !important; min-width: 188px !important; max-width: 188px !important; height: auto !important; min-height: 0 !important; padding: 12px 10px !important; box-sizing: border-box !important; background: linear-gradient(180deg, rgba(239,212,158,.97), rgba(202,156,86,.97)) !important; border: 2px solid #a86b23 !important; border-top: 0 !important; border-radius: 0 0 5px 5px !important; color: #432816 !important; box-shadow: inset 0 0 0 1px rgba(255,244,198,.55), 0 4px 12px rgba(0,0,0,.55) !important; background-image: none !important; }
+	#Themeboxes .donate_content { padding: 9px !important; }
+	#Themeboxes .donate_content img { width: 166px !important; height: 78px !important; object-fit: cover !important; display: block !important; margin: 0 auto 8px !important; border: 1px solid rgba(69,24,16,.85) !important; filter: saturate(1.15) contrast(1.08) brightness(.88) !important; }
+	#Themeboxes .donate_content > div { position: relative !important; }
+	#Themeboxes .donate_content > div::after { content: 'CONTEUDO EXCLUSIVO'; position: absolute; left: 0; right: 0; bottom: 13px; color: #ffe16c; font-family: Georgia, 'Times New Roman', serif; font-weight: 800; font-style: italic; font-size: 14px; text-shadow: 0 2px 2px #160706, 0 0 5px #000; }
+	#Themeboxes .donate_button, #Themeboxes .discord_button, #Themeboxes .searchchar_button, #Themeboxes .rank_button, #Themeboxes .eclipse-action-button { width: 154px !important; height: 34px !important; line-height: 32px !important; display: inline-block !important; border: 1px solid #ffe5a2 !important; border-radius: 4px !important; background: linear-gradient(180deg, #ff9d26 0%, #c45608 100%) !important; color: #fff8dc !important; font-family: Verdana, Arial, sans-serif !important; font-size: 11px !important; font-weight: 800 !important; text-transform: uppercase !important; text-decoration: none !important; text-shadow: 0 1px 1px #4c1200 !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.32), 0 2px 7px rgba(0,0,0,.45) !important; cursor: pointer !important; padding: 0 !important; }
+	#Themeboxes .donate_button:hover, #Themeboxes .discord_button:hover, #Themeboxes .searchchar_button:hover, #Themeboxes .rank_button:hover, #Themeboxes .eclipse-action-button:hover { background: linear-gradient(180deg, #ffc04f 0%, #d86108 100%) !important; color: #fff !important; }
+	#Themeboxes .eclipse-boosted-grid { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 8px !important; padding: 14px 9px !important; }
+	#Themeboxes .eclipse-boosted-item { display: flex; flex-direction: column; align-items: center; color: #274052; font-family: Verdana, Arial, sans-serif; font-size: 9px; line-height: 1.2; }
+	#Themeboxes .eclipse-boosted-frame { width: 50px; height: 50px; display: grid; place-items: center; background: rgba(13,37,53,.08); border: 2px solid #28516d; border-radius: 4px; margin-bottom: 5px; overflow: hidden; }
+	#Themeboxes .eclipse-boosted-frame img { max-width: 64px; max-height: 64px; object-fit: contain; }
+	#Themeboxes .eclipse-boosted-item strong { color: #18384f; font-size: 10px; }
+	#Themeboxes .eclipse-boosted-item span { max-width: 72px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+	#Themeboxes .discord_content, #Themeboxes .eclipse-actionbox { display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 9px !important; min-height: 116px !important; }
+	#Themeboxes .discord_content::before { content: ''; width: 54px; height: 54px; border-radius: 50%; background: radial-gradient(circle at 50% 45%, #7d86ff 0 28%, #5865f2 29% 58%, #3540b8 59% 100%); border: 4px solid rgba(255,255,255,.42); box-shadow: 0 0 18px rgba(88,101,242,.65); }
+	#Themeboxes .discord_content::after { content: 'Entre na nossa comunidade!'; color: #4d3520; font-size: 10px; margin-top: -3px; }
+	#Themeboxes .discord_button { background: linear-gradient(180deg, #6777ff 0%, #3344cb 100%) !important; border-color: #cfd5ff !important; }
+	#Themeboxes .eclipse-action-icon { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 50% 45%, #f4d06a 0 28%, #c8972e 29% 70%, #8d5b14 71% 100%); color: #fff5cd; font-family: Georgia, 'Times New Roman', serif; font-size: 30px; font-weight: 900; box-shadow: 0 0 18px rgba(255,180,59,.5); }
+	#Themeboxes .eclipse-actionbox p { margin: 0; color: #4d3520; font-size: 10px; line-height: 1.35; }
+	#Themeboxes .serversave_content { display: grid !important; justify-content: stretch !important; align-items: center !important; gap: 7px !important; }
+	#Themeboxes .serversave_text { color: #4d3520 !important; font-weight: 700 !important; }
+	#Themeboxes .serversave_countdown { color: #fff3d5 !important; background: rgba(40,18,12,.72) !important; border-color: #ffe2a1 !important; border-radius: 4px !important; font-size: 22px !important; letter-spacing: 0 !important; }
+	#Themeboxes .searchchar_input { width: 154px !important; height: 32px !important; margin: 0 auto 7px !important; border: 1px solid #8a6230 !important; border-radius: 4px !important; box-sizing: border-box !important; }
+	#Themeboxes .rank_content { padding: 8px 8px 11px !important; }
+	#Themeboxes .rank_player { color: #4d3520 !important; min-height: 42px !important; padding: 6px 2px 6px 4px !important; border-bottom: 1px solid rgba(112,73,33,.35) !important; }
+	#Themeboxes .rank_text { margin-left: 46px !important; color: #4d3520 !important; }
+	#Themeboxes .rank_text a { color: #44140d !important; }
+</style>
 <style>
 	.scrollToTop {
 		padding: 10px;

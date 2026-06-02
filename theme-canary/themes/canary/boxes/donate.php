@@ -58,13 +58,13 @@
     }
 </style>
 <div class="donate">
-    <div class="donate_header">Donate Here</div>
+    <div class="donate_header">WEBSHOP</div>
     <div class="donate_content">
         <div>
             <img src="<?php echo $template_path ?>/images/themeboxes/donate/donate.png">
         </div>
         <a href="<?= getLink('points'); ?>">
-            <button type="button" class="donate_button">Donate Now</button>
+            <button type="button" class="donate_button">OBTER ECLIPSE COINS</button>
         </a>
     </div>
     <div class="donate_bottom"></div>

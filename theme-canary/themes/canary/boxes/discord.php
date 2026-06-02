@@ -47,7 +47,7 @@
     <div class="discord_header">Discord</div>
     <div class="discord_content">
         <a href="<?php echo $config['discord_link']; ?>" target="new">
-            <button type="button" class="discord_button">Join Discord</button>
+            <button type="button" class="discord_button">ENTRAR NO DISCORD</button>
         </a>
     </div>
     <div class="discord_bottom"></div>
