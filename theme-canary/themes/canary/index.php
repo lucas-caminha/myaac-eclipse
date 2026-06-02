@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=10" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=11" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -208,26 +208,19 @@ if (isset($config['boxes']))
 
 		function OpenMenuItem(sourceId) {
 			menu[0][sourceId] = 1;
-			document.getElementById(sourceId + "_Submenu").style.visibility = "visible";
-			document.getElementById(sourceId + "_Extend").style.backgroundImage = "url(" + IMAGES + "global/general/minus.gif)";
+			var submenu = document.getElementById(sourceId + "_Submenu");
+			submenu.style.visibility = "visible";
+			submenu.style.display = "block";
 			document.getElementById(sourceId + "_Lights").style.visibility = "hidden";
-			$('#' + sourceId + '_Submenu').slideDown('slow');
-			//document.getElementById(sourceId+"_Submenu").style.visibility = "visible";
-			//document.getElementById(sourceId+"_Submenu").style.display = "block";
-			//document.getElementById(sourceId+"_Lights").style.visibility = "hidden";
 			document.getElementById(sourceId + "_Extend").style.backgroundImage = "url(" + IMAGES + "/general/minus.gif)";
 		}
 
 		function CloseMenuItem(sourceId) {
 			menu[0][sourceId] = 0;
+			var submenu = document.getElementById(sourceId + "_Submenu");
+			submenu.style.display = "none";
+			submenu.style.visibility = "hidden";
 			document.getElementById(sourceId + "_Lights").style.visibility = "visible";
-			document.getElementById(sourceId + "_Extend").style.backgroundImage = "url(" + IMAGES + "global/general/plus.gif)";
-			$('#' + sourceId + '_Submenu').slideUp('fast', function () {
-				document.getElementById(sourceId + "_Submenu").style.visibility = "hidden";
-			});
-			//document.getElementById(sourceId+"_Submenu").style.visibility = "hidden";
-			//document.getElementById(sourceId+"_Submenu").style.display = "none";
-			//document.getElementById(sourceId+"_Lights").style.visibility = "visible";
 			document.getElementById(sourceId + "_Extend").style.backgroundImage = "url(" + IMAGES + "/general/plus.gif)";
 		}
 
