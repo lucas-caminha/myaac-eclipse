@@ -1470,3 +1470,95 @@ body {
 .rank_text small {
   color: #5a3c21 !important;
 }
+
+/* Right column final arrangement: Donate, Boosted, Highscores, Discord. */
+#ThemeboxesColumn {
+  margin-left: 24px !important;
+}
+
+#Themeboxes .donate { order: 1 !important; }
+#Themeboxes .eclipse-boosted { order: 2 !important; }
+#Themeboxes .rank { order: 3 !important; }
+#Themeboxes .discord { order: 4 !important; }
+
+#Themeboxes .discord_content::before,
+#Themeboxes .discord_content::after {
+  content: none !important;
+  display: none !important;
+}
+
+#Themeboxes .eclipse-discord-icon {
+  width: 58px !important;
+  height: 58px !important;
+  object-fit: contain !important;
+  padding: 9px !important;
+  border-radius: 50% !important;
+  background: #5865f2 !important;
+  border: 4px solid rgba(255, 255, 255, 0.42) !important;
+  box-shadow: 0 0 18px rgba(88, 101, 242, 0.65) !important;
+  box-sizing: border-box !important;
+}
+
+#Themeboxes .eclipse-discord-text {
+  color: #4d3520 !important;
+  font-size: 10px !important;
+  line-height: 1.25 !important;
+}
+
+#EclipseFooterServerSave {
+  width: 190px;
+  margin: 20px auto 8px;
+  text-align: center;
+}
+
+#EclipseFooterServerSave .serversave {
+  width: 188px !important;
+  height: auto !important;
+  margin: 0 auto !important;
+}
+
+#EclipseFooterServerSave .serversave_header {
+  width: 188px !important;
+  height: 28px !important;
+  line-height: 28px !important;
+  background: linear-gradient(180deg, #234d63 0%, #0d2535 100%) !important;
+  border: 1px solid #a86b23 !important;
+  border-radius: 4px 4px 0 0 !important;
+  color: #f7e7bd !important;
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
+  background-image: none !important;
+}
+
+#EclipseFooterServerSave .serversave_content {
+  width: 188px !important;
+  height: auto !important;
+  padding: 8px !important;
+  background-color: #d9b36d !important;
+  background-image: linear-gradient(180deg, rgba(239,212,158,.97), rgba(202,156,86,.97)) !important;
+  border: 1px solid #a86b23 !important;
+  border-top: 0 !important;
+  border-radius: 0 0 4px 4px !important;
+  box-sizing: border-box !important;
+}
+
+#EclipseFooterServerSave .serversave_bottom {
+  display: none !important;
+}
+
+#EclipseFooterServerSave .serversave_text {
+  color: #4d3520 !important;
+}
+
+#EclipseFooterServerSave .serversave_countdown {
+  color: #fff3d5 !important;
+  background: rgba(40,18,12,.72) !important;
+  border-color: #ffe2a1 !important;
+  font-size: 18px !important;
+}
+
+#Footer {
+  color: #f0c893 !important;
+  text-shadow: 0 1px 2px #000 !important;
+}

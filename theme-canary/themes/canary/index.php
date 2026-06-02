@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=19" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=20" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -630,7 +630,27 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 						</div>
 					</div>
 				</div>
-				<div id="Footer"><?= template_footer(); ?></div>
+				<div id="EclipseFooterServerSave">
+					<?php include __DIR__ . "/boxes/serversave.php"; ?>
+				</div>
+				<div id="Footer">
+					<?php
+					$eclipseFooter = [];
+					if (admin()) {
+						$eclipseFooter[] = generateLink(ADMIN_URL, "Admin Panel", true);
+					}
+					if (setting("core.visitors_counter")) {
+						global $visitors;
+						$amount = $visitors->getAmountVisitors();
+						$eclipseFooter[] = "Currently there " . ($amount > 1 ? "are" : "is") . " " . $amount . " visitor" . ($amount > 1 ? "s" : "") . ".";
+					}
+					if (setting("core.footer_load_time")) {
+						$eclipseFooter[] = "Load time: " . round(microtime(true) - START_TIME, 4) . " seconds.";
+					}
+					$eclipseFooter[] = "Copyright &copy; " . date("Y") . " Eclipse OT. All rights reserved.";
+					echo implode("<br/>", $eclipseFooter);
+					?>
+				</div>
 			</div>
 
 			<div id="ThemeboxesColumn">
@@ -705,17 +725,17 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 <?= template_place_holder('body_end'); ?>
 
 <style id="eclipse-right-sidebar-final">
-	#ThemeboxesColumn { width: 210px !important; min-width: 210px !important; display: flex !important; flex-direction: column !important; align-items: center !important; }
+	#ThemeboxesColumn { width: 210px !important; min-width: 210px !important; display: flex !important; flex-direction: column !important; align-items: center !important; margin-left: 24px !important; }
 	#Themeboxes { width: 188px !important; display: flex !important; flex-direction: column !important; align-items: center !important; gap: 14px !important; margin: 0 auto !important; }
 	#RightArtwork { display: none !important; }
 	#Themeboxes > br, #Themeboxes .rank_bottom, #Themeboxes .discord_bottom, #Themeboxes .donate_bottom, #Themeboxes .serversave_bottom, #Themeboxes .searchchar_bottom, #Themeboxes .rashid_bottom { display: none !important; }
 	#Themeboxes .donate { order: 1 !important; }
 	#Themeboxes .eclipse-boosted { order: 2 !important; }
-	#Themeboxes .discord { order: 3 !important; }
-	#Themeboxes .eclipse-wiki { order: 4 !important; }
-	#Themeboxes .serversave { order: 5 !important; }
-	#Themeboxes .searchchar-form { order: 6 !important; width: 188px !important; margin: 0 !important; }
-	#Themeboxes .rank { order: 7 !important; }
+	#Themeboxes .discord { order: 4 !important; }
+	
+	
+	
+	#Themeboxes .rank { order: 3 !important; }
 	#Themeboxes .eclipse-rightbox, #Themeboxes .donate, #Themeboxes .discord, #Themeboxes .serversave, #Themeboxes .searchchar, #Themeboxes .rank { width: 188px !important; min-width: 188px !important; max-width: 188px !important; height: auto !important; margin: 0 !important; box-sizing: border-box !important; text-align: center !important; position: relative !important; }
 	#Themeboxes .eclipse-rightbox-title, #Themeboxes .donate_header, #Themeboxes .discord_header, #Themeboxes .serversave_header, #Themeboxes .searchchar_header, #Themeboxes .rank_header { width: 188px !important; height: 32px !important; line-height: 31px !important; box-sizing: border-box !important; background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important; border: 2px solid #a86b23 !important; border-radius: 4px 4px 0 0 !important; color: #f7e7bd !important; font-family: Georgia, 'Times New Roman', serif !important; font-size: 15px !important; font-weight: 800 !important; text-transform: uppercase !important; text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important; margin: 0 !important; padding: 0 !important; background-image: none !important; }
 	#Themeboxes .eclipse-rightbox-title::before, #Themeboxes .eclipse-rightbox-title::after, #Themeboxes .donate_header::before, #Themeboxes .donate_header::after, #Themeboxes .discord_header::before, #Themeboxes .discord_header::after, #Themeboxes .serversave_header::before, #Themeboxes .serversave_header::after, #Themeboxes .searchchar_header::before, #Themeboxes .searchchar_header::after, #Themeboxes .rank_header::before, #Themeboxes .rank_header::after { content: '*'; color: #ffcb66; font-size: 12px; padding: 0 5px; }

@@ -46,6 +46,8 @@
 <div class="discord">
     <div class="discord_header">Discord</div>
     <div class="discord_content">
+        <img class="eclipse-discord-icon" src="<?php echo $template_path ?>/images/global/header/icon-discord.png" alt="Discord">
+        <div class="eclipse-discord-text">Entre na nossa comunidade!</div>
         <a href="<?php echo $config['discord_link']; ?>" target="new">
             <button type="button" class="discord_button">ENTRAR NO DISCORD</button>
         </a>
