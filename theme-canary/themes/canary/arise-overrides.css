@@ -1572,3 +1572,9 @@ body {
 #ThemeboxesColumn {
   margin-left: 48px !important;
 }
+
+/* Real horizontal offset for the absolutely positioned right sidebar. */
+#ThemeboxesColumn {
+  left: 770px !important;
+  margin-left: 48px !important;
+}

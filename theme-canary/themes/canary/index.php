@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=22" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=23" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -725,7 +725,7 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 <?= template_place_holder('body_end'); ?>
 
 <style id="eclipse-right-sidebar-final">
-	#ThemeboxesColumn { width: 210px !important; min-width: 210px !important; display: flex !important; flex-direction: column !important; align-items: center !important; margin-left: 48px !important; }
+	#ThemeboxesColumn { width: 210px !important; min-width: 210px !important; display: flex !important; flex-direction: column !important; align-items: center !important; left: 770px !important; margin-left: 48px !important; }
 	#Themeboxes { width: 188px !important; display: flex !important; flex-direction: column !important; align-items: center !important; gap: 26px !important; margin: 0 auto !important; }
 	#RightArtwork { display: none !important; }
 	#Themeboxes > br, #Themeboxes .rank_bottom, #Themeboxes .discord_bottom, #Themeboxes .donate_bottom, #Themeboxes .serversave_bottom, #Themeboxes .searchchar_bottom, #Themeboxes .rashid_bottom { display: none !important; }
