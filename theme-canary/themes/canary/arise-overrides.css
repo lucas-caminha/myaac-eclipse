@@ -1095,3 +1095,378 @@ body {
   margin-right: 0 !important;
   box-sizing: border-box !important;
 }
+
+/* Rubin-inspired right sidebar cards for Eclipse OT. */
+:root {
+  --eclipse-right-width: 188px;
+  --eclipse-panel-gold: #d49a37;
+  --eclipse-panel-cream: #e8cf9a;
+  --eclipse-panel-cream-2: #c79d58;
+  --eclipse-panel-blue: #12364a;
+}
+
+#ThemeboxesColumn {
+  width: 210px !important;
+  min-width: 210px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+#Themeboxes {
+  width: var(--eclipse-right-width) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 14px !important;
+  margin: 0 auto !important;
+}
+
+#RightArtwork {
+  margin-left: 0 !important;
+  width: var(--eclipse-right-width) !important;
+}
+
+#Themeboxes > br,
+#Themeboxes .rank_bottom,
+#Themeboxes .discord_bottom,
+#Themeboxes .donate_bottom,
+#Themeboxes .serversave_bottom,
+#Themeboxes .searchchar_bottom,
+#Themeboxes .rashid_bottom {
+  display: none !important;
+}
+
+.eclipse-rightbox,
+.donate,
+.discord,
+.serversave,
+.searchchar,
+.rank {
+  width: var(--eclipse-right-width) !important;
+  min-width: var(--eclipse-right-width) !important;
+  max-width: var(--eclipse-right-width) !important;
+  height: auto !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+  position: relative !important;
+}
+
+.eclipse-rightbox-title,
+.donate_header,
+.discord_header,
+.serversave_header,
+.searchchar_header,
+.rank_header {
+  width: var(--eclipse-right-width) !important;
+  height: 32px !important;
+  line-height: 31px !important;
+  box-sizing: border-box !important;
+  background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important;
+  border: 2px solid #a86b23 !important;
+  border-radius: 4px 4px 0 0 !important;
+  color: #f7e7bd !important;
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255, 176, 69, 0.55) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-image: none !important;
+}
+
+.eclipse-rightbox-title::before,
+.eclipse-rightbox-title::after,
+.donate_header::before,
+.donate_header::after,
+.discord_header::before,
+.discord_header::after,
+.serversave_header::before,
+.serversave_header::after,
+.searchchar_header::before,
+.searchchar_header::after,
+.rank_header::before,
+.rank_header::after {
+  content: '*';
+  color: #ffcb66;
+  font-size: 12px;
+  padding: 0 5px;
+}
+
+.eclipse-rightbox-content,
+.donate_content,
+.discord_content,
+.serversave_content,
+.searchchar_content,
+.rank_content {
+  width: var(--eclipse-right-width) !important;
+  min-width: var(--eclipse-right-width) !important;
+  max-width: var(--eclipse-right-width) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 12px 10px !important;
+  box-sizing: border-box !important;
+  background: linear-gradient(180deg, rgba(239, 212, 158, 0.96), rgba(202, 156, 86, 0.96)) !important;
+  border: 2px solid #a86b23 !important;
+  border-top: 0 !important;
+  border-radius: 0 0 5px 5px !important;
+  color: #432816 !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 244, 198, 0.55), 0 4px 12px rgba(0, 0, 0, 0.55) !important;
+  background-image: none !important;
+}
+
+.donate {
+  order: 1;
+}
+
+.eclipse-boosted {
+  order: 2;
+}
+
+.discord {
+  order: 3;
+}
+
+.eclipse-wiki {
+  order: 4;
+}
+
+.serversave {
+  order: 5;
+}
+
+.searchchar {
+  order: 6;
+}
+
+.rank {
+  order: 7;
+}
+
+.donate_header {
+  color: #ffe0a2 !important;
+}
+
+.donate_content {
+  padding: 9px !important;
+}
+
+.donate_content img {
+  width: 166px !important;
+  height: 78px !important;
+  object-fit: cover !important;
+  display: block !important;
+  margin: 0 auto 8px !important;
+  border: 1px solid rgba(69, 24, 16, 0.85) !important;
+  filter: saturate(1.15) contrast(1.08) brightness(0.88) !important;
+}
+
+.donate_content > div {
+  position: relative;
+}
+
+.donate_content > div::after {
+  content: 'CONTEUDO EXCLUSIVO';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 13px;
+  color: #ffe16c;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 14px;
+  text-shadow: 0 2px 2px #160706, 0 0 5px #000;
+}
+
+.donate_button,
+.discord_button,
+.searchchar_button,
+.rank_button,
+.eclipse-action-button {
+  width: 154px !important;
+  height: 34px !important;
+  line-height: 32px !important;
+  display: inline-block !important;
+  border: 1px solid #ffe5a2 !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #ff9d26 0%, #c45608 100%) !important;
+  color: #fff8dc !important;
+  font-family: Verdana, Arial, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  text-shadow: 0 1px 1px #4c1200 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.32), 0 2px 7px rgba(0, 0, 0, 0.45) !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+}
+
+.donate_button:hover,
+.discord_button:hover,
+.searchchar_button:hover,
+.rank_button:hover,
+.eclipse-action-button:hover {
+  background: linear-gradient(180deg, #ffc04f 0%, #d86108 100%) !important;
+  color: #fff !important;
+}
+
+.eclipse-boosted-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 8px !important;
+  padding: 14px 9px !important;
+}
+
+.eclipse-boosted-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #274052;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+.eclipse-boosted-frame {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  background: rgba(13, 37, 53, 0.08);
+  border: 2px solid #28516d;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  overflow: hidden;
+}
+
+.eclipse-boosted-frame img {
+  max-width: 64px;
+  max-height: 64px;
+  object-fit: contain;
+}
+
+.eclipse-boosted-item strong {
+  color: #18384f;
+  font-size: 10px;
+}
+
+.eclipse-boosted-item span {
+  max-width: 72px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.discord_content,
+.eclipse-actionbox {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 9px !important;
+  min-height: 116px !important;
+}
+
+.discord_content::before {
+  content: '';
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 45%, #7d86ff 0 28%, #5865f2 29% 58%, #3540b8 59% 100%);
+  border: 4px solid rgba(255,255,255,0.42);
+  box-shadow: 0 0 18px rgba(88, 101, 242, 0.65);
+}
+
+.discord_content::after {
+  content: 'Entre na nossa comunidade!';
+  color: #4d3520;
+  font-size: 10px;
+  margin-top: -3px;
+}
+
+.discord_button {
+  background: linear-gradient(180deg, #6777ff 0%, #3344cb 100%) !important;
+  border-color: #cfd5ff !important;
+}
+
+.eclipse-action-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 50% 45%, #f4d06a 0 28%, #c8972e 29% 70%, #8d5b14 71% 100%);
+  color: #fff5cd;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 30px;
+  font-weight: 900;
+  box-shadow: 0 0 18px rgba(255, 180, 59, 0.5);
+}
+
+.eclipse-actionbox p {
+  margin: 0;
+  color: #4d3520;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.serversave_content {
+  display: grid !important;
+  justify-content: stretch !important;
+  align-items: center !important;
+  gap: 7px !important;
+}
+
+.serversave_text {
+  color: #4d3520 !important;
+  font-weight: 700 !important;
+}
+
+.serversave_countdown {
+  color: #fff3d5 !important;
+  background: rgba(40, 18, 12, 0.72) !important;
+  border-color: #ffe2a1 !important;
+  border-radius: 4px !important;
+  font-size: 22px !important;
+  letter-spacing: 0 !important;
+}
+
+.searchchar_input {
+  width: 154px !important;
+  height: 32px !important;
+  margin: 0 auto 7px !important;
+  border: 1px solid #8a6230 !important;
+  border-radius: 4px !important;
+  box-sizing: border-box !important;
+}
+
+.rank_content {
+  padding: 8px 8px 11px !important;
+}
+
+.rank_player {
+  color: #4d3520 !important;
+  min-height: 42px !important;
+  padding: 6px 2px 6px 4px !important;
+  border-bottom: 1px solid rgba(112, 73, 33, 0.35) !important;
+}
+
+.rank_text {
+  margin-left: 46px !important;
+  color: #4d3520 !important;
+}
+
+.rank_text a {
+  color: #44140d !important;
+}
+
+.rank_text small {
+  color: #5a3c21 !important;
+}
