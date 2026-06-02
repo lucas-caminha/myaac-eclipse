@@ -257,3 +257,184 @@ body {
   .arise-feature-grid { grid-template-columns: 1fr; }
   .arise-news-intro h1 { font-size: 26px; }
 }
+
+/* Eclipse menu readability pass: larger accordion blocks inspired by modern OT layouts. */
+#MenuColumn {
+  width: 206px !important;
+  margin-left: 6px !important;
+  margin-right: 12px !important;
+}
+
+#ContentColumn {
+  margin-left: 226px !important;
+  margin-right: 205px !important;
+}
+
+#LeftArtwork #TibiaLogoArtworkTop {
+  left: -54px;
+}
+
+#Menu {
+  left: 0 !important;
+  width: 206px;
+  padding: 4px 0 8px;
+}
+
+#MenuTop,
+#MenuBottom {
+  display: none;
+}
+
+.menuitem {
+  width: 206px;
+  margin: 0 0 7px;
+  position: relative;
+}
+
+.MenuButton {
+  width: 206px !important;
+  height: 37px !important;
+  background-image: none !important;
+  background:
+    linear-gradient(90deg, rgba(18, 6, 5, .95), rgba(72, 16, 10, .98) 50%, rgba(18, 6, 5, .95)) !important;
+  border: 1px solid rgba(255, 121, 37, .72);
+  border-radius: 4px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 216, 132, .28),
+    inset 0 -2px 0 rgba(0, 0, 0, .55),
+    0 2px 0 rgba(0, 0, 0, .65),
+    0 0 12px rgba(169, 21, 12, .28);
+  overflow: hidden;
+}
+
+.MenuButton::before,
+.MenuButton::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  width: 24px;
+  pointer-events: none;
+  opacity: .9;
+}
+
+.MenuButton::before {
+  left: 4px;
+  border-left: 1px solid rgba(255, 190, 80, .72);
+  border-top: 1px solid rgba(255, 190, 80, .58);
+}
+
+.MenuButton::after {
+  right: 4px;
+  border-right: 1px solid rgba(255, 190, 80, .72);
+  border-bottom: 1px solid rgba(255, 190, 80, .58);
+}
+
+.MenuButton .Button,
+.MenuButton .Lights {
+  display: none !important;
+}
+
+.MenuButton .Icon,
+.Icon {
+  top: 3px !important;
+  left: 12px !important;
+  width: 32px !important;
+  height: 32px !important;
+  filter: saturate(1.05) brightness(.95) drop-shadow(0 0 5px rgba(255, 68, 24, .42));
+}
+
+.MenuButton .Label,
+.Label {
+  top: 8px !important;
+  left: 52px !important;
+  width: 136px !important;
+  height: 22px !important;
+  filter: sepia(.26) saturate(1.3) brightness(1.45) drop-shadow(0 1px 0 #000) drop-shadow(0 0 6px rgba(255, 105, 35, .52));
+}
+
+.MenuButton .Extend,
+.Extend {
+  top: 12px !important;
+  right: 9px !important;
+  width: 12px !important;
+  height: 12px !important;
+  filter: sepia(.8) saturate(2) brightness(1.12) drop-shadow(0 0 5px rgba(255, 96, 24, .65));
+}
+
+.menuitem:hover .MenuButton {
+  background:
+    linear-gradient(90deg, rgba(37, 8, 6, .98), rgba(113, 24, 12, .98) 50%, rgba(37, 8, 6, .98)) !important;
+  border-color: rgba(255, 164, 61, .92);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 225, 148, .36),
+    inset 0 -2px 0 rgba(0, 0, 0, .55),
+    0 2px 0 rgba(0, 0, 0, .72),
+    0 0 16px rgba(255, 54, 22, .36);
+}
+
+.Submenu {
+  width: 196px !important;
+  margin: 0 5px 0 !important;
+  padding: 5px 0 6px !important;
+  background:
+    linear-gradient(180deg, rgba(236, 199, 130, .94), rgba(190, 145, 76, .94)) !important;
+  border: 1px solid rgba(92, 36, 12, .80) !important;
+  border-top: 0 !important;
+  border-radius: 0 0 5px 5px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 244, 202, .55),
+    inset 0 -1px 0 rgba(72, 22, 10, .35),
+    0 4px 10px rgba(0, 0, 0, .40);
+  overflow: hidden;
+}
+
+.Submenuitem {
+  min-height: 28px;
+  margin: 0 6px 2px !important;
+  border-radius: 3px;
+}
+
+.Submenuitem:hover {
+  background: rgba(90, 29, 13, .18) !important;
+}
+
+.SubmenuitemLabel,
+.SubmenuItemLabel {
+  min-height: 20px;
+  padding: 5px 8px 4px 30px !important;
+  border-bottom: 1px solid rgba(109, 57, 22, .22) !important;
+  color: #3d1c0d !important;
+  font-size: 12px;
+  line-height: 16px;
+  text-shadow: 0 1px 0 rgba(255, 239, 190, .65);
+  white-space: normal;
+}
+
+.Submenu a:link,
+.Submenu a:visited {
+  color: #3d1c0d !important;
+}
+
+.Submenu a:hover,
+.Submenu a:active {
+  color: #140503 !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.42), 0 0 7px rgba(255, 90, 28, .35);
+}
+
+.ActiveSubmenuItemIcon {
+  top: 8px !important;
+  left: 12px !important;
+  filter: hue-rotate(320deg) saturate(1.5) brightness(.95);
+}
+
+.LeftChain,
+.RightChain {
+  display: none !important;
+}
+
+@media (min-width: 1360px) {
+  #MenuColumn {
+    margin-left: 0 !important;
+  }
+}

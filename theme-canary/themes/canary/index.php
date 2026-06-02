@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=8" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=9" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
