@@ -1211,13 +1211,13 @@ body {
   min-height: 0 !important;
   padding: 12px 10px !important;
   box-sizing: border-box !important;
-  background: linear-gradient(180deg, rgba(239, 212, 158, 0.96), rgba(202, 156, 86, 0.96)) !important;
+  background-color: #d9b36d !important; background-image: linear-gradient(180deg, rgba(239, 212, 158, 0.96), rgba(202, 156, 86, 0.96)) !important;
   border: 2px solid #a86b23 !important;
   border-top: 0 !important;
   border-radius: 0 0 5px 5px !important;
   color: #432816 !important;
   box-shadow: inset 0 0 0 1px rgba(255, 244, 198, 0.55), 0 4px 12px rgba(0, 0, 0, 0.55) !important;
-  background-image: none !important;
+  
 }
 
 .donate {
