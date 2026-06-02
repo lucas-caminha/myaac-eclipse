@@ -1120,7 +1120,7 @@ body {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  gap: 14px !important;
+  gap: 26px !important;
   margin: 0 auto !important;
 }
 
@@ -1561,4 +1561,9 @@ body {
 #Footer {
   color: #f0c893 !important;
   text-shadow: 0 1px 2px #000 !important;
+}
+
+/* Add more breathing room between right sidebar cards. */
+#Themeboxes {
+  gap: 26px !important;
 }
