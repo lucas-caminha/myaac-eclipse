@@ -3785,3 +3785,75 @@ body {
   font-weight: 900 !important;
   text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
 }
+
+/* Login inputs and password visibility. */
+#ContentColumn .eclipse-login-page .eclipse-login-input,
+#ContentColumn .eclipse-login-page .eclipse-login-input:focus,
+#ContentColumn .eclipse-login-page .eclipse-login-input:-webkit-autofill,
+#ContentColumn .eclipse-login-page .eclipse-login-input:-webkit-autofill:hover,
+#ContentColumn .eclipse-login-page .eclipse-login-input:-webkit-autofill:focus {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  caret-color: #000 !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-login-page .eclipse-password-field {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+#ContentColumn .eclipse-login-page .eclipse-password-field .eclipse-password-input {
+  padding-right: 42px !important;
+}
+
+#ContentColumn .eclipse-login-page .eclipse-password-toggle {
+  position: absolute !important;
+  right: 5px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 30px !important;
+  height: 26px !important;
+  border: 1px solid #8f5a24 !important;
+  border-radius: 3px !important;
+  background: linear-gradient(180deg, #f6d98f 0%, #c99547 100%) !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  font-size: 15px !important;
+  font-weight: 900 !important;
+  line-height: 22px !important;
+  text-align: center !important;
+  text-shadow: none !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 1px 3px rgba(0,0,0,.25) !important;
+  cursor: pointer !important;
+}
+
+#ContentColumn .eclipse-login-page .eclipse-password-toggle:hover {
+  background: linear-gradient(180deg, #ffe4a6 0%, #d6a253 100%) !important;
+}
+
+/* Account manage beige panels must use dark text. */
+#ContentColumn .eclipse-account-manage-page .eclipse-account-welcome,
+#ContentColumn .eclipse-account-manage-page .eclipse-account-welcome *,
+#ContentColumn .eclipse-account-manage-page .TableContent,
+#ContentColumn .eclipse-account-manage-page .TableContent *:not(.BigButtonText):not(.MediumButtonText):not(button):not(button *):not(input[type="submit"]):not(input[type="button"]),
+#ContentColumn .eclipse-account-manage-page .InnerTableContainer,
+#ContentColumn .eclipse-account-manage-page .InnerTableContainer *:not(.CaptionContainer):not(.CaptionContainer *):not(.CaptionInnerContainer):not(.CaptionInnerContainer *):not(.BigButtonText):not(.MediumButtonText):not(button):not(button *):not(input[type="submit"]):not(input[type="button"]) {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .CaptionContainer .Text,
+#ContentColumn .eclipse-account-manage-page .CaptionContainer .Text *,
+#ContentColumn .eclipse-account-manage-page .CaptionInnerContainer .Text,
+#ContentColumn .eclipse-account-manage-page .CaptionInnerContainer .Text * {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  font-weight: 900 !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+}

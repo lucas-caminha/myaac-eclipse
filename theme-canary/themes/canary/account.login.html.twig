@@ -45,12 +45,17 @@
 																<td class="LabelV">
 																	<span class="eclipse-login-field-label{% if error is not null %} red{% endif %}" style="color:#000 !important;font-weight:800 !important;text-shadow:none !important;">{{ account_login_label }}:</span>
 																</td>
-																<td><input style="width: 100%;" type="text" name="account_login" size="35" maxlength="{{ setting('core.account_login_by_email') ? '255' : '30' }}" autofocus /></td>
+																<td><input class="eclipse-login-input" style="width: 100%; color:#000 !important; -webkit-text-fill-color:#000 !important; font-weight:800 !important; text-shadow:none !important;" type="text" name="account_login" size="35" maxlength="{{ setting('core.account_login_by_email') ? '255' : '30' }}" autofocus /></td>
 															</tr>
 															{{ hook('HOOK_ACCOUNT_LOGIN_AFTER_ACCOUNT') }}
 															<tr>
 																<td class="LabelV" ><span class="eclipse-login-field-label{% if error is not null %} red{% endif %}" style="color:#000 !important;font-weight:800 !important;text-shadow:none !important;">Senha:</span></td>
-																<td><input style="width: 100%;" type="password" name="password_login" size="35" maxlength="29" /></td>
+																<td>
+																	<div class="eclipse-password-field">
+																		<input id="password_login" class="eclipse-login-input eclipse-password-input" style="width: 100%; color:#000 !important; -webkit-text-fill-color:#000 !important; font-weight:800 !important; text-shadow:none !important;" type="password" name="password_login" size="35" maxlength="29" autocomplete="current-password" />
+																		<button type="button" class="eclipse-password-toggle" style="color:#000 !important;-webkit-text-fill-color:#000 !important;text-shadow:none !important;" aria-label="Mostrar senha" aria-pressed="false">&#128065;</button>
+																	</div>
+																</td>
 															</tr>
 															{{ hook('HOOK_ACCOUNT_LOGIN_AFTER_PASSWORD') }}
 															<tr>
@@ -171,4 +176,20 @@
 	</table>
 </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+	var toggle = document.querySelector('.eclipse-password-toggle');
+	var password = document.getElementById('password_login');
+	if (!toggle || !password) {
+		return;
+	}
+
+	toggle.addEventListener('click', function () {
+		var showPassword = password.type === 'password';
+		password.type = showPassword ? 'text' : 'password';
+		toggle.setAttribute('aria-pressed', showPassword ? 'true' : 'false');
+		toggle.setAttribute('aria-label', showPassword ? 'Esconder senha' : 'Mostrar senha');
+	});
+});
+</script>
 {{ hook('HOOK_ACCOUNT_LOGIN_AFTER_PAGE') }}
