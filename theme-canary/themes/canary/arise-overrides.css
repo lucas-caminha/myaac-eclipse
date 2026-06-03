@@ -3920,3 +3920,151 @@ body {
   -webkit-text-fill-color: #fff0b8 !important;
   text-shadow: none !important;
 }
+
+/* Characters search/results: beige panels with dark readable text. */
+#ContentColumn .Content .eclipse-characters-page,
+#ContentColumn .Content .eclipse-characters-page *:not(input[type="submit"]):not(input[type="submit"] *):not(.BigButtonText):not(.MediumButtonText) {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .eclipse-characters-page .TableContainer {
+  border: 2px solid #a86b23 !important;
+  border-radius: 5px !important;
+  overflow: hidden !important;
+  background: linear-gradient(180deg, #efd49e 0%, #d9b36d 58%, #c99a51 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,244,198,.48), 0 8px 22px rgba(0,0,0,.50) !important;
+}
+
+#ContentColumn .Content .eclipse-characters-page .CaptionContainer,
+#ContentColumn .Content .eclipse-characters-page .CaptionInnerContainer {
+  height: 36px !important;
+  background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important;
+  border: 0 !important;
+}
+
+#ContentColumn .Content .eclipse-characters-page .CaptionContainer span,
+#ContentColumn .Content .eclipse-characters-page .CaptionInnerContainer span {
+  display: none !important;
+}
+
+#ContentColumn .Content .eclipse-characters-page .CaptionContainer .Text,
+#ContentColumn .Content .eclipse-characters-page .CaptionContainer .Text *,
+#ContentColumn .Content .eclipse-characters-page .CaptionInnerContainer .Text,
+#ContentColumn .Content .eclipse-characters-page .CaptionInnerContainer .Text * {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  font: 900 16px Georgia, "Times New Roman", serif !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+}
+
+#ContentColumn .Content .eclipse-characters-page .InnerTableContainer,
+#ContentColumn .Content .eclipse-characters-page .TableContentContainer,
+#ContentColumn .Content .eclipse-characters-page .TableContent,
+#ContentColumn .Content .eclipse-characters-page .TableContent tbody,
+#ContentColumn .Content .eclipse-characters-page .TableContent tr,
+#ContentColumn .Content .eclipse-characters-page .TableContent td {
+  background-image: none !important;
+}
+
+#ContentColumn .Content .eclipse-characters-page .TableContent {
+  width: 100% !important;
+  border: 1px solid rgba(137,83,33,.54) !important;
+  border-radius: 5px !important;
+  background: linear-gradient(180deg, #f2dca9 0%, #dfbd7b 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,246,204,.64), 0 4px 12px rgba(0,0,0,.22) !important;
+}
+
+#ContentColumn .Content .eclipse-characters-page .TableContent td {
+  padding: 7px 10px !important;
+  vertical-align: middle !important;
+}
+
+#ContentColumn .Content .eclipse-characters-page tr[bgcolor] td {
+  background: rgba(255,243,211,.34) !important;
+}
+
+#ContentColumn .Content .eclipse-characters-page tr[bgcolor] + tr[bgcolor] td {
+  border-top: 1px solid rgba(137,83,33,.22) !important;
+}
+
+#ContentColumn .Content .eclipse-characters-page .LabelV,
+#ContentColumn .Content .eclipse-characters-page .LabelV150,
+#ContentColumn .Content .eclipse-characters-page .LabelV175 {
+  color: #3a0905 !important;
+  -webkit-text-fill-color: #3a0905 !important;
+  font-weight: 900 !important;
+}
+
+#ContentColumn .Content .eclipse-characters-page input:not([type]),
+#ContentColumn .Content .eclipse-characters-page input[type="text"] {
+  height: 32px !important;
+  padding: 0 10px !important;
+  border: 1px solid #8f5a24 !important;
+  border-radius: 3px !important;
+  background: #fff3d3 !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  font: 800 13px Verdana, Arial, sans-serif !important;
+  box-shadow: inset 0 1px 4px rgba(64,32,12,.28), 0 1px 0 rgba(255,255,255,.55) !important;
+}
+
+#ContentColumn .Content .eclipse-characters-page a,
+#ContentColumn .Content .eclipse-characters-page a * {
+  color: #4d1209 !important;
+  -webkit-text-fill-color: #4d1209 !important;
+  font-weight: 900 !important;
+}
+
+#ContentColumn .Content .eclipse-characters-page input[type="submit"],
+#ContentColumn .Content .eclipse-characters-page .BigButtonText,
+#ContentColumn .Content .eclipse-characters-page .MediumButtonText {
+  color: #fff8dc !important;
+  -webkit-text-fill-color: #fff8dc !important;
+  font-weight: 900 !important;
+  text-shadow: 0 1px 1px #4c1200 !important;
+}
+
+#ContentColumn #News .BoxContent .eclipse-characters-page,
+#ContentColumn #News .BoxContent .eclipse-characters-page td,
+#ContentColumn #News .BoxContent .eclipse-characters-page div,
+#ContentColumn #News .BoxContent .eclipse-characters-page span,
+#ContentColumn #News .BoxContent .eclipse-characters-page b,
+#ContentColumn #News .BoxContent .eclipse-characters-page strong,
+#ContentColumn #News .BoxContent .eclipse-characters-page label,
+#ContentColumn #News .BoxContent .eclipse-characters-page nobr {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn #News .BoxContent .eclipse-characters-page .CaptionContainer .Text,
+#ContentColumn #News .BoxContent .eclipse-characters-page .CaptionContainer .Text *,
+#ContentColumn #News .BoxContent .eclipse-characters-page .CaptionInnerContainer .Text,
+#ContentColumn #News .BoxContent .eclipse-characters-page .CaptionInnerContainer .Text * {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  font-weight: 900 !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+}
+
+#ContentColumn #News .BoxContent .eclipse-characters-page input:not(.BigButtonText):not([type="submit"]):not([type="button"]):not([type="hidden"]) {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  caret-color: #000 !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn #News .BoxContent .eclipse-characters-page input[type="submit"],
+#ContentColumn #News .BoxContent .eclipse-characters-page input[type="button"],
+#ContentColumn #News .BoxContent .eclipse-characters-page .BigButtonText,
+#ContentColumn #News .BoxContent .eclipse-characters-page .MediumButtonText {
+  color: #fff8dc !important;
+  -webkit-text-fill-color: #fff8dc !important;
+  font-weight: 900 !important;
+  text-shadow: 0 1px 1px #4c1200 !important;
+}

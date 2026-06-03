@@ -7,6 +7,8 @@
 </script>
 {% set rows = 0 %}
 
+<div class="eclipse-characters-page eclipse-characters-result">
+
 {% if canEdit %}
   <a href="admin/?p=players&id={{ player.getId() }}" title="Edit in Admin Panel" target="_blank">
     {% set button_name = 'Edit Character' %}
@@ -1100,3 +1102,4 @@
   </tr>
 </table>
 <br/>{{ search_form|raw }}
+</div>
