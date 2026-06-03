@@ -5,19 +5,7 @@
 defined('MYAAC') or die('Direct access not allowed!');
 $title = 'Baixar Cliente';
 
-$clientVersion = config('client');
-if (is_numeric($clientVersion)) {
-	$clientVersion = number_format(((int)$clientVersion) / 100, 2, '.', '');
-} else {
-	$clientVersion = '13.x';
-}
-
-$clientUrl = 'https://drive.google.com/drive/folders/0B2-sMQkWYzhGSFhGVlY2WGk5czQ';
-$ipChangerUrl = 'https://static.otland.net/ipchanger.exe';
-$serverIp = str_replace(['http://', 'https://', '/'], '', configLua('url') ?? '');
-if ($serverIp === '') {
-	$serverIp = 'eclipseot.com';
-}
+$clientVersion = '15';
 ?>
 
 <style>
@@ -76,22 +64,6 @@ if ($serverIp === '') {
 		font-size: 14px;
 	}
 
-	.eclipse-download-page .download-badge-row {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 8px;
-		margin-top: 14px;
-	}
-
-	.eclipse-download-page .download-badge {
-		padding: 6px 10px;
-		border: 1px solid rgba(99, 51, 15, .36);
-		border-radius: 4px;
-		background: rgba(255, 249, 218, .62);
-		color: #3f1509 !important;
-		font-size: 12px;
-	}
-
 	.eclipse-download-page .download-actions {
 		display: grid;
 		gap: 10px;
@@ -121,7 +93,7 @@ if ($serverIp === '') {
 
 	.eclipse-download-page .download-grid {
 		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 12px;
 		margin-top: 14px;
 	}
@@ -190,31 +162,21 @@ if ($serverIp === '') {
 				<h2 class="download-title">Baixar Cliente</h2>
 				<p class="download-lead">
 					Use o cliente oficial Tibia <?php echo htmlspecialchars($clientVersion); ?> para jogar no Eclipse OT.
-					Depois de instalar, abra o IP Changer e conecte no servidor.
+					Em breve o download ficará disponível por aqui.
 				</p>
-				<div class="download-badge-row">
-					<span class="download-badge">Cliente <?php echo htmlspecialchars($clientVersion); ?></span>
-					<span class="download-badge">Windows</span>
-					<span class="download-badge">Servidor: <?php echo htmlspecialchars($serverIp); ?></span>
-				</div>
 			</div>
 			<div class="download-actions">
-				<a class="download-button" href="<?php echo $clientUrl; ?>" target="_blank" rel="noopener">Baixar Cliente</a>
-				<a class="download-button secondary" href="<?php echo $ipChangerUrl; ?>" target="_blank" rel="noopener">Baixar IP Changer</a>
+				<a class="download-button" href="javascript:void(0)" aria-disabled="true">Baixar Cliente</a>
 			</div>
 		</div>
 
 		<div class="download-grid">
 			<div class="download-card">
 				<strong><span class="download-step">1</span>Baixe o cliente</strong>
-				<span>Abra o pacote do cliente e instale normalmente no seu computador.</span>
+				<span>Quando o download for liberado, baixe o pacote e instale normalmente no seu computador.</span>
 			</div>
 			<div class="download-card">
-				<strong><span class="download-step">2</span>Configure o acesso</strong>
-				<span>Use o IP Changer para apontar o cliente para o endereço do Eclipse OT.</span>
-			</div>
-			<div class="download-card">
-				<strong><span class="download-step">3</span>Entre no jogo</strong>
+				<strong><span class="download-step">2</span>Entre no jogo</strong>
 				<span>Crie sua conta, escolha sua vocação e comece sua jornada.</span>
 			</div>
 		</div>
