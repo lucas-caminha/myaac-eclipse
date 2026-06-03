@@ -3895,3 +3895,28 @@ body {
   color: #fff1bd !important;
   -webkit-text-fill-color: #fff1bd !important;
 }
+
+/* Rules page: dark text on beige panels, light only in section counters. */
+#ContentColumn .Content .eclipse-rules-page,
+#ContentColumn .Content .eclipse-rules-page *:not(.rules-index) {
+  color: #1f0804 !important;
+  -webkit-text-fill-color: #1f0804 !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .eclipse-rules-page .rules-title,
+#ContentColumn .Content .eclipse-rules-page .rules-title *,
+#ContentColumn .Content .eclipse-rules-page .rules-card h3,
+#ContentColumn .Content .eclipse-rules-page .rules-card h3 *:not(.rules-index),
+#ContentColumn .Content .eclipse-rules-page .rules-note strong {
+  color: #4d1209 !important;
+  -webkit-text-fill-color: #4d1209 !important;
+  font-weight: 900 !important;
+}
+
+#ContentColumn .Content .eclipse-rules-page .rules-index {
+  color: #fff0b8 !important;
+  -webkit-text-fill-color: #fff0b8 !important;
+  text-shadow: none !important;
+}

@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=68" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=69" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -2650,6 +2650,31 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		#ContentColumn .Content .eclipse-download-page .download-button.secondary * {
 		  color: #fff1bd !important;
 		  -webkit-text-fill-color: #fff1bd !important;
+		}
+
+		/* Rules page: dark text on beige panels, light only in section counters. */
+		#ContentColumn .Content .eclipse-rules-page,
+		#ContentColumn .Content .eclipse-rules-page *:not(.rules-index) {
+		  color: #1f0804 !important;
+		  -webkit-text-fill-color: #1f0804 !important;
+		  font-weight: 800 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn .Content .eclipse-rules-page .rules-title,
+		#ContentColumn .Content .eclipse-rules-page .rules-title *,
+		#ContentColumn .Content .eclipse-rules-page .rules-card h3,
+		#ContentColumn .Content .eclipse-rules-page .rules-card h3 *:not(.rules-index),
+		#ContentColumn .Content .eclipse-rules-page .rules-note strong {
+		  color: #4d1209 !important;
+		  -webkit-text-fill-color: #4d1209 !important;
+		  font-weight: 900 !important;
+		}
+
+		#ContentColumn .Content .eclipse-rules-page .rules-index {
+		  color: #fff0b8 !important;
+		  -webkit-text-fill-color: #fff0b8 !important;
+		  text-shadow: none !important;
 		}
 		</style>
 <style>
