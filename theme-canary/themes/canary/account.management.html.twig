@@ -1,4 +1,5 @@
-<div style="text-align:center">
+<div class="eclipse-account-manage-page">
+<div class="eclipse-account-welcome" style="text-align:center">
 	<table style="margin-left: auto; margin-right: auto;">
 		<tr>
 			<td>
@@ -22,7 +23,7 @@
 			  style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
 		<span class="CaptionVerticalLeft"
 			  style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-		<div class="Text">Account Status</div>
+		<div class="Text">Status da Conta</div>
 		<span class="CaptionVerticalRight"
 			  style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
 		<span class="CaptionBorderBottom"
@@ -51,11 +52,11 @@
 											{% if account_logged.isPremium() %}
 												<img class="AccountStatusImage"
 													 src="{{ template_path }}/images/account/account-status_green.gif"
-													 title="{{ tag }} Account" alt="{{ tag }} account">
+													 title="Conta {{ tag }}" alt="conta {{ tag }}">
 											{% else %}
 												<img class="AccountStatusImage"
 													 src="{{ template_path }}/images/account/account-status_red.gif"
-													 title="Free Account" alt="free account">
+													 title="Conta gratuita" alt="conta gratuita">
 											{% endif %}
 											</td>
 											<td width="100%" valign="middle">
@@ -63,12 +64,12 @@
 													{{ account_status|raw }}
 												</span>
 												<small><br>{{ account_expire_time[0] }} {% if account_expire_time[1] %}
-												(<a href="{{ getLink('points') }}">donate now</a>) {% endif %}</small>
+												(<a href="{{ getLink('points') }}">doar agora</a>) {% endif %}</small>
 											</td>
 											<td>
 												{% if config.gifts_system %}
 													<a href="{{ getLink('points') }}" target="blank">
-														{% set button_name = 'Get Coins' %}
+														{% set button_name = 'Obter Coins' %}
 														{% set button_color = 'green' %}
 														{{ include('buttons.base.html.twig') }}
 
@@ -100,19 +101,19 @@
 													<img class="PremiumFeatureImage1"
 														 src="{{ template_path }}/images/premiumfeatures/PremiumIcon-Travel.png"
 														 alt="premium feature 1" style="margin:0px 5px">
-													<div>use instant travel system</div>
+													<div>use o sistema de viagem instantânea</div>
 												</div>
 												<div style="justify-content: center">
 													<img class="PremiumFeatureImage1"
 														 src="{{ template_path }}/images/premiumfeatures/PremiumIcon-VIPGroups.png"
 														 alt="premium feature 1" style="margin:0px 5px">
-													<div>add groups to organise your VIP list</div>
+													<div>crie grupos para organizar sua lista VIP</div>
 												</div>
 												<div style="justify-content: flex-end">
 													<img class="PremiumFeatureImage1"
 														 src="{{ template_path }}/images/premiumfeatures/PremiumIcon-Promotion.png"
 														 alt="premium feature 1" style="margin:0px 5px">
-													<div>get stronger with a promotion</div>
+													<div>fique mais forte com uma promoção</div>
 												</div>
 											</td>
 										</tr>
@@ -143,7 +144,7 @@
 				  style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
 			<span class="CaptionVerticalLeft"
 				  style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-			<div class="Text">Download Client</div>
+			<div class="Text">Baixar Cliente</div>
 			<span class="CaptionVerticalRight"
 				  style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
 			<span class="CaptionBorderBottom"
@@ -175,9 +176,9 @@
 																style="width: 45px; height: 45px; border: 0px; margin-right: 10px;"
 																src="{{ template_path }}/images/account/download_windows.gif"></a>
 														<br>
-														<a style="position: absolute; bottom: -5px; right: 0px;" href="{{ getLink('downloads') }}">Download</a>
+														<a style="position: absolute; bottom: -5px; right: 0px;" href="{{ getLink('downloads') }}">Baixar</a>
 													</div>
-													<span style="position: relative; top: 18px;">Click <a href="{{ getLink('downloads') }}">here</a> to download the latest {{ config['lua']['serverName'] }} client!</span>
+													<span style="position: relative; top: 18px;">Clique <a href="{{ getLink('downloads') }}">aqui</a> para baixar o cliente mais recente do {{ config['lua']['serverName'] }}.</span>
 												</div>
 											</td>
 										</tr>
@@ -213,7 +214,7 @@
 					 style="background-image:url({{ template_path }}/images/content/box-frame-vertical.gif);"></div>
 				<table>
 					<tr>
-						<td class="LabelV">Your account is not registered!</td>
+						<td class="LabelV">Sua conta ainda não está registrada.</td>
 						<td>
 							<form action="{{ getLink('account/register') }}" method="post" style="border:0;">
 								{{ csrf() }}
@@ -222,8 +223,8 @@
 						</td>
 					</tr>
 					<tr>
-						<td style="width:100%;">You can register your account for increased protection. Click on "Register Account"
-			  and get your free recovery key today!
+						<td style="width:100%;">Registre sua conta para aumentar a proteção. Clique em "Registrar conta"
+			  e receba sua Recovery Key gratuita hoje.
 						</td>
 					</tr>
 				</table>
@@ -258,7 +259,7 @@
 				  style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
 			<span class="CaptionVerticalLeft"
 				  style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-			<div class="Text">Characters</div>
+			<div class="Text">Personagens</div>
 			<span class="CaptionVerticalRight"
 				  style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
 			<span class="CaptionBorderBottom"
@@ -283,7 +284,7 @@
 									<table class="TableContent" width="100%" style="border:1px solid #faf0d7;">
 										<tbody>
 										<tr>
-											<td style="text-align: center; font-weight: bold;">Regular Characters</td>
+											<td style="text-align: center; font-weight: bold;">Personagens regulares</td>
 										</tr>
 										</tbody>
 									</table>
@@ -304,7 +305,7 @@
 										<tbody>
 										<tr class="LabelH">
 											<td style="width: 15px !important;"></td>
-											<td>Name</td>
+											<td>Nome</td>
 											<td style="width: 100px !important;">Status</td>
 											<td style="width: 100px !important;"></td>
 										</tr>
@@ -320,12 +321,12 @@
 															  style="font-size:13pt; font-weight: bold;">{{ player.getName() }}
 
 															{% if player.isDeleted() %}
-																<span style="color: red"><b> [ DELETED ] </b></span>
+																<span style="color: red"><b> [ EXCLUÍDO ] </b></span>
 															{% endif %}
 
 															{% if player.isMain() %}
 																<img src="{{ template_path }}/images//account/maincharacter.png"
-																	 alt="(Main Character)" title="Main Character">
+																	 alt="(Personagem principal)" title="Personagem principal">
 															{% endif %}
 
 														</span>
@@ -334,10 +335,10 @@
 
 														<small>
 															<span
-																id="CharacterNameOf_0">{{ config.vocations[player.getVocation()] }} - Level {{ player.getLevel() }} - On {{ config['lua']['serverName'] }}
+																id="CharacterNameOf_0">{{ config.vocations[player.getVocation()] }} - Nível {{ player.getLevel() }} - Em {{ config['lua']['serverName'] }}
 																<span style="position: relative; top: 3px; margin-left: 5px;">
 																	<span class="HelperDivIndicator"
-																		  onmouseover="ActivateHelperDiv($(this), 'BattlEye Protected Game World', '<p>This character lives on a game world which has been protected by BattleEye since April 19, 2018.</p>', '');"
+																		  onmouseover="ActivateHelperDiv($(this), 'Mundo protegido por BattlEye', '<p>Este personagem vive em um mundo protegido pelo BattlEye desde 19 de abril de 2018.</p>', '');"
 																		  onmouseout="$('#HelperDivContainer').hide();">
 																		<img style="border:0;"
 																			 src="{{ template_path }}/images/global/content/icon_battleye.gif">
@@ -346,7 +347,7 @@
 
 																{% if guild.rank is not null %}
 																	<br>
-																	<span>Guild Membership: {{ guild.rank }} of the <a
+																	<span>Guilda: {{ guild.rank }} da <a
 																			href="">{{ guild.link|raw }}</a></span>
 																{% endif %}
 															</span>
@@ -356,7 +357,7 @@
 												<td>
 													<img id="DailyReawardState"
 														 src="{{ template_path }}/images/global/content/icon-status-dailyreward-collected.png"
-														 alt="Daily Reward collected" title="Daily Reward collected">
+														 alt="Recompensa diária coletada" title="Recompensa diária coletada">
 													{% if player.isOnline() %}
 														<img src="{{ template_path }}/images/on.gif" title="Online">
 													{% else %}
@@ -367,9 +368,9 @@
 												<td align="center">
 													<span id="CharacterOptionsOf_0">
 														<span style="font-weight:normal;">{% if not player.isDeleted() %}[<a
-																href="{{ getLink('account/characters/change-comment?name=' ~ player.getName|urlencode) }}">Edit</a>]{% endif %}</span>
+																href="{{ getLink('account/characters/change-comment?name=' ~ player.getName|urlencode) }}">Editar</a>]{% endif %}</span>
 														<br>
-														<span style="font-weight:normal;">[<a href="{{ getLink('account/characters/delete') }}">Delete</a>]</span>
+														<span style="font-weight:normal;">[<a href="{{ getLink('account/characters/delete') }}">Excluir</a>]</span>
 													</span>
 												</td>
 											</tr>
@@ -445,11 +446,10 @@
 					 style="background-image:url({{ template_path }}/images/content/box-frame-vertical.gif);"></div>
 				<table>
 					<tr>
-						<td class="LabelV">Note:</td>
-						<td style="width:100%;">A request has been submitted to change the email address of this account to
-			  <b>{{ email_new }}</b>. After <b>{{ email_new_time|date("j F Y, G:i:s") }}</b> you can accept the new
-			  email address and finish the process. Please cancel the request if you do not want your email address to
-			  be changed! Also cancel the request if you have no access to the new email address!
+						<td class="LabelV">Observação:</td>
+						<td style="width:100%;">Existe uma solicitação para alterar o email desta conta para
+			  <b>{{ email_new }}</b>. Após <b>{{ email_new_time|date("j F Y, G:i:s") }}</b>, você poderá aceitar o novo
+			  email e finalizar o processo. Cancele a solicitação se não quiser alterar o email ou se não tiver acesso ao novo endereço.
 						</td>
 					</tr>
 				</table>
@@ -485,7 +485,7 @@
 	</div>
 </div>
 
-{% set title = 'General Information' %}
+{% set title = 'Informações Gerais' %}
 {% set tableClass = 'Table3' %}
 {% set content %}
 	<table style="width:100%;">
@@ -499,31 +499,31 @@
 					<table class="TableContent" width="100%">
 						{% if not config.account_login_by_email or config.account_login_by_email_fallback %}
 							<tr style="background-color: {{ config.lightborder }};">
-								<td class="LabelV">Account {% if constant('USE_ACCOUNT_NAME') %}Name{% else %}Number{% endif %}:</td>
+								<td class="LabelV">{% if constant('USE_ACCOUNT_NAME') %}Nome da conta{% else %}Número da conta{% endif %}:</td>
 								<td style="width:90%;">{{ account }}</td>
 							</tr>
 						{% endif %}
 						<tr style="background-color: {{ config.darkborder }};">
-							<td class="LabelV">Email Address:</td>
+							<td class="LabelV">Email:</td>
 							<td style="width:90%;" >{{ account_email }}{{ email_change|raw }}</td>
 						</tr>
 						<tr style="background-color: {{ config.lightborder }};">
-							<td class="LabelV">Created:</td>
+							<td class="LabelV">Criada em:</td>
 							<td>{{ account_created|date("j F Y, G:i:s") }}</td>
 						</tr>
 						<tr style="background-color: {{ config.darkborder }};">
-							<td class="LabelV">Last Login:</td>
+							<td class="LabelV">Último login:</td>
 							<td>{{ account_web_lastlogin|date("j F Y, G:i:s") }}</td>
 						</tr>
 						<tr style="background-color: {{ config.lightborder }};">
-							<td class="LabelV">Account Status:</td>
+							<td class="LabelV">Status da conta:</td>
 							<td>{{ account_status|raw }}</td>
 						</tr>
 						{% if db.hasColumn('accounts', 'coins') %}
 						<tr style="background-color: {{ config.darkborder }};">
 							<td class="LabelV">Tibia Coins:</td>
 							<td>{{ account_logged.getCustomField('coins') }} <img src="{{ template_path }}/images/account/icon-tibiacoin.png" class="VSCCoinImages"/>
-								(Including: {{ account_logged.getCustomField('coins_transferable') }} <img
+								(Incluindo: {{ account_logged.getCustomField('coins_transferable') }} <img
 									src="{{ template_path }}/images/account/icon-tibiacointrusted.png"
 									class="VSCCoinImages">)
 							</td>
@@ -536,12 +536,12 @@
 						</tr>
 						{% else %}
 						<tr style="background-color: {{ config.lightborder }};">
-							<td class="LabelV">Premium Points:</td>
+							<td class="LabelV">Pontos Premium:</td>
 							<td>{{ account_logged.getCustomField('premium_points') }}</td>
 						</tr>
 						{% endif %}
 						<tr style="background-color: {{ config.darkborder }};">
-							<td class="LabelV">Registered:</td>
+							<td class="LabelV">Registrada:</td>
 							<td>{{ account_registered|raw }}</td>
 						</tr>
 					</table>
@@ -626,7 +626,7 @@
 				  style="background-image:url({{ template_path }}/images/content/table-headline-border.gif);"></span>
 			<span class="CaptionVerticalLeft"
 				  style="background-image:url({{ template_path }}/images/content/box-frame-vertical.gif);"></span>
-			<div class="Text">Public Information</div>
+			<div class="Text">Informações Públicas</div>
 			<span class="CaptionVerticalRight"
 				  style="background-image:url({{ template_path }}/images/content/box-frame-vertical.gif);"></span>
 			<span class="CaptionBorderBottom"
@@ -651,15 +651,15 @@
 												<td>
 													<table style="width:100%;">
 														<tr>
-															<td class="LabelV">Real Name:</td>
+															<td class="LabelV">Nome real:</td>
 															<td style="width:90%;">{{ account_rlname }}</td>
 														</tr>
 														<tr>
-															<td class="LabelV">Address:</td>
+															<td class="LabelV">Endereço:</td>
 															<td style="width:90%;">{{ account_location }}</td>
 														</tr>
 														<tr>
-															<td class="LabelV">Phone:</td>
+															<td class="LabelV">Telefone:</td>
 															<td style="width:90%;">{{ account_phone }}</td>
 														</tr>
 													</table>
@@ -714,7 +714,7 @@
 				  style="background-image:url({{ template_path }}/images/content/table-headline-border.gif);"></span>
 			<span class="CaptionVerticalLeft"
 				  style="background-image:url({{ template_path }}/images/content/box-frame-vertical.gif);"></span>
-			<div class="Text">Account logs</div>
+			<div class="Text">Logs da Conta</div>
 			<span class="CaptionVerticalRight"
 				  style="background-image:url({{ template_path }}/images/content/box-frame-vertical.gif);"></span>
 			<span class="CaptionBorderBottom"
@@ -737,8 +737,8 @@
 									<div class="TableContentContainer">
 										<table class="TableContent" width="100%">
 											<tr class="LabelH">
-												<td style="width:60%">Action</td>
-												<td style="width:30%">Date</td>
+												<td style="width:60%">Ação</td>
+												<td style="width:30%">Data</td>
 												<td style="width:10%">IP</td>
 											</tr>
 											{% autoescape false %}
@@ -777,3 +777,4 @@
 		margin: auto 5px;
 	}
 </style>
+</div>

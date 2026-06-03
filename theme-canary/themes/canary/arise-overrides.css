@@ -2121,7 +2121,7 @@ body {
 }
 
 .Content .Title::first-letter {
-  color: #ff7840;
+  color: #5e170d !important;
 }
 
 .Content .BorderTitleText:not(.eclipse-status-shell) {
@@ -2234,7 +2234,7 @@ body {
 }
 
 .Content #News .BoxContent > table td::first-letter {
-  color: #ffd494;
+  color: #5e170d !important;
 }
 
 /* Central content contrast pass: readable ticker and news body. */
@@ -2864,4 +2864,756 @@ body {
   color: #1f1008 !important;
   text-shadow: none !important;
   opacity: 1 !important;
+}
+
+/* Account login page polish. */
+#ContentColumn .eclipse-login-page,
+#ContentColumn .eclipse-login-page * {
+  filter: none !important;
+}
+
+#ContentColumn .eclipse-login-page {
+  color: #24100a !important;
+}
+
+#ContentColumn .eclipse-login-card {
+  margin: 0 0 16px !important;
+  border: 2px solid #a86b23 !important;
+  border-radius: 5px !important;
+  overflow: hidden !important;
+  background: linear-gradient(180deg, #efd49e 0%, #d9b36d 54%, #ca9c56 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,244,198,.45), 0 8px 20px rgba(0,0,0,.55) !important;
+}
+
+#ContentColumn .eclipse-login-card .CaptionContainer,
+#ContentColumn .eclipse-login-card .CaptionInnerContainer {
+  height: 36px !important;
+  background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important;
+  border: 0 !important;
+}
+
+#ContentColumn .eclipse-login-card .CaptionContainer span,
+#ContentColumn .eclipse-login-card .CaptionInnerContainer span {
+  display: none !important;
+}
+
+#ContentColumn .eclipse-login-card .CaptionContainer .Text {
+  position: static !important;
+  width: auto !important;
+  height: 36px !important;
+  padding: 0 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  color: #f7e7bd !important;
+  font: 800 15px Georgia, 'Times New Roman', serif !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+}
+
+#ContentColumn .eclipse-login-card .Table4,
+#ContentColumn .eclipse-login-card .Table3,
+#ContentColumn .eclipse-login-card .InnerTableContainer,
+#ContentColumn .eclipse-login-card .TableContentAndRightShadow,
+#ContentColumn .eclipse-login-card .TableContentContainer,
+#ContentColumn .eclipse-login-card .TableContent,
+#ContentColumn .eclipse-login-card .TableContent tbody,
+#ContentColumn .eclipse-login-card .TableContent tr,
+#ContentColumn .eclipse-login-card .TableContent td {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: #24100a !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-login-card .TableContent td * {
+  color: #2a1208 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-login-card .TableContent {
+  margin: 12px !important;
+  width: calc(100% - 24px) !important;
+  background: linear-gradient(180deg, #f1d9a4 0%, #dfb76e 100%) !important;
+  border: 1px solid rgba(137,83,33,.48) !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 rgba(255,246,204,.58), 0 4px 12px rgba(0,0,0,.24) !important;
+}
+
+#ContentColumn .eclipse-login-card .TableShadowContainer,
+#ContentColumn .eclipse-login-card .TableShadowContainerRightTop {
+  display: none !important;
+}
+
+#ContentColumn .eclipse-login-card-account .LabelV {
+  width: 170px !important;
+  padding: 10px 18px !important;
+  color: #3a0905 !important;
+  font-weight: 900 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-login-card-account .LabelV span,
+#ContentColumn .eclipse-login-card-account label {
+  color: #3a0905 !important;
+  font-weight: 900 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-login-card-account input[type="text"],
+#ContentColumn .eclipse-login-card-account input[type="password"] {
+  height: 34px !important;
+  padding: 0 12px !important;
+  box-sizing: border-box !important;
+  background: #fff3d3 !important;
+  border: 1px solid #8f5a24 !important;
+  border-radius: 3px !important;
+  color: #1f1008 !important;
+  font: 700 13px Verdana, Arial, sans-serif !important;
+  box-shadow: inset 0 1px 4px rgba(64,32,12,.28), 0 1px 0 rgba(255,255,255,.55) !important;
+}
+
+#ContentColumn .eclipse-login-card-account input[type="text"]:focus,
+#ContentColumn .eclipse-login-card-account input[type="password"]:focus {
+  outline: none !important;
+  border-color: #5e170d !important;
+  box-shadow: 0 0 0 2px rgba(94,23,13,.22), inset 0 1px 4px rgba(64,32,12,.22) !important;
+}
+
+#ContentColumn .eclipse-login-card-account label {
+  color: #3c1d12 !important;
+  font-weight: 700 !important;
+}
+
+#ContentColumn .eclipse-login-card .BigButton,
+#ContentColumn .eclipse-login-card .MediumButtonBackground {
+  width: 156px !important;
+  height: 34px !important;
+  border: 1px solid #ffe5a2 !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #ff9d26 0%, #c45608 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.32), 0 2px 7px rgba(0,0,0,.45) !important;
+  overflow: hidden !important;
+}
+
+#ContentColumn .eclipse-login-card .BigButtonOver,
+#ContentColumn .eclipse-login-card .MediumButtonOver {
+  display: none !important;
+}
+
+#ContentColumn .eclipse-login-card .BigButtonText,
+#ContentColumn .eclipse-login-card .MediumButtonText {
+  width: 156px !important;
+  height: 34px !important;
+  color: #fff8dc !important;
+  font: 900 12px Verdana, Arial, sans-serif !important;
+  text-shadow: 0 1px 1px #4c1200 !important;
+  text-transform: uppercase !important;
+}
+
+#ContentColumn .eclipse-login-divider {
+  margin: 18px 0 16px !important;
+  text-align: center !important;
+}
+
+#ContentColumn .eclipse-login-divider h1 {
+  margin: 0 !important;
+  color: #3a0905 !important;
+  font: 900 28px Verdana, Arial, sans-serif !important;
+  text-shadow: 0 1px 0 rgba(255,235,183,.72), 0 2px 8px rgba(58,9,5,.22) !important;
+}
+
+#ContentColumn #LoginCreateAccountBox {
+  padding: 4px 4px 4px 10px !important;
+  color: #3c1d12 !important;
+}
+
+#ContentColumn #LoginCreateAccountBox,
+#ContentColumn #LoginCreateAccountBox * {
+  color: #2a1208 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn #LoginCreateAccountBox p {
+  margin: 8px 0 !important;
+  color: #2a1208 !important;
+  font-size: 15px !important;
+  line-height: 1.35 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn #LoginCreateAccountBox b {
+  color: #5e170d !important;
+}
+
+/* Vocation cards on account and character creation. */
+#ContentColumn .eclipse-vocation-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+  gap: 10px !important;
+  margin: 8px 0 10px !important;
+}
+
+#ContentColumn .eclipse-vocation-card {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 230px !important;
+  padding: 8px !important;
+  box-sizing: border-box !important;
+  cursor: pointer !important;
+  border: 2px solid rgba(108, 56, 21, .58) !important;
+  border-radius: 5px !important;
+  background: linear-gradient(180deg, #f0d79f 0%, #d6ad70 100%) !important;
+  color: #24100a !important;
+  box-shadow: inset 0 1px 0 rgba(255,246,204,.58), 0 3px 9px rgba(0,0,0,.28) !important;
+  overflow: hidden !important;
+  transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease !important;
+}
+
+#ContentColumn .eclipse-vocation-card:hover,
+#ContentColumn .eclipse-vocation-card:has(input:checked) {
+  border-color: #5e170d !important;
+  box-shadow: inset 0 1px 0 rgba(255,246,204,.70), 0 0 0 2px rgba(94,23,13,.24), 0 5px 14px rgba(0,0,0,.34) !important;
+  transform: translateY(-1px) !important;
+}
+
+#ContentColumn .eclipse-vocation-card input[type="radio"] {
+  position: absolute !important;
+  top: 9px !important;
+  left: 9px !important;
+  z-index: 2 !important;
+}
+
+#ContentColumn .eclipse-vocation-card img {
+  width: 100% !important;
+  height: 118px !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 2px 0 8px !important;
+  padding: 4px !important;
+  box-sizing: border-box !important;
+  background: radial-gradient(circle at 50% 40%, rgba(35,77,99,.86), rgba(7,18,27,.95)) !important;
+  border: 1px solid #a86b23 !important;
+  border-radius: 4px !important;
+}
+
+#ContentColumn .eclipse-vocation-name {
+  display: block !important;
+  margin: 0 0 3px !important;
+  color: #3a0905 !important;
+  font: 900 16px Georgia, 'Times New Roman', serif !important;
+  text-shadow: 0 1px 0 rgba(255,235,183,.70) !important;
+}
+
+#ContentColumn .eclipse-vocation-role {
+  display: block !important;
+  margin-bottom: 7px !important;
+  color: #5e170d !important;
+  font: 900 10px Verdana, Arial, sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0 !important;
+}
+
+#ContentColumn .eclipse-vocation-description {
+  display: block !important;
+  color: #2a1208 !important;
+  font: 700 11px/1.35 Verdana, Arial, sans-serif !important;
+  text-shadow: none !important;
+}
+
+/* Creation forms readable text lock. Overrides the legacy light global content color. */
+#ContentColumn .Content .eclipse-create-account-page,
+#ContentColumn .Content .eclipse-create-character-page,
+#ContentColumn .Content .eclipse-create-account-page *,
+#ContentColumn .Content .eclipse-create-character-page * {
+  color: #24100a !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .eclipse-create-account-page .LabelV,
+#ContentColumn .Content .eclipse-create-account-page .LabelV span,
+#ContentColumn .Content .eclipse-create-character-page .LabelV,
+#ContentColumn .Content .eclipse-create-character-page .LabelV span,
+#ContentColumn .Content .eclipse-create-account-page .OptionContainer label,
+#ContentColumn .Content .eclipse-create-character-page .OptionContainer label,
+#ContentColumn .Content .eclipse-create-character-page b {
+  color: #3a0905 !important;
+  font-weight: 900 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .eclipse-create-account-page a,
+#ContentColumn .Content .eclipse-create-character-page a {
+  color: #5e170d !important;
+  font-weight: 800 !important;
+}
+
+#ContentColumn .Content .eclipse-create-account-page .FormFieldError,
+#ContentColumn .Content .eclipse-create-character-page .FormFieldError,
+#ContentColumn .Content .eclipse-create-account-page .red,
+#ContentColumn .Content .eclipse-create-character-page .red {
+  color: #8b1208 !important;
+}
+
+#ContentColumn .Content .eclipse-create-account-page .eclipse-vocation-card,
+#ContentColumn .Content .eclipse-create-character-page .eclipse-vocation-card,
+#ContentColumn .Content .eclipse-create-account-page .eclipse-vocation-card *,
+#ContentColumn .Content .eclipse-create-character-page .eclipse-vocation-card * {
+  color: #2a1208 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .eclipse-create-account-page .eclipse-vocation-card .eclipse-vocation-name,
+#ContentColumn .Content .eclipse-create-character-page .eclipse-vocation-card .eclipse-vocation-name {
+  color: #3a0905 !important;
+  text-shadow: 0 1px 0 rgba(255,235,183,.70) !important;
+}
+
+#ContentColumn .Content .eclipse-create-account-page .eclipse-vocation-card .eclipse-vocation-role,
+#ContentColumn .Content .eclipse-create-character-page .eclipse-vocation-card .eclipse-vocation-role {
+  color: #5e170d !important;
+}
+
+#ContentColumn .Content .eclipse-create-account-page .eclipse-vocation-card .eclipse-vocation-description,
+#ContentColumn .Content .eclipse-create-character-page .eclipse-vocation-card .eclipse-vocation-description {
+  color: #2a1208 !important;
+  font-weight: 800 !important;
+}
+
+/* Create account contrast lock for the legacy Arise table markup. */
+#ContentColumn .Content .eclipse-create-account-page form#createaccount,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .InnerTableContainer,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .TableContent,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .TableContent tr,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .TableContent td {
+  color: #24100a !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .LabelV,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .LabelV *,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .OptionContainer,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .OptionContainer *,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount td > span,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount td > span *,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount td > div,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount td > div * {
+  color: #2a1208 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .LabelV,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .LabelV span {
+  color: #3a0905 !important;
+  font-weight: 900 !important;
+}
+
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .FormFieldError,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount #account_error,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount #email_error,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount #password_error,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount #password_confirm_error,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount #character_error,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount #sex_error,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount #vocation_error,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount #town_error {
+  color: #5e170d !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .eclipse-vocation-card,
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .eclipse-vocation-card * {
+  color: #24100a !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .eclipse-vocation-card .eclipse-vocation-name {
+  color: #3a0905 !important;
+  text-shadow: 0 1px 0 rgba(255, 235, 183, .70) !important;
+}
+
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .eclipse-vocation-card .eclipse-vocation-role {
+  color: #5e170d !important;
+}
+
+#ContentColumn .Content .eclipse-create-account-page form#createaccount .eclipse-vocation-card .eclipse-vocation-description {
+  color: #2a1208 !important;
+  font-weight: 800 !important;
+}
+
+/* Global central content contrast for beige/yellow Arise tables. */
+#ContentColumn .Content .TableContentContainer,
+#ContentColumn .Content .InnerTableContainer,
+#ContentColumn .Content .TableContent,
+#ContentColumn .Content .TableContent tr,
+#ContentColumn .Content .TableContent td,
+#ContentColumn .Content .TableContent div,
+#ContentColumn .Content .TableContent p,
+#ContentColumn .Content .TableContent span,
+#ContentColumn .Content .TableContent label,
+#ContentColumn .Content .TableContent small,
+#ContentColumn .Content .TableContent strong,
+#ContentColumn .Content .TableContent b,
+#ContentColumn .Content .Odd,
+#ContentColumn .Content .Even,
+#ContentColumn .Content .LabelV,
+#ContentColumn .Content .LabelV *,
+#ContentColumn .Content .LabelH,
+#ContentColumn .Content .LabelH * {
+  color: #24100a !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .LabelV,
+#ContentColumn .Content .LabelV span,
+#ContentColumn .Content .LabelH,
+#ContentColumn .Content .LabelH span {
+  color: #3a0905 !important;
+  font-weight: 900 !important;
+}
+
+#ContentColumn .Content .TableContent a,
+#ContentColumn .Content .InnerTableContainer a {
+  color: #5e170d !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .FormFieldError,
+#ContentColumn .Content .red,
+#ContentColumn .Content span.red,
+#ContentColumn .Content .TableContent .red {
+  color: #8b1208 !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content input,
+#ContentColumn .Content select,
+#ContentColumn .Content textarea {
+  color: #1f1008 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .CaptionContainer,
+#ContentColumn .Content .CaptionContainer *,
+#ContentColumn .Content .CaptionInnerContainer,
+#ContentColumn .Content .CaptionInnerContainer *,
+#ContentColumn .Content .BorderTitleText,
+#ContentColumn .Content .BorderTitleText *,
+#ContentColumn .Content .Title,
+#ContentColumn .Content .Title * {
+  color: #f7e7bd !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+}
+
+#ContentColumn .Content .BigButtonText,
+#ContentColumn .Content .MediumButtonText,
+#ContentColumn .Content button,
+#ContentColumn .Content button *,
+#ContentColumn .Content input[type="submit"],
+#ContentColumn .Content input[type="button"] {
+  color: #fff8dc !important;
+  text-shadow: 0 1px 1px #4c1200 !important;
+}
+
+/* Create account page polish. */
+#ContentColumn .eclipse-create-account-page {
+  color: #24100a !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount > .TableContainer {
+  border: 2px solid #a86b23 !important;
+  border-radius: 5px !important;
+  overflow: hidden !important;
+  background: linear-gradient(180deg, #efd49e 0%, #d9b36d 58%, #c99a51 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,244,198,.48), 0 10px 26px rgba(0,0,0,.55) !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount > .TableContainer > table {
+  background: transparent !important;
+}
+
+#ContentColumn .eclipse-create-account-page .CaptionContainer,
+#ContentColumn .eclipse-create-account-page .CaptionInnerContainer {
+  height: 38px !important;
+  background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important;
+  border: 0 !important;
+}
+
+#ContentColumn .eclipse-create-account-page .CaptionContainer span,
+#ContentColumn .eclipse-create-account-page .CaptionInnerContainer span {
+  display: none !important;
+}
+
+#ContentColumn .eclipse-create-account-page .CaptionContainer .Text {
+  position: static !important;
+  width: auto !important;
+  height: 38px !important;
+  padding: 0 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  color: #f7e7bd !important;
+  font: 900 17px Georgia, 'Times New Roman', serif !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .InnerTableContainer {
+  padding: 12px !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .TableContentContainer {
+  padding: 0 !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .TableContentAndRightShadow,
+#ContentColumn .eclipse-create-account-page form#createaccount .TableContentContainer,
+#ContentColumn .eclipse-create-account-page form#createaccount .TableContent,
+#ContentColumn .eclipse-create-account-page form#createaccount .TableContent tbody,
+#ContentColumn .eclipse-create-account-page form#createaccount .TableContent tr,
+#ContentColumn .eclipse-create-account-page form#createaccount .TableContent td {
+  background-image: none !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .TableContent {
+  width: 100% !important;
+  margin: 0 0 14px !important;
+  border: 1px solid rgba(137,83,33,.54) !important;
+  border-radius: 5px !important;
+  background: linear-gradient(180deg, #f2dca9 0%, #dfbd7b 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,246,204,.64), 0 5px 14px rgba(0,0,0,.24) !important;
+  overflow: hidden !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .TableContent td {
+  padding: 6px 12px !important;
+  vertical-align: middle !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .TableContent tr:has(.FormFieldError:empty) td {
+  height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 0 !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .LabelV {
+  width: 185px !important;
+  color: #3a0905 !important;
+  font: 900 13px Verdana, Arial, sans-serif !important;
+  white-space: normal !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount input[type="text"],
+#ContentColumn .eclipse-create-account-page form#createaccount input:not([type]),
+#ContentColumn .eclipse-create-account-page form#createaccount #character_name,
+#ContentColumn .eclipse-create-account-page form#createaccount input[type="password"],
+#ContentColumn .eclipse-create-account-page form#createaccount select {
+  width: min(100%, 380px) !important;
+  height: 34px !important;
+  padding: 0 10px !important;
+  box-sizing: border-box !important;
+  border: 1px solid #8f5a24 !important;
+  border-radius: 3px !important;
+  background: #fff3d3 !important;
+  color: #1f1008 !important;
+  font: 700 13px Verdana, Arial, sans-serif !important;
+  box-shadow: inset 0 1px 4px rgba(64,32,12,.28), 0 1px 0 rgba(255,255,255,.55) !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount input[type="text"]:focus,
+#ContentColumn .eclipse-create-account-page form#createaccount input:not([type]):focus,
+#ContentColumn .eclipse-create-account-page form#createaccount #character_name:focus,
+#ContentColumn .eclipse-create-account-page form#createaccount input[type="password"]:focus,
+#ContentColumn .eclipse-create-account-page form#createaccount select:focus {
+  outline: none !important;
+  border-color: #5e170d !important;
+  box-shadow: 0 0 0 2px rgba(94,23,13,.22), inset 0 1px 4px rgba(64,32,12,.22) !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .OptionContainer {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  min-height: 30px !important;
+  margin: 0 18px 4px 0 !important;
+  color: #2a1208 !important;
+  font-weight: 800 !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount input[type="radio"],
+#ContentColumn .eclipse-create-account-page form#createaccount input[type="checkbox"] {
+  accent-color: #6f1f10 !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .FormFieldError {
+  display: inline-block !important;
+  min-height: 14px !important;
+  color: #6f1f10 !important;
+  font-size: 11px !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .FormFieldError:empty {
+  display: none !important;
+  min-height: 0 !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-vocation-grid {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+  gap: 12px !important;
+  padding: 2px 0 !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-vocation-card {
+  min-height: 245px !important;
+  padding: 9px !important;
+  border-color: rgba(108,56,21,.65) !important;
+  background: linear-gradient(180deg, #f4dda8 0%, #dbb46f 100%) !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-vocation-card img {
+  height: 116px !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .BigButton {
+  width: 168px !important;
+  height: 36px !important;
+  border: 1px solid #ffe5a2 !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #ff9d26 0%, #c45608 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.32), 0 3px 10px rgba(0,0,0,.45) !important;
+  overflow: hidden !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .BigButtonOver {
+  display: none !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .BigButtonText {
+  width: 168px !important;
+  height: 36px !important;
+  color: #fff8dc !important;
+  font: 900 12px Verdana, Arial, sans-serif !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 1px 1px #4c1200 !important;
+}
+
+/* Account management page polish. */
+#ContentColumn .eclipse-account-manage-page,
+#ContentColumn .eclipse-account-manage-page .TableContent,
+#ContentColumn .eclipse-account-manage-page .TableContent td,
+#ContentColumn .eclipse-account-manage-page .TableContent div,
+#ContentColumn .eclipse-account-manage-page .TableContent span,
+#ContentColumn .eclipse-account-manage-page .TableContent small,
+#ContentColumn .eclipse-account-manage-page .TableContent b,
+#ContentColumn .eclipse-account-manage-page .TableContent strong,
+#ContentColumn .eclipse-account-manage-page .TableContent label {
+  color: #24100a !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .TableContainer {
+  border: 2px solid #a86b23 !important;
+  border-radius: 5px !important;
+  overflow: hidden !important;
+  background: linear-gradient(180deg, #efd49e 0%, #d9b36d 58%, #c99a51 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,244,198,.48), 0 8px 22px rgba(0,0,0,.50) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .TableContainer > table {
+  background: transparent !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .CaptionContainer,
+#ContentColumn .eclipse-account-manage-page .CaptionInnerContainer {
+  height: 36px !important;
+  background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important;
+  border: 0 !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .CaptionContainer span,
+#ContentColumn .eclipse-account-manage-page .CaptionInnerContainer span {
+  display: none !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .CaptionContainer .Text {
+  position: static !important;
+  width: auto !important;
+  height: 36px !important;
+  padding: 0 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  color: #f7e7bd !important;
+  font: 900 16px Georgia, 'Times New Roman', serif !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .InnerTableContainer {
+  padding: 10px 12px !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .TableContentAndRightShadow,
+#ContentColumn .eclipse-account-manage-page .TableContentContainer,
+#ContentColumn .eclipse-account-manage-page .TableContent,
+#ContentColumn .eclipse-account-manage-page .TableContent tbody,
+#ContentColumn .eclipse-account-manage-page .TableContent tr,
+#ContentColumn .eclipse-account-manage-page .TableContent td {
+  background-image: none !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .TableContent {
+  width: 100% !important;
+  border: 1px solid rgba(137,83,33,.54) !important;
+  border-radius: 5px !important;
+  background: linear-gradient(180deg, #f2dca9 0%, #dfbd7b 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,246,204,.64), 0 4px 12px rgba(0,0,0,.22) !important;
+  overflow: hidden !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .TableContent td {
+  padding: 7px 10px !important;
+  vertical-align: middle !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .LabelV,
+#ContentColumn .eclipse-account-manage-page .LabelH,
+#ContentColumn .eclipse-account-manage-page .LabelH td {
+  color: #3a0905 !important;
+  font: 900 12px Verdana, Arial, sans-serif !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-account-manage-page a {
+  color: #5e170d !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .BigBoldText,
+#ContentColumn .eclipse-account-manage-page .BigBoldText * {
+  color: #3a0905 !important;
+  text-shadow: 0 1px 0 rgba(255,235,183,.70) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .premiumbenefits {
+  gap: 10px !important;
+  color: #2a1208 !important;
+  font-weight: 800 !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .premiumbenefits > div {
+  min-height: 58px !important;
+  padding: 8px !important;
+  border: 1px solid rgba(137,83,33,.36) !important;
+  border-radius: 4px !important;
+  background: rgba(255,243,211,.34) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .BigButtonText,
+#ContentColumn .eclipse-account-manage-page .MediumButtonText,
+#ContentColumn .eclipse-account-manage-page input[type="submit"],
+#ContentColumn .eclipse-account-manage-page input[type="button"] {
+  color: #fff8dc !important;
+  text-shadow: 0 1px 1px #4c1200 !important;
 }

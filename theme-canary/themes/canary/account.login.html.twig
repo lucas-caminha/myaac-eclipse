@@ -1,4 +1,5 @@
 {{ hook('HOOK_ACCOUNT_LOGIN_BEFORE_PAGE') }}
+<div class="eclipse-login-page">
 <form action="{{ getLink('account/manage') }}" method="post" style="margin: 0; padding: 0;">
 	{{ csrf() }}
 
@@ -6,7 +7,7 @@
 		<input type="hidden" name="redirect" value="{{ redirect }}" />
 	{% endif %}
 
-	<div class="TableContainer" >
+	<div class="TableContainer eclipse-login-card eclipse-login-card-account" >
 		<div class="CaptionContainer" >
 			<div class="CaptionInnerContainer" >
 				<span class="CaptionEdgeLeftTop" style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);" ></span>
@@ -92,10 +93,10 @@
 </form>
 <br/>
 
-<div style="text-align:center">
+<div class="eclipse-login-divider">
 	<h1>New to {{ config.lua.serverName }}?</h1>
 </div>
-<div class="TableContainer" >
+<div class="TableContainer eclipse-login-card eclipse-login-card-new" >
 	<div class="CaptionContainer" >
 		<div class="CaptionInnerContainer" >
 			<span class="CaptionEdgeLeftTop" style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
@@ -167,5 +168,6 @@
 		</tr>
 	</tbody>
 	</table>
+</div>
 </div>
 {{ hook('HOOK_ACCOUNT_LOGIN_AFTER_PAGE') }}
