@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=25" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=54" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -312,6 +312,9 @@ if (isset($config['boxes']))
 <div id="top"></div>
 <div id="ArtworkHelper">
 	<div id="Bodycontainer">
+		<img id="EclipseCenteredLogo"
+			 src="<?= $template_path; ?>/images/header/<?= $config['logo_image']; ?>"
+			 onClick="window.location = '<?= getLink('news') ?>';" alt="Eclipse OT"/>
 		<div id="ContentRow">
 			<div id="MenuColumn">
 				<div id="LeftArtwork">
@@ -425,69 +428,21 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 								 style="background-image:url(<?= $template_path; ?>/images/global/content/corner-tr.gif);"></div>
 							<div class="Border_1"
 								 style="background-image:url(<?= $template_path; ?>/images/global/content/border-1.gif);"></div>
-							<div class="BorderTitleText"
+							<div class="BorderTitleText eclipse-status-shell"
 								 style="background-image:url(<?= $template_path; ?>/images/global/content/newsheadline_background.gif); height: 28px;">
-								<div class="InfoBar">
-									<img class="InfoBarBigLogo"
-										 src="<?= $template_path; ?>/images/global/header/icon-download.png">
-									<span class="InfoBarNumbers">
-										<a class="InfoBarLinks" href="<?= getLink('downloads'); ?>"><span
-													class="InfoBarSmallElement">Download Client</span></a>
-									</span>
-
-									<?php if (!empty($config['whatsapp_link'])) { ?>
-										<img class="InfoBarBigLogo" style="margin-left: 8px"
-											 src="<?= $template_path; ?>/images/global/header/icon-whatsapp.png"
-											 width="16">
-										<span class="InfoBarNumbers">
-					<a class="InfoBarLinks" href="<?= $config['whatsapp_link']; ?>" target="new"><span
-							class="InfoBarSmallElement">Whatsapp</span></a>
-				</span>
-									<?php } ?>
-									<?php if (!empty($config['discord_link'])) { ?>
-										<img class="InfoBarBigLogo" style="margin-left: 8px"
-											 src="<?= $template_path; ?>/images/global/header/icon-discord.png">
-										<span class="InfoBarNumbers">
-					<a class="InfoBarLinks" href="<?= $config['discord_link']; ?>" target="new"><span
-							class="InfoBarSmallElement">Discord</span></a>
-				</span>
-									<?php } ?>
-									<?php if (!empty($config['instagram_link'])) { ?>
-										<img class="InfoBarBigLogo" style="margin-left: 8px"
-											 src="<?= $template_path; ?>/images/global/header/icon-instagram.png"
-											 width="16">
-										<span class="InfoBarNumbers">
-					<a class="InfoBarLinks" href="https://www.instagram.com/<?= $config['instagram_link']; ?>"
-					   target="new"><span class="InfoBarSmallElement">Instagram</span></a>
-				</span>
-									<?php } ?>
-									<?php if (!empty($config['facebook_link'])) { ?>
-										<img class="InfoBarBigLogo" style="margin-left: 8px"
-											 src="<?= $template_path; ?>/images/global/header/icon-facebook.png"
-											 width="16">
-										<span class="InfoBarNumbers">
-					<a class="InfoBarLinks" href="https://www.facebook.com/<?= $config['facebook_link']; ?>"
-					   target="new"><span class="InfoBarSmallElement">Facebook</span></a>
-				</span>
-									<?php } ?>
-									<span style="float: right; margin-top: -2px;">
-				<img class="InfoBarBigLogo" src="<?= $template_path; ?>/images/global/header/icon-players-online.png">
-				<span class="InfoBarNumbers">
-					<span class="InfoBarSmallElement">
-						<a class="InfoBarLinks" href="<?= getLink('online'); ?>">
-<?= $status['online'] ? $status['players'] . ' Players Online' : 'Server Offline' ?>
-						</a>
-					</span>
-				</span>
-<?php if ($config['collapse_status']) { ?>
-	<a data-bs-toggle="collapse" href="#statusbar" role="button" aria-expanded="false" aria-controls="statusbar">
-<img src="<?= $template_path; ?>/images/global/content/top-to-back.gif" class="InfoBarBigLogo">
-</a>
-<?php } ?>
-</span>
+								<div class="InfoBar eclipse-onlinebar <?= $status['online'] ? 'is-online' : 'is-offline' ?>">
+										<a class="InfoBarLinks eclipse-onlinebar-link" href="<?= getLink('online'); ?>">
+											<span class="eclipse-status-dot"></span>
+											<img class="InfoBarBigLogo" src="<?= $template_path; ?>/images/global/header/icon-players-online.png" alt="Players Online">
+											<span class="InfoBarNumbers">
+												<span class="InfoBarSmallElement eclipse-status-text">
+													<?= $status['online'] ? $status['players'] . ' Players Online' : 'Server Offline' ?>
+												</span>
+											</span>
+										</a>
+									</div>
 								</div>
-							</div>
-							<!-- COLLAPSE STATUS BAR -->
+								<!-- COLLAPSE STATUS BAR -->
 							<?php if ($config['collapse_status']) { ?>
 								<div class="collapse" id="statusbar" style="background-color: #d4c0a1;">
 									<table class="Table3" cellpadding="0" cellspacing="0" style="width: 100%;">
@@ -636,20 +591,13 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 				<div id="Footer">
 					<?php
 					$eclipseFooter = [];
-					if (admin()) {
-						$eclipseFooter[] = generateLink(ADMIN_URL, "Admin Panel", true);
-					}
-					if (setting("core.visitors_counter")) {
-						global $visitors;
-						$amount = $visitors->getAmountVisitors();
-						$eclipseFooter[] = "Currently there " . ($amount > 1 ? "are" : "is") . " " . $amount . " visitor" . ($amount > 1 ? "s" : "") . ".";
-					}
-					if (setting("core.footer_load_time")) {
-						$eclipseFooter[] = "Load time: " . round(microtime(true) - START_TIME, 4) . " seconds.";
-					}
-					$eclipseFooter[] = "Copyright &copy; " . date("Y") . " Eclipse OT. All rights reserved.";
-					echo implode("<br/>", $eclipseFooter);
-					?>
+						if (admin()) {
+							$eclipseFooter[] = generateLink(ADMIN_URL, "Admin Panel", true);
+						}
+						$eclipseFooter[] = "Eclipse Ot";
+						$eclipseFooter[] = "Copyright &copy; " . date("Y") . " Eclipse Ot. All rights reserved.";
+						echo implode("<br/>", $eclipseFooter);
+						?>
 				</div>
 			</div>
 
@@ -725,8 +673,8 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 <?= template_place_holder('body_end'); ?>
 
 <style id="eclipse-right-sidebar-final">
-	#ThemeboxesColumn { width: 210px !important; min-width: 210px !important; display: flex !important; flex-direction: column !important; align-items: center !important; margin-left: 0 !important; }
-	#Themeboxes { width: 188px !important; display: flex !important; flex-direction: column !important; align-items: center !important; gap: 26px !important; margin: 0 auto !important; }
+	#ThemeboxesColumn { width: 210px !important; min-width: 210px !important; display: flex !important; flex-direction: column !important; align-items: center !important; position: absolute !important; right: 0 !important; left: auto !important; margin-right: 0 !important; margin-left: 15px !important; }
+	#Themeboxes { width: 188px !important; display: flex !important; flex-direction: column !important; align-items: center !important; gap: 14px !important; margin: 0 auto !important; }
 	#RightArtwork { display: none !important; }
 	#Themeboxes > br, #Themeboxes .rank_bottom, #Themeboxes .discord_bottom, #Themeboxes .donate_bottom, #Themeboxes .serversave_bottom, #Themeboxes .searchchar_bottom, #Themeboxes .rashid_bottom { display: none !important; }
 	#Themeboxes .donate { order: 1 !important; }
@@ -768,8 +716,889 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 	#Themeboxes .rank_text a { color: #44140d !important; }
 
 
-#ThemeboxesColumn { left: 814px !important; margin-left: 0 !important; }
-</style>
+
+
+		#Themeboxes .eclipse-boosted-grid { gap: 10px !important; padding: 12px 8px 13px !important; overflow: visible !important; }
+		#Themeboxes .eclipse-boosted-item { min-width: 0 !important; overflow: visible !important; }
+		#Themeboxes .eclipse-boosted-frame { width: 58px !important; height: 58px !important; overflow: visible !important; margin-bottom: 6px !important; }
+		#Themeboxes .eclipse-boosted-frame img { max-width: 76px !important; max-height: 76px !important; object-fit: contain !important; }
+		#Themeboxes .eclipse-boosted-item span { max-width: 78px !important; white-space: normal !important; overflow: hidden !important; text-overflow: clip !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; line-height: 1.15 !important; min-height: 21px !important; }
+		#EclipseFooterServerSave { width: 210px !important; margin: 22px auto 10px !important; }
+		#EclipseFooterServerSave .serversave { width: 210px !important; filter: none !important; }
+		#EclipseFooterServerSave .serversave_header { width: 210px !important; height: 26px !important; line-height: 25px !important; background: linear-gradient(180deg, rgba(47,9,6,.96), rgba(8,3,3,.98)) !important; border: 1px solid rgba(255,122,24,.75) !important; border-bottom: 0 !important; border-radius: 4px 4px 0 0 !important; color: #ffd494 !important; font-size: 12px !important; letter-spacing: 0 !important; text-shadow: 0 0 8px rgba(255,93,32,.85), 0 1px 2px #000 !important; }
+		#EclipseFooterServerSave .serversave_header::before, #EclipseFooterServerSave .serversave_header::after { content: '*'; color: #ffb653; padding: 0 5px; }
+		#EclipseFooterServerSave .serversave_content { width: 210px !important; padding: 8px 10px 10px !important; background: linear-gradient(180deg, rgba(20,5,4,.94), rgba(3,1,1,.96)) !important; border: 1px solid rgba(255,122,24,.75) !important; border-top: 0 !important; border-radius: 0 0 4px 4px !important; box-shadow: 0 0 18px rgba(0,0,0,.72), inset 0 0 14px rgba(255,70,24,.10) !important; }
+		#EclipseFooterServerSave .serversave_text { color: #d9a66c !important; font-size: 10px !important; text-transform: uppercase !important; }
+		#EclipseFooterServerSave .serversave_countdown { color: #ffe5bc !important; background: rgba(0,0,0,.55) !important; border: 1px solid rgba(255,195,104,.50) !important; border-radius: 3px !important; font-size: 18px !important; text-shadow: 0 0 8px rgba(255,94,32,.55), 0 1px 2px #000 !important; }
+
+		/* Final polish: boosted sprite centering and dark footer server save box. */
+		#Themeboxes .eclipse-boosted-grid {
+		  grid-template-columns: 1fr 1fr !important;
+		  gap: 8px !important;
+		  padding: 12px 8px 14px !important;
+		}
+		
+		#Themeboxes .eclipse-boosted-item {
+		  align-items: center !important;
+		  justify-content: flex-start !important;
+		  text-align: center !important;
+		}
+		
+		#Themeboxes .eclipse-boosted-frame {
+		  width: 58px !important;
+		  height: 58px !important;
+		  display: flex !important;
+		  align-items: center !important;
+		  justify-content: center !important;
+		  overflow: visible !important;
+		  box-sizing: border-box !important;
+		}
+		
+		#Themeboxes .eclipse-boosted-frame img {
+		  display: block !important;
+		  margin: auto !important;
+		  position: static !important;
+		  transform: none !important;
+		}
+		
+		#Themeboxes .eclipse-boosted-boss .eclipse-boosted-frame img {
+		  max-width: 76px !important;
+		  max-height: 76px !important;
+		}
+		
+		#Themeboxes .eclipse-boosted-creature .eclipse-boosted-frame img {
+		  max-width: 54px !important;
+		  max-height: 54px !important;
+		}
+		
+		#Themeboxes .eclipse-boosted-item span {
+		  max-width: 74px !important;
+		  margin: 0 auto !important;
+		  white-space: normal !important;
+		  overflow: hidden !important;
+		  display: -webkit-box !important;
+		  -webkit-line-clamp: 2 !important;
+		  -webkit-box-orient: vertical !important;
+		}
+		
+		#EclipseFooterServerSave,
+		#EclipseFooterServerSave .serversave {
+		  width: 210px !important;
+		  height: auto !important;
+		  min-height: 0 !important;
+		  box-sizing: border-box !important;
+		}
+		
+		#EclipseFooterServerSave {
+		  margin: 20px auto 8px !important;
+		}
+		
+		#EclipseFooterServerSave .serversave_header {
+		  width: 210px !important;
+		  height: 28px !important;
+		  line-height: 28px !important;
+		  box-sizing: border-box !important;
+		  margin: 0 !important;
+		}
+		
+		#EclipseFooterServerSave .serversave_content {
+		  width: 210px !important;
+		  height: auto !important;
+		  min-height: 66px !important;
+		  padding: 9px 12px 10px !important;
+		  display: flex !important;
+		  flex-direction: column !important;
+		  align-items: center !important;
+		  justify-content: center !important;
+		  gap: 7px !important;
+		  box-sizing: border-box !important;
+		}
+		
+		#EclipseFooterServerSave .serversave_text {
+		  width: 100% !important;
+		  line-height: 1.1 !important;
+		}
+		
+		#EclipseFooterServerSave .serversave_countdown {
+		  width: 164px !important;
+		  height: 32px !important;
+		  line-height: 31px !important;
+		  padding: 0 !important;
+		  box-sizing: border-box !important;
+		}
+		
+		/* Simple footer server save. */
+		#EclipseFooterServerSave {
+		  width: 190px !important;
+		  margin: 18px auto 8px !important;
+		  text-align: center !important;
+		}
+		
+		#EclipseFooterServerSave .serversave {
+		  width: 190px !important;
+		  height: auto !important;
+		  margin: 0 auto !important;
+		  filter: none !important;
+		}
+		
+		#EclipseFooterServerSave .serversave_header,
+		#EclipseFooterServerSave .serversave_text,
+		#EclipseFooterServerSave .serversave_bottom {
+		  display: none !important;
+		}
+		
+		#EclipseFooterServerSave .serversave_content {
+		  width: 190px !important;
+		  height: auto !important;
+		  min-height: 0 !important;
+		  padding: 0 !important;
+		  margin: 0 !important;
+		  display: block !important;
+		  background: transparent !important;
+		  border: 0 !important;
+		  box-shadow: none !important;
+		}
+		
+		#EclipseFooterServerSave .serversave_countdown {
+		  width: auto !important;
+		  height: auto !important;
+		  line-height: 1 !important;
+		  padding: 0 !important;
+		  margin: 0 auto !important;
+		  display: inline-block !important;
+		  background: transparent !important;
+		  border: 0 !important;
+		  color: #ffd494 !important;
+		  font-family: Georgia, 'Times New Roman', serif !important;
+		  font-size: 20px !important;
+		  font-weight: 800 !important;
+		  text-shadow: 0 0 10px rgba(255, 87, 28, .55), 0 1px 2px #000 !important;
+		}
+		
+		/* Server save as a single footer line. */
+		#EclipseFooterServerSave .serversave_content {
+		  display: flex !important;
+		  align-items: baseline !important;
+		  justify-content: center !important;
+		  gap: 7px !important;
+		  width: auto !important;
+		}
+		
+		#EclipseFooterServerSave .serversave_content::before {
+		  content: 'Server Save:';
+		  color: #ffd494 !important;
+		  font-family: Georgia, 'Times New Roman', serif !important;
+		  font-size: 14px !important;
+		  font-weight: 800 !important;
+		  text-shadow: 0 0 8px rgba(255, 87, 28, .45), 0 1px 2px #000 !important;
+		}
+		
+		#EclipseFooterServerSave .serversave_countdown {
+		  font-size: 18px !important;
+		}
+		
+		/* Server save stacked footer text. */
+		#EclipseFooterServerSave .serversave_content {
+		  display: flex !important;
+		  flex-direction: column !important;
+		  align-items: center !important;
+		  justify-content: center !important;
+		  gap: 4px !important;
+		}
+		
+		#EclipseFooterServerSave .serversave_content::before {
+		  content: 'Server Save:';
+		  color: #ffd494 !important;
+		  font-family: Georgia, 'Times New Roman', serif !important;
+		  font-size: 14px !important;
+		  font-weight: 800 !important;
+		  line-height: 1 !important;
+		  text-shadow: 0 0 8px rgba(255, 87, 28, .45), 0 1px 2px #000 !important;
+		}
+		
+		#EclipseFooterServerSave .serversave_countdown {
+		  font-size: 18px !important;
+		  line-height: 1 !important;
+		}
+		
+		/* Center Eclipse logo above the online players bar. */
+		#LeftArtwork {
+		  position: fixed !important;
+		  top: 0 !important;
+		  left: 0 !important;
+		  right: 0 !important;
+		  width: 100vw !important;
+		  height: 210px !important;
+		  display: flex !important;
+		  justify-content: center !important;
+		  align-items: flex-start !important;
+		  pointer-events: none !important;
+		  z-index: 50000 !important;
+		}
+		
+		#LeftArtwork #TibiaLogoArtworkTop {
+		  position: relative !important;
+		  top: 4px !important;
+		  left: auto !important;
+		  width: 286px !important;
+		  height: 208px !important;
+		  display: block !important;
+		  margin-left: 0 !important;
+		  transform: none !important;
+		  object-fit: contain !important;
+		  pointer-events: auto !important;
+		  z-index: 50000 !important;
+		}
+
+		#LeftArtwork {
+		  display: none !important;
+		}
+
+		#EclipseCenteredLogo {
+		  position: absolute !important;
+		  top: 4px !important;
+		  left: 50% !important;
+		  width: 286px !important;
+		  height: 208px !important;
+		  display: block !important;
+		  transform: translateX(-50%) !important;
+		  object-fit: contain !important;
+		  cursor: pointer !important;
+		  z-index: 999999 !important;
+		  filter: drop-shadow(0 16px 22px rgba(0,0,0,.96)) drop-shadow(0 0 20px rgba(255,54,24,.58));
+		}
+
+		/* Final central content skin. */
+		.Content .Box {
+		  margin-bottom: 14px !important;
+		  background: rgba(6, 2, 2, .88) !important;
+		  border: 1px solid rgba(255, 112, 36, .42) !important;
+		  border-radius: 5px !important;
+		  overflow: hidden !important;
+		  box-shadow: 0 16px 32px rgba(0,0,0,.72), 0 0 0 1px rgba(255,203,115,.08), inset 0 0 28px rgba(255,54,24,.07) !important;
+		}
+
+		.Content .Corner-tl,
+		.Content .Corner-tr,
+		.Content .Corner-bl,
+		.Content .Corner-br,
+		.Content .Border_1,
+		.Content .Border_2,
+		.Content .Border_3,
+		.Content .Border_4,
+		.Content .Border_5,
+		.Content .Border_6,
+		.Content .Border_7,
+		.Content .Border_8,
+		.Content .Border_9,
+		.Content .BottomCornersHelper,
+		.Content .CornerWrapper-b {
+		  display: none !important;
+		}
+
+		.Content .BoxContent {
+		  min-height: 76px !important;
+		  padding: 12px 14px !important;
+		  background: radial-gradient(circle at 50% 0, rgba(160,26,17,.20), transparent 42%), linear-gradient(180deg, rgba(31,8,8,.94), rgba(13,4,4,.98)) !important;
+		  color: #f2d9be !important;
+		  font-family: Verdana, Arial, sans-serif !important;
+		  font-size: 12px !important;
+		  line-height: 1.55 !important;
+		  box-shadow: inset 0 1px 0 rgba(255,219,150,.10), inset 0 0 32px rgba(0,0,0,.46) !important;
+		}
+
+		.Content .Border_2,
+		.Content .Border_3 {
+		  display: block !important;
+		  margin: 0 !important;
+		  padding: 0 !important;
+		  background: transparent !important;
+		  border: 0 !important;
+		}
+
+		.Content .BoxContent table,
+		.Content .BoxContent tbody,
+		.Content .BoxContent tr,
+		.Content .BoxContent td {
+		  background: transparent !important;
+		  color: inherit !important;
+		}
+
+		.Content .BoxContent td {
+		  padding: 8px 10px !important;
+		}
+
+		.Content .BoxContent a {
+		  color: #ffb768 !important;
+		  text-decoration: none !important;
+		}
+
+		.Content .BoxContent a:hover {
+		  color: #ffe1a8 !important;
+		  text-shadow: 0 0 8px rgba(255,112,36,.55) !important;
+		}
+
+		.Content .Title {
+		  position: relative !important;
+		  top: auto !important;
+		  left: auto !important;
+		  display: block !important;
+		  padding: 6px 12px 7px !important;
+		  color: #ffe2a8 !important;
+		  font-family: Georgia, 'Times New Roman', serif !important;
+		  font-size: 20px !important;
+		  font-weight: 800 !important;
+		  line-height: 1 !important;
+		  letter-spacing: 0 !important;
+		  text-shadow: 0 2px 2px #000, 0 0 10px rgba(255,95,35,.62) !important;
+		}
+
+		.Content .Title::first-letter {
+		  color: #ff7840;
+		}
+
+		.Content .BorderTitleText:not(.eclipse-status-shell) {
+		  height: 34px !important;
+		  display: flex !important;
+		  align-items: center !important;
+		  background: linear-gradient(90deg, rgba(10,3,3,.98), rgba(61,12,8,.96) 48%, rgba(10,3,3,.98)) !important;
+		  border-bottom: 1px solid rgba(255,105,42,.45) !important;
+		  box-shadow: inset 0 1px 0 rgba(255,219,150,.12), inset 0 -1px 0 rgba(0,0,0,.72), 0 5px 14px rgba(0,0,0,.35) !important;
+		}
+
+		.Content #NewsTicker .BoxContent,
+		.Content #News .BoxContent,
+		.Content #FeaturedArticle .BoxContent {
+		  min-height: 88px !important;
+		}
+
+		.Content #NewsTicker .BoxContent .Row {
+		  min-height: 28px !important;
+		  padding: 7px 9px 7px 34px !important;
+		  box-sizing: border-box !important;
+		  border: 1px solid rgba(255,126,45,.22) !important;
+		  border-radius: 4px !important;
+		  background: linear-gradient(180deg, rgba(0,0,0,.38), rgba(0,0,0,.22)) !important;
+		}
+
+		.Content #NewsTicker .NewsTickerIcon {
+		  top: 8px !important;
+		  left: 9px !important;
+		  filter: drop-shadow(0 0 6px rgba(255,95,35,.55)) !important;
+		}
+
+		.Content #NewsTicker .NewsTickerText {
+		  margin-left: 0 !important;
+		  color: #ead0b8 !important;
+		}
+
+		.Content #NewsTicker .NewsTickerDate {
+		  position: static !important;
+		  display: inline-block !important;
+		  width: auto !important;
+		  margin-right: 16px !important;
+		  color: #c69a72 !important;
+		  font-size: 10px !important;
+		}
+
+		.Content #NewsTicker .NewsTickerShortText,
+		.Content #NewsTicker .NewsTickerFullText {
+		  margin-left: 0 !important;
+		  color: #f1d9bf !important;
+		}
+
+		.Content #News .NewsHeadlineBackground,
+		.Content #FeaturedArticle .NewsHeadlineBackground,
+		.Content #NewsArchive .NewsHeadlineBackground {
+		  height: 32px !important;
+		  margin: 0 0 10px !important;
+		  border: 1px solid rgba(255,126,45,.28) !important;
+		  border-radius: 4px !important;
+		  background: linear-gradient(90deg, rgba(0,0,0,.78), rgba(50,9,8,.84), rgba(0,0,0,.78)) !important;
+		  box-shadow: inset 0 1px 0 rgba(255,218,145,.10) !important;
+		}
+
+		.Content #News .NewsHeadlineIcon,
+		.Content #FeaturedArticle .NewsHeadlineIcon,
+		.Content #NewsArchive .NewsHeadlineIcon {
+		  top: 5px !important;
+		  left: 9px !important;
+		  margin: 0 !important;
+		  filter: drop-shadow(0 0 6px rgba(255,95,35,.50)) !important;
+		}
+
+		.Content #News .NewsHeadlineDate,
+		.Content #FeaturedArticle .NewsHeadlineDate,
+		.Content #NewsArchive .NewsHeadlineDate {
+		  top: 9px !important;
+		  left: 48px !important;
+		  width: 96px !important;
+		  color: #c69a72 !important;
+		  font-size: 10px !important;
+		}
+
+		.Content #News .NewsHeadlineText,
+		.Content #FeaturedArticle .NewsHeadlineText,
+		.Content #NewsArchive .NewsHeadlineText {
+		  top: 8px !important;
+		  left: 142px !important;
+		  color: #d8c1ad !important;
+		  font-size: 13px !important;
+		  text-shadow: 0 1px 2px #000 !important;
+		}
+
+		/* Final contrast pass for ticker and news text. */
+		.Content .BoxContent {
+		  background: radial-gradient(circle at 50% 0, rgba(189,45,22,.24), transparent 48%), linear-gradient(180deg, rgba(48,16,13,.97), rgba(26,9,8,.98)) !important;
+		  color: #ffe6ca !important;
+		}
+
+		.Content .BoxContent div,
+		.Content .BoxContent span,
+		.Content .BoxContent td,
+		.Content .BoxContent p,
+		.Content .BoxContent b,
+		.Content .BoxContent i {
+		  color: #ffe6ca !important;
+		  opacity: 1 !important;
+		}
+
+		.Content #NewsTicker .BoxContent {
+		  background: linear-gradient(180deg, rgba(52,17,13,.98), rgba(24,7,7,.98)) !important;
+		}
+
+		.Content #NewsTicker .BoxContent .Row {
+		  min-height: 38px !important;
+		  padding: 10px 38px 10px 38px !important;
+		  border-color: rgba(255,160,72,.40) !important;
+		  background: linear-gradient(180deg, rgba(92,33,24,.88), rgba(47,15,12,.92)) !important;
+		  box-shadow: inset 0 1px 0 rgba(255,221,158,.12), 0 6px 16px rgba(0,0,0,.30) !important;
+		}
+
+		.Content #NewsTicker .NewsTickerText,
+		.Content #NewsTicker .NewsTickerText div,
+		.Content #NewsTicker .NewsTickerText span,
+		.Content #NewsTicker .NewsTickerShortText,
+		.Content #NewsTicker .NewsTickerFullText {
+		  color: #ffe3c1 !important;
+		  opacity: 1 !important;
+		  text-shadow: 0 1px 2px #000 !important;
+		}
+
+		.Content #NewsTicker .NewsTickerDate {
+		  color: #ffbf7a !important;
+		  font-weight: 700 !important;
+		}
+
+		.Content #NewsTicker .NewsTickerIcon {
+		  top: 11px !important;
+		}
+
+		.Content #NewsTicker .NewsTickerExtend {
+		  position: absolute !important;
+		  top: 12px !important;
+		  right: 11px !important;
+		}
+
+		.Content #News .NewsHeadlineBackground,
+		.Content #FeaturedArticle .NewsHeadlineBackground,
+		.Content #NewsArchive .NewsHeadlineBackground {
+		  background: linear-gradient(90deg, rgba(15,4,4,.96), rgba(93,25,15,.92), rgba(15,4,4,.96)) !important;
+		  border-color: rgba(255,160,72,.42) !important;
+		}
+
+		.Content #News .NewsHeadlineDate,
+		.Content #FeaturedArticle .NewsHeadlineDate,
+		.Content #NewsArchive .NewsHeadlineDate {
+		  color: #ffbf7a !important;
+		  opacity: 1 !important;
+		}
+
+		.Content #News .NewsHeadlineText,
+		.Content #FeaturedArticle .NewsHeadlineText,
+		.Content #NewsArchive .NewsHeadlineText {
+		  color: #ffe3c1 !important;
+		  opacity: 1 !important;
+		}
+
+		.Content #News .BoxContent > table td {
+		  color: #ffe6ca !important;
+		  font-size: 13px !important;
+		  line-height: 1.65 !important;
+		  text-shadow: 0 1px 2px rgba(0,0,0,.72) !important;
+		}
+
+		.Content #News .BoxContent > table td img[align="bottom"] {
+		  filter: sepia(.45) saturate(1.8) brightness(1.9) drop-shadow(0 0 7px rgba(255,125,45,.45)) !important;
+		}
+
+		/* Keep all central content text readable over dark panels. */
+		#ContentColumn .Content,
+		#ContentColumn .Content *,
+		#ContentColumn .Content .BoxContent,
+		#ContentColumn .Content .BoxContent *,
+		#ContentColumn .Content table,
+		#ContentColumn .Content tr,
+		#ContentColumn .Content td,
+		#ContentColumn .Content th,
+		#ContentColumn .Content div,
+		#ContentColumn .Content span,
+		#ContentColumn .Content p,
+		#ContentColumn .Content li,
+		#ContentColumn .Content label,
+		#ContentColumn .Content small,
+		#ContentColumn .Content strong,
+		#ContentColumn .Content b,
+		#ContentColumn .Content i {
+		  color: #ffe6ca !important;
+		}
+
+		#ContentColumn .Content a,
+		#ContentColumn .Content a * {
+		  color: #ffbf7a !important;
+		}
+
+		#ContentColumn .Content a:hover,
+		#ContentColumn .Content a:hover * {
+		  color: #fff1cf !important;
+		}
+
+		#ContentColumn .Content input,
+		#ContentColumn .Content select,
+		#ContentColumn .Content textarea {
+		  color: #24100a !important;
+		}
+
+		/* Ticker uses lowercase id in MyAAC output. */
+		#ContentColumn #newsticker .BoxContent {
+		  min-height: 78px !important;
+		  padding: 12px 14px !important;
+		  background: linear-gradient(180deg, rgba(68,22,15,.98), rgba(31,9,8,.98)) !important;
+		}
+
+		#ContentColumn #newsticker .Row,
+		#ContentColumn #newsticker .Row > .Odd,
+		#ContentColumn #newsticker .Row > .Even {
+		  min-height: 38px !important;
+		  display: block !important;
+		  box-sizing: border-box !important;
+		  background: linear-gradient(180deg, rgba(138,71,55,.92), rgba(86,37,29,.94)) !important;
+		  border: 1px solid rgba(255,196,115,.55) !important;
+		  border-radius: 4px !important;
+		  color: #fff0d6 !important;
+		  opacity: 1 !important;
+		  box-shadow: inset 0 1px 0 rgba(255,240,190,.22), 0 6px 16px rgba(0,0,0,.35) !important;
+		}
+
+		#ContentColumn #newsticker .Row {
+		  position: relative !important;
+		  padding: 0 !important;
+		}
+
+		#ContentColumn #newsticker .Row > .Odd,
+		#ContentColumn #newsticker .Row > .Even {
+		  padding: 10px 38px 10px 38px !important;
+		}
+
+		#ContentColumn #newsticker .NewsTickerText,
+		#ContentColumn #newsticker .NewsTickerText *,
+		#ContentColumn #newsticker .NewsTickerShortText,
+		#ContentColumn #newsticker .NewsTickerFullText {
+		  color: #fff0d6 !important;
+		  opacity: 1 !important;
+		  text-shadow: 0 1px 2px #000 !important;
+		}
+
+		#ContentColumn #newsticker .NewsTickerDate {
+		  color: #ffd08a !important;
+		  font-weight: 800 !important;
+		}
+
+		#ContentColumn #newsticker .NewsTickerIcon {
+		  top: 11px !important;
+		  left: 10px !important;
+		  filter: brightness(1.7) saturate(1.6) drop-shadow(0 0 7px rgba(255,120,45,.65)) !important;
+		}
+
+		#ContentColumn #newsticker .NewsTickerExtend {
+		  position: absolute !important;
+		  top: 12px !important;
+		  right: 11px !important;
+		  filter: brightness(1.75) saturate(1.5) !important;
+		}
+
+		#ContentColumn #newsticker .NewsTickerText,
+		#ContentColumn #newsticker .NewsTickerText *,
+		#ContentColumn #newsticker .NewsTickerShortText,
+		#ContentColumn #newsticker .NewsTickerFullText {
+		  color: #fff8e8 !important;
+		  font-weight: 700 !important;
+		  text-shadow: 0 1px 2px #000, 0 0 8px rgba(255, 218, 150, .28) !important;
+		}
+
+		#ContentColumn #newsticker .NewsTickerDate {
+		  color: #ffe0a6 !important;
+		  font-weight: 900 !important;
+		}
+
+		#ContentColumn #newsticker .Row > .Odd,
+		#ContentColumn #newsticker .Row > .Even {
+		  background: linear-gradient(180deg, rgba(116,50,37,.96), rgba(64,25,20,.98)) !important;
+		}
+
+		#ContentColumn #News .BoxContent {
+		  background: linear-gradient(180deg, rgba(52,17,13,.98), rgba(24,7,7,.98)) !important;
+		}
+
+		#ContentColumn #News .NewsHeadlineBackground {
+		  background: linear-gradient(180deg, rgba(116,50,37,.96), rgba(64,25,20,.98)) !important;
+		  border: 1px solid rgba(255,196,115,.55) !important;
+		  border-radius: 4px !important;
+		  box-shadow: inset 0 1px 0 rgba(255,240,190,.22), 0 6px 16px rgba(0,0,0,.35) !important;
+		}
+
+		#ContentColumn #News .NewsHeadlineDate {
+		  color: #ffe0a6 !important;
+		  font-weight: 900 !important;
+		  opacity: 1 !important;
+		  text-shadow: 0 1px 2px #000 !important;
+		}
+
+		#ContentColumn #News .NewsHeadlineText {
+		  color: #fff8e8 !important;
+		  font-weight: 800 !important;
+		  opacity: 1 !important;
+		  text-shadow: 0 1px 2px #000, 0 0 8px rgba(255,218,150,.28) !important;
+		}
+
+		#ContentColumn #News .BoxContent table,
+		#ContentColumn #News .BoxContent tr,
+		#ContentColumn #News .BoxContent td,
+		#ContentColumn #News .BoxContent td * {
+		  color: #fff8e8 !important;
+		  font-weight: 500 !important;
+		  opacity: 1 !important;
+		  text-shadow: 0 1px 2px rgba(0,0,0,.72) !important;
+		}
+
+		#ContentColumn #News .BoxContent > table {
+		  margin-top: 4px !important;
+		  background: linear-gradient(180deg, rgba(116,50,37,.42), rgba(64,25,20,.34)) !important;
+		  border: 1px solid rgba(255,196,115,.20) !important;
+		  border-radius: 4px !important;
+		}
+
+		#ContentColumn #News .BoxContent td img[align="bottom"] {
+		  filter: sepia(.45) saturate(1.8) brightness(2.1) drop-shadow(0 0 7px rgba(255,125,45,.55)) !important;
+		}
+
+		/* News card: light parchment style for readability. */
+		#ContentColumn #News .BoxContent {
+		  background: linear-gradient(180deg, #f1d391, #c9964d) !important;
+		  border: 1px solid #8f5525 !important;
+		  border-radius: 0 0 5px 5px !important;
+		  box-shadow: inset 0 1px 0 rgba(255,246,204,.7), 0 8px 18px rgba(0,0,0,.35) !important;
+		}
+
+		#ContentColumn #News .NewsHeadlineBackground {
+		  background: linear-gradient(180deg, #2d0b08, #090202) !important;
+		  border: 1px solid rgba(255,178,79,.58) !important;
+		  border-radius: 4px !important;
+		  box-shadow: inset 0 1px 0 rgba(255,220,140,.2) !important;
+		}
+
+		#ContentColumn #News .NewsHeadlineDate {
+		  color: #ffd08a !important;
+		  font-weight: 900 !important;
+		  text-shadow: 0 1px 2px #000 !important;
+		}
+
+		#ContentColumn #News .NewsHeadlineText {
+		  color: #ffe7b8 !important;
+		  font-weight: 900 !important;
+		  text-shadow: 0 1px 2px #000, 0 0 8px rgba(255,178,79,.35) !important;
+		}
+
+		#ContentColumn #News .BoxContent > table {
+		  margin-top: 6px !important;
+		  background: linear-gradient(180deg, #f5ddb0, #d6ad70) !important;
+		  border: 1px solid rgba(87,48,22,.25) !important;
+		  border-radius: 4px !important;
+		  box-shadow: inset 0 1px 0 rgba(255,246,204,.55) !important;
+		}
+
+		#ContentColumn #News .BoxContent > table td,
+		#ContentColumn #News .BoxContent > table td * {
+		  color: #3c1d12 !important;
+		  font-weight: 600 !important;
+		  text-shadow: none !important;
+		  opacity: 1 !important;
+		}
+
+		#ContentColumn #News .BoxContent > table td {
+		  padding: 12px 14px !important;
+		  font-size: 13px !important;
+		  line-height: 1.55 !important;
+		}
+
+		#ContentColumn #News .BoxContent td img[align="bottom"] {
+		  filter: sepia(.45) saturate(1.7) brightness(.75) contrast(1.25) !important;
+		}
+
+		/* Match central news/ticker with right sidebar boxes. */
+		#ContentColumn #newsticker,
+		#ContentColumn #News {
+		  background: transparent !important;
+		  border: 2px solid #a86b23 !important;
+		  border-radius: 5px !important;
+		  box-shadow: inset 0 0 0 1px rgba(255,244,198,.30), 0 8px 20px rgba(0,0,0,.55) !important;
+		}
+
+		#ContentColumn #newsticker .BorderTitleText,
+		#ContentColumn #News .BorderTitleText {
+		  background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important;
+		  border-bottom: 2px solid #a86b23 !important;
+		  height: 36px !important;
+		}
+
+		#ContentColumn #newsticker .BoxContent,
+		#ContentColumn #News .BoxContent {
+		  background-color: #d9b36d !important;
+		  background-image: linear-gradient(180deg, rgba(239,212,158,.97), rgba(202,156,86,.97)) !important;
+		  border: 0 !important;
+		  border-radius: 0 0 3px 3px !important;
+		  box-shadow: inset 0 0 0 1px rgba(255,244,198,.55) !important;
+		}
+
+		#ContentColumn #newsticker .Title,
+		#ContentColumn #News .Title {
+		  color: #f7e7bd !important;
+		  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+		}
+
+		#ContentColumn #newsticker .Row > .Odd,
+		#ContentColumn #newsticker .Row > .Even,
+		#ContentColumn #News .BoxContent > table {
+		  background: linear-gradient(180deg, rgba(246,222,174,.95), rgba(211,164,91,.95)) !important;
+		  border: 1px solid rgba(137,83,33,.42) !important;
+		  box-shadow: inset 0 1px 0 rgba(255,246,204,.58) !important;
+		}
+
+		#ContentColumn #newsticker .NewsTickerText,
+		#ContentColumn #newsticker .NewsTickerText *,
+		#ContentColumn #newsticker .NewsTickerShortText,
+		#ContentColumn #newsticker .NewsTickerFullText,
+		#ContentColumn #News .BoxContent > table td,
+		#ContentColumn #News .BoxContent > table td * {
+		  color: #432816 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn #newsticker .NewsTickerDate,
+		#ContentColumn #News .NewsHeadlineDate {
+		  color: #5e170d !important;
+		  font-weight: 900 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn #News .NewsHeadlineBackground {
+		  background: linear-gradient(180deg, #234d63 0%, #0d2535 100%) !important;
+		  border: 1px solid #a86b23 !important;
+		  box-shadow: inset 0 1px 0 rgba(255,220,140,.22) !important;
+		}
+
+		#ContentColumn #News .NewsHeadlineText {
+		  color: #f7e7bd !important;
+		  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+		}
+
+		/* Central content body: same yellow/beige tone as Boosted and Highscores. */
+		#ContentColumn #newsticker .BoxContent,
+		#ContentColumn #News .BoxContent {
+		  background-color: #d9b36d !important;
+		  background-image: linear-gradient(180deg, #efd49e 0%, #d9b36d 48%, #ca9c56 100%) !important;
+		}
+
+		#ContentColumn #newsticker .Row,
+		#ContentColumn #newsticker .Row > .Odd,
+		#ContentColumn #newsticker .Row > .Even,
+		#ContentColumn #News .BoxContent > table,
+		#ContentColumn #News .BoxContent > table tr,
+		#ContentColumn #News .BoxContent > table td {
+		  background-color: #e2bd74 !important;
+		  background-image: linear-gradient(180deg, #f1d9a4 0%, #dfb76e 100%) !important;
+		  border-color: rgba(137,83,33,.48) !important;
+		}
+
+		#ContentColumn #newsticker .NewsTickerText,
+		#ContentColumn #newsticker .NewsTickerText *,
+		#ContentColumn #News .BoxContent > table td,
+		#ContentColumn #News .BoxContent > table td * {
+		  color: #1f1008 !important;
+		  text-shadow: none !important;
+		  opacity: 1 !important;
+		}
+
+		#ContentColumn #newsticker .NewsTickerDate,
+		#ContentColumn #News .NewsHeadlineDate {
+		  color: #4f130b !important;
+		}
+
+		/* Cancel legacy red hue filter on central content wrappers. */
+		#ContentColumn #newsticker,
+		#ContentColumn #News,
+		#ContentColumn #newsticker .Border_2,
+		#ContentColumn #newsticker .Border_3,
+		#ContentColumn #News .Border_2,
+		#ContentColumn #News .Border_3,
+		#ContentColumn #newsticker .BoxContent,
+		#ContentColumn #News .BoxContent,
+		#ContentColumn #newsticker .Row,
+		#ContentColumn #newsticker .Odd,
+		#ContentColumn #newsticker .Even,
+		#ContentColumn #News .BoxContent > table,
+		#ContentColumn #News .BoxContent > table tr,
+		#ContentColumn #News .BoxContent > table td {
+		  filter: none !important;
+		}
+
+		#ContentColumn #newsticker .BoxContent,
+		#ContentColumn #News .BoxContent {
+		  background: linear-gradient(180deg, #efd49e 0%, #d9b36d 48%, #ca9c56 100%) !important;
+		}
+
+		#ContentColumn #newsticker .Row > .Odd,
+		#ContentColumn #newsticker .Row > .Even,
+		#ContentColumn #News .BoxContent > table,
+		#ContentColumn #News .BoxContent > table tr,
+		#ContentColumn #News .BoxContent > table td {
+		  background: linear-gradient(180deg, #f1d9a4 0%, #dfb76e 100%) !important;
+		}
+
+		/* Final central content color lock: neutralize inherited red filters. */
+		#ContentColumn #newsticker,
+		#ContentColumn #News,
+		#ContentColumn #newsticker *,
+		#ContentColumn #News * {
+		  filter: none !important;
+		}
+
+		#ContentColumn #newsticker .BoxContent,
+		#ContentColumn #News .BoxContent,
+		#ContentColumn #newsticker .Row,
+		#ContentColumn #newsticker .Row > .Odd,
+		#ContentColumn #newsticker .Row > .Even,
+		#ContentColumn #News .BoxContent > table,
+		#ContentColumn #News .BoxContent > table tbody,
+		#ContentColumn #News .BoxContent > table tr,
+		#ContentColumn #News .BoxContent > table td {
+		  background-color: #d9b36d !important;
+		  background-image: linear-gradient(180deg, #f0d79f 0%, #d9b36d 52%, #c99c57 100%) !important;
+		  color: #1f1008 !important;
+		  text-shadow: none !important;
+		  opacity: 1 !important;
+		}
+		</style>
 <style>
 	.scrollToTop {
 		padding: 10px;

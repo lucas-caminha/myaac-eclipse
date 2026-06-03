@@ -18,12 +18,12 @@ $bossImage = ((int)$boss['looktypeEx'] !== 0)
 <div class="eclipse-rightbox eclipse-boosted">
     <div class="eclipse-rightbox-title">BOOSTED</div>
     <div class="eclipse-rightbox-content eclipse-boosted-grid">
-        <div class="eclipse-boosted-item">
+        <div class="eclipse-boosted-item eclipse-boosted-boss">
             <div class="eclipse-boosted-frame"><img src="<?= $bossImage ?>" alt="Boss boosted"></div>
             <strong>BOSS</strong>
             <span><?= ucwords(strtolower(trim($boss['boostname']))); ?></span>
         </div>
-        <div class="eclipse-boosted-item">
+        <div class="eclipse-boosted-item eclipse-boosted-creature">
             <div class="eclipse-boosted-frame"><img src="<?= $creatureImage ?>" alt="Creature boosted"></div>
             <strong>CREATURE</strong>
             <span><?= ucwords(strtolower(trim($creature['boostname']))); ?></span>
