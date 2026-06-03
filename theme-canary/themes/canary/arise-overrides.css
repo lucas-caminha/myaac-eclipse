@@ -3617,3 +3617,80 @@ body {
   color: #fff8dc !important;
   text-shadow: 0 1px 1px #4c1200 !important;
 }
+
+/* Account management contrast fixes. */
+#ContentColumn .Content .eclipse-account-manage-page,
+#ContentColumn .Content .eclipse-account-manage-page *:not(.BigButton):not(.BigButton *):not(.BigButtonText):not(.MediumButtonText):not(button):not(button *):not(input[type="submit"]):not(input[type="button"]) {
+  color: #24100a !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .eclipse-account-manage-page .CaptionContainer,
+#ContentColumn .Content .eclipse-account-manage-page .CaptionContainer *,
+#ContentColumn .Content .eclipse-account-manage-page .CaptionInnerContainer,
+#ContentColumn .Content .eclipse-account-manage-page .CaptionInnerContainer *,
+#ContentColumn .Content .eclipse-account-manage-page .BorderTitleText,
+#ContentColumn .Content .eclipse-account-manage-page .BorderTitleText *,
+#ContentColumn .Content .eclipse-account-manage-page .Title,
+#ContentColumn .Content .eclipse-account-manage-page .Title * {
+  color: #f7e7bd !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+}
+
+#ContentColumn .Content .eclipse-account-manage-page .BigButtonText,
+#ContentColumn .Content .eclipse-account-manage-page .MediumButtonText,
+#ContentColumn .Content .eclipse-account-manage-page button,
+#ContentColumn .Content .eclipse-account-manage-page button *,
+#ContentColumn .Content .eclipse-account-manage-page input[type="submit"],
+#ContentColumn .Content .eclipse-account-manage-page input[type="button"] {
+  color: #fff8dc !important;
+  text-shadow: 0 1px 1px #4c1200 !important;
+}
+
+#ContentColumn .Content .eclipse-account-manage-page .TableContent,
+#ContentColumn .Content .eclipse-account-manage-page .InnerTableContainer,
+#ContentColumn .Content .eclipse-account-manage-page .TableContentContainer {
+  background-color: #e8c57f !important;
+}
+
+/* Generic success/confirmation page. */
+#ContentColumn .eclipse-success-page,
+#ContentColumn .eclipse-success-page *:not(.BigButton):not(.BigButton *):not(.BigButtonText):not(.MediumButtonText) {
+  color: #24100a !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-success-panel {
+  border: 2px solid #a86b23 !important;
+  border-radius: 5px !important;
+  overflow: hidden !important;
+  background: linear-gradient(180deg, #f3dc9f 0%, #dfba73 68%, #c99547 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,244,198,.55), 0 8px 22px rgba(0,0,0,.46) !important;
+}
+
+#ContentColumn .eclipse-success-title {
+  padding: 11px 14px !important;
+  color: #f7e7bd !important;
+  font: 900 16px Georgia, 'Times New Roman', serif !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+  background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important;
+}
+
+#ContentColumn .eclipse-success-body {
+  min-height: 92px !important;
+  padding: 22px 24px !important;
+  border-top: 1px solid rgba(255,244,198,.50) !important;
+  font: 700 13px/1.65 Verdana, Arial, sans-serif !important;
+  background: rgba(255,242,205,.34) !important;
+}
+
+#ContentColumn .eclipse-success-body b,
+#ContentColumn .eclipse-success-body strong {
+  color: #5e170d !important;
+}
+
+#ContentColumn .eclipse-success-actions {
+  display: flex !important;
+  justify-content: center !important;
+  margin-top: 16px !important;
+}
