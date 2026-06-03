@@ -3921,6 +3921,141 @@ body {
   text-shadow: none !important;
 }
 
+/* Highscores: cleaner ranking table without outfit thumbnails. */
+#ContentColumn .Content .eclipse-highscores-page,
+#ContentColumn .Content .eclipse-highscores-page *:not(.CaptionContainer):not(.CaptionContainer *):not(.CaptionInnerContainer):not(.CaptionInnerContainer *) {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page .TableContainer {
+  border: 2px solid #a86b23 !important;
+  border-radius: 5px !important;
+  overflow: hidden !important;
+  background: linear-gradient(180deg, #efd49e 0%, #d9b36d 58%, #c99a51 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,244,198,.48), 0 8px 22px rgba(0,0,0,.50) !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page .CaptionContainer,
+#ContentColumn .Content .eclipse-highscores-page .CaptionInnerContainer {
+  height: 36px !important;
+  background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important;
+  border: 0 !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page .CaptionContainer span,
+#ContentColumn .Content .eclipse-highscores-page .CaptionInnerContainer span {
+  display: none !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page .CaptionContainer .Text,
+#ContentColumn .Content .eclipse-highscores-page .CaptionContainer .Text *,
+#ContentColumn .Content .eclipse-highscores-page .CaptionInnerContainer .Text,
+#ContentColumn .Content .eclipse-highscores-page .CaptionInnerContainer .Text * {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  font: 900 16px Georgia, "Times New Roman", serif !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page .RightArea {
+  float: right !important;
+  font: 800 11px Verdana, Arial, sans-serif !important;
+  padding-top: 2px !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page .InnerTableContainer,
+#ContentColumn .Content .eclipse-highscores-page .TableContentContainer,
+#ContentColumn .Content .eclipse-highscores-page .TableContent,
+#ContentColumn .Content .eclipse-highscores-page .TableContent tbody,
+#ContentColumn .Content .eclipse-highscores-page .TableContent tr,
+#ContentColumn .Content .eclipse-highscores-page .TableContent td {
+  background-image: none !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page .TableContent {
+  width: 100% !important;
+  border: 1px solid rgba(137,83,33,.54) !important;
+  border-radius: 5px !important;
+  overflow: hidden !important;
+  background: linear-gradient(180deg, #f4dfad 0%, #dfbd7b 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,246,204,.64), 0 4px 12px rgba(0,0,0,.22) !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page .TableContent td {
+  padding: 8px 10px !important;
+  vertical-align: middle !important;
+  border-color: rgba(125,73,26,.28) !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page .TableContent tr:not(.LabelH):nth-child(odd) td {
+  background: rgba(255,245,216,.42) !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page .TableContent tr:not(.LabelH):nth-child(even) td {
+  background: rgba(224,184,113,.34) !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page .LabelH,
+#ContentColumn .Content .eclipse-highscores-page .LabelH td {
+  background: linear-gradient(180deg, #4b1008 0%, #1a0503 100%) !important;
+  color: #fff8dc !important;
+  -webkit-text-fill-color: #fff8dc !important;
+  font-weight: 900 !important;
+  text-shadow: 0 1px 1px #000 !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page .PageNavigation,
+#ContentColumn .Content .eclipse-highscores-page .PageNavigation * {
+  color: #2a0905 !important;
+  -webkit-text-fill-color: #2a0905 !important;
+  font-weight: 900 !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page .CurrentPageLink {
+  display: inline-block !important;
+  min-width: 18px !important;
+  padding: 2px 5px !important;
+  border-radius: 3px !important;
+  background: #4b1008 !important;
+  color: #fff8dc !important;
+  -webkit-text-fill-color: #fff8dc !important;
+  text-align: center !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page a,
+#ContentColumn .Content .eclipse-highscores-page a * {
+  color: #4d1209 !important;
+  -webkit-text-fill-color: #4d1209 !important;
+  font-weight: 900 !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page select {
+  min-width: 220px !important;
+  height: 32px !important;
+  padding: 0 10px !important;
+  border: 1px solid #8f5a24 !important;
+  border-radius: 3px !important;
+  background: #fff3d3 !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  font: 800 13px Verdana, Arial, sans-serif !important;
+  box-shadow: inset 0 1px 4px rgba(64,32,12,.24), 0 1px 0 rgba(255,255,255,.55) !important;
+}
+
+#ContentColumn .Content .eclipse-highscores-page .highscores-note {
+  margin: 12px 0 !important;
+  padding: 10px 12px !important;
+  border: 1px solid rgba(137,83,33,.45) !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #f5dfad 0%, #dfbd7b 100%) !important;
+  color: #2a0905 !important;
+  -webkit-text-fill-color: #2a0905 !important;
+  font-weight: 800 !important;
+}
+
 /* Characters search/results: beige panels with dark readable text. */
 #ContentColumn .Content .eclipse-characters-page,
 #ContentColumn .Content .eclipse-characters-page *:not(input[type="submit"]):not(input[type="submit"] *):not(.BigButtonText):not(.MediumButtonText) {

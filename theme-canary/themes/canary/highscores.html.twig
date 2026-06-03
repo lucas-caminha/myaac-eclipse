@@ -1,3 +1,5 @@
+<div class="eclipse-highscores-page">
+
 {% set pageNavigation %}
 
 	{% set pagesLimit = min((totalResults/setting('core.highscores_per_page'))|round(0, 'ceil'), 20) %}
@@ -39,7 +41,7 @@
 				  style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
 			<span class="CaptionVerticalLeft"
 				  style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
-			<div class="Text">Highscores Filter</div>
+			<div class="Text">Filtro de Highscores</div>
 			<span class="CaptionVerticalRight"
 				  style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
 			<span class="CaptionBorderBottom"
@@ -59,11 +61,11 @@
 						<tbody>
 						<tr>
 							<td style="width:150px">
-								<label for="vocationFilter">Vocation:</label>
+								<label for="vocationFilter">Vocacao:</label>
 							</td>
 							<td>
 								<select onchange="location = this.value;" id="vocationFilter">
-									<option value="{{ getLink('highscores') }}/{{ list|urlencode }}" class="size_xs">(all)</option>
+									<option value="{{ getLink('highscores') }}/{{ list|urlencode }}" class="size_xs">(todas)</option>
 									{% for i in baseVocations  %}
 										<option value="{{ getLink('highscores') }}/{{ list|urlencode }}/{{ config.vocations[i]|lower|urlencode }}" class="size_xs" {% if vocationId is not null and vocationId == i %}selected{% endif %}>{{ config.vocations[i]}}</option>
 									{% endfor %}
@@ -74,11 +76,11 @@
 						</tr>
 						<tr>
 							<td>
-								<label for="skillFilter">Category:</label>
+								<label for="skillFilter">Categoria:</label>
 							</td>
 							<td>
 								<select onchange="location = this.value;" id="skillFilter">
-									{% for link, name in types|sort((a, b) => a <=> b) %} %}
+									{% for link, name in types|sort((a, b) => a <=> b) %}
 										<option value="{{ getLink('highscores') }}/{{ link|urlencode }}{% if vocation is not null %}/{{ vocation|lower|urlencode }}{% endif %}" class="size_xs" {% if list is not null and list == link %}selected{% endif %}>{{ name }}</option>
 									{% endfor %}
 								</select>
@@ -93,7 +95,7 @@
 	</table>
 </div>
 
-<p><i>Skills displayed in the Highscores do not include any bonuses (loyalty, equipment etc.).</i></p>
+<p class="highscores-note"><i>As habilidades exibidas nos Highscores nao incluem bonus de lealdade, equipamentos ou outros modificadores.</i></p>
 
 <div class="TableContainer">
 	<div class="CaptionContainer">
@@ -106,7 +108,7 @@
 				  style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
 			<span class="CaptionVerticalLeft"
 				  style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
-			<div class="Text">Highscores <span class="RightArea">Last Update:  {{ (date().timestamp - updatedAt == 0) ? 'now' : updatedAt|timeago }} </span></div>
+			<div class="Text">Highscores <span class="RightArea">Ultima atualizacao: {{ (date().timestamp - updatedAt == 0) ? 'agora' : updatedAt|timeago }} </span></div>
 			<span class="CaptionVerticalRight"
 				  style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
 			<span class="CaptionBorderBottom"
@@ -133,22 +135,18 @@
 										<tr class="LabelH">
 											<td>Rank</td>
 
-											{% if setting('core.highscores_outfit') %}
-												<td>Outfit</td>
-											{% endif %}
-
-											<td style="width: 90%">Name</td>
-											<td style="text-align:right">Vocation</td>
+											<td style="width: 90%">Nome</td>
+											<td style="text-align:right">Vocacao</td>
 											<td style="text-align: right">
 												{{ levelName }}
 											</td>
 											{% if skill == constant('POT::SKILL__LEVEL') %}
-											<td style="text-align: right">Points</td>
+											<td style="text-align: right">Pontos</td>
 											{% endif %}
 										</tr>
 
 										{% if highscores|length < 1 %}
-											<tr bgcolor="{{ config('darkborder') }}"><td colspan="100%">No records yet.</td></tr>
+											<tr bgcolor="{{ config('darkborder') }}"><td colspan="100%">Nenhum registro encontrado.</td></tr>
 										{% else %}
 
 											{% set row = 0 %}
@@ -156,12 +154,8 @@
 											{% for player in highscores %}
 												{% set row = row + 1 %}
 
-												<tr {% if setting('core.highscores_outfit') %}style="height: 50px;"{% endif %}>
+												<tr>
 													<td>{{ player.rank }}</td>
-
-												{% if setting('core.highscores_outfit') %}
-													<td>{{ player.outfit|raw }}</td>
-												{% endif %}
 
 												<td class="DoNotBreak">
 													<a href="{{ player.link }}">
@@ -197,4 +191,6 @@
 		</tr>
 		</tbody>
 	</table>
+</div>
+
 </div>
