@@ -4056,6 +4056,36 @@ body {
   font-weight: 800 !important;
 }
 
+#ContentColumn #News .BoxContent .eclipse-highscores-page,
+#ContentColumn #News .BoxContent .eclipse-highscores-page td,
+#ContentColumn #News .BoxContent .eclipse-highscores-page div,
+#ContentColumn #News .BoxContent .eclipse-highscores-page span,
+#ContentColumn #News .BoxContent .eclipse-highscores-page b,
+#ContentColumn #News .BoxContent .eclipse-highscores-page strong,
+#ContentColumn #News .BoxContent .eclipse-highscores-page label,
+#ContentColumn #News .BoxContent .eclipse-highscores-page small,
+#ContentColumn #News .BoxContent .eclipse-highscores-page i,
+#ContentColumn #News .BoxContent .eclipse-highscores-page select,
+#ContentColumn #News .BoxContent .eclipse-highscores-page option {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn #News .BoxContent .eclipse-highscores-page .CaptionContainer .Text,
+#ContentColumn #News .BoxContent .eclipse-highscores-page .CaptionContainer .Text *,
+#ContentColumn #News .BoxContent .eclipse-highscores-page .CaptionInnerContainer .Text,
+#ContentColumn #News .BoxContent .eclipse-highscores-page .CaptionInnerContainer .Text *,
+#ContentColumn #News .BoxContent .eclipse-highscores-page .LabelH,
+#ContentColumn #News .BoxContent .eclipse-highscores-page .LabelH td,
+#ContentColumn #News .BoxContent .eclipse-highscores-page .LabelH * {
+  color: #fff8dc !important;
+  -webkit-text-fill-color: #fff8dc !important;
+  font-weight: 900 !important;
+  text-shadow: 0 1px 1px #000 !important;
+}
+
 /* Characters search/results: beige panels with dark readable text. */
 #ContentColumn .Content .eclipse-characters-page,
 #ContentColumn .Content .eclipse-characters-page *:not(input[type="submit"]):not(input[type="submit"] *):not(.BigButtonText):not(.MediumButtonText) {

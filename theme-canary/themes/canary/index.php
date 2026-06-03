@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=71" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=72" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -2810,6 +2810,36 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		  color: #2a0905 !important;
 		  -webkit-text-fill-color: #2a0905 !important;
 		  font-weight: 800 !important;
+		}
+
+		#ContentColumn #News .BoxContent .eclipse-highscores-page,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page td,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page div,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page span,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page b,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page strong,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page label,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page small,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page i,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page select,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page option {
+		  color: #000 !important;
+		  -webkit-text-fill-color: #000 !important;
+		  font-weight: 800 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn #News .BoxContent .eclipse-highscores-page .CaptionContainer .Text,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page .CaptionContainer .Text *,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page .CaptionInnerContainer .Text,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page .CaptionInnerContainer .Text *,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page .LabelH,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page .LabelH td,
+		#ContentColumn #News .BoxContent .eclipse-highscores-page .LabelH * {
+		  color: #fff8dc !important;
+		  -webkit-text-fill-color: #fff8dc !important;
+		  font-weight: 900 !important;
+		  text-shadow: 0 1px 1px #000 !important;
 		}
 
 		/* Characters search/results: beige panels with dark readable text. */
