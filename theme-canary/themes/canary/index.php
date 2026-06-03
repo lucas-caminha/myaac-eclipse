@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=67" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=68" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -2612,6 +2612,44 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		  -webkit-text-fill-color: #fff !important;
 		  font-weight: 900 !important;
 		  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+		}
+
+		/* Downloads page: keep the beige panels readable despite generic dark-content rules. */
+		#ContentColumn .Content .eclipse-download-page,
+		#ContentColumn .Content .eclipse-download-page *:not(.download-button):not(.download-button *):not(.download-step) {
+		  color: #1f0804 !important;
+		  -webkit-text-fill-color: #1f0804 !important;
+		  font-weight: 800 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-title,
+		#ContentColumn .Content .eclipse-download-page .download-title *,
+		#ContentColumn .Content .eclipse-download-page .download-card strong,
+		#ContentColumn .Content .eclipse-download-page .download-note strong {
+		  color: #4d1209 !important;
+		  -webkit-text-fill-color: #4d1209 !important;
+		  font-weight: 900 !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-step {
+		  color: #fff0b8 !important;
+		  -webkit-text-fill-color: #fff0b8 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-button,
+		#ContentColumn .Content .eclipse-download-page .download-button * {
+		  color: #fff7d4 !important;
+		  -webkit-text-fill-color: #fff7d4 !important;
+		  font-weight: 900 !important;
+		  text-shadow: 0 1px 1px #4c1600 !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-button.secondary,
+		#ContentColumn .Content .eclipse-download-page .download-button.secondary * {
+		  color: #fff1bd !important;
+		  -webkit-text-fill-color: #fff1bd !important;
 		}
 		</style>
 <style>
