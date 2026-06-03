@@ -1,24 +1,66 @@
 <style>
+  .eclipse-event-schedule {
+	color: #000 !important;
+	font-weight: 800;
+	text-shadow: none !important;
+  }
+
+  .eclipse-event-schedule .BoxContent {
+	background: linear-gradient(180deg, #f3dc9f 0%, #dfba73 68%, #c99547 100%) !important;
+	border: 2px solid #a86b23;
+	border-radius: 5px;
+	box-shadow: inset 0 0 0 1px rgba(255,244,198,.55), 0 8px 22px rgba(0,0,0,.46);
+	padding-bottom: 14px;
+  }
+
+  .eclipse-event-schedule .TableContainer {
+	background: transparent !important;
+	box-shadow: none !important;
+  }
+
+  .eclipse-event-schedule .CaptionContainer,
+  .eclipse-event-schedule .CaptionInnerContainer {
+	height: 40px !important;
+	background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important;
+	border: 0 !important;
+  }
+
+  .eclipse-event-schedule .CaptionContainer > span,
+  .eclipse-event-schedule .CaptionInnerContainer > span {
+	display: none !important;
+  }
+
+  .eclipse-event-schedule .CaptionContainer .Text {
+	position: static !important;
+	width: 100% !important;
+	height: 40px !important;
+	padding: 0 14px !important;
+	box-sizing: border-box !important;
+	color: #fff !important;
+	font: 900 15px Georgia, "Times New Roman", serif !important;
+	text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+  }
+
   #eventscheduletable {
-	border-collapse: collapse;
+	width: 100%;
+	border-collapse: separate;
 	table-layout: fixed;
-	border-spacing: 1px;
-	padding: 1px;
-	border: 1px;
-	background: #d4c0a1;
-	border-color: #5f4d41;
-	-moz-box-shadow: 2px 2px 3px 3px #7c5231;
-	-webkit-box-shadow: 2px 2px 3px 3px #7c5231;
-	-ms-box-shadow: 2px 2px 3px 3px #7c5231;
-	box-shadow: 2px 2px 3px 3px #7c5231;
+	border-spacing: 4px;
+	padding: 8px;
+	border: 1px solid rgba(137,83,33,.54);
+	border-radius: 5px;
+	background: linear-gradient(180deg, #efd49e 0%, #d9b36d 58%, #c99a51 100%);
+	box-shadow: inset 0 1px 0 rgba(255,246,204,.64), 0 4px 12px rgba(0,0,0,.22);
   }
 
   #eventscheduletable td {
-	border: 1px solid #faf0d7;
-	height: 24px;
+	border: 1px solid rgba(137,83,33,.44);
+	border-radius: 4px;
+	height: 26px;
 	overflow: hidden;
-	font-weight: bold;
-	color: #fff;
+	font-weight: 900;
+	color: #000 !important;
+	text-shadow: none !important;
   }
 
   .eventscheduleheadertop {
@@ -26,6 +68,7 @@
 	width: 100%;
 	display: flex;
 	min-width: 400px;
+	align-items: center;
   }
 
   .eventscheduleheaderblockleft {
@@ -37,8 +80,11 @@
 
   .eventscheduleheaderdateblock {
 	position: absolute;
-	width: 150px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 220px;
 	text-align: center;
+	font-size: 15px;
   }
 
   .eventscheduleheaderleft {
@@ -55,48 +101,72 @@
 	margin-right: 5px;
   }
 
+  .eventschedule-weekdays td {
+	color: #fff !important;
+	background: #0d2535 !important;
+	border-color: rgba(255,214,145,.34) !important;
+	text-shadow: 0 1px 1px #000 !important;
+  }
+
   td#default {
-	color: #5f4d41;
-	background-color: #e7d1af;
+	color: #000 !important;
+	background: linear-gradient(180deg, #f6dfaa 0%, #e4bf78 100%);
   }
 
   td#today {
-	color: #5f4d41;
-	background-color: #f3e5d0;
+	color: #000 !important;
+	background: linear-gradient(180deg, #fff1bf 0%, #f0c967 100%);
+	border-color: #5e170d;
+	box-shadow: inset 0 0 0 2px rgba(94,23,13,.22);
   }
 
   td#other_day {
-	color: #5f4d41;
-	background-color: #d4c0a1;
+	color: #000 !important;
+	background: rgba(158,108,55,.32);
 	border: none;
   }
 
   .day {
-	font-weight: bold;
-	margin-left: 3px;
-	margin-bottom: 2px;
+	font-weight: 900;
+	margin: 4px 0 6px 5px;
+	color: #000 !important;
+	font-size: 13px;
+	text-shadow: none !important;
   }
 
   .activated {
 	font-size: 12pt;
 	font-weight: bold;
+	color: #000 !important;
+	text-shadow: none !important;
 	word-break: break-word;
   }
 
   .event_name {
-	color: #fff;
+	color: #fff !important;
 	width: 100%;
 	font-weight: bold;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	padding: 1% 1% 1% 3px;
+	padding: 2px 4px;
 	margin-bottom: 2px;
+	border: 1px solid rgba(255,245,202,.55);
+	border-radius: 3px;
+	box-sizing: border-box;
+	text-shadow: 0 1px 1px rgba(0,0,0,.75);
+  }
+
+  .eclipse-event-schedule-note {
+	margin: 10px 14px 0;
+	color: #000 !important;
+	font-weight: 800;
+	text-shadow: none !important;
   }
 </style>
 <?php
 defined('MYAAC') or die('Direct access not allowed!');
-$title = 'Event Schedule';
+$title = 'Agenda de Eventos';
 
 $currentYear = date('Y');
 $currentMonth = date('n');
@@ -105,12 +175,26 @@ $getYear	= $_GET['year'] ?? $currentYear;
 $getMonth	= $_GET['month'] ?? $currentMonth;
 
 $dateObj	= DateTime::createFromFormat('!m', $getMonth);
-$monthName	= $dateObj->format('F'); // March
+$monthNames = [
+	1 => 'Janeiro',
+	2 => 'Fevereiro',
+	3 => 'Março',
+	4 => 'Abril',
+	5 => 'Maio',
+	6 => 'Junho',
+	7 => 'Julho',
+	8 => 'Agosto',
+	9 => 'Setembro',
+	10 => 'Outubro',
+	11 => 'Novembro',
+	12 => 'Dezembro',
+];
+$monthName = $monthNames[(int)$getMonth] ?? $dateObj->format('F');
 
 function showWeeks(): string
 {
 	$out = "";
-	$weeks = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+	$weeks = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
 	for ($i = 0; $i < 7; $i++) $out .= "<td>$weeks[$i]</td>";
 	return $out;
 }
@@ -144,7 +228,7 @@ function showCalendar($month, $year): string
 
 	$firstDayOfWeek = jddayofweek(cal_to_jd(CAL_GREGORIAN, $month, "01", $year), 0) - 1;
 
-	$outDays = "<tr style='text-align:center; width:120px; background-color:#5f4d41;'>" . showWeeks() . "</tr>";
+	$outDays = "<tr class='eventschedule-weekdays' style='text-align:center; width:120px; background-color:#0d2535; color:#fff !important;'>" . showWeeks() . "</tr>";
 
 	$events_xml = config('data_path') . 'XML/events.xml';
 
@@ -180,10 +264,10 @@ function showCalendar($month, $year): string
 		usort($events, 'compareEvent');
 	}
 
-	for ($row = 0; $row < 5; $row++) {
+	for ($row = 0; $row < 6; $row++) {
 		$outDays .= "<tr>";
 		for ($column = 0; $column < 7; $column++) {
-			$outDays .= "<td style='height:82px; background-clip: padding-box; overflow: hidden; vertical-align:top;' ";
+			$outDays .= "<td style='height:82px; background-clip: padding-box; overflow: hidden; vertical-align:top; color:#000 !important; -webkit-text-fill-color:#000 !important; font-weight:900 !important; text-shadow:none !important;' ";
 			$color = "other_day";
 			if ($currentDay == (date('d') - 1) && date('m') == $month) {
 				$color = "today";
@@ -199,7 +283,7 @@ function showCalendar($month, $year): string
 				if ($column < $firstDayOfWeek && $row == 0) {
 					$outDays .= " ";
 				} else {
-					$outDays .= "<div class='day'><span style='vertical-align: text-bottom;'>" . ++$currentDay . " </span></div>";
+					$outDays .= "<div class='day' style='color:#000 !important; -webkit-text-fill-color:#000 !important; font-weight:900 !important; text-shadow:none !important;'><span style='vertical-align: text-bottom; color:#000 !important; -webkit-text-fill-color:#000 !important; font-weight:900 !important; text-shadow:none !important;'>" . ++$currentDay . " </span></div>";
 
 					if (isset($events)) {
 						$current_date = "$month/$currentDay/$year";
@@ -227,7 +311,8 @@ function showCalendar($month, $year): string
 }
 ?>
 
-<div class="BoxContent" style="background-image:url(https://static.tibia.com/images/global/content/scroll.gif);">
+<div class="eclipse-event-schedule">
+<div class="BoxContent">
 	<div id="eventscheduletablecontainer">
 		<div class="TableContainer">
 			<div class="CaptionContainer">
@@ -254,7 +339,7 @@ function showCalendar($month, $year): string
 
 										if ($getMonth > $currentMonth || $getYear > $currentYear) {
 											echo '<a href="' . getLink('event-schedule') . '?year=' . $year .
-										'&month=' . $month . '" style = "color:white;" > «</a>';
+										'&month=' . $month . '" style="color:white;" > &laquo;</a>';
 										}
 
 										?>
@@ -272,7 +357,7 @@ function showCalendar($month, $year): string
 											$month = 1;
 										}
 
-										echo '<a href="' . getLink('event-schedule') . '?year=' . $year . '&month=' . $month . '" style = "color:white;" > »</a>';
+										echo '<a href="' . getLink('event-schedule') . '?year=' . $year . '&month=' . $month . '" style="color:white;" > &raquo;</a>';
 
 										?>
 									</span>
@@ -288,7 +373,7 @@ function showCalendar($month, $year): string
 					<span class="CaptionEdgeRightBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
 				</div>
 			</div>
-			<table class="Table1" cellpadding="0" cellspacing="0" style="background-color: rgb(241, 224, 197);">
+			<table class="Table1" cellpadding="0" cellspacing="0" style="background-color: transparent;">
 				<tbody>
 				<tr>
 					<td>
@@ -306,5 +391,6 @@ function showCalendar($month, $year): string
 		</div>
 	</div>
 	<br>
-	<div>* Event starts/ends at server save of this day.</div>
+	<div class="eclipse-event-schedule-note">* O evento começa/termina no server save deste dia.</div>
+</div>
 </div>
