@@ -3045,6 +3045,51 @@ body {
   color: #5e170d !important;
 }
 
+/* Final login page typography. */
+#ContentColumn .Content .eclipse-login-page,
+#ContentColumn .Content .eclipse-login-page *:not(.CaptionContainer):not(.CaptionContainer *):not(.CaptionInnerContainer):not(.CaptionInnerContainer *):not(.BigButton):not(.BigButton *):not(.BigButtonText):not(.MediumButtonText):not(button):not(button *):not(input):not(input *) {
+  color: #000 !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .eclipse-login-page .CaptionContainer .Text,
+#ContentColumn .Content .eclipse-login-page .CaptionContainer .Text *,
+#ContentColumn .Content .eclipse-login-page .CaptionInnerContainer .Text,
+#ContentColumn .Content .eclipse-login-page .CaptionInnerContainer .Text * {
+  color: #fff !important;
+  font-weight: 900 !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+}
+
+#ContentColumn .Content .eclipse-login-page .eclipse-login-divider h1 {
+  color: #3a0905 !important;
+  font-weight: 900 !important;
+  text-shadow: 0 1px 0 rgba(255,235,183,.72), 0 2px 8px rgba(58,9,5,.22) !important;
+}
+
+#ContentColumn .Content .eclipse-login-page input[type="text"],
+#ContentColumn .Content .eclipse-login-page input[type="password"] {
+  color: #000 !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .eclipse-login-page .BigButtonText,
+#ContentColumn .Content .eclipse-login-page .MediumButtonText,
+#ContentColumn .Content .eclipse-login-page button,
+#ContentColumn .Content .eclipse-login-page button * {
+  color: #fff8dc !important;
+  font-weight: 900 !important;
+  text-shadow: 0 1px 1px #4c1200 !important;
+}
+
+#ContentColumn .Content .eclipse-login-page .eclipse-login-create-button {
+  border: 0 !important;
+  background: transparent !important;
+  cursor: pointer !important;
+}
+
 /* Vocation cards on account and character creation. */
 #ContentColumn .eclipse-vocation-grid {
   display: grid !important;
@@ -3711,6 +3756,31 @@ body {
 #ContentColumn .Content .eclipse-account-manage-page .BorderTitleText *,
 #ContentColumn .Content .eclipse-account-manage-page .Title,
 #ContentColumn .Content .eclipse-account-manage-page .Title * {
+  color: #fff !important;
+  font-weight: 900 !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+}
+
+/* Final login contrast pass, after generic content overrides. */
+#ContentColumn .eclipse-login-page .eclipse-login-card-account .LabelV,
+#ContentColumn .eclipse-login-page .eclipse-login-card-account .LabelV span,
+#ContentColumn .eclipse-login-page .eclipse-login-card-account label,
+#ContentColumn .eclipse-login-page #LoginCreateAccountBox,
+#ContentColumn .eclipse-login-page #LoginCreateAccountBox *,
+#ContentColumn .Content .eclipse-login-page .eclipse-login-card-account .LabelV,
+#ContentColumn .Content .eclipse-login-page .eclipse-login-card-account .LabelV span,
+#ContentColumn .Content .eclipse-login-page .eclipse-login-card-account label,
+#ContentColumn .Content .eclipse-login-page #LoginCreateAccountBox,
+#ContentColumn .Content .eclipse-login-page #LoginCreateAccountBox * {
+  color: #000 !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-login-page .eclipse-login-card .CaptionContainer .Text,
+#ContentColumn .eclipse-login-page .eclipse-login-card .CaptionContainer .Text *,
+#ContentColumn .Content .eclipse-login-page .eclipse-login-card .CaptionContainer .Text,
+#ContentColumn .Content .eclipse-login-page .eclipse-login-card .CaptionContainer .Text * {
   color: #fff !important;
   font-weight: 900 !important;
   text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;

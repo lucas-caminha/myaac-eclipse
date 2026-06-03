@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=65" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=66" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -380,6 +380,29 @@ foreach ($config['menu_categories'] as $id => $cat) {
 							<div id='<?= $cat['id']; ?>_Submenu' class='Submenu'>
 								<?php
 								foreach ($menus[$id] as $category => $menu) {
+									$menuNameTranslations = [
+										'Latest News' => 'Últimas Notícias',
+										'Event Schedule' => 'Agenda de Eventos',
+										'Account Management' => 'Gerenciar Conta',
+										'Create Account' => 'Criar Conta',
+										'Lost Account?' => 'Recuperar Conta',
+										'Server Rules' => 'Regras do Servidor',
+										'Characters' => 'Personagens',
+										'Who is Online?' => 'Quem Está Online?',
+										'Last Kills' => 'Últimas Mortes',
+										'Houses' => 'Casas',
+										'Guilds' => 'Guildas',
+										'Support List' => 'Equipe de Suporte',
+										'Monsters' => 'Monstros',
+										'Spells' => 'Magias',
+										'Commands' => 'Comandos',
+										'Server Info' => 'Informações do Servidor',
+										'Exp Table' => 'Tabela de Exp',
+										'Buy Points' => 'Comprar Points',
+										'Shop Offer' => 'Ofertas da Loja',
+										'Shop History' => 'Histórico da Loja',
+									];
+									$menuName = $menuNameTranslations[$menu['name']] ?? $menu['name'];
 									?>
 									<a href='<?php echo $menu['link_full']; ?>'<?= $menu['target_blank']?>>
 										<div id='submenu_<?= str_replace('/', '_', $menu['link']); ?>'
@@ -390,7 +413,7 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 											<div id='ActiveSubmenuItemIcon_<?= str_replace('/', '_', $menu['link']); ?>'
 												 class='ActiveSubmenuItemIcon'
 												 style='background-image:url(<?= $template_path; ?>/images/menu/icon-activesubmenu.gif);'></div>
-											<div class='SubmenuitemLabel' <?php echo $menu['style_color']; ?>><?php echo $menu['name']; ?></div>
+											<div class='SubmenuitemLabel' <?php echo $menu['style_color']; ?>><?php echo $menuName; ?></div>
 											<div class='RightChain'
 												 style='background-image:url(<?= $template_path; ?>/images/general/chain.gif);'></div>
 										</div>
@@ -1778,6 +1801,51 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		  color: #5e170d !important;
 		}
 
+		/* Final login page typography. */
+		#ContentColumn .Content .eclipse-login-page,
+		#ContentColumn .Content .eclipse-login-page *:not(.CaptionContainer):not(.CaptionContainer *):not(.CaptionInnerContainer):not(.CaptionInnerContainer *):not(.BigButton):not(.BigButton *):not(.BigButtonText):not(.MediumButtonText):not(button):not(button *):not(input):not(input *) {
+		  color: #000 !important;
+		  font-weight: 800 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn .Content .eclipse-login-page .CaptionContainer .Text,
+		#ContentColumn .Content .eclipse-login-page .CaptionContainer .Text *,
+		#ContentColumn .Content .eclipse-login-page .CaptionInnerContainer .Text,
+		#ContentColumn .Content .eclipse-login-page .CaptionInnerContainer .Text * {
+		  color: #fff !important;
+		  font-weight: 900 !important;
+		  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+		}
+
+		#ContentColumn .Content .eclipse-login-page .eclipse-login-divider h1 {
+		  color: #3a0905 !important;
+		  font-weight: 900 !important;
+		  text-shadow: 0 1px 0 rgba(255,235,183,.72), 0 2px 8px rgba(58,9,5,.22) !important;
+		}
+
+		#ContentColumn .Content .eclipse-login-page input[type="text"],
+		#ContentColumn .Content .eclipse-login-page input[type="password"] {
+		  color: #000 !important;
+		  font-weight: 800 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn .Content .eclipse-login-page .BigButtonText,
+		#ContentColumn .Content .eclipse-login-page .MediumButtonText,
+		#ContentColumn .Content .eclipse-login-page button,
+		#ContentColumn .Content .eclipse-login-page button * {
+		  color: #fff8dc !important;
+		  font-weight: 900 !important;
+		  text-shadow: 0 1px 1px #4c1200 !important;
+		}
+
+		#ContentColumn .Content .eclipse-login-page .eclipse-login-create-button {
+		  border: 0 !important;
+		  background: transparent !important;
+		  cursor: pointer !important;
+		}
+
 		/* Vocation cards on account and character creation. */
 		#ContentColumn .eclipse-vocation-grid {
 		  display: grid !important;
@@ -2444,6 +2512,31 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		#ContentColumn .Content .eclipse-account-manage-page .BorderTitleText *,
 		#ContentColumn .Content .eclipse-account-manage-page .Title,
 		#ContentColumn .Content .eclipse-account-manage-page .Title * {
+		  color: #fff !important;
+		  font-weight: 900 !important;
+		  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+		}
+
+		/* Final login contrast pass, after generic content overrides. */
+		#ContentColumn .eclipse-login-page .eclipse-login-card-account .LabelV,
+		#ContentColumn .eclipse-login-page .eclipse-login-card-account .LabelV span,
+		#ContentColumn .eclipse-login-page .eclipse-login-card-account label,
+		#ContentColumn .eclipse-login-page #LoginCreateAccountBox,
+		#ContentColumn .eclipse-login-page #LoginCreateAccountBox *,
+		#ContentColumn .Content .eclipse-login-page .eclipse-login-card-account .LabelV,
+		#ContentColumn .Content .eclipse-login-page .eclipse-login-card-account .LabelV span,
+		#ContentColumn .Content .eclipse-login-page .eclipse-login-card-account label,
+		#ContentColumn .Content .eclipse-login-page #LoginCreateAccountBox,
+		#ContentColumn .Content .eclipse-login-page #LoginCreateAccountBox * {
+		  color: #000 !important;
+		  font-weight: 800 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn .eclipse-login-page .eclipse-login-card .CaptionContainer .Text,
+		#ContentColumn .eclipse-login-page .eclipse-login-card .CaptionContainer .Text *,
+		#ContentColumn .Content .eclipse-login-page .eclipse-login-card .CaptionContainer .Text,
+		#ContentColumn .Content .eclipse-login-page .eclipse-login-card .CaptionContainer .Text * {
 		  color: #fff !important;
 		  font-weight: 900 !important;
 		  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
