@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=64" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=65" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -2426,6 +2426,27 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		  display: flex !important;
 		  justify-content: center !important;
 		  margin-top: 16px !important;
+		}
+
+		/* Final account management typography. */
+		#ContentColumn .Content .eclipse-account-manage-page,
+		#ContentColumn .Content .eclipse-account-manage-page *:not(.CaptionContainer):not(.CaptionContainer *):not(.CaptionInnerContainer):not(.CaptionInnerContainer *):not(.BorderTitleText):not(.BorderTitleText *):not(.Title):not(.Title *):not(.BigButton):not(.BigButton *):not(.BigButtonText):not(.MediumButtonText):not(button):not(button *):not(input[type="submit"]):not(input[type="button"]) {
+		  color: #000 !important;
+		  font-weight: 800 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn .Content .eclipse-account-manage-page .CaptionContainer .Text,
+		#ContentColumn .Content .eclipse-account-manage-page .CaptionContainer .Text *,
+		#ContentColumn .Content .eclipse-account-manage-page .CaptionInnerContainer .Text,
+		#ContentColumn .Content .eclipse-account-manage-page .CaptionInnerContainer .Text *,
+		#ContentColumn .Content .eclipse-account-manage-page .BorderTitleText,
+		#ContentColumn .Content .eclipse-account-manage-page .BorderTitleText *,
+		#ContentColumn .Content .eclipse-account-manage-page .Title,
+		#ContentColumn .Content .eclipse-account-manage-page .Title * {
+		  color: #fff !important;
+		  font-weight: 900 !important;
+		  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
 		}
 		</style>
 <style>
