@@ -4086,6 +4086,21 @@ body {
   text-shadow: 0 1px 1px #000 !important;
 }
 
+#ContentColumn #News .BoxContent > small {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn #News .BoxContent .eclipse-highscores-page .CurrentPageLink,
+#ContentColumn #News .BoxContent .eclipse-highscores-page .CurrentPageLink * {
+  color: #fff8dc !important;
+  -webkit-text-fill-color: #fff8dc !important;
+  font-weight: 900 !important;
+  text-shadow: 0 1px 1px #000 !important;
+}
+
 /* Characters search/results: beige panels with dark readable text. */
 #ContentColumn .Content .eclipse-characters-page,
 #ContentColumn .Content .eclipse-characters-page *:not(input[type="submit"]):not(input[type="submit"] *):not(.BigButtonText):not(.MediumButtonText) {
