@@ -1,26 +1,87 @@
 # Changelog
 
-## 2026-06-02 - Menu Cleanup
+Historico de alteracoes do projeto MyAAC Eclipse OT.
 
-- Improved submenu hover behavior to avoid JavaScript background artifacts.
-- Removed News Archive, Changelog, Polls, Bans, Forum, Gallery and FAQ from the public menu.
-- Added a theme override for `news.html.twig` to hide forum comment links.
-- Added SQL migration `sql/002-clean-eclipse-menu.sql`.
+O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
-## 2026-06-02
+---
 
-- Rebranded site/server identity from Arise OT to Eclipse OT.
-- Added red/black dark fantasy website background.
-- Created and applied transparent Eclipse OT logo.
-- Created favicon and touch icon from the Eclipse OT logo.
-- Added custom CSS layer to align the Canary theme with Eclipse OT branding.
-- Increased page layout width to better use side space on large monitors.
-- Centered the logo above the login box.
-- Added Eclipse OT introductory MyAAC news content.
+## [Unreleased]
 
-## 2026-05-25
+### Adicionado
+- Documentacao completa do projeto
 
-- Installed MyAAC on the VPS.
-- Installed and enabled the Canary theme for MyAAC.
-- Hid template switching and set Canary as the default template.
-- Fixed missing jQuery asset used by the theme menu interactions.
+---
+
+## [1.1.0] - 2026-06-02
+
+### Adicionado
+- SQL migration `sql/002-clean-eclipse-menu.sql` para limpeza do menu
+- Override de tema para `news.html.twig` para ocultar links de comentarios do forum
+
+### Alterado
+- Melhorado comportamento de hover do submenu para evitar artefatos de background JavaScript
+
+### Removido
+- Itens do menu publico: News Archive, Changelog, Polls, Bans, Forum, Gallery e FAQ
+
+---
+
+## [1.0.0] - 2026-06-02
+
+### Adicionado
+- Identidade visual Eclipse OT (rebrand de Arise OT)
+- Background dark fantasy vermelho/preto
+- Logo transparente Eclipse OT
+- Favicon e touch icon personalizados
+- Camada CSS customizada (`arise-overrides.css`)
+- Conteudo inicial de news MyAAC
+
+### Alterado
+- Largura do layout da pagina expandida para monitores grandes
+- Logo centralizado acima do box de login
+
+---
+
+## [0.1.0] - 2026-05-25
+
+### Adicionado
+- Instalacao inicial do MyAAC no VPS
+- Tema Canary instalado e habilitado
+- Correcao do asset jQuery faltando para interacoes do menu
+
+### Alterado
+- Template switching ocultado
+- Canary definido como template padrao
+
+---
+
+## Como Atualizar Este Changelog
+
+Ao fazer alteracoes no projeto, adicione uma entrada na secao `[Unreleased]` seguindo este formato:
+
+```markdown
+### Adicionado
+- Nova feature ou arquivo
+
+### Alterado
+- Mudancas em funcionalidades existentes
+
+### Corrigido
+- Correcoes de bugs
+
+### Removido
+- Features ou arquivos removidos
+
+### Seguranca
+- Correcoes de vulnerabilidades
+```
+
+Quando uma nova versao for lancada, mova os itens de `[Unreleased]` para uma nova secao com a versao e data.
+
+---
+
+## Links
+
+- [Documentacao](./README.md)
+- [Repositorio GitHub](https://github.com/lucas-caminha/myaac-eclipse)
