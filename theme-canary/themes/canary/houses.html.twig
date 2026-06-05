@@ -1,0 +1,203 @@
+<div class="eclipse-houses-page">
+
+<div class="TableContainer">
+	<div class="CaptionContainer">
+		<div class="CaptionInnerContainer">
+			<span class="CaptionEdgeLeftTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+			<span class="CaptionEdgeRightTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+			<span class="CaptionBorderTop" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
+			<span class="CaptionVerticalLeft" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
+			<div class="Text">Busca de Casas</div>
+			<span class="CaptionVerticalRight" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
+			<span class="CaptionBorderBottom" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
+			<span class="CaptionEdgeLeftBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+			<span class="CaptionEdgeRightBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+		</div>
+	</div>
+	<table class="Table1" cellpadding="0" cellspacing="0">
+		<tbody>
+		<tr>
+			<td>
+				<div class="InnerTableContainer">
+					<form action="{{ getLink('houses') }}" method="post">
+						<table style="width:100%;">
+							<tbody>
+							<tr>
+								<td style="width: 33%; padding: 10px; vertical-align: top;">
+									<label style="font-weight: bold; display: block; margin-bottom: 8px;">Cidade:</label>
+									{% set checked = false %}
+									{% for id, name in config.towns %}
+										{% if id > 0 %}
+											{% if ((townId is empty and name is not empty) or id == townId) and not checked %}
+												{% set variable = "checked" %}
+												{% set checked = true %}
+											{% else %}
+												{% set variable = "" %}
+											{% endif %}
+											<div style="margin-bottom: 4px;">
+												<input type="radio" name="town" id="town_{{ id }}" value="{{ id }}"{% if variable is defined %} {{ variable }}{% endif %}>
+												<label for="town_{{ id }}">{{ name }}</label>
+											</div>
+										{% endif %}
+									{% endfor %}
+								</td>
+								<td style="width: 33%; padding: 10px; vertical-align: top;">
+									<label style="font-weight: bold; display: block; margin-bottom: 8px;">Status:</label>
+									<div style="margin-bottom: 4px;">
+										<input type="radio" name="state" id="state_all" value=""{% if state is empty %} checked{% endif %}>
+										<label for="state_all">Todos</label>
+									</div>
+									<div style="margin-bottom: 4px;">
+										<input type="radio" name="state" id="state_free" value="free"{% if state == 'free' %} checked{% endif %}>
+										<label for="state_free">Livres</label>
+									</div>
+									<div style="margin-bottom: 4px;">
+										<input type="radio" name="state" id="state_rented" value="rented"{% if state == 'rented' %} checked{% endif %}>
+										<label for="state_rented">Alugadas</label>
+									</div>
+
+									<label style="font-weight: bold; display: block; margin: 15px 0 8px;">Tipo:</label>
+									<div style="margin-bottom: 4px;">
+										<input type="radio" name="type" id="type_all" value=""{% if type is empty %} checked{% endif %}>
+										<label for="type_all">Todos</label>
+									</div>
+									<div style="margin-bottom: 4px;">
+										<input type="radio" name="type" id="type_house" value="house"{% if type == 'house' %} checked{% endif %}>
+										<label for="type_house">Casas</label>
+									</div>
+									<div style="margin-bottom: 4px;">
+										<input type="radio" name="type" id="type_guildhall" value="guildhall"{% if type == 'guildhall' %} checked{% endif %}>
+										<label for="type_guildhall">Guild Halls</label>
+									</div>
+								</td>
+								<td style="width: 33%; padding: 10px; vertical-align: top;">
+									<label style="font-weight: bold; display: block; margin-bottom: 8px;">Ordenar por:</label>
+									<div style="margin-bottom: 4px;">
+										<input type="radio" name="order" id="order_name" value=""{% if order is empty %} checked{% endif %}>
+										<label for="order_name">Nome</label>
+									</div>
+									<div style="margin-bottom: 4px;">
+										<input type="radio" name="order" id="order_size" value="size"{% if order == 'size' %} checked{% endif %}>
+										<label for="order_size">Tamanho</label>
+									</div>
+									<div style="margin-bottom: 4px;">
+										<input type="radio" name="order" id="order_rent" value="rent"{% if order == 'rent' %} checked{% endif %}>
+										<label for="order_rent">Aluguel</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3" style="text-align: center; padding: 15px;">
+									<button type="submit" class="eclipse-btn">Buscar Casas</button>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+{% if errors is defined and errors is not empty %}
+	{% for error in errors %}
+		<p class="error" style="color: #b41414; text-align: center; margin: 10px 0;">{{ error }}</p>
+	{% endfor %}
+{% endif %}
+
+{% if houses is defined and houses is not empty %}
+<div class="TableContainer" style="margin-top: 15px;">
+	<div class="CaptionContainer">
+		<div class="CaptionInnerContainer">
+			<span class="CaptionEdgeLeftTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+			<span class="CaptionEdgeRightTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+			<span class="CaptionBorderTop" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
+			<span class="CaptionVerticalLeft" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
+			<div class="Text">{{ houseType|default('Casas') }} Disponiveis{% if townName is defined and townName is not empty %} em {{ townName }}{% endif %}</div>
+			<span class="CaptionVerticalRight" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
+			<span class="CaptionBorderBottom" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
+			<span class="CaptionEdgeLeftBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+			<span class="CaptionEdgeRightBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+		</div>
+	</div>
+	<table class="Table3" cellpadding="0" cellspacing="0">
+		<tbody>
+		<tr>
+			<td>
+				<div class="InnerTableContainer">
+					<table style="width:100%;">
+						<tbody>
+						<tr>
+							<td>
+								<div class="TableContentContainer">
+									<table class="TableContent myaac-table" width="100%" style="border:1px solid #faf0d7;">
+										<tbody>
+										<tr class="LabelH">
+											<td style="width: 40%">Nome</td>
+											<td style="width: 10%; text-align: center">Tamanho</td>
+											<td style="width: 15%; text-align: right">Aluguel</td>
+											<td style="width: 25%">Status</td>
+											<td style="width: 10%; text-align: center">Acoes</td>
+										</tr>
+										{% for house in houses %}
+										<tr>
+											<td class="DoNotBreak">{{ house.name }}</td>
+											<td style="text-align: center;">{{ house.size }} SQM</td>
+											<td style="text-align: right;">{{ house.rent|number_format(0, ',', '.') }} gp</td>
+											<td>{{ house.rentedBy|raw }}</td>
+											<td style="text-align: center;">
+												<a href="{{ house.link }}" class="eclipse-btn-small">Ver</a>
+											</td>
+										</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+{% elseif housesSearch is defined and housesSearch %}
+<div class="TableContainer" style="margin-top: 15px;">
+	<div class="CaptionContainer">
+		<div class="CaptionInnerContainer">
+			<span class="CaptionEdgeLeftTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+			<span class="CaptionEdgeRightTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+			<span class="CaptionBorderTop" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
+			<span class="CaptionVerticalLeft" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
+			<div class="Text">Resultado</div>
+			<span class="CaptionVerticalRight" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
+			<span class="CaptionBorderBottom" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
+			<span class="CaptionEdgeLeftBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+			<span class="CaptionEdgeRightBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+		</div>
+	</div>
+	<table class="Table1" cellpadding="0" cellspacing="0">
+		<tbody>
+		<tr>
+			<td>
+				<div class="InnerTableContainer" style="padding: 20px; text-align: center;">
+					Nenhuma {{ houseType|default('casa') }} encontrada com os criterios especificados.
+				</div>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+{% endif %}
+
+{% if cleanOldHouse is defined and cleanOldHouse is not empty %}
+<p class="houses-note" style="margin-top: 15px; font-style: italic; color: #666; text-align: center; font-size: 12px;">
+	<i>Atencao: Casas de jogadores inativos por mais de {{ cleanOldHouse }} dias sao automaticamente liberadas durante o server save.</i>
+</p>
+{% endif %}
+
+</div>

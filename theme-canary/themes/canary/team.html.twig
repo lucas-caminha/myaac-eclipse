@@ -1,0 +1,111 @@
+<div class="eclipse-team-page">
+
+<div class="TableContainer">
+	<div class="CaptionContainer">
+		<div class="CaptionInnerContainer">
+			<span class="CaptionEdgeLeftTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+			<span class="CaptionEdgeRightTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+			<span class="CaptionBorderTop" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
+			<span class="CaptionVerticalLeft" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
+			<div class="Text">Equipe do Servidor</div>
+			<span class="CaptionVerticalRight" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
+			<span class="CaptionBorderBottom" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
+			<span class="CaptionEdgeLeftBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+			<span class="CaptionEdgeRightBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
+		</div>
+	</div>
+	<table class="Table3" cellpadding="0" cellspacing="0">
+		<tbody>
+		<tr>
+			<td>
+				<div class="InnerTableContainer">
+					<table style="width:100%;">
+						<tbody>
+						<tr>
+							<td>
+								<div class="TableContentContainer">
+									<table class="TableContent myaac-table" width="100%" style="border:1px solid #faf0d7;">
+										<tbody>
+										<tr class="LabelH">
+											<td style="width: 15%">Cargo</td>
+											{% if setting('core.team_outfit') %}
+											<td style="width: 10%; text-align: center">Outfit</td>
+											{% endif %}
+											<td style="width: 40%">Nome</td>
+											{% if setting('core.team_status') %}
+											<td style="width: 15%; text-align: center">Status</td>
+											{% endif %}
+											{% if (setting('core.multiworld') or setting('core.team_world')) %}
+											<td style="width: 10%; text-align: center">Mundo</td>
+											{% endif %}
+											{% if setting('core.team_lastlogin') %}
+											<td style="width: 20%; text-align: right">Ultimo Login</td>
+											{% endif %}
+										</tr>
+
+										{% set hasMembers = false %}
+										{% for group in groupmember|reverse %}
+											{% if group.members is not empty %}
+												{% set hasMembers = true %}
+												{% for member in group.members|reverse %}
+												<tr>
+													<td class="DoNotBreak">
+														<span style="color: #b41414; font-weight: bold;">{{ group.group_name|capitalize }}</span>
+													</td>
+													{% if setting('core.team_outfit') %}
+													<td style="text-align: center; height: 64px; position: relative;">
+														<img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: -10px;" src="{{ member.outfit }}" alt="outfit"/>
+													</td>
+													{% endif %}
+													<td class="DoNotBreak">
+														{% if setting('core.account_country') %}
+															{{ member.flag_image|raw }}
+														{% endif %}
+														{{ member.link|raw }}
+													</td>
+													{% if setting('core.team_status') %}
+													<td style="text-align: center;">
+														{% if member.status %}
+															<span style="color: green; font-weight: bold;">Online</span>
+														{% else %}
+															<span style="color: #888;">Offline</span>
+														{% endif %}
+													</td>
+													{% endif %}
+													{% if (setting('core.multiworld') or setting('core.team_world')) %}
+													<td style="text-align: center;">{{ member.world_name }}</td>
+													{% endif %}
+													{% if setting('core.team_lastlogin') %}
+													<td style="text-align: right;">{{ member.last_login }}</td>
+													{% endif %}
+												</tr>
+												{% endfor %}
+											{% endif %}
+										{% endfor %}
+
+										{% if not hasMembers %}
+											<tr>
+												<td colspan="100%" style="text-align: center; padding: 20px;">
+													Nenhum membro da equipe encontrado.
+												</td>
+											</tr>
+										{% endif %}
+										</tbody>
+									</table>
+								</div>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<p class="team-note" style="margin-top: 10px; font-style: italic; color: #666; text-align: center;">
+	<i>A equipe do Eclipse OT esta sempre disponivel para ajudar. Entre em contato pelo Discord para suporte.</i>
+</p>
+
+</div>

@@ -4248,3 +4248,133 @@ body {
   font-weight: 900 !important;
   text-shadow: 0 1px 1px #4c1200 !important;
 }
+
+/* =============================================
+   Eclipse OT Custom Page Styles
+   - Team, Guilds, Houses, Last Kills
+   ============================================= */
+
+/* Shared button styles for Eclipse pages */
+.eclipse-btn,
+.eclipse-btn-small {
+  display: inline-block;
+  padding: 8px 16px;
+  background: linear-gradient(180deg, #6b180c, #2d0806);
+  border: 1px solid rgba(255, 136, 42, .78);
+  border-radius: 4px;
+  color: #fff2cf !important;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  text-shadow: 0 1px 0 #000;
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 220, 140, .36),
+    inset 0 -2px 0 rgba(0, 0, 0, .60),
+    0 2px 0 rgba(0, 0, 0, .70);
+  transition: all .15s ease;
+}
+
+.eclipse-btn-small {
+  padding: 5px 10px;
+  font-size: 10px;
+}
+
+.eclipse-btn:hover,
+.eclipse-btn-small:hover {
+  background: linear-gradient(180deg, #96220e, #410b07);
+  border-color: rgba(255, 184, 67, .95);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 230, 160, .42),
+    inset 0 -2px 0 rgba(0, 0, 0, .62),
+    0 2px 0 rgba(0, 0, 0, .72),
+    0 0 18px rgba(255, 58, 22, .40);
+  color: #fff !important;
+}
+
+/* Team Page Styles */
+.eclipse-team-page .TableContent tr:nth-child(even) {
+  background-color: rgba(212, 192, 161, 0.3);
+}
+
+.eclipse-team-page .TableContent tr:nth-child(odd) {
+  background-color: rgba(255, 242, 219, 0.5);
+}
+
+.eclipse-team-page .team-note {
+  color: #5a4a3a;
+}
+
+/* Guilds Page Styles */
+.eclipse-guilds-page .TableContent tr:nth-child(even):not(.LabelH) {
+  background-color: rgba(212, 192, 161, 0.3);
+}
+
+.eclipse-guilds-page .TableContent tr:nth-child(odd):not(.LabelH) {
+  background-color: rgba(255, 242, 219, 0.5);
+}
+
+.eclipse-guilds-page .TableContent img {
+  border-radius: 4px;
+}
+
+/* Houses Page Styles */
+.eclipse-houses-page .TableContent tr:nth-child(even):not(.LabelH) {
+  background-color: rgba(212, 192, 161, 0.3);
+}
+
+.eclipse-houses-page .TableContent tr:nth-child(odd):not(.LabelH) {
+  background-color: rgba(255, 242, 219, 0.5);
+}
+
+.eclipse-houses-page input[type="radio"] {
+  margin-right: 5px;
+}
+
+.eclipse-houses-page label {
+  cursor: pointer;
+}
+
+.eclipse-houses-page .houses-note {
+  color: #5a4a3a;
+}
+
+/* Last Kills Page Styles */
+.eclipse-lastkills-page .TableContent tr:nth-child(even):not(.LabelH) {
+  background-color: rgba(212, 192, 161, 0.3);
+}
+
+.eclipse-lastkills-page .TableContent tr:nth-child(odd):not(.LabelH) {
+  background-color: rgba(255, 242, 219, 0.5);
+}
+
+.eclipse-lastkills-page .kill-description {
+  line-height: 1.5;
+}
+
+.eclipse-lastkills-page .kill-description a {
+  color: #8a170f;
+  font-weight: bold;
+}
+
+.eclipse-lastkills-page .kill-description a:hover {
+  color: #d52a18;
+}
+
+/* Highscores page consistency */
+.eclipse-highscores-page .TableContent tr:nth-child(even):not(.LabelH) {
+  background-color: rgba(212, 192, 161, 0.3);
+}
+
+.eclipse-highscores-page .TableContent tr:nth-child(odd):not(.LabelH) {
+  background-color: rgba(255, 242, 219, 0.5);
+}
+
+.highscores-note {
+  margin: 10px 0;
+  color: #5a4a3a;
+  font-size: 12px;
+}
+
