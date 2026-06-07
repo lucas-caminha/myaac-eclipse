@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=76" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=77" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -3484,6 +3484,45 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		  -webkit-text-fill-color: #fff8dc !important;
 		  font-weight: 900 !important;
 		  text-shadow: 0 1px 1px #4c1200 !important;
+		}
+
+		/* Comandos e Informações: keep rebuilt beige cards readable after inline news rules. */
+		#ContentColumn #News .BoxContent .eclipse-server-info,
+		#ContentColumn #News .BoxContent .eclipse-server-info *:not(a):not(a *),
+		#ContentColumn #News .BoxContent .serverinfo-commands-body tbody td,
+		#ContentColumn #News .BoxContent .serverinfo-table td,
+		#ContentColumn #News .BoxContent .serverinfo-list dt,
+		#ContentColumn #News .BoxContent .serverinfo-list dd {
+		  color: #180904 !important;
+		  -webkit-text-fill-color: #180904 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn #News .BoxContent .serverinfo-card-title,
+		#ContentColumn #News .BoxContent .serverinfo-card-title *,
+		#ContentColumn #News .BoxContent .eclipse-server-info .serverinfo-card .serverinfo-card-title,
+		#ContentColumn #News .BoxContent .eclipse-server-info .serverinfo-card .serverinfo-card-title *,
+		#ContentColumn #News .BoxContent .serverinfo-hero h1,
+		#ContentColumn #News .BoxContent .serverinfo-footer-note {
+		  color: #fff3c5 !important;
+		  -webkit-text-fill-color: #fff3c5 !important;
+		  text-shadow: 0 2px 2px #000 !important;
+		}
+
+		#ContentColumn #News .BoxContent .serverinfo-commands-body thead td,
+		#ContentColumn #News .BoxContent .serverinfo-commands-body thead td *,
+		#ContentColumn #News .BoxContent .serverinfo-table th,
+		#ContentColumn #News .BoxContent .serverinfo-table th * {
+		  color: #fff7dc !important;
+		  -webkit-text-fill-color: #fff7dc !important;
+		  text-shadow: 0 1px 2px #000 !important;
+		}
+
+		#ContentColumn #News .BoxContent .serverinfo-nav a,
+		#ContentColumn #News .BoxContent .serverinfo-nav a * {
+		  color: #3b1207 !important;
+		  -webkit-text-fill-color: #3b1207 !important;
+		  text-shadow: none !important;
 		}
 		</style>
 <style>

@@ -9,574 +9,163 @@
     hours = hours < 10 ? "0" + hours : hours;
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
-    document.getElementById("timerServerSave_hour").innerHTML = hours + "h ";
-    document.getElementById("timerServerSave_minute").innerHTML = minutes + "m ";
-    document.getElementById("timerServerSave_second").innerHTML = seconds + "s ";
+
+    document.getElementById("timerServerSave_hour").innerHTML = hours + "h";
+    document.getElementById("timerServerSave_minute").innerHTML = minutes + "m";
+    document.getElementById("timerServerSave_second").innerHTML = seconds + "s";
 
     if (distance < 0) {
       clearInterval(x);
-      document.getElementById("timerServerSave_hour").innerHTML = "Server save now!";
+      document.getElementById("timerServerSave_hour").innerHTML = "Agora";
+      document.getElementById("timerServerSave_minute").innerHTML = "";
+      document.getElementById("timerServerSave_second").innerHTML = "";
     }
   }, 1000);
 </script>
 
 <div class="eclipse-server-info">
-<div style="text-align:center">
-  <h1>{{ config.lua.serverName }}</h1>
-</div>
-<div class="SmallBox">
-  <div class="MessageContainer">
-    <div class="BoxFrameHorizontal"
-         style="background-image:url({{ template_path }}/images/global/content/box-frame-horizontal.gif);"></div>
-    <div class="BoxFrameEdgeLeftTop"
-         style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></div>
-    <div class="BoxFrameEdgeRightTop"
-         style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></div>
-    <div class="Message">
-      <div class="BoxFrameVerticalLeft"
-           style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></div>
-      <div class="BoxFrameVerticalRight"
-           style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></div>
-      <table style="width:100%;">
-        <tbody>
-        <tr>
-          <td style="width:100%;text-align:center;">
-            <nobr>[<a href="#server-commands">Comandos</a>]</nobr>
-            <nobr>[<a href="{{ getLink('team') }}">Equipe de Suporte</a>]</nobr>
-            <nobr>[<a href="{{ getLink('rules') }}">Regras do Servidor</a>]</nobr>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+  <section class="serverinfo-hero">
+    <h1>{{ config.lua.serverName }}</h1>
+    <nav class="serverinfo-nav">
+      <a href="#server-commands">Comandos</a>
+      <a href="#server-details">Informações</a>
+      <a href="#server-rates">Rates</a>
+      <a href="#server-pvp">PvP</a>
+    </nav>
+  </section>
+
+  <section id="server-commands" class="serverinfo-card serverinfo-commands-card">
+    <div class="serverinfo-card-title">Comandos</div>
+    <div class="serverinfo-commands-body">
+      {% if commandsPage %}
+        {{ commandsPage.body|raw }}
+      {% else %}
+        <p>Os comandos do servidor serão exibidos aqui quando estiverem cadastrados no painel.</p>
+      {% endif %}
     </div>
-    <div class="BoxFrameHorizontal"
-         style="background-image:url({{ template_path }}/images/global/content/box-frame-horizontal.gif);"></div>
-    <div class="BoxFrameEdgeRightBottom"
-         style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></div>
-    <div class="BoxFrameEdgeLeftBottom"
-         style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></div>
-  </div>
-</div>
-<br>
-<div id="server-commands" class="eclipse-server-info-commands">
-  <div class="eclipse-server-info-commands-title">Comandos</div>
-  <div class="eclipse-server-info-commands-body">
-    {% if commandsPage %}
-      {{ commandsPage.body|raw }}
-    {% else %}
-      <p>Os comandos do servidor serão exibidos aqui quando estiverem cadastrados no painel.</p>
-    {% endif %}
-  </div>
-</div>
-<br>
-<div style="display: flex;">
-  <div
-    style="width: 100%; display: grid; justify-content: center; text-align: center; max-height: 120px; margin-top: 3%;">
-    <p style="font-size: 24px; font-weight: bold; margin: 0;">Server Save<br></p>
-    <small style="margin: 0 0 10px 0;">Every day {{ serverSave.0 }}:{{ serverSave.1 }}</small>
-    <div style="display: flex;">
-      <div
-        style="padding: 10px; box-shadow: 3px 3px 2px #875f3e; border: 1px solid #5f4d41; background-color: #d4c0a1; border-radius: 5px 0 0 5px;">
-        <label>hours</label>
-        <div id="timerServerSave_hour" style="font-size: 24px; font-weight: bold;"></div>
+  </section>
+
+  <div class="serverinfo-grid serverinfo-grid-top">
+    <section class="serverinfo-card serverinfo-save-card">
+      <div class="serverinfo-card-title">Server Save</div>
+      <p class="serverinfo-muted">Todos os dias às {{ serverSave.0 }}:{{ serverSave.1 }}</p>
+      <div class="serverinfo-countdown">
+        <div>
+          <span id="timerServerSave_hour"></span>
+          <small>horas</small>
+        </div>
+        <div>
+          <span id="timerServerSave_minute"></span>
+          <small>minutos</small>
+        </div>
+        <div>
+          <span id="timerServerSave_second"></span>
+          <small>segundos</small>
+        </div>
       </div>
-      <div
-        style="padding: 10px; box-shadow: 3px 3px 2px #875f3e; border: 1px solid #5f4d41; background-color: #d4c0a1;">
-        <label>minutes</label>
-        <div id="timerServerSave_minute" style="font-size: 24px; font-weight: bold;"></div>
-      </div>
-      <div
-        style="padding: 10px; box-shadow: 3px 3px 2px #875f3e; border: 1px solid #5f4d41; background-color: #d4c0a1; border-radius: 0 5px 5px 0;">
-        <label>seconds</label>
-        <div id="timerServerSave_second" style="font-size: 24px; font-weight: bold;"></div>
-      </div>
-    </div>
+    </section>
+
+    <section id="server-details" class="serverinfo-card">
+      <div class="serverinfo-card-title">Informações do Servidor</div>
+      <dl class="serverinfo-list">
+        <div><dt>IP</dt><dd>{{ serverIp }} (porta {{ config.lua.loginPort ?? config.lua.loginProtocolPort }})</dd></div>
+        <div><dt>Cliente</dt><dd>{{ clientVersion }}</dd></div>
+        <div><dt>Uptime</dt><dd>{{ status.uptimeReadable }}</dd></div>
+        <div><dt>Global Save</dt><dd>{{ serverSave.0 }}:{{ serverSave.1 }}</dd></div>
+        <div><dt>Tipo de Mundo</dt><dd>{{ config.lua.worldType|upper }}</dd></div>
+        <div><dt>Protection Level</dt><dd>{{ protectionLevel }}</dd></div>
+        <div><dt>Loot</dt><dd>x{{ rateLoot }}</dd></div>
+        <div><dt>Spawn</dt><dd>x{{ rateSpawn }}</dd></div>
+        <div><dt>Aluguel de casas</dt><dd>{{ houseRent }}</dd></div>
+        <div><dt>Nível para guild</dt><dd>{% if config.guild_need_level > 0 %}{{ config.guild_need_level }}{% else %}sem requisito{% endif %}</dd></div>
+        {% if houseLevel %}
+          <div><dt>Nível para comprar casa</dt><dd>{{ houseLevel }}</dd></div>
+        {% endif %}
+      </dl>
+      {% if houseOld %}
+        <p class="serverinfo-muted">Casas com donos inativos são limpas após 30 dias.</p>
+      {% endif %}
+    </section>
   </div>
 
-  <div style="width: 100%;">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tbody>
-      <tr>
-        <td>
-          <div class="TableContainer">
-            <div class="CaptionContainer">
-              <div class="CaptionInnerContainer">
-                <span class="CaptionEdgeLeftTop"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                <span class="CaptionEdgeRightTop"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                <span class="CaptionBorderTop"
-                      style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
-                <span class="CaptionVerticalLeft"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-                <div class="Text">
-                  <div style="height: 16px;">Server Info</div>
-                </div>
-                <span class="CaptionVerticalRight"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-                <span class="CaptionBorderBottom"
-                      style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
-                <span class="CaptionEdgeLeftBottom"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                <span class="CaptionEdgeRightBottom"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-              </div>
-            </div>
-            <table class="Table3" cellpadding="0" cellspacing="0">
-              <tbody>
+  <div id="server-rates" class="serverinfo-grid">
+    <section class="serverinfo-card">
+      <div class="serverinfo-card-title">Rates</div>
+      {% if not rateUseStages %}
+        <div class="serverinfo-rate-tiles">
+          <div><span>x{{ rateExp }}</span><small>Experiência</small></div>
+          <div><span>x{{ rateMagic }}</span><small>Magic Level</small></div>
+          <div><span>x{{ rateSkill }}</span><small>Skills</small></div>
+        </div>
+      {% else %}
+        <div class="serverinfo-stage-table-wrap">
+          <h3>Experiência</h3>
+          <table class="serverinfo-table">
+            <thead>
+            <tr><th>De</th><th>Até</th><th>Rate</th></tr>
+            </thead>
+            <tbody>
+            {% for result in rateStages.experienceStages %}
               <tr>
-                <td>
-                  <div class="InnerTableContainer">
-                    <table style="width:100%;">
-                      <tbody>
-                      <tr>
-                        <td>
-                          <div class="TableContentContainer">
-                            <table class="TableContent" width="100%">
-                              <tbody>
-                              <tr bgcolor="#D4C0A1">
-                                <td><b>IP:</b> {{ serverIp }} (Port: {{ config.lua.loginPort ?? config.lua.loginProtocolPort }})</td>
-                              </tr>
-                              <tr bgcolor="#F1E0C6">
-                                <td><b>Client: </b> {{ clientVersion }}</td>
-                              </tr>
-                              <tr bgcolor="#D4C0A1">
-                                <td><b>Uptime:</b> {{ status.uptimeReadable }} </td>
-                              </tr>
-                              <tr bgcolor="#F1E0C6">
-                                <td><b>Global save: </b> {{ serverSave.0 }}:{{ serverSave.1 }}</td>
-                              </tr>
-                              <tr bgcolor="#D4C0A1">
-                                <td><b>World type:</b> {{ config.lua.worldType|upper }}</td>
-                              </tr>
-                              <tr bgcolor="#F1E0C6">
-                                <td><b>Protection level: </b> {{ protectionLevel }}</td>
-                              </tr>
-                              <tr bgcolor="#D4C0A1">
-                                <td><b>Loot: </b> x{{ rateLoot }}</td>
-                              </tr>
-                              <tr bgcolor="#F1E0C6">
-                                <td><b>Spawn:</b> x{{ rateSpawn }}</td>
-                              </tr>
-                              <tr bgcolor="#D4C0A1">
-                                <td><b>House rent: </b> {{ houseRent }}
-                                  <br>{% if houseOld %}Houses with inactive owners are cleaned after 30 days.{% endif %}
-                                </td>
-                              </tr>
-                              <tr bgcolor="#F1E0C6">
-                                <td>
-                                  <b>Level to create
-                                    guild:</b>{% if config.guild_need_level > 0 %} {{ config.guild_need_level }} {% else %} no level {% endif %}
-                                </td>
-                              </tr>
-                              {% if houseLevel %}
-                                <tr bgcolor="#D4C0A1">
-                                  <td><b>Level to buy house:</b> {{ houseLevel }}</td>
-                                </tr>
-                              {% endif %}
-                              </tbody>
-                            </table>
-                          </div>
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </td>
+                <td>{{ result.minlevel }}</td>
+                <td>{% if result.maxlevel is not empty %}{{ result.maxlevel }}{% else %}-{% endif %}</td>
+                <td>{{ result.multiplier }}x</td>
               </tr>
-              </tbody>
-            </table>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-<br>
-<div style="display: flex;">
-  <div style="width: 98%; padding: 5px 0;">
-    {% if not rateUseStages %}
-      <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tbody>
-        <tr>
-          <td>
-            <div class="TableContainer">
-              <div class="CaptionContainer">
-                <div class="CaptionInnerContainer">
-                <span class="CaptionEdgeLeftTop"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                  <span class="CaptionEdgeRightTop"
-                        style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                  <span class="CaptionBorderTop"
-                        style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
-                  <span class="CaptionVerticalLeft"
-                        style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-                  <div class="Text">
-                    <div style="height: 16px;">Rates</div>
-                  </div>
-                  <span class="CaptionVerticalRight"
-                        style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-                  <span class="CaptionBorderBottom"
-                        style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
-                  <span class="CaptionEdgeLeftBottom"
-                        style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                  <span class="CaptionEdgeRightBottom"
-                        style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                </div>
-              </div>
-              <table class="Table3" cellpadding="0" cellspacing="0">
-                <tbody>
-                <tr>
-                  <td>
-                    <div class="InnerTableContainer">
-                      <table style="width:100%;">
-                        <tbody>
-                        <tr>
-                          <td>
-                            <div class="TableContentContainer">
-                              <table class="TableContent" width="100%">
-                                <tbody>
-                                <tr bgcolor="#D4C0A1">
-                                  <td><b>Exp Rate:</b> x{{ rateExp }}</td>
-                                </tr>
-                                <tr bgcolor="#F1E0C6">
-                                  <td><b>Magic Level: </b> x{{ rateMagic }}</td>
-                                </tr>
-                                <tr bgcolor="#D4C0A1">
-                                  <td><b>Skills:</b> x{{ rateSkill }}</td>
-                                </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </td>
-                        </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    {% else %}
-      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-bottom: 10px;">
-        <tbody>
-        <tr>
-          <td>
-            <div class="TableContainer">
-              <div class="CaptionContainer">
-                <div class="CaptionInnerContainer">
-                <span class="CaptionEdgeLeftTop"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                  <span class="CaptionEdgeRightTop"
-                        style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                  <span class="CaptionBorderTop"
-                        style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
-                  <span class="CaptionVerticalLeft"
-                        style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-                  <div class="Text">
-                    <div style="height: 16px;">Experience Rates:</div>
-                  </div>
-                  <span class="CaptionVerticalRight"
-                        style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-                  <span class="CaptionBorderBottom"
-                        style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
-                  <span class="CaptionEdgeLeftBottom"
-                        style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                  <span class="CaptionEdgeRightBottom"
-                        style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                </div>
-              </div>
-              <div style="top: 15px;" id="ExpTableCollapse" class="BigToggleButton"
-                   onclick="CollapseTable('ExpTableCollapseContainer'); $('#labelshow').html($('#labelshow').html() === 'show' ? 'hide' : 'show');"
-                   onmouseover="ActivateHelperDiv($(this), '', 'Click here to expand the list of experience rates.', '');"
-                   onmouseout="$('#HelperDivContainer').hide();">
-                <div id="Indicator_ExpTableCollapseContainer" class="CircleSymbolMinus"
-                     style="position: absolute; height: 18px; width: 18px; top: -8px; right: -8px; z-index: 99; cursor: pointer; background-image: url({{ template_path }}/images/global/content/circle-symbol-plus.gif);"></div>
-              </div>
-              <table class="Table3" cellpadding="0" cellspacing="0" style="width: 100%">
-                <tbody>
-                <tr>
-                  <td>
-                    <div class="InnerTableContainer" id="ExpTableCollapseContainer" style="display: none; margin: 0;">
-                      <table class="TableContent" width="100%">
-                        <tbody>
-                        <tr>
-                          <th>From level</th>
-                          <th>To level</th>
-                          <th>Exp rate</th>
-                        </tr>
-                        {% set i = 0 %}
-                        {% for result in rateStages.experienceStages %}
-                          {% set i = i + 1 %}
-                          <tr bgcolor="{{ getStyle(i) }}">
-                            <td>{{ result.minlevel }}</td>
-                            <td>{% if result.maxlevel is not empty %} {{ result.maxlevel }} {% else %} - {% endif %}</td>
-                            <td>{{ result.multiplier }}x</td>
-                          </tr>
-                        {% endfor %}
-                        </tbody>
-                      </table>
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+            {% endfor %}
+            </tbody>
+          </table>
 
-      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-bottom: 10px;">
-        <tbody>
-        <tr>
-          <td>
-            <div class="TableContainer">
-              <div class="CaptionContainer">
-                <div class="CaptionInnerContainer">
-                <span class="CaptionEdgeLeftTop"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                  <span class="CaptionEdgeRightTop"
-                        style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                  <span class="CaptionBorderTop"
-                        style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
-                  <span class="CaptionVerticalLeft"
-                        style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-                  <div class="Text">
-                    <div style="height: 16px;">Skill Rates:</div>
-                  </div>
-                  <span class="CaptionVerticalRight"
-                        style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-                  <span class="CaptionBorderBottom"
-                        style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
-                  <span class="CaptionEdgeLeftBottom"
-                        style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                  <span class="CaptionEdgeRightBottom"
-                        style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                </div>
-              </div>
-              <div style="top: 15px;" id="SkillTableCollapse" class="BigToggleButton"
-                   onclick="CollapseTable('SkillTableCollapseContainer'); $('#labelshow').html($('#labelshow').html() === 'show' ? 'hide' : 'show');"
-                   onmouseover="ActivateHelperDiv($(this), '', 'Click here to expand the list of skill rates.', '');"
-                   onmouseout="$('#HelperDivContainer').hide();">
-                <div id="Indicator_SkillTableCollapseContainer" class="CircleSymbolMinus"
-                     style="position: absolute; height: 18px; width: 18px; top: -8px; right: -8px; z-index: 99; cursor: pointer; background-image: url({{ BASE_URL }}{{ template_path }}/images/global/content/circle-symbol-plus.gif);"></div>
-              </div>
-              <div class="InnerTableContainer" id="SkillTableCollapseContainer" style="display: none; margin: 0;">
-                <table class="Table3" cellpadding="0" cellspacing="0" style="width: 100%">
-                  <tbody>
-                  <tr>
-                    <td>
-                      <table class="TableContent" width="100%">
-                        <tbody>
-                        <tr>
-                          <th>From skill</th>
-                          <th>To skill</th>
-                          <th>Skill Rate</th>
-                        </tr>
-                        {% set i = 0 %}
-                        {% for result in rateStages.skillsStages %}
-                          {% set i = i + 1 %}
-                          <tr bgcolor="{{ getStyle(i) }}">
-                            <td>{{ result.minlevel }}</td>
-                            <td>{% if result.maxlevel is not empty %} {{ result.maxlevel }} {% else %} - {% endif %}</td>
-                            <td>{{ result.multiplier }}x</td>
-                          </tr>
-                        {% endfor %}
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-
-      <table border="0" cellpadding="0" cellspacing="0" width="100%" ">
-      <tbody>
-      <tr>
-        <td>
-          <div class="TableContainer">
-            <div class="CaptionContainer">
-              <div class="CaptionInnerContainer">
-                <span class="CaptionEdgeLeftTop"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                <span class="CaptionEdgeRightTop"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                <span class="CaptionBorderTop"
-                      style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
-                <span class="CaptionVerticalLeft"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-                <div class="Text">
-                  <div style="height: 16px;">Magic Rates:</div>
-                </div>
-                <span class="CaptionVerticalRight"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-                <span class="CaptionBorderBottom"
-                      style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
-                <span class="CaptionEdgeLeftBottom"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                <span class="CaptionEdgeRightBottom"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-              </div>
-            </div>
-            <div style="top: 15px;" id="MagicTableCollapse" class="BigToggleButton"
-                 onclick="CollapseTable('MagicTableCollapseContainer'); $('#labelshow').html($('#labelshow').html() === 'show' ? 'hide' : 'show');"
-                 onmouseover="ActivateHelperDiv($(this), '', 'Click here to expand the list of magic level rates.', '');"
-                 onmouseout="$('#HelperDivContainer').hide();">
-              <div id="Indicator_MagicTableCollapseContainer" class="CircleSymbolMinus"
-                   style="position: absolute; height: 18px; width: 18px; top: -8px; right: -8px; z-index: 99; cursor: pointer; background-image: url({{ template_path }}/images/global/content/circle-symbol-plus.gif);"></div>
-            </div>
-            <table class="Table3" cellpadding="0" cellspacing="0" style="width: 100%">
-              <tbody>
+          <h3>Skills</h3>
+          <table class="serverinfo-table">
+            <thead>
+            <tr><th>De</th><th>Até</th><th>Rate</th></tr>
+            </thead>
+            <tbody>
+            {% for result in rateStages.skillsStages %}
               <tr>
-                <td>
-                  <div class="InnerTableContainer" id="MagicTableCollapseContainer" style="display: none; margin: 0;">
-                    <table class="TableContent" width="100%">
-                      <tbody>
-                      <tr>
-                        <th>From magic level</th>
-                        <th>To magic level</th>
-                        <th>Magic level Rate</th>
-                      </tr>
-                      {% set i = 0 %}
-                      {% for result in rateStages.magicLevelStages %}
-                        {% set i = i + 1 %}
-                        <tr bgcolor="{{ getStyle(i) }}">
-                          <td>{{ result.minlevel }}</td>
-                          <td>{% if result.maxlevel is not empty %} {{ result.maxlevel }} {% else %} - {% endif %}</td>
-                          <td>{{ result.multiplier }}x</td>
-                        </tr>
-                      {% endfor %}
-                      </tbody>
-                    </table>
-                  </div>
-                </td>
+                <td>{{ result.minlevel }}</td>
+                <td>{% if result.maxlevel is not empty %}{{ result.maxlevel }}{% else %}-{% endif %}</td>
+                <td>{{ result.multiplier }}x</td>
               </tr>
-              </tbody>
-            </table>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-      </table>
-    {% endif %}
+            {% endfor %}
+            </tbody>
+          </table>
+
+          <h3>Magic Level</h3>
+          <table class="serverinfo-table">
+            <thead>
+            <tr><th>De</th><th>Até</th><th>Rate</th></tr>
+            </thead>
+            <tbody>
+            {% for result in rateStages.magicLevelStages %}
+              <tr>
+                <td>{{ result.minlevel }}</td>
+                <td>{% if result.maxlevel is not empty %}{{ result.maxlevel }}{% else %}-{% endif %}</td>
+                <td>{{ result.multiplier }}x</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+    </section>
+
+    <section id="server-pvp" class="serverinfo-card">
+      <div class="serverinfo-card-title">Sistema PvP</div>
+      <dl class="serverinfo-list">
+        <div><dt>PZ Lock</dt><dd>{{ pzLocked / (60 * 1000) }} min</dd></div>
+        <div><dt>Duração do frag</dt><dd>7 horas</dd></div>
+        <div><dt>Red Skull</dt><dd>{{ redSkullDuration }} dias</dd></div>
+        {% if blackSkullDuration %}
+          <div><dt>Black Skull</dt><dd>{{ blackSkullDuration }} dias</dd></div>
+        {% endif %}
+        {% if dailyFragsToRedSkull is defined %}
+          <div><dt>Red Skull</dt><dd>{{ dailyFragsToRedSkull }} diário / {{ weeklyFragsToRedSkull }} semanal / {{ monthlyFragsToRedSkull }} mensal</dd></div>
+          <div><dt>Black Skull</dt><dd>{{ dailyFragsToRedSkull * 2 }} diário / {{ weeklyFragsToRedSkull * 2 }} semanal / {{ monthlyFragsToRedSkull * 2 }} mensal</dd></div>
+        {% endif %}
+      </dl>
+    </section>
   </div>
 
-  <div style="width: 100%; padding: 5px 0 10px 10px;">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tbody>
-      <tr>
-        <td>
-          <div class="TableContainer">
-            <div class="CaptionContainer">
-              <div class="CaptionInnerContainer">
-                <span class="CaptionEdgeLeftTop"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                <span class="CaptionEdgeRightTop"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                <span class="CaptionBorderTop"
-                      style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
-                <span class="CaptionVerticalLeft"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-                <div class="Text">
-                  <div style="height: 16px;">Frags & Skull system</div>
-                </div>
-                <span class="CaptionVerticalRight"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-                <span class="CaptionBorderBottom"
-                      style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
-                <span class="CaptionEdgeLeftBottom"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-                <span class="CaptionEdgeRightBottom"
-                      style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-              </div>
-            </div>
-            <table class="Table3" cellpadding="0" cellspacing="0">
-              <tbody>
-              <tr>
-                <td>
-                  <div class="InnerTableContainer">
-                    <table style="width:100%;">
-                      <tbody>
-                      <tr>
-                        <td>
-                          <div class="TableContentContainer">
-                            <table class="TableContent" width="100%">
-                              <tbody>
-                              <tr bgcolor="#D4C0A1">
-                                <td><b>PZ Lock:</b> {{ pzLocked / (60 * 1000) }} min</td>
-                              </tr>
-                              {% set whiteSkullTime = 7 * 60 %}
-                              {# Converter para dias, horas, minutos e segundos #}
-                              {% set days = whiteSkullTime // (24 * 60) %}
-                              {% set hours = (whiteSkullTime % (24 * 60)) // 60 %}
-                              {% set minutes = whiteSkullTime % 60 %}
-                              {% set seconds = 0 %}
-                              <tr bgcolor="#F1E0C6">
-                                <td>
-                                  <b>Frag Duration:</b>
-                                  {% if days > 0 %} {{ days }} days {% endif %}
-                                  {% if hours > 0 %} {{ hours }} hours {% endif %}
-                                  {% if minutes > 0 %} {{ minutes }} mins {% endif %}
-                                  {% if seconds > 0 %} {{ seconds }} segs {% endif %}
-                                </td>
-                              </tr>
-                              <tr bgcolor="#D4C0A1">
-                                <td><b>Red Skull Duration:</b> {{ redSkullDuration }} days</td>
-                              </tr>
-                              {% if blackSkullDuration %}
-                                <tr bgcolor="#F1E0C6">
-                                  <td><b>Black Skull Duration: </b> {{ blackSkullDuration }} days</td>
-                                </tr>
-                              {% endif %}
-                              {% if dailyFragsToRedSkull is defined %}
-                                <tr bgcolor="#D4C0A1">
-                                  <td><b>Red skull:</b>
-                                    {{ dailyFragsToRedSkull }} daily /
-                                    {{ weeklyFragsToRedSkull }} weekly /
-                                    {{ monthlyFragsToRedSkull }} monthly
-                                  </td>
-                                </tr>
-                                <tr bgcolor="#F1E0C6">
-                                  <td><b>Black skull:</b>
-                                    {{ dailyFragsToRedSkull * 2 }} daily /
-                                    {{ weeklyFragsToRedSkull * 2 }} frags weekly /
-                                    {{ monthlyFragsToRedSkull * 2 }} frags monthly
-                                  </td>
-                                </tr>
-                              {% endif %}
-                              </tbody>
-                            </table>
-                          </div>
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-<br>
-<div style="text-align:center">
-  Please report rule violations (Botters, players breaking rules etc) with CTRL + R.
-</div>
+  <p class="serverinfo-footer-note">Denuncie violações de regras dentro do jogo usando CTRL + R.</p>
 </div>
