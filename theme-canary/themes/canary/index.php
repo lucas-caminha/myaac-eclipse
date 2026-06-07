@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=77" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=78" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -3522,6 +3522,29 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		#ContentColumn #News .BoxContent .serverinfo-nav a * {
 		  color: #3b1207 !important;
 		  -webkit-text-fill-color: #3b1207 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn #News .BoxContent .eclipse-online-page .online-card-title,
+		#ContentColumn #News .BoxContent .eclipse-online-page .online-card-title *,
+		#ContentColumn #News .BoxContent .eclipse-online-page .online-hero h2,
+		#ContentColumn #News .BoxContent .eclipse-online-page .online-hero p {
+		  color: #fff3c5 !important;
+		  -webkit-text-fill-color: #fff3c5 !important;
+		  text-shadow: 0 2px 2px #000 !important;
+		}
+
+		#ContentColumn #News .BoxContent .eclipse-online-page .online-card-title {
+		  background: linear-gradient(180deg, #0d3344 0%, #061824 100%) !important;
+		}
+
+		#ContentColumn #News .BoxContent .eclipse-online-page .online-total strong,
+		#ContentColumn #News .BoxContent .eclipse-online-page .online-vocation span,
+		#ContentColumn #News .BoxContent .eclipse-online-page .online-table td,
+		#ContentColumn #News .BoxContent .eclipse-online-page .online-info-list strong,
+		#ContentColumn #News .BoxContent .eclipse-online-page .online-frag-list span {
+		  color: #180904 !important;
+		  -webkit-text-fill-color: #180904 !important;
 		  text-shadow: none !important;
 		}
 		</style>
