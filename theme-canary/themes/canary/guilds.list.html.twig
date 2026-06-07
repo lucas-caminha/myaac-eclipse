@@ -1,123 +1,77 @@
-<div class="eclipse-guilds-page">
+{% set title = 'Guildas Ativas - ' ~ config.lua.serverName %}
+{% set content %}
 
-<div class="TableContainer">
-	<div class="CaptionContainer">
-		<div class="CaptionInnerContainer">
-			<span class="CaptionEdgeLeftTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
-			<span class="CaptionEdgeRightTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
-			<span class="CaptionBorderTop" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
-			<span class="CaptionVerticalLeft" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
-			<div class="Text">Guilds Ativas no {{ config.lua.serverName }}</div>
-			<span class="CaptionVerticalRight" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
-			<span class="CaptionBorderBottom" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
-			<span class="CaptionEdgeLeftBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
-			<span class="CaptionEdgeRightBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
-		</div>
+<div class="eclipse-directory-page eclipse-guilds-page">
+	<div class="directory-note">
+		<strong>Guildas Ativas</strong>
+		<span>Veja as comunidades organizadas no Eclipse OT.</span>
 	</div>
-	<table class="Table3" cellpadding="0" cellspacing="0">
-		<tbody>
-		<tr>
-			<td>
-				<div class="InnerTableContainer">
-					<table style="width:100%;">
-						<tbody>
-						<tr>
-							<td>
-								<div class="TableContentContainer">
-									<table class="TableContent myaac-table" width="100%" style="border:1px solid #faf0d7;">
-										<tbody>
-										{% if guilds|length > 0 %}
-										<tr class="LabelH">
-											<td style="width: 80px; text-align: center">Logo</td>
-											<td>Descricao</td>
-											<td style="width: 100px; text-align: center">Acoes</td>
-										</tr>
 
-										{% set i = 0 %}
-										{% for guild in guilds %}
-											{% set i = i + 1 %}
-											<tr>
-												<td style="text-align: center; padding: 10px;">
-													<img src="{{ constant('GUILD_IMAGES_DIR') }}{{ guild.logo }}" width="64" height="64" alt="{{ guild.name }}" style="border: 1px solid #d4c0a1;">
-												</td>
-												<td style="word-break: break-word; padding: 10px;">
-													<div style="margin-bottom: 5px;">
-														<a href="{{ guild.link }}" style="font-size: 14px; font-weight: bold;">{{ guild.name }}</a>
-														{% if isAdmin %}
-															<a href="{{ getLink('guilds') }}?action=delete_by_admin&guild={{ guild.name }}" style="color: #b41414; font-size: 11px; margin-left: 10px;">[Deletar]</a>
-														{% endif %}
-													</div>
-													{% if guild.description is not empty %}
-													<div style="color: #5a4a3a; font-size: 12px; line-height: 1.4;">
-														{{ guild.description }}
-													</div>
-													{% endif %}
-												</td>
-												<td style="text-align: center;">
-													<a href="{{ guild.link }}" class="eclipse-btn-small">Ver Guild</a>
-												</td>
-											</tr>
-										{% endfor %}
-										{% else %}
-										<tr>
-											<td colspan="3" style="text-align: center; padding: 30px;">
-												<div style="margin-bottom: 15px;">
-													<strong>Nenhuma guild ativa no servidor.</strong>
-												</div>
-												{% if logged %}
-												<div style="color: #666; margin-bottom: 15px;">
-													Seja o primeiro a criar uma guild!
-												</div>
-												<a href="{{ getLink('guilds') }}?action=create" class="eclipse-btn">Criar Guild</a>
-												{% else %}
-												<div style="color: #666;">
-													Faca login para criar a primeira guild do servidor.
-												</div>
-												{% endif %}
-											</td>
-										</tr>
-										{% endif %}
-										</tbody>
-									</table>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-			</td>
-		</tr>
-		</tbody>
-	</table>
-</div>
+	<div class="directory-card">
+		<div class="directory-card-title">Lista de Guildas</div>
+		<table class="directory-table guilds-table">
+			<tbody>
+			{% if guilds|length > 0 %}
+				<tr class="LabelH">
+					<td class="guild-logo-cell">Logo</td>
+					<td>Descricao</td>
+					<td></td>
+				</tr>
 
-{% if guilds|length > 0 and logged %}
-<div class="TableContainer" style="margin-top: 15px;">
-	<div class="CaptionContainer">
-		<div class="CaptionInnerContainer">
-			<span class="CaptionEdgeLeftTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
-			<span class="CaptionEdgeRightTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
-			<span class="CaptionBorderTop" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
-			<span class="CaptionVerticalLeft" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
-			<div class="Text">Acoes</div>
-			<span class="CaptionVerticalRight" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
-			<span class="CaptionBorderBottom" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
-			<span class="CaptionEdgeLeftBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
-			<span class="CaptionEdgeRightBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span>
-		</div>
+				{% for guild in guilds %}
+					<tr>
+						<td class="guild-logo-cell">
+							<img src="{{ constant('GUILD_IMAGES_DIR') }}{{ guild.logo }}" width="64" height="64" alt="{{ guild.name }}">
+						</td>
+						<td class="guild-description-cell">
+							<strong>{{ guild.name }}</strong>
+							{% if isAdmin %}
+								<a href="{{ getLink('guilds') }}?action=delete_by_admin&guild={{ guild.name }}"> - deletar</a>
+							{% endif %}
+							{% if guild.description is not empty %}
+								<p>{{ guild.description }}</p>
+							{% else %}
+								<p>Esta guilda ainda nao possui descricao publica.</p>
+							{% endif %}
+						</td>
+						<td class="directory-action">
+							<form action="{{ guild.link }}" method="post">
+								{{ csrf() }}
+								{{ include('buttons.view.html.twig') }}
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			{% else %}
+				<tr>
+					<td class="directory-empty">
+						Nenhuma guilda ativa encontrada.
+						{% if logged %}Voce pode criar a primeira guilda do servidor.{% endif %}
+					</td>
+				</tr>
+			{% endif %}
+			</tbody>
+		</table>
 	</div>
-	<table class="Table1" cellpadding="0" cellspacing="0">
-		<tbody>
-		<tr>
-			<td>
-				<div class="InnerTableContainer" style="padding: 15px; text-align: center;">
-					<a href="{{ getLink('guilds') }}?action=create" class="eclipse-btn">Criar Nova Guild</a>
-				</div>
-			</td>
-		</tr>
-		</tbody>
-	</table>
-</div>
-{% endif %}
 
+	<div class="directory-note guilds-action-note">
+		{% if logged %}
+			<span>Nao encontrou uma guilda para chamar de sua?</span>
+			<form action="{{ getLink('guilds') }}?action=create" method="post">
+				{{ csrf() }}
+				{% set button_name = 'Found Guild' %}
+				{% set button_image = '_sbutton_foundguild' %}
+				{% include('buttons.base.html.twig') %}
+			</form>
+		{% else %}
+			<span>Entre na sua conta para criar uma guilda.</span>
+			<form action="{{ getLink('account/manage') }}?redirect={{ getLink('guilds') }}" method="post">
+				{{ csrf() }}
+				{% include('buttons.login.html.twig') %}
+			</form>
+		{% endif %}
+	</div>
 </div>
+
+{% endset %}
+{% include 'tables.headline.html.twig' %}

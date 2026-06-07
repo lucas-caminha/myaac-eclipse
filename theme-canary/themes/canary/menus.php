@@ -22,11 +22,7 @@ return [
 		'Equipe de Suporte' => 'team',
 	],
 	MENU_CATEGORY_LIBRARY => [
-		'Monstros' => 'monsters',
-		'Magias' => 'spells',
-		'Comandos' => 'commands',
-		'Informações do Servidor' => 'ots-info',
-		'Tabela de Exp' => 'exp-table',
+		'Comandos e Informações' => 'ots-info',
 	],
 	MENU_CATEGORY_SHOP => [
 		'Comprar Points' => 'points',

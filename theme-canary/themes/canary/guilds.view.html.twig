@@ -1,0 +1,179 @@
+<div class="eclipse-directory-page eclipse-guild-view-page">
+	<div class="guild-hero">
+		<img src="{{ constant('GUILD_IMAGES_DIR') }}{{ logo }}" width="64" height="64" alt="{{ guild_name }}">
+		<h1>{{ guild_name }}</h1>
+		<img src="{{ constant('GUILD_IMAGES_DIR') }}{{ logo }}" width="64" height="64" alt="{{ guild_name }}">
+	</div>
+
+	{{ hook('HOOK_GUILDS_BEFORE_GUILD_HEADER') }}
+	{{ hook('HOOK_GUILDS_AFTER_GUILD_HEADER') }}
+
+	<div class="directory-card">
+		<div class="directory-card-title">Informacoes da Guilda</div>
+		<div class="guild-info-box">
+			{% if description is not empty %}
+				<div class="guild-description">{{ description|raw }}</div>
+			{% endif %}
+
+			{% if guild_owner is not empty %}
+				{% set guildOwnerName = guild_owner.getName() %}
+				<p><a href="{{ getPlayerLink(guildOwnerName, false) }}"><strong>{{ guildOwnerName }}</strong></a> lidera a guilda <strong>{{ guild_name }}</strong>.</p>
+			{% endif %}
+
+			<p>A guilda foi fundada em {{ config.lua.serverName }} no dia {{ guild_creation_date|date("d/m/Y") }}.</p>
+
+			{% if isLeader %}
+				<a href="{{ getLink('guilds') }}?action=manager&guild={{ guild_name }}" class="guild-manage-link">
+					{% set button_name = 'Manage Guild' %}
+					{% include('buttons.base.html.twig') %}
+				</a>
+			{% endif %}
+			{{ hook('HOOK_GUILDS_AFTER_MANAGE_BUTTON') }}
+		</div>
+	</div>
+
+	{{ hook('HOOK_GUILDS_AFTER_GUILD_INFORMATION') }}
+
+	<div class="directory-card">
+		<div class="directory-card-title">Membros</div>
+		<table class="directory-table guild-members-table">
+			<tbody>
+			<tr class="LabelH">
+				<td>Rank</td>
+				<td>Nome{% if useGuildNick %} e titulo{% endif %}</td>
+				<td>Vocacao</td>
+				<td>Level</td>
+				<td>Status</td>
+			</tr>
+
+			{% set showedRank, i = false, 0 %}
+			{% for rank in guild_members %}
+				{% if rank.members|length > 0 %}
+					{% set i = i + 1 %}
+					{% for player in rank.members %}
+						<tr>
+							<td>{% if not showedRank %}<strong>{{ rank.rank_name }}</strong>{% endif %}{% set showedRank = true %}</td>
+							<td>
+								{% set playerName = player.getName() %}
+								<form action="{{ getLink('guilds') }}?action=change_nick&name={{ playerName }}&guild={{ guild_name }}" method="post" class="guild-inline-form">
+									{{ csrf() }}
+									{{ getPlayerLink(playerName, true)|raw }}
+
+									{% set showGuildNick = false %}
+									{% if player.getGuildNick() is not empty %}
+										{% set showGuildNick = true %}
+										{% set guildNickRaw = player.getGuildNick()|raw %}
+									{% endif %}
+
+									{% if logged %}
+										{% if player.getId() in players_from_account_ids %}
+											<input type="text" name="nick" value="{{ guildNickRaw }}">
+											<input type="submit" value="Alterar">
+										{% elseif showGuildNick %}
+											<span>({{ guildNickRaw }})</span>
+										{% endif %}
+
+										{% if level_in_guild > rank.rank_level or isLeader %}
+											{% if guildOwnerName != playerName %}
+												<a class="guild-kick-link" href="{{ getLink('guilds') }}?action=kick_player&guild={{ guild_name|url_encode }}&name={{ playerName|url_encode }}">KICK</a>
+											{% endif %}
+										{% endif %}
+									{% elseif showGuildNick %}
+										<span>({{ guildNickRaw }})</span>
+									{% endif %}
+								</form>
+							</td>
+							<td>{{ player.getVocationName() }}</td>
+							<td>{{ player.getLevel() }}</td>
+							<td>
+								{% if player.isOnline() %}
+									<span class="status-online">Online</span>
+								{% else %}
+									<span class="status-offline">Offline</span>
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+					{% set showedRank = false %}
+				{% endif %}
+			{% else %}
+				<tr><td colspan="5" class="directory-empty">Nenhum membro encontrado.</td></tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	{{ hook('HOOK_GUILDS_AFTER_GUILD_MEMBERS') }}
+
+	<div class="directory-card">
+		<div class="directory-card-title">Personagens Convidados</div>
+		<table class="directory-table">
+			<tbody>
+			<tr class="LabelH"><td>Nome</td></tr>
+			{% for invited_player in invited_list %}
+				{% if invited_player.isLoaded() %}
+					<tr>
+						<td>
+							{{ getPlayerLink(invited_player.getName(), true)|raw }}
+							{% if isVice %}
+								<a class="guild-kick-link" href="{{ getLink('guilds') }}?action=delete_invite&guild={{ guild_name|url_encode }}&name={{ invited_player.getName()|url_encode }}">Cancelar convite</a>
+							{% endif %}
+						</td>
+					</tr>
+				{% endif %}
+			{% else %}
+				<tr><td class="directory-empty">Nenhum personagem convidado.</td></tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	{{ hook('HOOK_GUILDS_AFTER_INVITED_CHARACTERS', { 'guild': guild, 'isLeader': isLeader }) }}
+
+	<div class="directory-note guild-actions">
+		{% if not logged %}
+			<form action="{{ getLink('account/manage') }}?redirect={{ getGuildLink(guild_name|url_encode, false) }}" method="post">
+				{{ csrf() }}
+				{{ include('buttons.login.html.twig') }}
+			</form>
+		{% else %}
+			{% if show_accept_invite > 0 %}
+				<form action="{{ getLink('guilds') }}?action=accept_invite&guild={{ guild_name|url_encode }}" method="post">
+					{{ csrf() }}
+					<input type="image" name="Accept Invite" alt="Accept Invite" src="{{ template_path }}/images/global/buttons/sbutton_acceptinvite.png" style="width: 120px; height: 20px;">
+				</form>
+			{% endif %}
+
+			{% if isVice %}
+				{% if db.hasTableAndColumns('guild_invites', ['player_id']) %}
+					<form action="{{ getLink('guilds') }}?action=invite&guild={{ guild_name|url_encode }}" method="post">
+						{{ csrf() }}
+						{% set button_name = 'Invite Character' %}
+						{% set button_image = '_sbutton_invitecharacter' %}
+						{% include('buttons.base.html.twig') %}
+					</form>
+				{% endif %}
+				<form action="{{ getLink('guilds') }}?action=change_rank&guild={{ guild_name|url_encode }}" method="post">
+					{{ csrf() }}
+					{% set button_name = 'Edit Ranks' %}
+					{% set button_image = '_sbutton_editranks' %}
+					{% include('buttons.base.html.twig') %}
+				</form>
+			{% endif %}
+
+			{% if players_from_account_in_guild|length > 0 %}
+				<form action="{{ getLink('guilds') }}?action=leave&guild={{ guild_name|url_encode }}" method="post">
+					{{ csrf() }}
+					{% set button_name = 'Leave Guild' %}
+					{% set button_image = '_sbutton_leaveguild' %}
+					{% include('buttons.base.html.twig') %}
+				</form>
+			{% endif %}
+		{% endif %}
+
+		<form action="{{ getLink('guilds') }}" method="post">
+			{{ csrf() }}
+			{{ include('buttons.back.html.twig') }}
+		</form>
+	</div>
+</div>

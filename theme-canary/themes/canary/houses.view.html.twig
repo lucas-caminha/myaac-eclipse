@@ -1,0 +1,36 @@
+{% set title = houseName %}
+{% set content %}
+
+<div class="eclipse-directory-page eclipse-house-view-page">
+	{% if errors is not empty %}
+		<div class="directory-note directory-error">
+			{% for error in errors %}
+				<p>{{ error }}</p>
+			{% endfor %}
+		</div>
+	{% else %}
+		<div class="house-view-card">
+			<div class="house-image">
+				<img src="{{ imgPath }}" alt="{{ houseName }}">
+			</div>
+
+			<div class="house-details">
+				<h2>{{ houseName }}</h2>
+				<p>{{ bedsMessage }} e possui <strong>{{ houseSize }} metros quadrados</strong>.</p>
+
+				{% if rentType != 'never' %}
+					<p>O aluguel {{ rentType }} e de <strong>{{ houseRent }} gold</strong> e sera debitado no banco do personagem.</p>
+				{% endif %}
+
+				{% if owner is not empty %}
+					<p>Esta casa esta alugada por <strong>{{ owner|raw }}</strong>.</p>
+				{% else %}
+					<p>Esta casa ainda esta disponivel.</p>
+				{% endif %}
+			</div>
+		</div>
+	{% endif %}
+</div>
+
+{% endset %}
+{% include 'tables.headline.html.twig' %}

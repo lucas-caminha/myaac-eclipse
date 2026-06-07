@@ -41,9 +41,9 @@
         <tbody>
         <tr>
           <td style="width:100%;text-align:center;">
-            <nobr>[<a href="{{ getLink('commands') }}">Commands</a>]</nobr>
-            <nobr>[<a href="{{ getLink('team') }}">Support List</a>]</nobr>
-            <nobr>[<a href="{{ getLink('rules') }}">Server Rules</a>]</nobr>
+            <nobr>[<a href="#server-commands">Comandos</a>]</nobr>
+            <nobr>[<a href="{{ getLink('team') }}">Equipe de Suporte</a>]</nobr>
+            <nobr>[<a href="{{ getLink('rules') }}">Regras do Servidor</a>]</nobr>
           </td>
         </tr>
         </tbody>
@@ -55,6 +55,17 @@
          style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></div>
     <div class="BoxFrameEdgeLeftBottom"
          style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></div>
+  </div>
+</div>
+<br>
+<div id="server-commands" class="eclipse-server-info-commands">
+  <div class="eclipse-server-info-commands-title">Comandos</div>
+  <div class="eclipse-server-info-commands-body">
+    {% if commandsPage %}
+      {{ commandsPage.body|raw }}
+    {% else %}
+      <p>Os comandos do servidor serão exibidos aqui quando estiverem cadastrados no painel.</p>
+    {% endif %}
   </div>
 </div>
 <br>

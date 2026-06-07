@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=73" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=76" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -1404,6 +1404,19 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		  text-shadow: 0 1px 2px rgba(0,0,0,.72) !important;
 		}
 
+		#ContentColumn #News .BoxContent .eclipse-server-info .eclipse-server-info-commands-body tbody td,
+		#ContentColumn #News .BoxContent .eclipse-server-info .eclipse-server-info-commands-body tbody td * {
+		  color: #160a04 !important;
+		  -webkit-text-fill-color: #160a04 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn #News .BoxContent .eclipse-server-info .eclipse-server-info-commands-body thead td,
+		#ContentColumn #News .BoxContent .eclipse-server-info .eclipse-server-info-commands-body thead td * {
+		  color: #fff7dc !important;
+		  -webkit-text-fill-color: #fff7dc !important;
+		}
+
 		#ContentColumn #News .BoxContent > table {
 		  margin-top: 4px !important;
 		  background: linear-gradient(180deg, rgba(116,50,37,.42), rgba(64,25,20,.34)) !important;
@@ -2675,6 +2688,474 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		  color: #fff0b8 !important;
 		  -webkit-text-fill-color: #fff0b8 !important;
 		  text-shadow: none !important;
+		}
+
+		/* Directory-style public pages: houses, guilds and team. */
+		#ContentColumn .Content .eclipse-directory-page,
+		#ContentColumn .Content .eclipse-directory-page *:not(.BigButton):not(.BigButton *):not(.BigButtonText):not(.MediumButtonText):not(button):not(button *) {
+		  color: #000 !important;
+		  -webkit-text-fill-color: #000 !important;
+		  font-weight: 800 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .directory-note,
+		#ContentColumn .Content .eclipse-directory-page .directory-hint,
+		#ContentColumn .Content .eclipse-directory-page .directory-card,
+		#ContentColumn .Content .eclipse-directory-page .house-view-card,
+		#ContentColumn .Content .eclipse-directory-page .guild-hero {
+		  border: 1px solid rgba(137,83,33,.50) !important;
+		  border-radius: 5px !important;
+		  background: linear-gradient(180deg, #f5dfad 0%, #dfbd7b 100%) !important;
+		  box-shadow: inset 0 1px 0 rgba(255,246,204,.64), 0 5px 14px rgba(0,0,0,.28) !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .directory-note {
+		  display: flex !important;
+		  align-items: center !important;
+		  justify-content: space-between !important;
+		  gap: 12px !important;
+		  margin: 0 0 12px !important;
+		  padding: 12px 14px !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .directory-note strong,
+		#ContentColumn .Content .eclipse-directory-page h1,
+		#ContentColumn .Content .eclipse-directory-page h2 {
+		  color: #4d1209 !important;
+		  -webkit-text-fill-color: #4d1209 !important;
+		  font-family: Georgia, "Times New Roman", serif !important;
+		  font-weight: 900 !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .directory-hint {
+		  margin: 0 0 12px !important;
+		  padding: 10px 12px !important;
+		  color: #2a0905 !important;
+		  -webkit-text-fill-color: #2a0905 !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .directory-card {
+		  margin: 0 0 14px !important;
+		  overflow: hidden !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .directory-card-title {
+		  padding: 9px 14px !important;
+		  background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important;
+		  color: #fff8dc !important;
+		  -webkit-text-fill-color: #fff8dc !important;
+		  font: 900 16px Georgia, "Times New Roman", serif !important;
+		  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .directory-table {
+		  width: 100% !important;
+		  border-collapse: collapse !important;
+		  background: linear-gradient(180deg, #f4dfad 0%, #dfbd7b 100%) !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .directory-table td {
+		  padding: 9px 10px !important;
+		  vertical-align: middle !important;
+		  border: 1px solid rgba(125,73,26,.25) !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .directory-table tr:not(.LabelH):nth-child(odd) td {
+		  background: rgba(255,245,216,.42) !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .directory-table tr:not(.LabelH):nth-child(even) td {
+		  background: rgba(224,184,113,.34) !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .LabelH,
+		#ContentColumn .Content .eclipse-directory-page .LabelH td {
+		  background: linear-gradient(180deg, #4b1008 0%, #1a0503 100%) !important;
+		  color: #fff8dc !important;
+		  -webkit-text-fill-color: #fff8dc !important;
+		  font-weight: 900 !important;
+		  text-shadow: 0 1px 1px #000 !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page a,
+		#ContentColumn .Content .eclipse-directory-page a * {
+		  color: #4d1209 !important;
+		  -webkit-text-fill-color: #4d1209 !important;
+		  font-weight: 900 !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page input:not([type="image"]):not([type="submit"]):not([type="button"]) {
+		  color: #000 !important;
+		  -webkit-text-fill-color: #000 !important;
+		  font-weight: 800 !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .directory-empty {
+		  padding: 18px !important;
+		  text-align: center !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .directory-action {
+		  width: 120px !important;
+		  text-align: center !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .directory-submit {
+		  padding: 12px !important;
+		  text-align: center !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .houses-filter-grid {
+		  display: grid !important;
+		  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+		  gap: 10px !important;
+		  padding: 14px !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .houses-filter-grid > div {
+		  padding: 10px !important;
+		  border: 1px solid rgba(137,83,33,.35) !important;
+		  border-radius: 4px !important;
+		  background: rgba(255,245,216,.36) !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .houses-filter-grid label {
+		  display: block !important;
+		  margin-top: 7px !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .house-view-card {
+		  display: grid !important;
+		  grid-template-columns: 220px 1fr !important;
+		  gap: 18px !important;
+		  padding: 16px !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .house-image img {
+		  max-width: 100% !important;
+		  border: 2px solid #8f5a24 !important;
+		  border-radius: 5px !important;
+		  background: #2a1009 !important;
+		  box-shadow: 0 6px 16px rgba(0,0,0,.35) !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .guild-logo-cell {
+		  width: 86px !important;
+		  text-align: center !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .guild-logo-cell img,
+		#ContentColumn .Content .eclipse-directory-page .guild-hero img {
+		  border: 2px solid #8f5a24 !important;
+		  border-radius: 5px !important;
+		  background: #1b0805 !important;
+		  box-shadow: 0 4px 12px rgba(0,0,0,.30) !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .guild-description-cell p {
+		  margin: 6px 0 0 !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .guilds-action-note,
+		#ContentColumn .Content .eclipse-directory-page .guild-actions {
+		  justify-content: center !important;
+		  flex-wrap: wrap !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .guild-hero {
+		  display: grid !important;
+		  grid-template-columns: 72px 1fr 72px !important;
+		  align-items: center !important;
+		  gap: 12px !important;
+		  margin-bottom: 14px !important;
+		  padding: 14px !important;
+		  text-align: center !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .guild-info-box {
+		  padding: 14px !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .guild-inline-form {
+		  margin: 0 !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .guild-inline-form input[type="text"] {
+		  width: 150px !important;
+		  margin-left: 6px !important;
+		  padding: 4px 7px !important;
+		  border: 1px solid #8f5a24 !important;
+		  background: #fff3d3 !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .guild-inline-form input[type="submit"] {
+		  margin-left: 4px !important;
+		  padding: 4px 8px !important;
+		  border: 1px solid #8f5a24 !important;
+		  background: linear-gradient(180deg, #f5a22a 0%, #c45608 100%) !important;
+		  color: #fff8dc !important;
+		  -webkit-text-fill-color: #fff8dc !important;
+		  font-weight: 900 !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .guild-kick-link {
+		  float: right !important;
+		  color: #8b1208 !important;
+		  -webkit-text-fill-color: #8b1208 !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .team-outfit-cell {
+		  width: 74px !important;
+		  text-align: center !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .team-outfit-cell img {
+		  max-width: 58px !important;
+		  max-height: 58px !important;
+		  object-fit: contain !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .status-online {
+		  color: #0c651b !important;
+		  -webkit-text-fill-color: #0c651b !important;
+		  font-weight: 900 !important;
+		}
+
+		#ContentColumn .Content .eclipse-directory-page .status-offline {
+		  color: #8b1208 !important;
+		  -webkit-text-fill-color: #8b1208 !important;
+		  font-weight: 900 !important;
+		}
+
+		#ContentColumn #News .BoxContent .eclipse-directory-page .directory-card-title,
+		#ContentColumn #News .BoxContent .eclipse-directory-page .directory-card-title *,
+		#ContentColumn #News .BoxContent .eclipse-directory-page .LabelH,
+		#ContentColumn #News .BoxContent .eclipse-directory-page .LabelH td,
+		#ContentColumn #News .BoxContent .eclipse-directory-page .LabelH * {
+		  color: #fff8dc !important;
+		  -webkit-text-fill-color: #fff8dc !important;
+		  text-shadow: 0 1px 1px #000 !important;
+		}
+
+		#ContentColumn #News .BoxContent .eclipse-directory-page,
+		#ContentColumn #News .BoxContent .eclipse-directory-page td,
+		#ContentColumn #News .BoxContent .eclipse-directory-page div,
+		#ContentColumn #News .BoxContent .eclipse-directory-page span,
+		#ContentColumn #News .BoxContent .eclipse-directory-page p,
+		#ContentColumn #News .BoxContent .eclipse-directory-page b,
+		#ContentColumn #News .BoxContent .eclipse-directory-page strong,
+		#ContentColumn #News .BoxContent .eclipse-directory-page label,
+		#ContentColumn #News .BoxContent .eclipse-directory-page small {
+		  color: #000 !important;
+		  -webkit-text-fill-color: #000 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn #News .BoxContent .eclipse-directory-page .directory-card-title,
+		#ContentColumn #News .BoxContent .eclipse-directory-page .directory-card-title *,
+		#ContentColumn #News .BoxContent .eclipse-directory-page .LabelH,
+		#ContentColumn #News .BoxContent .eclipse-directory-page .LabelH td,
+		#ContentColumn #News .BoxContent .eclipse-directory-page .LabelH *,
+		#ContentColumn #News .BoxContent .eclipse-directory-page .team-outfit-cell,
+		#ContentColumn #News .BoxContent .eclipse-directory-page .team-outfit-cell * {
+		  color: #fff8dc !important;
+		  -webkit-text-fill-color: #fff8dc !important;
+		  font-weight: 900 !important;
+		  text-shadow: 0 1px 1px #000 !important;
+		}
+
+		#ContentColumn #News .BoxContent .eclipse-directory-page .status-online {
+		  color: #0c651b !important;
+		  -webkit-text-fill-color: #0c651b !important;
+		}
+
+		#ContentColumn #News .BoxContent .eclipse-directory-page .status-offline {
+		  color: #8b1208 !important;
+		  -webkit-text-fill-color: #8b1208 !important;
+		}
+
+		@media (max-width: 900px) {
+		  #ContentColumn .Content .eclipse-directory-page .houses-filter-grid,
+		  #ContentColumn .Content .eclipse-directory-page .house-view-card {
+		    grid-template-columns: 1fr !important;
+		  }
+		}
+
+		/* Last kills: readable death log in the central content panel. */
+		#ContentColumn .Content .eclipse-lastkills-page,
+		#ContentColumn .Content .eclipse-lastkills-page *:not(.CaptionContainer):not(.CaptionContainer *):not(.CaptionInnerContainer):not(.CaptionInnerContainer *) {
+		  color: #000 !important;
+		  -webkit-text-fill-color: #000 !important;
+		  font-weight: 800 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .lastkills-intro {
+		  display: flex !important;
+		  align-items: center !important;
+		  justify-content: space-between !important;
+		  gap: 12px !important;
+		  margin: 0 0 12px !important;
+		  padding: 12px 14px !important;
+		  border: 1px solid rgba(137,83,33,.48) !important;
+		  border-radius: 5px !important;
+		  background: linear-gradient(180deg, #f5dfad 0%, #dfbd7b 100%) !important;
+		  box-shadow: inset 0 1px 0 rgba(255,246,204,.64), 0 4px 12px rgba(0,0,0,.22) !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .lastkills-intro strong {
+		  color: #4d1209 !important;
+		  -webkit-text-fill-color: #4d1209 !important;
+		  font: 900 18px Georgia, "Times New Roman", serif !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .lastkills-intro span {
+		  color: #241006 !important;
+		  -webkit-text-fill-color: #241006 !important;
+		  font-size: 12px !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .TableContainer {
+		  border: 2px solid #a86b23 !important;
+		  border-radius: 5px !important;
+		  overflow: hidden !important;
+		  background: linear-gradient(180deg, #efd49e 0%, #d9b36d 58%, #c99a51 100%) !important;
+		  box-shadow: inset 0 0 0 1px rgba(255,244,198,.48), 0 8px 22px rgba(0,0,0,.50) !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .CaptionContainer,
+		#ContentColumn .Content .eclipse-lastkills-page .CaptionInnerContainer {
+		  height: 36px !important;
+		  background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important;
+		  border: 0 !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .CaptionContainer span,
+		#ContentColumn .Content .eclipse-lastkills-page .CaptionInnerContainer span {
+		  display: none !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .CaptionContainer .Text,
+		#ContentColumn .Content .eclipse-lastkills-page .CaptionContainer .Text *,
+		#ContentColumn .Content .eclipse-lastkills-page .CaptionInnerContainer .Text,
+		#ContentColumn .Content .eclipse-lastkills-page .CaptionInnerContainer .Text * {
+		  color: #fff8dc !important;
+		  -webkit-text-fill-color: #fff8dc !important;
+		  font: 900 16px Georgia, "Times New Roman", serif !important;
+		  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .InnerTableContainer,
+		#ContentColumn .Content .eclipse-lastkills-page .TableContentContainer,
+		#ContentColumn .Content .eclipse-lastkills-page .TableContent,
+		#ContentColumn .Content .eclipse-lastkills-page .TableContent tbody,
+		#ContentColumn .Content .eclipse-lastkills-page .TableContent tr,
+		#ContentColumn .Content .eclipse-lastkills-page .TableContent td {
+		  background-image: none !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .lastkills-table {
+		  width: 100% !important;
+		  border: 1px solid rgba(137,83,33,.54) !important;
+		  border-radius: 5px !important;
+		  overflow: hidden !important;
+		  background: linear-gradient(180deg, #f4dfad 0%, #dfbd7b 100%) !important;
+		  box-shadow: inset 0 1px 0 rgba(255,246,204,.64), 0 4px 12px rgba(0,0,0,.22) !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .lastkills-table td {
+		  padding: 9px 10px !important;
+		  vertical-align: middle !important;
+		  border-color: rgba(125,73,26,.28) !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .lastkills-table tr:not(.LabelH):nth-child(odd) td {
+		  background: rgba(255,245,216,.42) !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .lastkills-table tr:not(.LabelH):nth-child(even) td {
+		  background: rgba(224,184,113,.34) !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .LabelH,
+		#ContentColumn .Content .eclipse-lastkills-page .LabelH td {
+		  background: linear-gradient(180deg, #4b1008 0%, #1a0503 100%) !important;
+		  color: #fff8dc !important;
+		  -webkit-text-fill-color: #fff8dc !important;
+		  font-weight: 900 !important;
+		  text-shadow: 0 1px 1px #000 !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .lastkills-rank {
+		  width: 48px !important;
+		  text-align: center !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .lastkills-rank span {
+		  display: inline-block !important;
+		  min-width: 24px !important;
+		  padding: 3px 6px !important;
+		  border-radius: 4px !important;
+		  background: linear-gradient(180deg, #6d170c 0%, #260604 100%) !important;
+		  color: #fff8dc !important;
+		  -webkit-text-fill-color: #fff8dc !important;
+		  font-weight: 900 !important;
+		  text-shadow: 0 1px 1px #000 !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .lastkills-time {
+		  width: 150px !important;
+		  white-space: nowrap !important;
+		  color: #3a0905 !important;
+		  -webkit-text-fill-color: #3a0905 !important;
+		  font-weight: 900 !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .lastkills-description,
+		#ContentColumn .Content .eclipse-lastkills-page .lastkills-description * {
+		  color: #000 !important;
+		  -webkit-text-fill-color: #000 !important;
+		  font-weight: 800 !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .lastkills-description a,
+		#ContentColumn .Content .eclipse-lastkills-page .lastkills-description a * {
+		  color: #4d1209 !important;
+		  -webkit-text-fill-color: #4d1209 !important;
+		  font-weight: 900 !important;
+		}
+
+		#ContentColumn .Content .eclipse-lastkills-page .lastkills-empty {
+		  padding: 18px !important;
+		  text-align: center !important;
+		  color: #2a0905 !important;
+		  -webkit-text-fill-color: #2a0905 !important;
+		}
+
+		#ContentColumn #News .BoxContent .eclipse-lastkills-page,
+		#ContentColumn #News .BoxContent .eclipse-lastkills-page td,
+		#ContentColumn #News .BoxContent .eclipse-lastkills-page div,
+		#ContentColumn #News .BoxContent .eclipse-lastkills-page span,
+		#ContentColumn #News .BoxContent .eclipse-lastkills-page b,
+		#ContentColumn #News .BoxContent .eclipse-lastkills-page strong,
+		#ContentColumn #News .BoxContent .eclipse-lastkills-page small {
+		  color: #000 !important;
+		  -webkit-text-fill-color: #000 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn #News .BoxContent .eclipse-lastkills-page .CaptionContainer .Text,
+		#ContentColumn #News .BoxContent .eclipse-lastkills-page .CaptionContainer .Text *,
+		#ContentColumn #News .BoxContent .eclipse-lastkills-page .CaptionInnerContainer .Text,
+		#ContentColumn #News .BoxContent .eclipse-lastkills-page .CaptionInnerContainer .Text *,
+		#ContentColumn #News .BoxContent .eclipse-lastkills-page .LabelH,
+		#ContentColumn #News .BoxContent .eclipse-lastkills-page .LabelH td,
+		#ContentColumn #News .BoxContent .eclipse-lastkills-page .LabelH * {
+		  color: #fff8dc !important;
+		  -webkit-text-fill-color: #fff8dc !important;
+		  font-weight: 900 !important;
+		  text-shadow: 0 1px 1px #000 !important;
 		}
 
 		/* Highscores: cleaner ranking table without outfit thumbnails. */

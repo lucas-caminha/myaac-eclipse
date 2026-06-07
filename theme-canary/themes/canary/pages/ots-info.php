@@ -11,7 +11,10 @@
  * @link      https://github.com/opentibiabr/myaac
  */
 defined('MYAAC') or die('Direct access not allowed!');
-$title = 'Server Info';
+
+use MyAAC\Models\Pages;
+
+$title = 'Comandos e Informações';
 
 $rent = trim(strtolower(configLua('houseRentPeriod')));
 if ($rent != 'yearly' && $rent != 'monthly' && $rent != 'weekly' && $rent != 'daily')
@@ -46,8 +49,10 @@ if ($now > $serverSaveTime) {
 }
 
 $config['lua']['rateStages'] = loadStagesData($config['server_path'] . 'data/stages.lua');
+$commandsPage = Pages::where('name', 'commands')->first();
 
 $twig->display('server-info.html.twig', [
+	'commandsPage' => $commandsPage,
 	'serverSave' => $explodeServerSave,
 	'serverSaveTime' => $serverSaveTime->format('Y, n-1, j, G, i, s'),
 	'rateUseStages' => $rateUseStages = getBoolean(configLua('rateUseStages')),
