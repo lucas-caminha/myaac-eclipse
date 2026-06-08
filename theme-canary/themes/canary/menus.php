@@ -11,6 +11,7 @@ return [
 		'Recuperar Conta' => 'account/lost',
 		'Regras do Servidor' => 'rules',
 		'Downloads' => 'downloads',
+		'VIP & Loyalty' => 'vip-loyalty',
 	],
 	MENU_CATEGORY_COMMUNITY => [
 		'Personagens' => 'characters',
