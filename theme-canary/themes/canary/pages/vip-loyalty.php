@@ -21,7 +21,7 @@ $loyaltyPremiumSpent = (int) (configLua('loyaltyPointsPerPremiumDaySpent') ?? 0)
 $loyaltyPremiumPurchased = (int) (configLua('loyaltyPointsPerPremiumDayPurchased') ?? 0);
 $loyaltyMultiplier = (float) (configLua('loyaltyBonusPercentageMultiplier') ?? 1.0);
 
-$loyaltyTitles = [
+$defaultLoyaltyTitles = [
 	['Scout of Tibia', 50],
 	['Sentinel of Tibia', 100],
 	['Steward of Tibia', 200],
@@ -35,7 +35,7 @@ $loyaltyTitles = [
 	['Enlightened of Tibia', 7000],
 ];
 
-$loyaltyBonuses = [
+$defaultLoyaltyBonuses = [
 	[360, 5],
 	[720, 10],
 	[1080, 15],
@@ -48,6 +48,12 @@ $loyaltyBonuses = [
 	[3600, 50],
 ];
 
+$loyaltySourceFile = ($config['server_path'] ?? '') . 'data/libs/functions/player.lua';
+$loyaltySource = eclipseLoadLoyaltyFromLua($loyaltySourceFile, $defaultLoyaltyTitles, $defaultLoyaltyBonuses);
+$loyaltyTitles = $loyaltySource['titles'];
+$loyaltyBonuses = $loyaltySource['bonuses'];
+$loyaltyUsingLuaSource = $loyaltySource['from_lua'];
+
 function eclipseStatusText(bool $enabled): string
 {
 	return $enabled ? 'Ativo' : 'Desativado';
@@ -57,6 +63,51 @@ function eclipseYesNo(bool $enabled): string
 {
 	return $enabled ? 'Sim' : 'N&atilde;o';
 }
+
+function eclipseFormatPercent(float $value): string
+{
+	return rtrim(rtrim(number_format($value, 2, '.', ''), '0'), '.');
+}
+
+function eclipseLoadLoyaltyFromLua(string $file, array $fallbackTitles, array $fallbackBonuses): array
+{
+	if (!@is_file($file)) {
+		return [
+			'titles' => $fallbackTitles,
+			'bonuses' => $fallbackBonuses,
+			'from_lua' => false,
+		];
+	}
+
+	$source = @file_get_contents($file);
+	if ($source === false) {
+		return [
+			'titles' => $fallbackTitles,
+			'bonuses' => $fallbackBonuses,
+			'from_lua' => false,
+		];
+	}
+
+	$titles = [];
+	if (preg_match_all('/name\s*=\s*"([^"]+)"\s*,\s*points\s*=\s*(\d+)/', $source, $matches, PREG_SET_ORDER)) {
+		foreach ($matches as $match) {
+			$titles[] = [$match[1], (int) $match[2]];
+		}
+	}
+
+	$bonuses = [];
+	if (preg_match_all('/minPoints\s*=\s*(\d+)\s*,\s*percentage\s*=\s*(\d+(?:\.\d+)?)/', $source, $matches, PREG_SET_ORDER)) {
+		foreach ($matches as $match) {
+			$bonuses[] = [(int) $match[1], (float) $match[2]];
+		}
+	}
+
+	return [
+		'titles' => $titles ?: $fallbackTitles,
+		'bonuses' => $bonuses ?: $fallbackBonuses,
+		'from_lua' => !empty($titles) && !empty($bonuses),
+	];
+}
 ?>
 
 <style>
@@ -64,7 +115,8 @@ function eclipseYesNo(bool $enabled): string
 	.eclipse-vip-page * {
 		box-sizing: border-box;
 		color: #1f0804 !important;
-		font-weight: 800;
+		font-family: Arial, Helvetica, sans-serif;
+		font-weight: 700;
 		text-shadow: none !important;
 	}
 
@@ -93,7 +145,8 @@ function eclipseYesNo(bool $enabled): string
 
 	.eclipse-vip-page .vip-hero,
 	.eclipse-vip-page .vip-card,
-	.eclipse-vip-page .vip-note {
+	.eclipse-vip-page .vip-note,
+	.eclipse-vip-page .vip-source-note {
 		border: 1px solid rgba(118, 70, 26, .46);
 		border-radius: 5px;
 		background: linear-gradient(180deg, #fff0bd 0%, #e8c27a 100%);
@@ -102,10 +155,24 @@ function eclipseYesNo(bool $enabled): string
 
 	.eclipse-vip-page .vip-hero {
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) auto;
+		grid-template-columns: auto minmax(0, 1fr) auto;
 		gap: 16px;
 		align-items: center;
 		padding: 18px;
+	}
+
+	.eclipse-vip-page .vip-hero-icons {
+		display: flex;
+		gap: 10px;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.eclipse-vip-page .vip-hero-icons img {
+		width: 54px;
+		height: 54px;
+		object-fit: contain;
+		filter: drop-shadow(0 3px 3px rgba(58, 24, 4, .45));
 	}
 
 	.eclipse-vip-page .vip-title {
@@ -115,10 +182,11 @@ function eclipseYesNo(bool $enabled): string
 	}
 
 	.eclipse-vip-page .vip-lead,
-	.eclipse-vip-page .vip-note {
+	.eclipse-vip-page .vip-note,
+	.eclipse-vip-page .vip-source-note {
 		margin: 0;
 		font-size: 14px;
-		line-height: 1.55;
+		line-height: 1.62;
 	}
 
 	.eclipse-vip-page .vip-status {
@@ -162,6 +230,10 @@ function eclipseYesNo(bool $enabled): string
 	}
 
 	.eclipse-vip-page .vip-card {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		gap: 12px;
+		align-items: start;
 		padding: 14px;
 	}
 
@@ -171,10 +243,28 @@ function eclipseYesNo(bool $enabled): string
 		font: 900 16px Georgia, "Times New Roman", serif;
 	}
 
+	.eclipse-vip-page .vip-card-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 42px;
+		height: 42px;
+		border: 1px solid rgba(83, 40, 14, .35);
+		border-radius: 4px;
+		background: rgba(255, 246, 209, .55);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, .65);
+	}
+
+	.eclipse-vip-page .vip-card-icon img {
+		max-width: 32px;
+		max-height: 32px;
+		object-fit: contain;
+	}
+
 	.eclipse-vip-page .vip-card p,
 	.eclipse-vip-page .vip-card li {
 		font-size: 13px;
-		line-height: 1.48;
+		line-height: 1.58;
 	}
 
 	.eclipse-vip-page .vip-card p {
@@ -193,12 +283,23 @@ function eclipseYesNo(bool $enabled): string
 	}
 
 	.eclipse-vip-page .vip-benefit {
-		min-height: 78px;
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		gap: 10px;
+		align-items: center;
+		min-height: 86px;
 		padding: 12px;
 		border: 1px solid rgba(93, 48, 17, .4);
 		border-radius: 5px;
 		background: linear-gradient(180deg, #fff5ce 0%, #e5bd72 100%);
 		box-shadow: inset 0 1px 0 rgba(255, 255, 255, .65);
+	}
+
+	.eclipse-vip-page .vip-benefit img {
+		width: 34px;
+		height: 34px;
+		object-fit: contain;
+		filter: drop-shadow(0 2px 2px rgba(70, 30, 7, .35));
 	}
 
 	.eclipse-vip-page .vip-benefit span {
@@ -211,8 +312,15 @@ function eclipseYesNo(bool $enabled): string
 
 	.eclipse-vip-page .vip-benefit strong {
 		display: block;
-		font-size: 21px;
+		font: 900 22px Georgia, "Times New Roman", serif;
 		color: #1f0804 !important;
+	}
+
+	.eclipse-vip-page .vip-table-wrap {
+		overflow-x: auto;
+		border: 1px solid rgba(91, 49, 16, .34);
+		border-radius: 5px;
+		box-shadow: 0 5px 14px rgba(70, 35, 7, .2);
 	}
 
 	.eclipse-vip-page .vip-table {
@@ -235,6 +343,10 @@ function eclipseYesNo(bool $enabled): string
 		font-weight: 900;
 	}
 
+	.eclipse-vip-page .vip-table tbody tr:nth-child(even) td {
+		background: #efd39a;
+	}
+
 	.eclipse-vip-page .vip-table td:nth-child(2),
 	.eclipse-vip-page .vip-table td:nth-child(3) {
 		text-align: center;
@@ -244,6 +356,22 @@ function eclipseYesNo(bool $enabled): string
 		margin-top: 14px;
 		padding: 13px 14px;
 		background: linear-gradient(180deg, #fff2c4 0%, #e9c27a 100%);
+	}
+
+	.eclipse-vip-page .vip-source-note {
+		display: flex;
+		gap: 10px;
+		align-items: center;
+		margin-top: 12px;
+		padding: 10px 12px;
+		background: linear-gradient(180deg, #f9e9ba 0%, #dfbc75 100%);
+		font-size: 12px;
+	}
+
+	.eclipse-vip-page .vip-source-note img {
+		width: 20px;
+		height: 20px;
+		object-fit: contain;
 	}
 
 	.eclipse-vip-page .vip-note strong {
@@ -257,6 +385,10 @@ function eclipseYesNo(bool $enabled): string
 			grid-template-columns: 1fr;
 		}
 
+		.eclipse-vip-page .vip-hero-icons {
+			justify-content: flex-start;
+		}
+
 		.eclipse-vip-page .vip-status {
 			min-width: 0;
 		}
@@ -266,6 +398,10 @@ function eclipseYesNo(bool $enabled): string
 <div class="eclipse-vip-page">
 	<div class="vip-shell">
 		<section class="vip-hero">
+			<div class="vip-hero-icons">
+				<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-VIP.png" alt="VIP">
+				<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-Loyalty.png" alt="Loyalty">
+			</div>
 			<div>
 				<h2 class="vip-title">VIP & Loyalty</h2>
 				<p class="vip-lead">
@@ -281,90 +417,140 @@ function eclipseYesNo(bool $enabled): string
 
 		<div class="vip-section-title">Benef&iacute;cios VIP</div>
 		<div class="vip-benefits">
-			<div class="vip-benefit"><span>Experi&ecirc;ncia</span><strong>+<?php echo $vipBonusExp; ?>%</strong></div>
-			<div class="vip-benefit"><span>Loot</span><strong>+<?php echo $vipBonusLoot; ?>%</strong></div>
-			<div class="vip-benefit"><span>Skills</span><strong>+<?php echo $vipBonusSkill; ?>%</strong></div>
-			<div class="vip-benefit"><span>Auto Loot VIP</span><strong><?php echo eclipseYesNo($vipAutoLootOnly); ?></strong></div>
-			<div class="vip-benefit"><span>Idle protegido</span><strong><?php echo eclipseYesNo($vipStayOnline); ?></strong></div>
-			<div class="vip-benefit"><span>Manter house</span><strong><?php echo eclipseYesNo($vipKeepHouse); ?></strong></div>
+			<div class="vip-benefit">
+				<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-Stamina.png" alt="">
+				<div><span>Experi&ecirc;ncia</span><strong>+<?php echo $vipBonusExp; ?>%</strong></div>
+			</div>
+			<div class="vip-benefit">
+				<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-TrackLoot.png" alt="">
+				<div><span>Loot</span><strong>+<?php echo $vipBonusLoot; ?>%</strong></div>
+			</div>
+			<div class="vip-benefit">
+				<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-Trainingstatues.png" alt="">
+				<div><span>Skills</span><strong>+<?php echo $vipBonusSkill; ?>%</strong></div>
+			</div>
+			<div class="vip-benefit">
+				<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-QuickLoot.png" alt="">
+				<div><span>Auto Loot VIP</span><strong><?php echo eclipseYesNo($vipAutoLootOnly); ?></strong></div>
+			</div>
+			<div class="vip-benefit">
+				<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-Login.png" alt="">
+				<div><span>Idle protegido</span><strong><?php echo eclipseYesNo($vipStayOnline); ?></strong></div>
+			</div>
+			<div class="vip-benefit">
+				<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-House.png" alt="">
+				<div><span>Manter house</span><strong><?php echo eclipseYesNo($vipKeepHouse); ?></strong></div>
+			</div>
 		</div>
 
 		<div class="vip-grid" style="margin-top: 12px;">
 			<section class="vip-card">
-				<h3>Como ativar VIP</h3>
-				<p>
-					Quando o sistema VIP estiver habilitado, qualquer conta com dias premium ativos ser&aacute; reconhecida como VIP pelo servidor.
-					Os b&ocirc;nus s&atilde;o aplicados automaticamente ao entrar no jogo.
-				</p>
+				<div class="vip-card-icon">
+					<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-VIP.png" alt="">
+				</div>
+				<div>
+					<h3>Como ativar VIP</h3>
+					<p>
+						Quando o sistema VIP estiver habilitado, qualquer conta com dias premium ativos ser&aacute; reconhecida como VIP pelo servidor.
+						Os b&ocirc;nus s&atilde;o aplicados automaticamente ao entrar no jogo.
+					</p>
+				</div>
 			</section>
 			<section class="vip-card">
-				<h3>Recursos adicionais</h3>
-				<ul>
-					<li>Redu&ccedil;&atilde;o de cooldown de familiar: <?php echo $vipFamiliarReduction; ?> minuto(s).</li>
-					<li>Recompensas online podem dar mais coins ou tokens para contas VIP quando os eventos estiverem ativos.</li>
-					<li>Alguns recursos dependem da configura&ccedil;&atilde;o atual do servidor.</li>
-				</ul>
+				<div class="vip-card-icon">
+					<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-Summons.png" alt="">
+				</div>
+				<div>
+					<h3>Recursos adicionais</h3>
+					<ul>
+						<li>Redu&ccedil;&atilde;o de cooldown de familiar: <?php echo $vipFamiliarReduction; ?> minuto(s).</li>
+						<li>Recompensas online podem dar mais coins ou tokens para contas VIP quando os eventos estiverem ativos.</li>
+						<li>Alguns recursos dependem da configura&ccedil;&atilde;o atual do servidor.</li>
+					</ul>
+				</div>
 			</section>
 		</div>
 
 		<div class="vip-section-title">Informa&ccedil;&otilde;es de Loyalty</div>
 		<div class="vip-grid">
 			<section class="vip-card">
-				<h3>Como ganhar pontos</h3>
-				<ul>
-					<li><?php echo $loyaltyCreationDay; ?> ponto(s) por dia desde a cria&ccedil;&atilde;o da conta.</li>
-					<li><?php echo $loyaltyPremiumPurchased; ?> ponto(s) por dia premium comprado.</li>
-					<li><?php echo $loyaltyPremiumSpent; ?> ponto(s) por dia premium utilizado.</li>
-				</ul>
+				<div class="vip-card-icon">
+					<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-Loyalty.png" alt="">
+				</div>
+				<div>
+					<h3>Como ganhar pontos</h3>
+					<ul>
+						<li><?php echo $loyaltyCreationDay; ?> ponto(s) por dia desde a cria&ccedil;&atilde;o da conta.</li>
+						<li><?php echo $loyaltyPremiumPurchased; ?> ponto(s) por dia premium comprado.</li>
+						<li><?php echo $loyaltyPremiumSpent; ?> ponto(s) por dia premium utilizado.</li>
+					</ul>
+				</div>
 			</section>
 			<section class="vip-card">
-				<h3>O que o b&ocirc;nus afeta</h3>
-				<p>
-					O b&ocirc;nus de Loyalty afeta skills e magic level. Ele n&atilde;o altera diretamente experi&ecirc;ncia, loot ou dano final.
-					O multiplicador atual do b&ocirc;nus &eacute; <?php echo rtrim(rtrim(number_format($loyaltyMultiplier, 2, '.', ''), '0'), '.'); ?>x.
-				</p>
+				<div class="vip-card-icon">
+					<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-Analytics.png" alt="">
+				</div>
+				<div>
+					<h3>O que o b&ocirc;nus afeta</h3>
+					<p>
+						O b&ocirc;nus de Loyalty afeta skills e magic level. Ele n&atilde;o altera diretamente experi&ecirc;ncia, loot ou dano final.
+						O multiplicador atual do b&ocirc;nus &eacute; <?php echo eclipseFormatPercent($loyaltyMultiplier); ?>x.
+					</p>
+				</div>
 			</section>
 		</div>
 
+		<div class="vip-source-note">
+			<img src="<?php echo $template_path; ?>/images/content/info.gif" alt="">
+			<span>
+				As configura&ccedil;&otilde;es de VIP s&atilde;o lidas do config do servidor.
+				Os t&iacute;tulos e b&ocirc;nus de Loyalty <?php echo $loyaltyUsingLuaSource ? 'foram carregados diretamente do script Lua do jogo.' : 'est&atilde;o usando valores padr&atilde;o porque o script Lua do jogo n&atilde;o foi encontrado pelo site.'; ?>
+			</span>
+		</div>
+
 		<div class="vip-section-title">T&iacute;tulos de Loyalty</div>
-		<table class="vip-table">
-			<thead>
-			<tr>
-				<th>T&iacute;tulo</th>
-				<th>Pontos necess&aacute;rios</th>
-			</tr>
-			</thead>
-			<tbody>
-			<?php foreach ($loyaltyTitles as [$loyaltyTitle, $points]) { ?>
+		<div class="vip-table-wrap">
+			<table class="vip-table">
+				<thead>
 				<tr>
-					<td><?php echo htmlspecialchars($loyaltyTitle); ?></td>
-					<td><?php echo $points; ?></td>
+					<th>T&iacute;tulo</th>
+					<th>Pontos necess&aacute;rios</th>
 				</tr>
-			<?php } ?>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+				<?php foreach ($loyaltyTitles as [$loyaltyTitle, $points]) { ?>
+					<tr>
+						<td><?php echo htmlspecialchars($loyaltyTitle); ?></td>
+						<td><?php echo $points; ?></td>
+					</tr>
+				<?php } ?>
+				</tbody>
+			</table>
+		</div>
 
 		<div class="vip-section-title">B&ocirc;nus de Skills por Loyalty</div>
-		<table class="vip-table">
-			<thead>
-			<tr>
-				<th>Pontos necess&aacute;rios</th>
-				<th>B&ocirc;nus base</th>
-				<th>B&ocirc;nus atual</th>
-			</tr>
-			</thead>
-			<tbody>
-			<?php foreach ($loyaltyBonuses as [$points, $bonus]) {
-				$currentBonus = $bonus * $loyaltyMultiplier;
-			?>
+		<div class="vip-table-wrap">
+			<table class="vip-table">
+				<thead>
 				<tr>
-					<td><?php echo $points; ?></td>
-					<td>+<?php echo $bonus; ?>%</td>
-					<td>+<?php echo rtrim(rtrim(number_format($currentBonus, 2, '.', ''), '0'), '.'); ?>%</td>
+					<th>Pontos necess&aacute;rios</th>
+					<th>B&ocirc;nus base</th>
+					<th>B&ocirc;nus atual</th>
 				</tr>
-			<?php } ?>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+				<?php foreach ($loyaltyBonuses as [$points, $bonus]) {
+					$currentBonus = $bonus * $loyaltyMultiplier;
+				?>
+					<tr>
+						<td><?php echo $points; ?></td>
+						<td>+<?php echo eclipseFormatPercent($bonus); ?>%</td>
+						<td>+<?php echo eclipseFormatPercent($currentBonus); ?>%</td>
+					</tr>
+				<?php } ?>
+				</tbody>
+			</table>
+		</div>
 
 		<div class="vip-note">
 			<strong>Observa&ccedil;&atilde;o:</strong>
