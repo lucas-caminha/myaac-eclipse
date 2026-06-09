@@ -8,6 +8,7 @@ Este guia documenta os scripts SQL incluidos no projeto e como gerenciar migraco
 |---------|-----------|
 | `sql/001-eclipse-news.sql` | Atualiza a news de boas-vindas |
 | `sql/002-clean-eclipse-menu.sql` | Remove itens desnecessarios do menu |
+| `sql/003-add-vip-loyalty-menu.sql` | Adiciona VIP & Loyalty ao menu Biblioteca |
 
 ## Aplicando Migracoes
 
@@ -82,6 +83,24 @@ WHERE template = 'canary'
 - Forum
 - Gallery
 - FAQ
+
+### 003-add-vip-loyalty-menu.sql
+
+Adiciona e normaliza o item VIP & Loyalty no menu Biblioteca do template Canary:
+
+```sql
+UPDATE myaac_menu
+SET category = 5,
+    ordering = 0,
+    enabled = 1
+WHERE template = 'canary'
+  AND link = 'vip-loyalty';
+```
+
+**O que faz:**
+- Insere `VIP & Loyalty` se ainda nao existir
+- Move o item para a categoria Biblioteca
+- Reordena `Comandos e Informacoes` para ficar abaixo do VIP & Loyalty
 
 ## Criando Novas Migracoes
 

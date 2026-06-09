@@ -17,8 +17,8 @@ $vipFamiliarReduction = (int) (configLua('vipFamiliarTimeCooldownReduction') ?? 
 
 $loyaltyEnabled = getBoolean(configLua('loyaltyEnabled') ?? true);
 $loyaltyCreationDay = (int) (configLua('loyaltyPointsPerCreationDay') ?? 1);
-$loyaltyPremiumSpent = (int) (configLua('loyaltyPointsPerPremiumDaySpent') ?? 0);
-$loyaltyPremiumPurchased = (int) (configLua('loyaltyPointsPerPremiumDayPurchased') ?? 0);
+$loyaltyPremiumSpent = (int) (configLua('loyaltyPointsPerPremiumDaySpent') ?? 4);
+$loyaltyPremiumPurchased = (int) (configLua('loyaltyPointsPerPremiumDayPurchased') ?? 4);
 $loyaltyMultiplier = (float) (configLua('loyaltyBonusPercentageMultiplier') ?? 1.0);
 
 $defaultLoyaltyTitles = [
@@ -117,6 +117,23 @@ function eclipseLoadLoyaltyFromLua(string $file, array $fallbackTitles, array $f
 		color: #1f0804 !important;
 		font-family: Arial, Helvetica, sans-serif;
 		font-weight: 700;
+		text-shadow: none !important;
+	}
+
+	#ContentColumn #News .eclipse-vip-page .vip-hero,
+	#ContentColumn #News .eclipse-vip-page .vip-hero *,
+	#ContentColumn #News .eclipse-vip-page .vip-card,
+	#ContentColumn #News .eclipse-vip-page .vip-card *,
+	#ContentColumn #News .eclipse-vip-page .vip-benefit,
+	#ContentColumn #News .eclipse-vip-page .vip-benefit *,
+	#ContentColumn #News .eclipse-vip-page .vip-note,
+	#ContentColumn #News .eclipse-vip-page .vip-note *,
+	#ContentColumn #News .eclipse-vip-page .vip-source-note,
+	#ContentColumn #News .eclipse-vip-page .vip-source-note *,
+	#ContentColumn #News .eclipse-vip-page .vip-table,
+	#ContentColumn #News .eclipse-vip-page .vip-table * {
+		color: #1f0804 !important;
+		-webkit-text-fill-color: #1f0804 !important;
 		text-shadow: none !important;
 	}
 
