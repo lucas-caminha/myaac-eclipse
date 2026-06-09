@@ -5,10 +5,10 @@
 defined('MYAAC') or die('Direct access not allowed!');
 $title = 'Baixar Cliente';
 
-$clientVersion = '15.00.249ccc-r2';
+$clientVersion = '15.11.c9d1cf-r1';
 $launcherVersion = '1.0.1';
 $launcherUrl = '/downloads/eclipse-launcher.zip';
-$clientUrl = '/downloads/eclipse-client-15.00.249ccc.zip';
+$clientUrl = '/downloads/eclipse-client-15.11.c9d1cf.zip';
 ?>
 
 <style>
