@@ -9,6 +9,7 @@ Este guia documenta os scripts SQL incluidos no projeto e como gerenciar migraco
 | `sql/001-eclipse-news.sql` | Atualiza a news de boas-vindas |
 | `sql/002-clean-eclipse-menu.sql` | Remove itens desnecessarios do menu |
 | `sql/003-add-vip-loyalty-menu.sql` | Adiciona VIP & Loyalty ao menu Biblioteca |
+| `sql/004-update-downloads-launcher.sql` | Atualiza Downloads com links do launcher |
 
 ## Aplicando Migracoes
 
@@ -101,6 +102,21 @@ WHERE template = 'canary'
 - Insere `VIP & Loyalty` se ainda nao existir
 - Move o item para a categoria Biblioteca
 - Reordena `Comandos e Informacoes` para ficar abaixo do VIP & Loyalty
+
+### 004-update-downloads-launcher.sql
+
+Atualiza a pagina publica Downloads para apontar aos arquivos oficiais do launcher:
+
+```sql
+UPDATE myaac_pages
+SET title = 'Baixar Cliente'
+WHERE name = 'downloads';
+```
+
+**O que faz:**
+- Troca o conteudo antigo de download por links para o Eclipse Launcher
+- Mantem um link secundario para baixar o cliente completo
+- Desativa TinyMCE para preservar o HTML da pagina
 
 ## Criando Novas Migracoes
 

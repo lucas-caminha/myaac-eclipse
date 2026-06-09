@@ -5,7 +5,9 @@
 defined('MYAAC') or die('Direct access not allowed!');
 $title = 'Baixar Cliente';
 
-$clientVersion = '15';
+$clientVersion = '15.00.249ccc';
+$launcherUrl = '/downloads/eclipse-launcher.zip';
+$clientUrl = '/downloads/eclipse-client-15.00.249ccc.zip';
 ?>
 
 <style>
@@ -67,7 +69,7 @@ $clientVersion = '15';
 	.eclipse-download-page .download-actions {
 		display: grid;
 		gap: 10px;
-		min-width: 210px;
+		min-width: 230px;
 	}
 
 	.eclipse-download-page .download-button {
@@ -162,28 +164,29 @@ $clientVersion = '15';
 				<h2 class="download-title">Baixar Cliente</h2>
 				<p class="download-lead">
 					Use o cliente oficial Tibia <?php echo htmlspecialchars($clientVersion); ?> para jogar no Eclipse OT.
-					Em breve o download ficará disponível por aqui.
+					Baixe o launcher para instalar e atualizar o cliente automaticamente.
 				</p>
 			</div>
 			<div class="download-actions">
-				<a class="download-button" href="javascript:void(0)" aria-disabled="true">Baixar Cliente</a>
+				<a class="download-button" href="<?php echo htmlspecialchars($launcherUrl); ?>">Baixar Launcher</a>
+				<a class="download-button secondary" href="<?php echo htmlspecialchars($clientUrl); ?>">Baixar Cliente Completo</a>
 			</div>
 		</div>
 
 		<div class="download-grid">
 			<div class="download-card">
-				<strong><span class="download-step">1</span>Baixe o cliente</strong>
-				<span>Quando o download for liberado, baixe o pacote e instale normalmente no seu computador.</span>
+				<strong><span class="download-step">1</span>Baixe o launcher</strong>
+				<span>Extraia o arquivo, abra o EclipseLauncher.exe e deixe ele baixar ou atualizar o cliente automaticamente.</span>
 			</div>
 			<div class="download-card">
 				<strong><span class="download-step">2</span>Entre no jogo</strong>
-				<span>Crie sua conta, escolha sua vocação e comece sua jornada.</span>
+				<span>Crie sua conta, escolha sua voca&ccedil;&atilde;o e comece sua jornada.</span>
 			</div>
 		</div>
 
 		<div class="download-note">
-			<strong>Observação:</strong>
-			<span>Se o navegador bloquear o download, confirme que deseja manter o arquivo. Baixe sempre pelos links oficiais desta página.</span>
+			<strong>Observa&ccedil;&atilde;o:</strong>
+			<span>Se o navegador bloquear o download, confirme que deseja manter o arquivo. Baixe sempre pelos links oficiais desta p&aacute;gina.</span>
 		</div>
 	</div>
 </div>
