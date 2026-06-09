@@ -10,6 +10,7 @@ Este guia documenta os scripts SQL incluidos no projeto e como gerenciar migraco
 | `sql/002-clean-eclipse-menu.sql` | Remove itens desnecessarios do menu |
 | `sql/003-add-vip-loyalty-menu.sql` | Adiciona VIP & Loyalty ao menu Biblioteca |
 | `sql/004-update-downloads-launcher.sql` | Atualiza Downloads com links do launcher |
+| `sql/005-polish-downloads-page.sql` | Melhora visual e instrucoes da pagina Downloads |
 
 ## Aplicando Migracoes
 
@@ -117,6 +118,21 @@ WHERE name = 'downloads';
 - Troca o conteudo antigo de download por links para o Eclipse Launcher
 - Mantem um link secundario para baixar o cliente completo
 - Desativa TinyMCE para preservar o HTML da pagina
+
+### 005-polish-downloads-page.sql
+
+Melhora o conteudo da pagina Downloads:
+
+```sql
+UPDATE myaac_pages
+SET title = 'Baixar Cliente'
+WHERE name = 'downloads';
+```
+
+**O que faz:**
+- Destaca o launcher como download principal
+- Mostra as versoes atuais do client e launcher
+- Adiciona uma nota sobre o alerta do Windows/SmartScreen
 
 ## Criando Novas Migracoes
 

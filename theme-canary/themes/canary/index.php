@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=82" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=83" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -2663,6 +2663,186 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		#ContentColumn .Content .eclipse-download-page .download-button.secondary * {
 		  color: #fff1bd !important;
 		  -webkit-text-fill-color: #fff1bd !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-shell {
+		  padding: 18px !important;
+		  background: linear-gradient(180deg, #f6dfa9 0%, #e0bd74 58%, #c9964c 100%) !important;
+		  border: 2px solid #a86b23 !important;
+		  border-radius: 5px !important;
+		  box-shadow: inset 0 0 0 1px rgba(255,246,204,.60), 0 10px 24px rgba(0,0,0,.46) !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-hero {
+		  display: grid !important;
+		  grid-template-columns: minmax(0, 1fr) 285px !important;
+		  gap: 18px !important;
+		  align-items: stretch !important;
+		  padding: 0 !important;
+		  border: 0 !important;
+		  background: transparent !important;
+		  box-shadow: none !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-hero-copy,
+		#ContentColumn .Content .eclipse-download-page .download-primary-panel,
+		#ContentColumn .Content .eclipse-download-page .download-card,
+		#ContentColumn .Content .eclipse-download-page .download-note {
+		  border: 1px solid rgba(118,70,26,.48) !important;
+		  border-radius: 5px !important;
+		  background: linear-gradient(180deg, #fff0bd 0%, #e5bd74 100%) !important;
+		  box-shadow: inset 0 1px 0 rgba(255,252,224,.82), 0 6px 16px rgba(71,39,9,.22) !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-hero-copy {
+		  min-height: 210px !important;
+		  padding: 20px !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-eyebrow {
+		  display: inline-block !important;
+		  margin-bottom: 10px !important;
+		  padding: 5px 9px !important;
+		  border: 1px solid rgba(91,22,9,.35) !important;
+		  border-radius: 4px !important;
+		  background: linear-gradient(180deg, #6d1a0e 0%, #2b0604 100%) !important;
+		  color: #fff0bd !important;
+		  -webkit-text-fill-color: #fff0bd !important;
+		  font: 900 11px Verdana, Arial, sans-serif !important;
+		  text-transform: uppercase !important;
+		  text-shadow: 0 1px 1px #000 !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-title {
+		  margin: 0 0 10px !important;
+		  color: #4d1209 !important;
+		  -webkit-text-fill-color: #4d1209 !important;
+		  font: 900 26px Georgia, "Times New Roman", serif !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-lead {
+		  max-width: 560px !important;
+		  font-size: 14px !important;
+		  line-height: 1.6 !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-version-row {
+		  display: flex !important;
+		  flex-wrap: wrap !important;
+		  gap: 8px !important;
+		  margin-top: 16px !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-version-row span {
+		  display: inline-flex !important;
+		  min-height: 26px !important;
+		  align-items: center !important;
+		  padding: 5px 9px !important;
+		  border: 1px solid rgba(133,78,25,.55) !important;
+		  border-radius: 4px !important;
+		  background: rgba(255,246,211,.46) !important;
+		  font: 900 12px Verdana, Arial, sans-serif !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-primary-panel {
+		  display: flex !important;
+		  min-height: 210px !important;
+		  flex-direction: column !important;
+		  justify-content: space-between !important;
+		  padding: 16px !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-file-meta strong {
+		  display: block !important;
+		  margin-bottom: 6px !important;
+		  color: #4d1209 !important;
+		  -webkit-text-fill-color: #4d1209 !important;
+		  font: 900 17px Georgia, "Times New Roman", serif !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-file-meta span {
+		  display: block !important;
+		  font-size: 12px !important;
+		  line-height: 1.45 !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-actions {
+		  display: grid !important;
+		  gap: 10px !important;
+		  min-width: 0 !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-button {
+		  display: block !important;
+		  padding: 12px 14px !important;
+		  border: 1px solid #ffe1a0 !important;
+		  border-radius: 4px !important;
+		  background: linear-gradient(180deg, #ff9d26 0%, #c45608 100%) !important;
+		  box-shadow: inset 0 1px 0 rgba(255,255,255,.38), 0 3px 9px rgba(73,31,2,.34) !important;
+		  font: 900 12px Verdana, Arial, sans-serif !important;
+		  text-align: center !important;
+		  text-transform: uppercase !important;
+		  text-decoration: none !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-button:hover {
+		  background: linear-gradient(180deg, #ffc04f 0%, #d86108 100%) !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-button.secondary {
+		  background: linear-gradient(180deg, #173f54 0%, #08202d 100%) !important;
+		  border-color: #d69a3d !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-grid {
+		  display: grid !important;
+		  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+		  gap: 12px !important;
+		  margin-top: 14px !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-card {
+		  padding: 14px !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-card strong {
+		  display: flex !important;
+		  align-items: center !important;
+		  gap: 8px !important;
+		  margin-bottom: 8px !important;
+		  font-size: 14px !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-step {
+		  display: inline-flex !important;
+		  width: 24px !important;
+		  height: 24px !important;
+		  flex: 0 0 24px !important;
+		  align-items: center !important;
+		  justify-content: center !important;
+		  border-radius: 50% !important;
+		  background: #5a130a !important;
+		  font: 900 13px Arial, sans-serif !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-note {
+		  margin-top: 14px !important;
+		  padding: 13px 14px !important;
+		  background: linear-gradient(180deg, #fff5cc 0%, #e8c27a 100%) !important;
+		}
+
+		#ContentColumn .Content .eclipse-download-page .download-note span {
+		  display: block !important;
+		  margin-top: 4px !important;
+		  font-size: 13px !important;
+		  line-height: 1.5 !important;
+		}
+
+		@media (max-width: 860px) {
+		  #ContentColumn .Content .eclipse-download-page .download-hero,
+		  #ContentColumn .Content .eclipse-download-page .download-grid {
+		    grid-template-columns: 1fr !important;
+		  }
 		}
 
 		/* Rules page: dark text on beige panels, light only in section counters. */
