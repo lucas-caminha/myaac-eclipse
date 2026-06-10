@@ -36,17 +36,6 @@ if ($blackSkullDuration = configLua('blackSkullDuration') ?? null)
 	$blackSkullDuration = eval('return ' . $blackSkullDuration . ';');
 
 $explodeServerSave = explode(':', configLua('globalServerSaveTime') ?? '05:00:00');
-$hours_ServerSave = $explodeServerSave[0];
-$minutes_ServerSave = $explodeServerSave[1];
-$seconds_ServerSave = $explodeServerSave[2];
-
-$now = new DateTime();
-$serverSaveTime = new DateTime();
-$serverSaveTime->setTime($hours_ServerSave, $minutes_ServerSave, $seconds_ServerSave);
-
-if ($now > $serverSaveTime) {
-	$serverSaveTime->modify('+1 day');
-}
 
 $config['lua']['rateStages'] = loadStagesData($config['server_path'] . 'data/stages.lua');
 $commandsPage = Pages::where('name', 'commands')->first();
@@ -54,7 +43,6 @@ $commandsPage = Pages::where('name', 'commands')->first();
 $twig->display('server-info.html.twig', [
 	'commandsPage' => $commandsPage,
 	'serverSave' => $explodeServerSave,
-	'serverSaveTime' => $serverSaveTime->format('Y, n-1, j, G, i, s'),
 	'rateUseStages' => $rateUseStages = getBoolean(configLua('rateUseStages')),
 	'rateStages' => $rateUseStages && isset($config['lua']['rateStages']) ? $config['lua']['rateStages'] : [],
 	'serverIp' => str_replace(['http://', 'https://', '/'], '', configLua('url')),

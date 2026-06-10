@@ -3698,13 +3698,6 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		  text-shadow: 0 1px 2px #000 !important;
 		}
 
-		#ContentColumn #News .BoxContent .serverinfo-nav a,
-		#ContentColumn #News .BoxContent .serverinfo-nav a * {
-		  color: #3b1207 !important;
-		  -webkit-text-fill-color: #3b1207 !important;
-		  text-shadow: none !important;
-		}
-
 		#ContentColumn #News .BoxContent .eclipse-online-page .online-card-title,
 		#ContentColumn #News .BoxContent .eclipse-online-page .online-card-title *,
 		#ContentColumn #News .BoxContent .eclipse-online-page .online-hero h2,

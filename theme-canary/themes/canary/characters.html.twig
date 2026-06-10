@@ -1,4 +1,4 @@
-<div class="eclipse-characters-page eclipse-characters-result eclipse-character-compact">
+<div class="eclipse-characters-page eclipse-characters-result eclipse-character-compact{% if account.isPremium() %} is-vip-account{% endif %}">
   {% if canEdit %}
     <div class="character-admin-action">
       <a href="admin/?p=players&id={{ player.getId() }}" title="Editar no painel admin" target="_blank">
@@ -9,6 +9,10 @@
   {% endif %}
 
   <div class="character-profile-header">
+    {% if account.isPremium() %}
+      <div class="character-vip-ribbon">VIP</div>
+    {% endif %}
+
     {% if outfit is not null %}
       <div class="character-outfit-frame">
         <img src="{{ outfit }}" alt="Outfit de {{ player.getName() }}">
