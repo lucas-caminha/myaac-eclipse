@@ -39,6 +39,23 @@
 <form action="{{ getLink('account/create') }}" method="post" id="createaccount">
 	{{ csrf() }}
 
+	<div class="eclipse-registration-steps" aria-label="Etapas do cadastro">
+		<button type="button" class="eclipse-registration-step is-active" data-registration-step="account">
+			<span class="eclipse-registration-step-number">1</span>
+			<span class="eclipse-registration-step-text">Dados de acesso</span>
+		</button>
+		{% if setting('core.account_create_character_create') %}
+		<button type="button" class="eclipse-registration-step is-locked" data-registration-step="character" disabled>
+			<span class="eclipse-registration-step-number">2</span>
+			<span class="eclipse-registration-step-text">Personagem inicial</span>
+		</button>
+		{% endif %}
+		<button type="button" class="eclipse-registration-step is-locked" data-registration-step="rules" disabled>
+			<span class="eclipse-registration-step-number">{% if setting('core.account_create_character_create') %}3{% else %}2{% endif %}</span>
+			<span class="eclipse-registration-step-text">Regras</span>
+		</button>
+	</div>
+
 	{% set title = 'Criar conta no ' ~ config.lua.serverName %}
 	{% set background = config('darkborder') %}
 	{% set tableClass = 'Table5' %}
@@ -50,8 +67,14 @@
 					<div class="TableShadowContainerRightTop"> <div class="TableShadowRightTop" style="background-image:url({{ template_path }}/images/global/content/table-shadow-rt.gif);"></div></div>
 					<div class="TableContentAndRightShadow" style="background-image:url({{ template_path }}/images/global/content/table-shadow-rm.gif);">
 						<div class="TableContentContainer">
-							<table class="TableContent" width="100%" style="border:1px solid #faf0d7;">
+							<table class="TableContent eclipse-registration-panel is-active" data-registration-panel="account" width="100%" style="border:1px solid #faf0d7;">
 								<tbody>
+								<tr class="eclipse-registration-panel-intro">
+									<td colspan="2">
+										<strong>Crie seus dados de acesso</strong>
+										<span>Use um email real e uma senha forte. Esses dados serao usados para recuperar sua conta e acessar o painel.</span>
+									</td>
+								</tr>
 
 								{{ hook('HOOK_ACCOUNT_CREATE_BEFORE_ACCOUNT') }}
 
@@ -70,6 +93,9 @@
 								</tr>
 								{% endif %}
 								<tr><td></td><td><span id="account_error" class="FormFieldError">{% if errors.account is defined %}{{ errors.account }}{% endif %}</span></td></tr>
+								{% if not config.account_login_by_email %}
+								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">Escolha um nome facil de lembrar e que voce ainda nao use em outros jogos.</span></td></tr>
+								{% endif %}
 								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_ACCOUNT') }}
 								<tr>
 									<td class="LabelV" style="width: 150px">
@@ -83,6 +109,7 @@
 								<tr>
 									<td></td><td><span id="email_error" class="FormFieldError">{% if errors.email is defined %}{{ errors.email }}{% endif %}</span></td>
 								</tr>
+								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">Confira bem o email antes de continuar. Ele pode ser necessario para confirmar ou recuperar sua conta.</span></td></tr>
 
 								{% if setting('core.mail_enabled') and setting('core.account_mail_verify') %}
 									<tr><td></td><td><span><strong>Use um email valido.<br/>Vamos enviar um link para confirmar seu cadastro.</strong></span></td></tr>
@@ -91,7 +118,9 @@
 								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_EMAIL') }}
 
 								{% if setting('core.account_country') %}
-									<input type="hidden" name="country" id="account_country" value="br">
+									<select name="country" id="account_country" class="eclipse-registration-country-select" aria-hidden="true" tabindex="-1">
+										<option value="br" selected>Brazil</option>
+									</select>
 								{% endif %}
 
 								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_COUNTRY') }}
@@ -106,6 +135,7 @@
 									</td>
 								</tr>
 								<tr><td></td><td><span id="password_error" class="FormFieldError">{% if errors.password is defined %}{{ errors.password }}{% endif %}</span></td></tr>
+								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">Use letras, numeros e simbolos. Evite repetir senha de outros servicos.</span></td></tr>
 
 								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_PASSWORD') }}
 
@@ -140,8 +170,14 @@
 					</div>
 					<div class="TableContentAndRightShadow" style="background-image:url({{ template_path }}/images/global/content/table-shadow-rm.gif);">
 						<div class="TableContentContainer">
-							<table class="TableContent" width="100%" style="border:1px solid #faf0d7;">
+							<table class="TableContent eclipse-registration-panel is-locked" data-registration-panel="character" width="100%" style="border:1px solid #faf0d7;">
 								<tbody>
+								<tr class="eclipse-registration-panel-intro">
+									<td colspan="2">
+										<strong>Monte seu primeiro personagem</strong>
+										<span>Essa etapa libera depois que os dados de acesso estiverem completos.</span>
+									</td>
+								</tr>
 
 								{{ hook('HOOK_ACCOUNT_CREATE_BEFORE_CHARACTER_NAME') }}
 
@@ -161,6 +197,7 @@
 										<span id="character_error" class="FormFieldError">{% if errors.name is defined %}{{ errors.name }}{% endif %}</span>
 									</td>
 								</tr>
+								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">O nome aparece publicamente no site e dentro do jogo.</span></td></tr>
 
 								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_CHARACTER_NAME') }}
 
@@ -287,8 +324,14 @@
 					</div>
 					<div class="TableContentAndRightShadow" style="background-image:url({{ template_path }}/images/global/content/table-shadow-rm.gif);">
 						<div class="TableContentContainer">
-							<table class="TableContent" width="100%" style="border:1px solid #faf0d7;">
+							<table class="TableContent eclipse-registration-panel is-locked" data-registration-panel="rules" width="100%" style="border:1px solid #faf0d7;">
 								<tbody>
+								<tr class="eclipse-registration-panel-intro">
+									<td colspan="2">
+										<strong>Finalize com as regras do servidor</strong>
+										<span>Essa etapa libera quando as informacoes anteriores estiverem preenchidas.</span>
+									</td>
+								</tr>
 								<tr>
 									<td colspan="2" ><b>Confirme a leitura das regras:</b></td>
 								</tr>
@@ -342,6 +385,124 @@
 </div>
 {{ hook('HOOK_ACCOUNT_CREATE_AFTER_FORM') }}
 <script type="text/javascript" src="{{ constant('BASE_URL') }}tools/check_name.js"></script>
+<script>
+	(function () {
+		var form = document.getElementById('createaccount');
+		if (!form) {
+			return;
+		}
+
+		var steps = Array.prototype.slice.call(form.querySelectorAll('[data-registration-step]'));
+		var panels = Array.prototype.slice.call(form.querySelectorAll('[data-registration-panel]'));
+		var activeStep = 'account';
+		var hasCharacterStep = !!form.querySelector('[data-registration-panel="character"]');
+
+		function byId(id) {
+			return document.getElementById(id);
+		}
+
+		function fieldFilled(id) {
+			var field = byId(id);
+			return !field || field.value.trim().length > 0;
+		}
+
+		function selected(name) {
+			return !!form.querySelector('input[name="' + name + '"]:checked');
+		}
+
+		function validEmail() {
+			var field = byId('email');
+			return !!field && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
+		}
+
+		function validPassword() {
+			var password = byId('password');
+			var confirm = byId('password_confirm');
+			return !!password && !!confirm && password.value.length >= 6 && password.value === confirm.value;
+		}
+
+		function accountReady() {
+			return fieldFilled('account_input') && validEmail() && validPassword();
+		}
+
+		function characterReady() {
+			if (!hasCharacterStep) {
+				return true;
+			}
+
+			var hasVocationChoices = !!form.querySelector('input[name="vocation"]');
+			var hasTownChoices = !!form.querySelector('input[name="town"]');
+
+			return fieldFilled('character_name') &&
+				selected('sex') &&
+				(!hasVocationChoices || selected('vocation')) &&
+				(!hasTownChoices || selected('town'));
+		}
+
+		function allowedSteps() {
+			var allowed = { account: true };
+			var accountIsReady = accountReady();
+			var characterIsReady = characterReady();
+
+			if (hasCharacterStep) {
+				allowed.character = accountIsReady;
+				allowed.rules = accountIsReady && characterIsReady;
+			}
+			else {
+				allowed.rules = accountIsReady;
+			}
+
+			return allowed;
+		}
+
+		function setActiveStep(stepName) {
+			activeStep = stepName;
+
+			steps.forEach(function (step) {
+				var isActive = step.getAttribute('data-registration-step') === activeStep;
+				step.classList.toggle('is-active', isActive);
+			});
+
+			panels.forEach(function (panel) {
+				var isActive = panel.getAttribute('data-registration-panel') === activeStep;
+				panel.classList.toggle('is-active', isActive);
+			});
+		}
+
+		function refresh() {
+			var allowed = allowedSteps();
+
+			steps.forEach(function (step) {
+				var stepName = step.getAttribute('data-registration-step');
+				var unlocked = !!allowed[stepName];
+				step.disabled = !unlocked;
+				step.classList.toggle('is-locked', !unlocked);
+				step.classList.toggle('is-complete', stepName === 'account' ? accountReady() : stepName === 'character' ? characterReady() : !!byId('accept_rules') && byId('accept_rules').checked);
+			});
+
+			panels.forEach(function (panel) {
+				var panelName = panel.getAttribute('data-registration-panel');
+				panel.classList.toggle('is-locked', !allowed[panelName]);
+			});
+
+			if (!allowed[activeStep]) {
+				setActiveStep('account');
+			}
+		}
+
+		steps.forEach(function (step) {
+			step.addEventListener('click', function () {
+				if (!step.disabled) {
+					setActiveStep(step.getAttribute('data-registration-step'));
+				}
+			});
+		});
+
+		form.addEventListener('input', refresh);
+		form.addEventListener('change', refresh);
+		refresh();
+	})();
+</script>
 <style>
 	#SuggestAccountNumber {
 		font-size: 7pt;
