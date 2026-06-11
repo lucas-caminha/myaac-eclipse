@@ -1,3 +1,17 @@
+{% set vocation_label = vocation|lower %}
+{% set vocation_banner = '' %}
+{% if 'knight' in vocation_label or 'cavaleiro' in vocation_label %}
+  {% set vocation_banner = 'knight' %}
+{% elseif 'paladin' in vocation_label or 'paladino' in vocation_label %}
+  {% set vocation_banner = 'paladin' %}
+{% elseif 'monk' in vocation_label or 'monge' in vocation_label %}
+  {% set vocation_banner = 'monk' %}
+{% elseif 'sorcerer' in vocation_label or 'feiticeiro' in vocation_label %}
+  {% set vocation_banner = 'sorcerer' %}
+{% elseif 'druid' in vocation_label or 'druida' in vocation_label %}
+  {% set vocation_banner = 'druid' %}
+{% endif %}
+
 <div class="eclipse-characters-page eclipse-characters-result eclipse-character-compact{% if account.isPremium() %} is-vip-account{% endif %}">
   {% if canEdit %}
     <div class="character-admin-action">
@@ -8,7 +22,7 @@
     </div>
   {% endif %}
 
-  <div class="character-profile-header">
+  <div class="character-profile-header{% if vocation_banner %} is-vocation-{{ vocation_banner }}{% endif %}">
     {% if account.isPremium() %}
       <div class="character-vip-ribbon">VIP</div>
     {% endif %}
@@ -22,10 +36,16 @@
     <div class="character-profile-main">
       <span class="character-profile-kicker">Personagem</span>
       <h2>{{ player.getName() }}</h2>
-      <div class="character-profile-meta">
-        <span class="character-stat-pill">Level <strong>{{ player.getLevel() }}</strong></span>
-        <span class="character-stat-pill">Vocação <strong>{{ vocation }}</strong></span>
-      </div>
+      {% if rankingBadges is not empty %}
+        <div class="character-ranking-badges" aria-label="Primeiro lugar nos rankings">
+          {% for badge in rankingBadges %}
+            <a class="character-ranking-badge is-{{ badge.slug }}" href="{{ getLink('highscores') }}/{{ badge.slug }}" title="Ver ranking de {{ badge.label }}">
+              <span class="character-ranking-icon"><img src="{{ badge.icon }}" alt=""></span>
+              <span>{{ badge.label }}</span>
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
 
     <div class="character-profile-status {% if player.isOnline() %}is-online{% else %}is-offline{% endif %}">
@@ -48,7 +68,7 @@
             <td>{{ sex }}</td>
           </tr>
           <tr>
-            <th>Vocation:</th>
+            <th>Vocação:</th>
             <td>{{ vocation }}</td>
           </tr>
           <tr>
@@ -87,6 +107,17 @@
         </table>
       </section>
     </div>
+
+    {% if equipment is not null %}
+      <section class="character-equipment-card">
+        <div class="character-card-title">Equipamentos</div>
+        <div class="character-equipment-layout" aria-label="Equipamentos de {{ player.getName() }}">
+          {% for slot in 1..10 %}
+            <div class="character-equipment-slot slot-{{ slot }}">{{ equipment[slot]|raw }}</div>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
 
     <div class="character-skills-card">
       <div class="character-card-title">Skills</div>
