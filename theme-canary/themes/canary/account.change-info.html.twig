@@ -1,0 +1,111 @@
+<div class="eclipse-change-info-page">
+	<div class="change-info-hero">
+		<div class="change-info-kicker">Dados cadastrais</div>
+		<h2>Atualizar Informações</h2>
+		<p>Essas informações só serão necessárias para contas que desejarem realizar doações futuramente.</p>
+	</div>
+
+	<form id="form" action="{{ getLink('account/change-info') }}" method="post">
+		{{ csrf() }}
+		<input type="hidden" name="changeinfosave" value="1">
+
+		<div class="change-info-grid">
+			<section class="change-info-card change-info-main-card">
+				<div class="change-info-card-title">Identificação</div>
+				<div class="change-info-card-body">
+					<div class="change-info-field">
+						<label for="info_rlname">Nome Completo <span>*</span></label>
+						<input id="info_rlname" name="info_rlname" value="{{ account_rlname }}" maxlength="100" required autocomplete="name">
+						<small>Informe nome e sobrenome como aparecem no documento.</small>
+					</div>
+
+					<div class="change-info-row">
+						<div class="change-info-field">
+							<label for="info_birth_date">Data de Nascimento <span>*</span></label>
+							<input type="date" id="info_birth_date" name="info_birth_date" value="{{ account_birth_date }}" required autocomplete="bday">
+						</div>
+
+						<div class="change-info-field">
+							<label for="info_cpf">CPF <span>*</span></label>
+							<input id="info_cpf" name="info_cpf" value="{{ account_cpf }}" maxlength="14" inputmode="numeric" required autocomplete="off" placeholder="000.000.000-00">
+							<small>Use apenas o CPF do titular da conta.</small>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="change-info-card">
+				<div class="change-info-card-title">Informações Públicas</div>
+				<div class="change-info-card-body">
+					<div class="change-info-field">
+						<label for="info_location">Localização</label>
+						<input id="info_location" name="info_location" value="{{ account_location }}" maxlength="50" autocomplete="address-level2">
+						<small>Opcional. Pode aparecer junto aos dados públicos da conta.</small>
+					</div>
+
+					{% if setting('core.account_country') %}
+					<div class="change-info-field">
+						<label for="account_country">País</label>
+						<select name="info_country" id="account_country">
+							{% for code, country in countries %}
+							<option value="{{ code }}"{% if account_country == code %} selected{% endif %}>{{ country }}</option>
+							{% endfor %}
+						</select>
+						<img src="" id="account_country_img" alt="">
+					</div>
+					<script>
+						function updateFlag()
+						{
+							var img = $('#account_country_img');
+							var country = $('#account_country :selected').val();
+							if(country.length) {
+								img.attr('src', 'images/flags/' + country + '.gif');
+								img.show();
+							}
+							else {
+								img.hide();
+							}
+						}
+
+						$(function() {
+							updateFlag();
+							$('#account_country').change(function() {
+								updateFlag();
+							});
+						});
+					</script>
+					{% endif %}
+				</div>
+			</section>
+		</div>
+
+		<div class="change-info-actions">
+			{% set button_name = 'Salvar Dados' %}
+			{{ include('buttons.submit.html.twig') }}
+		</div>
+	</form>
+
+	<form class="change-info-back-form" action="{{ getLink('account/manage') }}" method="post">
+		{{ csrf() }}
+		{% set button_name = 'Voltar' %}
+		{% set button_image = '_sbutton_back' %}
+		{{ include('buttons.base.html.twig') }}
+	</form>
+</div>
+
+<script>
+	(function () {
+		var cpf = document.getElementById('info_cpf');
+		if (!cpf) {
+			return;
+		}
+
+		cpf.addEventListener('input', function () {
+			var value = cpf.value.replace(/\D+/g, '').slice(0, 11);
+			value = value.replace(/(\d{3})(\d)/, '$1.$2');
+			value = value.replace(/(\d{3})(\d)/, '$1.$2');
+			value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+			cpf.value = value;
+		});
+	})();
+</script>

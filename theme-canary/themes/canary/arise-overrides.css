@@ -4424,6 +4424,499 @@ body {
   text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
 }
 
+/* Account management action buttons: replace the legacy blue/black sprites. */
+#ContentColumn .eclipse-account-manage-page .InnerTableButtonRow {
+  margin-top: 12px !important;
+  border-spacing: 10px 6px !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .InnerTableButtonRow td {
+  padding: 4px 7px !important;
+}
+
+#ContentColumn .eclipse-account-manage-page form {
+  margin: 0 !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .BigButton {
+  width: auto !important;
+  min-width: 136px !important;
+  height: 34px !important;
+  display: inline-flex !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  border: 1px solid #ffe5a2 !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #ffad33 0%, #d86a0a 54%, #a83b05 100%) !important;
+  background-image: linear-gradient(180deg, #ffad33 0%, #d86a0a 54%, #a83b05 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.38), inset 0 -1px 0 rgba(88,19,3,.35), 0 3px 9px rgba(0,0,0,.38) !important;
+  overflow: hidden !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .BigButton > div {
+  width: 100% !important;
+  min-height: 34px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .BigButtonOver {
+  display: none !important;
+  background-image: none !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .BigButton:hover {
+  border-color: #fff2bf !important;
+  background: linear-gradient(180deg, #ffc45a 0%, #e7770d 56%, #b44605 100%) !important;
+  background-image: linear-gradient(180deg, #ffc45a 0%, #e7770d 56%, #b44605 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.46), 0 4px 12px rgba(0,0,0,.46), 0 0 0 2px rgba(255,211,111,.18) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .BigButtonText,
+#ContentColumn .Content .eclipse-account-manage-page .BigButtonText,
+#ContentColumn .eclipse-account-manage-page input.BigButtonText,
+#ContentColumn .Content .eclipse-account-manage-page input.BigButtonText {
+  position: static !important;
+  width: 100% !important;
+  min-width: 136px !important;
+  height: 34px !important;
+  padding: 0 16px !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: #fff8dc !important;
+  -webkit-text-fill-color: #fff8dc !important;
+  font: 900 12px/34px Verdana, Arial, sans-serif !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 1px 1px #4c1200, 0 0 5px rgba(0,0,0,.35) !important;
+  cursor: pointer !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .TableContent td[align="right"] .BigButton,
+#ContentColumn .eclipse-account-manage-page .TableContent td[align="right"] .BigButtonText {
+  min-width: 118px !important;
+}
+
+#ContentColumn .eclipse-account-manage-page span[style*="font-weight:normal"] a {
+  display: inline-block !important;
+  min-width: 58px !important;
+  padding: 4px 8px !important;
+  border: 1px solid rgba(94, 23, 13, .42) !important;
+  border-radius: 3px !important;
+  background: linear-gradient(180deg, #f8dd9e 0%, #d6a661 100%) !important;
+  color: #4b1208 !important;
+  -webkit-text-fill-color: #4b1208 !important;
+  font: 900 11px/1.1 Verdana, Arial, sans-serif !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  text-shadow: 0 1px 0 rgba(255, 242, 197, .70) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page span[style*="font-weight:normal"] a:hover {
+  border-color: #7b2d10 !important;
+  background: linear-gradient(180deg, #ffe8b2 0%, #e0b56f 100%) !important;
+}
+
+/* Register account / Recovery Key screen. */
+#ContentColumn .eclipse-register-account-page,
+#ContentColumn .eclipse-register-account-page *:not(.BigButton):not(.BigButton *):not(.BigButtonText) {
+  color: #1f1008 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-register-account-page {
+  border: 2px solid #a86b23 !important;
+  border-radius: 5px !important;
+  overflow: hidden !important;
+  background: linear-gradient(180deg, #efd49e 0%, #d9b36d 58%, #c99a51 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,244,198,.48), 0 8px 22px rgba(0,0,0,.50) !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-hero {
+  padding: 18px 22px 20px !important;
+  background: linear-gradient(180deg, #234d63 0%, #0d2535 60%, #07121b 100%) !important;
+  border-bottom: 1px solid rgba(255, 214, 117, .35) !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-kicker {
+  margin-bottom: 6px !important;
+  color: #f5c56a !important;
+  -webkit-text-fill-color: #f5c56a !important;
+  font: 900 11px/1.2 Verdana, Arial, sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0 !important;
+}
+
+#ContentColumn .eclipse-register-account-page h2 {
+  margin: 0 0 8px !important;
+  color: #fff4ce !important;
+  -webkit-text-fill-color: #fff4ce !important;
+  font: 900 24px/1.15 Georgia, 'Times New Roman', serif !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-hero p {
+  max-width: 690px !important;
+  margin: 0 !important;
+  color: #f8e5b8 !important;
+  -webkit-text-fill-color: #f8e5b8 !important;
+  font: 800 12px/1.55 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.15fr) minmax(230px, .85fr) !important;
+  gap: 14px !important;
+  padding: 14px !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-card {
+  border: 1px solid rgba(137,83,33,.54) !important;
+  border-radius: 5px !important;
+  background: linear-gradient(180deg, #f2dca9 0%, #dfbd7b 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,246,204,.64), 0 4px 12px rgba(0,0,0,.22) !important;
+  overflow: hidden !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-card-title {
+  padding: 10px 13px !important;
+  background: linear-gradient(180deg, #4b1008 0%, #1a0503 100%) !important;
+  color: #fff8dc !important;
+  -webkit-text-fill-color: #fff8dc !important;
+  font: 900 14px/1.2 Georgia, 'Times New Roman', serif !important;
+  text-shadow: 0 1px 1px #000 !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-card-body {
+  padding: 16px !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-label {
+  display: block !important;
+  margin: 0 0 7px !important;
+  color: #3a0905 !important;
+  -webkit-text-fill-color: #3a0905 !important;
+  font: 900 13px/1.25 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-input {
+  width: min(100%, 390px) !important;
+  height: 36px !important;
+  padding: 0 11px !important;
+  box-sizing: border-box !important;
+  border: 1px solid #8f5a24 !important;
+  border-radius: 3px !important;
+  background: #fff3d3 !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  font: 800 13px Verdana, Arial, sans-serif !important;
+  box-shadow: inset 0 1px 4px rgba(64,32,12,.28), 0 1px 0 rgba(255,255,255,.55) !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-input:focus {
+  outline: none !important;
+  border-color: #5e170d !important;
+  box-shadow: 0 0 0 2px rgba(94,23,13,.22), inset 0 1px 4px rgba(64,32,12,.22) !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-field-note {
+  margin: 8px 0 0 !important;
+  color: #513019 !important;
+  -webkit-text-fill-color: #513019 !important;
+  font: 700 11px/1.45 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-actions {
+  display: flex !important;
+  margin-top: 16px !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-back-form {
+  margin-top: 10px !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-checklist {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-checklist li {
+  position: relative !important;
+  margin: 0 0 10px !important;
+  padding-left: 22px !important;
+  color: #2a1208 !important;
+  -webkit-text-fill-color: #2a1208 !important;
+  font: 800 12px/1.45 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-register-account-page .register-account-checklist li::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 5px !important;
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  background: #5e170d !important;
+  box-shadow: 0 0 0 2px rgba(255, 232, 167, .62) !important;
+}
+
+#ContentColumn .eclipse-register-account-page .BigButton {
+  width: auto !important;
+  min-width: 136px !important;
+  height: 34px !important;
+  display: inline-flex !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  border: 1px solid #ffe5a2 !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #ffad33 0%, #d86a0a 54%, #a83b05 100%) !important;
+  background-image: linear-gradient(180deg, #ffad33 0%, #d86a0a 54%, #a83b05 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.38), inset 0 -1px 0 rgba(88,19,3,.35), 0 3px 9px rgba(0,0,0,.38) !important;
+  overflow: hidden !important;
+}
+
+#ContentColumn .eclipse-register-account-page .BigButton > div {
+  width: 100% !important;
+  min-height: 34px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#ContentColumn .eclipse-register-account-page .BigButtonOver {
+  display: none !important;
+  background-image: none !important;
+}
+
+#ContentColumn .eclipse-register-account-page .BigButtonText,
+#ContentColumn .Content .eclipse-register-account-page .BigButtonText,
+#ContentColumn .eclipse-register-account-page input.BigButtonText,
+#ContentColumn .Content .eclipse-register-account-page input.BigButtonText {
+  position: static !important;
+  width: 100% !important;
+  min-width: 136px !important;
+  height: 34px !important;
+  padding: 0 16px !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: #fff8dc !important;
+  -webkit-text-fill-color: #fff8dc !important;
+  font: 900 12px/34px Verdana, Arial, sans-serif !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 1px 1px #4c1200, 0 0 5px rgba(0,0,0,.35) !important;
+  cursor: pointer !important;
+}
+
+@media (max-width: 760px) {
+  #ContentColumn .eclipse-register-account-page .register-account-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Account change-info: donation profile fields. */
+#ContentColumn .eclipse-change-info-page,
+#ContentColumn .eclipse-change-info-page *:not(.BigButton):not(.BigButton *):not(.BigButtonText) {
+  color: #1f1008 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-change-info-page {
+  border: 2px solid #a86b23 !important;
+  border-radius: 5px !important;
+  overflow: hidden !important;
+  background: linear-gradient(180deg, #efd49e 0%, #d9b36d 58%, #c99a51 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,244,198,.48), 0 8px 22px rgba(0,0,0,.50) !important;
+}
+
+#ContentColumn .eclipse-change-info-page .change-info-hero {
+  padding: 18px 22px 20px !important;
+  background: linear-gradient(180deg, #234d63 0%, #0d2535 60%, #07121b 100%) !important;
+  border-bottom: 1px solid rgba(255, 214, 117, .35) !important;
+}
+
+#ContentColumn .eclipse-change-info-page .change-info-kicker {
+  margin-bottom: 6px !important;
+  color: #f5c56a !important;
+  -webkit-text-fill-color: #f5c56a !important;
+  font: 900 11px/1.2 Verdana, Arial, sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0 !important;
+}
+
+#ContentColumn .eclipse-change-info-page h2 {
+  margin: 0 0 8px !important;
+  color: #fff4ce !important;
+  -webkit-text-fill-color: #fff4ce !important;
+  font: 900 24px/1.15 Georgia, 'Times New Roman', serif !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+}
+
+#ContentColumn .eclipse-change-info-page .change-info-hero p {
+  max-width: 720px !important;
+  margin: 0 !important;
+  color: #f8e5b8 !important;
+  -webkit-text-fill-color: #f8e5b8 !important;
+  font: 800 12px/1.55 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-change-info-page .change-info-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.15fr) minmax(240px, .85fr) !important;
+  gap: 14px !important;
+  padding: 14px !important;
+}
+
+#ContentColumn .eclipse-change-info-page .change-info-card {
+  border: 1px solid rgba(137,83,33,.54) !important;
+  border-radius: 5px !important;
+  background: linear-gradient(180deg, #f2dca9 0%, #dfbd7b 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,246,204,.64), 0 4px 12px rgba(0,0,0,.22) !important;
+  overflow: hidden !important;
+}
+
+#ContentColumn .eclipse-change-info-page .change-info-card-title {
+  padding: 10px 13px !important;
+  background: linear-gradient(180deg, #4b1008 0%, #1a0503 100%) !important;
+  color: #fff8dc !important;
+  -webkit-text-fill-color: #fff8dc !important;
+  font: 900 14px/1.2 Georgia, 'Times New Roman', serif !important;
+  text-shadow: 0 1px 1px #000 !important;
+}
+
+#ContentColumn .eclipse-change-info-page .change-info-card-body {
+  padding: 16px !important;
+}
+
+#ContentColumn .eclipse-change-info-page .change-info-row {
+  display: grid !important;
+  grid-template-columns: minmax(150px, .75fr) minmax(190px, 1fr) !important;
+  gap: 12px !important;
+}
+
+#ContentColumn .eclipse-change-info-page .change-info-field {
+  margin-bottom: 13px !important;
+}
+
+#ContentColumn .eclipse-change-info-page label {
+  display: block !important;
+  margin: 0 0 7px !important;
+  color: #3a0905 !important;
+  -webkit-text-fill-color: #3a0905 !important;
+  font: 900 13px/1.25 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-change-info-page label span {
+  color: #8b1208 !important;
+  -webkit-text-fill-color: #8b1208 !important;
+}
+
+#ContentColumn .eclipse-change-info-page input,
+#ContentColumn .eclipse-change-info-page select {
+  width: 100% !important;
+  height: 36px !important;
+  padding: 0 11px !important;
+  box-sizing: border-box !important;
+  border: 1px solid #8f5a24 !important;
+  border-radius: 3px !important;
+  background: #fff3d3 !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  font: 800 13px Verdana, Arial, sans-serif !important;
+  box-shadow: inset 0 1px 4px rgba(64,32,12,.28), 0 1px 0 rgba(255,255,255,.55) !important;
+}
+
+#ContentColumn .eclipse-change-info-page input:focus,
+#ContentColumn .eclipse-change-info-page select:focus {
+  outline: none !important;
+  border-color: #5e170d !important;
+  box-shadow: 0 0 0 2px rgba(94,23,13,.22), inset 0 1px 4px rgba(64,32,12,.22) !important;
+}
+
+#ContentColumn .eclipse-change-info-page small {
+  display: block !important;
+  margin-top: 6px !important;
+  color: #513019 !important;
+  -webkit-text-fill-color: #513019 !important;
+  font: 700 11px/1.45 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-change-info-page #account_country_img {
+  display: inline-block !important;
+  margin-top: 8px !important;
+}
+
+#ContentColumn .eclipse-change-info-page .change-info-actions,
+#ContentColumn .eclipse-change-info-page .change-info-back-form {
+  display: inline-flex !important;
+  margin: 0 0 16px 14px !important;
+}
+
+#ContentColumn .eclipse-change-info-page .change-info-back-form {
+  margin-left: 8px !important;
+}
+
+#ContentColumn .eclipse-change-info-page .BigButton {
+  width: auto !important;
+  min-width: 136px !important;
+  height: 34px !important;
+  display: inline-flex !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  border: 1px solid #ffe5a2 !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #ffad33 0%, #d86a0a 54%, #a83b05 100%) !important;
+  background-image: linear-gradient(180deg, #ffad33 0%, #d86a0a 54%, #a83b05 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.38), inset 0 -1px 0 rgba(88,19,3,.35), 0 3px 9px rgba(0,0,0,.38) !important;
+  overflow: hidden !important;
+}
+
+#ContentColumn .eclipse-change-info-page .BigButton > div {
+  width: 100% !important;
+  min-height: 34px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#ContentColumn .eclipse-change-info-page .BigButtonOver {
+  display: none !important;
+  background-image: none !important;
+}
+
+#ContentColumn .eclipse-change-info-page .BigButtonText,
+#ContentColumn .Content .eclipse-change-info-page .BigButtonText,
+#ContentColumn .eclipse-change-info-page input.BigButtonText,
+#ContentColumn .Content .eclipse-change-info-page input.BigButtonText {
+  position: static !important;
+  width: 100% !important;
+  min-width: 136px !important;
+  height: 34px !important;
+  padding: 0 16px !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: #fff8dc !important;
+  -webkit-text-fill-color: #fff8dc !important;
+  font: 900 12px/34px Verdana, Arial, sans-serif !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 1px 1px #4c1200, 0 0 5px rgba(0,0,0,.35) !important;
+  cursor: pointer !important;
+}
+
+@media (max-width: 760px) {
+  #ContentColumn .eclipse-change-info-page .change-info-grid,
+  #ContentColumn .eclipse-change-info-page .change-info-row {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* Final login contrast pass, after generic content overrides. */
 #ContentColumn .eclipse-login-page .eclipse-login-card-account .LabelV,
 #ContentColumn .eclipse-login-page .eclipse-login-card-account .LabelV span,

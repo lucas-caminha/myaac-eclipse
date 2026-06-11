@@ -45,6 +45,22 @@ sudo systemctl status php8.2-fpm
 sudo systemctl status mariadb
 ```
 
+### Mercado Pago Pix
+
+A pagina `/points` ja esta preparada para gerar Pix pelo Mercado Pago quando as variaveis estiverem configuradas no ambiente do PHP-FPM/Apache:
+
+```bash
+MERCADOPAGO_ACCESS_TOKEN="APP_USR-..."
+MERCADOPAGO_WEBHOOK_URL="https://seu-dominio.com/plugins/theme-canary/webhooks/mercadopago.php"
+```
+
+Notas:
+- Sem `MERCADOPAGO_ACCESS_TOKEN`, o fluxo registra a intencao de doacao, mas nao chama gateway externo.
+- `MERCADOPAGO_WEBHOOK_URL` e opcional; se nao for informado, o site usa `getLink('mercadopago-webhook')`.
+- Para producao, prefira configurar `MERCADOPAGO_WEBHOOK_URL` apontando para o endpoint cru `/plugins/theme-canary/webhooks/mercadopago.php`.
+- O webhook consulta o pagamento no Mercado Pago e so credita coins quando o status retornado for `approved`.
+- Depois de alterar variaveis de ambiente, reinicie o servico PHP/Apache usado pelo site.
+
 ## Deploy de Atualizacoes
 
 ### Atualizar Tema
@@ -58,8 +74,20 @@ git pull origin main
 # Sincronizar arquivos do tema
 sudo rsync -av theme-canary/themes/canary/ /var/www/html/plugins/theme-canary/themes/canary/
 
+# Sincronizar paginas publicas do plugin, quando existirem
+sudo rsync -av theme-canary/pages/ /var/www/html/plugins/theme-canary/pages/
+
+# Sincronizar webhooks publicos do plugin, quando existirem
+sudo rsync -av theme-canary/webhooks/ /var/www/html/plugins/theme-canary/webhooks/
+
+# Sincronizar overrides de paginas do MyAAC, quando existirem
+sudo rsync -av system/pages/account/change-info.php /var/www/html/system/pages/account/change-info.php
+
 # Ajustar permissoes
 sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/themes/canary
+sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/pages
+sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/webhooks
+sudo chown www-data:www-data /var/www/html/system/pages/account/change-info.php
 
 # Limpar cache
 sudo find /var/www/html/system/cache -type f -delete
@@ -85,7 +113,11 @@ git pull origin main
 
 echo "Sincronizando tema..."
 sudo rsync -av theme-canary/themes/canary/ /var/www/html/plugins/theme-canary/themes/canary/
+sudo rsync -av theme-canary/pages/ /var/www/html/plugins/theme-canary/pages/
+sudo rsync -av theme-canary/webhooks/ /var/www/html/plugins/theme-canary/webhooks/
 sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/themes/canary
+sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/pages
+sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/webhooks
 
 echo "Limpando cache..."
 sudo find /var/www/html/system/cache -type f -delete

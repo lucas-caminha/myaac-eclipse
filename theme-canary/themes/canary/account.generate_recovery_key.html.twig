@@ -1,0 +1,46 @@
+<div class="eclipse-register-account-page">
+	<div class="register-account-hero">
+		<div class="register-account-kicker">Seguranca da conta</div>
+		<h2>Gerar Recovery Key</h2>
+		<p>Confirme sua senha para registrar a conta e receber uma chave de recuperacao. Guarde essa chave fora do computador.</p>
+	</div>
+
+	<div class="register-account-grid">
+		<section class="register-account-card register-account-form-card">
+			<div class="register-account-card-title">Confirmacao</div>
+			<div class="register-account-card-body">
+				<form id="form" action="{{ getLink('account/register') }}" method="post">
+					{{ csrf() }}
+					<input type="hidden" name="registeraccountsave" value="1"/>
+
+					<label class="register-account-label" for="reg_password">Senha da conta</label>
+					<input class="register-account-input" type="password" id="reg_password" name="reg_password" maxlength="29" autofocus autocomplete="current-password"/>
+					<p class="register-account-field-note">Digite a senha atual da sua conta para gerar a Recovery Key.</p>
+
+					<div class="register-account-actions">
+						{% set button_name = 'Gerar Key' %}
+						{{ include('buttons.submit.html.twig') }}
+					</div>
+				</form>
+
+				<form class="register-account-back-form" action="{{ getLink('account/manage') }}" method="post">
+					{{ csrf() }}
+					{% set button_name = 'Voltar' %}
+					{% set button_image = '_sbutton_back' %}
+					{{ include('buttons.base.html.twig') }}
+				</form>
+			</div>
+		</section>
+
+		<aside class="register-account-card register-account-info-card">
+			<div class="register-account-card-title">Antes de continuar</div>
+			<div class="register-account-card-body">
+				<ul class="register-account-checklist">
+					<li>Ela permite recuperar sua conta se voce perder acesso ao email.</li>
+					<li>Nunca envie sua Recovery Key para jogadores, suporte falso ou terceiros.</li>
+					<li>Anote exatamente como aparecer na tela de sucesso.</li>
+				</ul>
+			</div>
+		</aside>
+	</div>
+</div>

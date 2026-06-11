@@ -11,6 +11,9 @@ Este guia documenta os scripts SQL incluidos no projeto e como gerenciar migraco
 | `sql/003-add-vip-loyalty-menu.sql` | Adiciona VIP & Loyalty ao menu Biblioteca |
 | `sql/004-update-downloads-launcher.sql` | Atualiza Downloads com links do launcher |
 | `sql/005-polish-downloads-page.sql` | Melhora visual e instrucoes da pagina Downloads |
+| `sql/006-update-downloads-client-15-11.sql` | Atualiza Downloads para o client 15.11 |
+| `sql/007-add-account-donation-profile.sql` | Adiciona campos de perfil usados em doacoes futuras |
+| `sql/008-add-donation-intents.sql` | Adiciona tabela de intencoes de doacao para futuro Pix |
 
 ## Aplicando Migracoes
 
@@ -133,6 +136,54 @@ WHERE name = 'downloads';
 - Destaca o launcher como download principal
 - Mostra as versoes atuais do client e launcher
 - Adiciona uma nota sobre o alerta do Windows/SmartScreen
+
+### 007-add-account-donation-profile.sql
+
+Adiciona campos cadastrais na tabela `accounts` para validacao de doacoes futuras:
+
+```sql
+ALTER TABLE accounts
+  ADD COLUMN IF NOT EXISTS birth_date DATE NULL AFTER rlname,
+  ADD COLUMN IF NOT EXISTS cpf VARCHAR(14) NOT NULL DEFAULT '' AFTER birth_date;
+```
+
+**O que faz:**
+- Mantem o nome completo no campo existente `accounts.rlname`
+- Adiciona `birth_date` para data de nascimento
+- Adiciona `cpf` para CPF normalizado
+- Depende do override `system/pages/account/change-info.php` para salvar os novos campos
+
+### 008-add-donation-intents.sql
+
+Cria a tabela `eclipse_donation_intents` para registrar intencoes de doacao antes da integracao com Pix:
+
+```sql
+CREATE TABLE IF NOT EXISTS eclipse_donation_intents (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  account_id INT(11) UNSIGNED NOT NULL,
+  package_key VARCHAR(50) NOT NULL,
+  amount_brl_cents INT UNSIGNED NOT NULL,
+  coins INT UNSIGNED NOT NULL,
+  status VARCHAR(40) NOT NULL DEFAULT 'pending_gateway',
+  gateway VARCHAR(40) DEFAULT NULL,
+  gateway_reference VARCHAR(191) DEFAULT NULL,
+  pix_qr_code TEXT DEFAULT NULL,
+  pix_copy_paste TEXT DEFAULT NULL,
+  payer_name VARCHAR(255) DEFAULT NULL,
+  payer_cpf VARCHAR(14) DEFAULT NULL,
+  notes VARCHAR(500) DEFAULT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT NULL,
+  confirmed_at DATETIME DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+```
+
+**O que faz:**
+- Registra conta, pacote, valor em centavos, coins e status da intencao
+- Reserva campos para QR Code Pix, codigo copia e cola e referencia do gateway
+- Mantem snapshot de nome e CPF para conferencia futura
+- Nao credita coins automaticamente enquanto a integracao de pagamento estiver pendente
 
 ## Criando Novas Migracoes
 
