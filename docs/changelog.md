@@ -10,6 +10,7 @@ O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0
 
 ### Adicionado
 - Documentacao completa do projeto
+- Override de `/highscores` com suporte a categorias extras dinamicas quando as colunas existirem no banco, incluindo Charm Points, Loyalty Points, Achievement Points, Bosstiary Points, Task Points e Prey Wildcards
 
 ---
 
@@ -78,10 +79,3 @@ Ao fazer alteracoes no projeto, adicione uma entrada na secao `[Unreleased]` seg
 ```
 
 Quando uma nova versao for lancada, mova os itens de `[Unreleased]` para uma nova secao com a versao e data.
-
----
-
-## Links
-
-- [Documentacao](./README.md)
-- [Repositorio GitHub](https://github.com/lucas-caminha/myaac-eclipse)
