@@ -41,7 +41,7 @@ foreach ($configVocations as $id => $name) {
 
 $customRankingCandidates = [
 	'charm-points' => [
-		'label' => 'Charm Points',
+		'label' => 'Bestiary (Charm Points)',
 		'table' => 'players',
 		'columns' => ['charm_points', 'charm_points_total', 'bestiary_charm_points'],
 	],
@@ -59,16 +59,6 @@ $customRankingCandidates = [
 		'label' => 'Bosstiary Points',
 		'table' => 'players',
 		'columns' => ['bosstiary_points', 'boss_points'],
-	],
-	'task-points' => [
-		'label' => 'Task Points',
-		'table' => 'players',
-		'columns' => ['task_points', 'tasks_points'],
-	],
-	'prey-wildcards' => [
-		'label' => 'Prey Wildcards',
-		'table' => 'players',
-		'columns' => ['prey_wildcards', 'prey_wildcard'],
 	],
 ];
 
@@ -235,17 +225,17 @@ if (empty($highscores)) {
 			->addSelect($customRanking['table'] . '.' . $customRanking['column'] . ' as value')
 			->orderByDesc('players.experience');
 	} else if ($skill >= POT::SKILL_FIRST && $skill <= POT::SKILL__LAST) {
-		if ($db->hasColumn('players', 'skill_fist')) {
-			$skill_ids = [
-				POT::SKILL_FIST => 'skill_fist',
-				POT::SKILL_CLUB => 'skill_club',
-				POT::SKILL_SWORD => 'skill_sword',
-				POT::SKILL_AXE => 'skill_axe',
-				POT::SKILL_DIST => 'skill_dist',
-				POT::SKILL_SHIELD => 'skill_shielding',
-				POT::SKILL_FISH => 'skill_fishing',
-			];
+		$skill_ids = [
+			POT::SKILL_FIST => 'skill_fist',
+			POT::SKILL_CLUB => 'skill_club',
+			POT::SKILL_SWORD => 'skill_sword',
+			POT::SKILL_AXE => 'skill_axe',
+			POT::SKILL_DIST => 'skill_dist',
+			POT::SKILL_SHIELD => 'skill_shielding',
+			POT::SKILL_FISH => 'skill_fishing',
+		];
 
+		if (isset($skill_ids[$skill]) && $db->hasColumn('players', $skill_ids[$skill])) {
 			$query
 				->addSelect($skill_ids[$skill] . ' as value')
 				->orderByDesc($skill_ids[$skill] . '_tries');
