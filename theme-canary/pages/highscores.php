@@ -235,15 +235,18 @@ if (empty($highscores)) {
 			POT::SKILL_FISH => 'skill_fishing',
 		];
 
-		if (isset($skill_ids[$skill]) && $db->hasColumn('players', $skill_ids[$skill])) {
+		$skillColumn = $skill_ids[$skill] ?? null;
+
+		if ($skillColumn !== null && $db->hasColumn('players', $skillColumn)) {
 			$query
-				->addSelect($skill_ids[$skill] . ' as value')
-				->orderByDesc($skill_ids[$skill] . '_tries');
+				->addSelect($skillColumn . ' as value')
+				->orderByDesc($skillColumn . '_tries');
 		} else {
 			$query
-				->join('player_skills', 'player_skills.player_id', '=', 'players.id')
-				->where('skillid', $skill)
-				->addSelect('player_skills.value as value');
+				->addSelect('players.level as value', 'players.experience')
+				->orderByDesc('players.experience');
+			$skill = POT::SKILL__LEVEL;
+			$list = 'experience';
 		}
 	} else if ($skill == SKILL_FRAGS) {
 		if ($db->hasTable('player_killers')) {
