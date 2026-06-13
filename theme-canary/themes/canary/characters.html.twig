@@ -111,30 +111,11 @@
     {% if equipment is not null %}
       <section class="character-equipment-card">
         <div class="character-card-title">Equipamentos</div>
-        <table class="character-equipment-layout character-equipment-classic" aria-label="Equipamentos de {{ player.getName() }}">
-          <tbody>
-          <tr>
-            <td class="character-equipment-cell is-empty"></td>
-            <td class="character-equipment-slot slot-head">{{ equipment[1]|raw }}</td>
-            <td class="character-equipment-cell is-empty"></td>
-          </tr>
-          <tr>
-            <td class="character-equipment-slot slot-necklace">{{ equipment[2]|raw }}</td>
-            <td class="character-equipment-slot slot-armor">{{ equipment[4]|raw }}</td>
-            <td class="character-equipment-slot slot-backpack">{{ equipment[3]|raw }}</td>
-          </tr>
-          <tr>
-            <td class="character-equipment-slot slot-left-hand">{{ equipment[6]|raw }}</td>
-            <td class="character-equipment-slot slot-legs">{{ equipment[7]|raw }}</td>
-            <td class="character-equipment-slot slot-right-hand">{{ equipment[5]|raw }}</td>
-          </tr>
-          <tr>
-            <td class="character-equipment-slot slot-ring">{{ equipment[9]|raw }}</td>
-            <td class="character-equipment-slot slot-feet">{{ equipment[8]|raw }}</td>
-            <td class="character-equipment-slot slot-ammo">{{ equipment[10]|raw }}</td>
-          </tr>
-          </tbody>
-        </table>
+        <div class="character-equipment-layout" aria-label="Equipamentos de {{ player.getName() }}">
+          {% for slot in 1..10 %}
+            <div class="character-equipment-slot slot-{{ slot }}">{{ equipment[slot]|raw }}</div>
+          {% endfor %}
+        </div>
       </section>
     {% endif %}
 
