@@ -1585,6 +1585,21 @@ body {
 #ContentColumn .eclipse-plugin-tab-panel.is-active { display:block; }
 #ContentColumn .eclipse-plugin-filter-links { display:flex; gap:5px; }
 #ContentColumn .eclipse-plugin-filter-links a { padding:7px 10px; border:1px solid #91611f; background:#fff0c4; color:#3a210f!important; font-weight:800; text-decoration:none!important; }
+#ContentColumn .eclipse-bestiary-category-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; margin-bottom:13px; }
+#ContentColumn .eclipse-bestiary-category { display:grid; grid-template-rows:auto 66px auto; min-height:116px; padding:8px; border:1px solid #a66c25; border-radius:3px; background:#dfbd76; color:#2b180d!important; text-align:center; text-decoration:none!important; box-shadow:inset 0 0 0 1px rgba(255,244,204,.45),0 2px 4px rgba(61,31,5,.2); }
+#ContentColumn .eclipse-bestiary-category:hover { background:#efd797; transform:translateY(-1px); }
+#ContentColumn .eclipse-bestiary-category.is-active { border-color:#70200e; background:#f2d997; box-shadow:inset 0 0 0 2px #a83a1a,0 3px 7px rgba(61,22,4,.32); }
+#ContentColumn .eclipse-bestiary-category strong { overflow:hidden; color:#321b0e!important; font:700 13px Georgia,serif; text-overflow:ellipsis; white-space:nowrap; }
+#ContentColumn .eclipse-bestiary-category-image { display:flex; align-items:center; justify-content:center; margin:5px auto; width:66px; height:62px; border:1px solid #9b6a2c; background:#cda65d; }
+#ContentColumn .eclipse-bestiary-category-image img { max-width:60px; max-height:58px; image-rendering:auto; }
+#ContentColumn .eclipse-bestiary-category small { color:#6f4822!important; font-size:9px; font-weight:800; }
+#ContentColumn .eclipse-bestiary-results-header { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:10px; padding:11px 13px; border:1px solid #a66c25; background:#ead08e; color:#2b180d; }
+#ContentColumn .eclipse-bestiary-results-header span { color:#7a4e22!important; font-size:9px; font-weight:800; text-transform:uppercase; }
+#ContentColumn .eclipse-bestiary-results-header h3 { margin:2px 0; color:#30190c!important; font:700 18px Georgia,serif; }
+#ContentColumn .eclipse-bestiary-results-header p { margin:0; color:#60401f!important; font-size:10px; }
+#ContentColumn .eclipse-bestiary-actions { display:flex; align-items:center; gap:8px; }
+#ContentColumn .eclipse-bestiary-actions form { margin:0; }
+#ContentColumn .eclipse-monster-search-empty[hidden] { display:none!important; }
 #ContentColumn .eclipse-monster-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
 #ContentColumn .eclipse-monster-card { display:grid; grid-template-columns:70px 1fr; gap:9px; min-height:118px; padding:10px; border:1px solid #ae7324; border-radius:5px; background:#efd493; color:#27150b!important; text-decoration:none!important; box-shadow:0 2px 5px rgba(59,32,5,.2); }
 #ContentColumn .eclipse-monster-card.is-boss { border-color:#d29022; box-shadow:inset 0 0 0 2px #f4ce66,0 2px 6px rgba(71,34,2,.3); }
@@ -1610,9 +1625,10 @@ body {
 #ContentColumn .eclipse-detail-list span,#ContentColumn .eclipse-element-grid span,#ContentColumn .eclipse-plugin-tags span { padding:8px 10px; border:1px solid #bd914b; background:#f8e5b4; color:#301b0e; }
 #ContentColumn .eclipse-element-grid span strong { display:block; margin-bottom:3px; }
 #ContentColumn .eclipse-loot-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:7px; }
-#ContentColumn .eclipse-loot-grid div { display:grid; grid-template-columns:36px 1fr; align-items:center; min-height:52px; padding:7px; border:1px solid #bd914b; background:#f8e5b4; }
-#ContentColumn .eclipse-loot-grid img { grid-row:1/3; width:32px; height:32px; }
-#ContentColumn .eclipse-loot-grid span { color:#785129; font-size:10px; }
+#ContentColumn .eclipse-loot-grid div { display:grid; grid-template-columns:40px minmax(0,1fr); grid-template-rows:auto auto; align-content:center; align-items:center; column-gap:7px; min-height:58px; padding:7px; border:1px solid #bd914b; background:#f8e5b4; }
+#ContentColumn .eclipse-loot-grid img { grid-column:1; grid-row:1/3; justify-self:center; width:32px; height:32px; }
+#ContentColumn .eclipse-loot-grid strong { grid-column:2; grid-row:1; min-width:0; line-height:1.2; overflow-wrap:anywhere; }
+#ContentColumn .eclipse-loot-grid span { grid-column:2; grid-row:2; align-self:start; color:#785129; font-size:10px; font-weight:800; line-height:1.2; }
 #ContentColumn .eclipse-monster-voice { color:#7c220d; font-weight:800; }
 #ContentColumn .eclipse-plugin-notice,#ContentColumn .eclipse-plugin-note { padding:12px; border:1px solid #b87b26; background:#ead08e; color:#321d0f; }
 #ContentColumn .eclipse-market-sell-form { display:grid; grid-template-columns:2fr 1fr auto; gap:10px; align-items:end; }
@@ -1637,8 +1653,9 @@ body {
 #ContentColumn .eclipse-powerful-guilds-list strong,#ContentColumn .eclipse-powerful-guilds-list small { display:block; overflow:hidden; text-overflow:ellipsis; }
 #ContentColumn .eclipse-powerful-guilds-list small { margin-top:3px; color:#725027; font-size:9px; }
 #ContentColumn .eclipse-guild-position { display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; background:#8d2a12; color:#fff; font-weight:800; }
-@media(max-width:760px){#ContentColumn .eclipse-monster-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#ContentColumn .eclipse-loot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#ContentColumn .eclipse-powerful-guilds-list{grid-template-columns:repeat(2,1fr)}#ContentColumn .eclipse-powerful-guilds-list a{border-bottom:1px solid #c99b51}}
-@media(max-width:520px){#ContentColumn .eclipse-category-grid,#ContentColumn .eclipse-monster-grid,#ContentColumn .eclipse-market-grid{grid-template-columns:1fr}#ContentColumn .eclipse-stat-grid{grid-template-columns:repeat(2,1fr)}#ContentColumn .eclipse-market-sell-form{grid-template-columns:1fr}#ContentColumn .eclipse-plugin-toolbar form{align-items:stretch;flex-direction:column;width:100%}#ContentColumn .eclipse-plugin-tab-list{display:grid;grid-template-columns:1fr}#ContentColumn .eclipse-monster-detail-hero{flex-direction:column;align-items:flex-start}}
+@media(max-width:900px){#ContentColumn .eclipse-bestiary-category-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:760px){#ContentColumn .eclipse-bestiary-category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#ContentColumn .eclipse-monster-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#ContentColumn .eclipse-loot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#ContentColumn .eclipse-powerful-guilds-list{grid-template-columns:repeat(2,1fr)}#ContentColumn .eclipse-powerful-guilds-list a{border-bottom:1px solid #c99b51}#ContentColumn .eclipse-bestiary-results-header{align-items:stretch;flex-direction:column}#ContentColumn .eclipse-bestiary-actions{align-items:stretch}}
+@media(max-width:520px){#ContentColumn .eclipse-category-grid,#ContentColumn .eclipse-monster-grid,#ContentColumn .eclipse-market-grid{grid-template-columns:1fr}#ContentColumn .eclipse-bestiary-category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#ContentColumn .eclipse-stat-grid{grid-template-columns:repeat(2,1fr)}#ContentColumn .eclipse-market-sell-form{grid-template-columns:1fr}#ContentColumn .eclipse-plugin-toolbar form{align-items:stretch;flex-direction:column;width:100%}#ContentColumn .eclipse-plugin-tab-list{display:grid;grid-template-columns:1fr}#ContentColumn .eclipse-monster-detail-hero{flex-direction:column;align-items:flex-start}#ContentColumn .eclipse-bestiary-actions{flex-direction:column}#ContentColumn .eclipse-bestiary-actions .eclipse-plugin-search,#ContentColumn .eclipse-bestiary-actions .eclipse-plugin-button{width:100%}}
 
 #Themeboxes .rank_player.is-vocation-knight {
   background-image: linear-gradient(90deg, rgba(12, 10, 8, 0.84), rgba(12, 10, 8, 0.54)), url("images/vocations/knightbanner.png") !important;
@@ -3089,19 +3106,23 @@ body {
 }
 
 #ContentColumn #News .BoxContent .serverinfo-list {
+  display: grid;
+  gap: 7px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0;
   padding: 12px 14px 14px;
 }
 
 #ContentColumn #News .BoxContent .serverinfo-list div {
-  align-items: center;
+  align-content: center;
   background: #f2d795 !important;
   border: 1px solid rgba(91, 47, 8, .22);
   display: grid;
-  gap: 4px;
+  gap: 2px;
   grid-template-columns: minmax(0, 1fr);
-  margin-bottom: 6px;
-  padding: 8px 10px;
+  margin: 0;
+  min-height: 48px;
+  padding: 6px 9px;
 }
 
 #ContentColumn #News .BoxContent .serverinfo-list div:nth-child(even) {
@@ -3142,6 +3163,48 @@ body {
   margin-top: 0;
 }
 
+#ContentColumn #News .BoxContent .serverinfo-rate-chart {
+  display: grid;
+  gap: 4px;
+}
+
+#ContentColumn #News .BoxContent .serverinfo-rate-row {
+  align-items: center;
+  display: grid;
+  gap: 9px;
+  grid-template-columns: 94px minmax(0, 1fr) 48px;
+  min-height: 24px;
+}
+
+#ContentColumn #News .BoxContent .serverinfo-rate-range,
+#ContentColumn #News .BoxContent .serverinfo-rate-row strong {
+  color: #2b180d !important;
+  -webkit-text-fill-color: #2b180d !important;
+  font-size: 11px;
+  font-weight: 900;
+  text-shadow: none !important;
+}
+
+#ContentColumn #News .BoxContent .serverinfo-rate-row strong {
+  text-align: right;
+}
+
+#ContentColumn #News .BoxContent .serverinfo-rate-track {
+  background: #c29a55 !important;
+  border: 1px solid #9a6728;
+  box-shadow: inset 0 1px 2px rgba(74, 36, 5, .28);
+  display: block;
+  height: 14px;
+  overflow: hidden;
+}
+
+#ContentColumn #News .BoxContent .serverinfo-rate-track > span {
+  background: linear-gradient(90deg, #72180b 0%, #bd4b18 58%, #e59b37 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 224, 146, .38);
+  display: block;
+  height: 100%;
+}
+
 #ContentColumn #News .BoxContent .serverinfo-footer-note {
   color: #ffe7b8 !important;
   -webkit-text-fill-color: #ffe7b8 !important;
@@ -3160,6 +3223,20 @@ body {
 
   #ContentColumn #News .BoxContent .serverinfo-list div {
     grid-template-columns: 1fr;
+  }
+
+  #ContentColumn #News .BoxContent .serverinfo-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  #ContentColumn #News .BoxContent .serverinfo-list {
+    grid-template-columns: 1fr;
+  }
+
+  #ContentColumn #News .BoxContent .serverinfo-rate-row {
+    grid-template-columns: 78px minmax(0, 1fr) 42px;
   }
 }
 
@@ -7404,5 +7481,16 @@ html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-monster-de
   color: #fff4ce !important;
   -webkit-text-fill-color: #fff4ce !important;
   text-shadow: 0 1px #000 !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-monsters-page .eclipse-bestiary-category strong,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-monsters-page .eclipse-bestiary-category small,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-monsters-page .eclipse-bestiary-results-header span,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-monsters-page .eclipse-bestiary-results-header h3,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-monsters-page .eclipse-bestiary-results-header p,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-monsters-page .eclipse-bestiary-results-header strong {
+  color: #2b180d !important;
+  -webkit-text-fill-color: #2b180d !important;
+  text-shadow: none !important;
 }
 

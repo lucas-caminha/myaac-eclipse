@@ -19,6 +19,10 @@ O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0
 - Interface em portugues para `/account/lost`, incluindo o estado de recuperacao por e-mail indisponivel
 
 ### Alterado
+- Página de informações com dados do servidor mais compactos e rates em gráficos proporcionais
+- Posicionamento do percentual de drop nos cards de loot do Bestiary
+- Bestiário de monstros organizado por classes, carregadas dos scripts Lua do Canary
+- Aba de runas simplificada sem imagens de itens
 - Alinhamento e dimensoes dos sprites de boss e creature na box Boosted
 - Contraste e organizacao visual do fluxo de recuperacao de conta
 

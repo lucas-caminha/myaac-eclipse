@@ -64,52 +64,37 @@
       {% else %}
         <div class="serverinfo-stage-table-wrap">
           <h3>Experiência</h3>
-          <table class="serverinfo-table">
-            <thead>
-            <tr><th>De</th><th>Até</th><th>Rate</th></tr>
-            </thead>
-            <tbody>
+          <div class="serverinfo-rate-chart" aria-label="Rates de experiência por nível">
             {% for result in rateStages.experienceStages %}
-              <tr>
-                <td>{{ result.minlevel }}</td>
-                <td>{% if result.maxlevel is not empty %}{{ result.maxlevel }}{% else %}-{% endif %}</td>
-                <td>{{ result.multiplier }}x</td>
-              </tr>
+              <div class="serverinfo-rate-row">
+                <span class="serverinfo-rate-range">Lv. {{ result.minlevel }}{% if result.maxlevel is not empty %}–{{ result.maxlevel }}{% else %}+{% endif %}</span>
+                <span class="serverinfo-rate-track"><span style="width: {{ result.chartPercent }}%"></span></span>
+                <strong>{{ result.multiplier }}x</strong>
+              </div>
             {% endfor %}
-            </tbody>
-          </table>
+          </div>
 
           <h3>Skills</h3>
-          <table class="serverinfo-table">
-            <thead>
-            <tr><th>De</th><th>Até</th><th>Rate</th></tr>
-            </thead>
-            <tbody>
+          <div class="serverinfo-rate-chart" aria-label="Rates de skills por nível">
             {% for result in rateStages.skillsStages %}
-              <tr>
-                <td>{{ result.minlevel }}</td>
-                <td>{% if result.maxlevel is not empty %}{{ result.maxlevel }}{% else %}-{% endif %}</td>
-                <td>{{ result.multiplier }}x</td>
-              </tr>
+              <div class="serverinfo-rate-row">
+                <span class="serverinfo-rate-range">Lv. {{ result.minlevel }}{% if result.maxlevel is not empty %}–{{ result.maxlevel }}{% else %}+{% endif %}</span>
+                <span class="serverinfo-rate-track"><span style="width: {{ result.chartPercent }}%"></span></span>
+                <strong>{{ result.multiplier }}x</strong>
+              </div>
             {% endfor %}
-            </tbody>
-          </table>
+          </div>
 
           <h3>Magic Level</h3>
-          <table class="serverinfo-table">
-            <thead>
-            <tr><th>De</th><th>Até</th><th>Rate</th></tr>
-            </thead>
-            <tbody>
+          <div class="serverinfo-rate-chart" aria-label="Rates de magic level">
             {% for result in rateStages.magicLevelStages %}
-              <tr>
-                <td>{{ result.minlevel }}</td>
-                <td>{% if result.maxlevel is not empty %}{{ result.maxlevel }}{% else %}-{% endif %}</td>
-                <td>{{ result.multiplier }}x</td>
-              </tr>
+              <div class="serverinfo-rate-row">
+                <span class="serverinfo-rate-range">ML {{ result.minlevel }}{% if result.maxlevel is not empty %}–{{ result.maxlevel }}{% else %}+{% endif %}</span>
+                <span class="serverinfo-rate-track"><span style="width: {{ result.chartPercent }}%"></span></span>
+                <strong>{{ result.multiplier }}x</strong>
+              </div>
             {% endfor %}
-            </tbody>
-          </table>
+          </div>
         </div>
       {% endif %}
   </section>

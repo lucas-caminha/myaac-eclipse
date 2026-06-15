@@ -14,3 +14,8 @@ if(
 		return;
 	}
 }
+
+if ($db->hasTable('myaac_lua_monsters') && !$db->hasColumn('myaac_lua_monsters', 'bestiary_class')) {
+	$db->query("ALTER TABLE `myaac_lua_monsters` ADD `bestiary_class` VARCHAR(100) NOT NULL DEFAULT '' AFTER `health`");
+	success('Campo de categoria do Bestiary criado.');
+}

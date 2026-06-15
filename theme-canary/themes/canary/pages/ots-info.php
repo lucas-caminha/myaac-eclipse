@@ -37,7 +37,7 @@ if ($blackSkullDuration = configLua('blackSkullDuration') ?? null)
 
 $explodeServerSave = explode(':', configLua('globalServerSaveTime') ?? '05:00:00');
 
-$config['lua']['rateStages'] = loadStagesData($config['server_path'] . 'data/stages.lua');
+$config['lua']['rateStages'] = prepareRateCharts(loadStagesData($config['server_path'] . 'data/stages.lua'));
 $commandsPage = Pages::where('name', 'commands')->first();
 
 $twig->display('server-info.html.twig', [
@@ -136,4 +136,21 @@ function loadStagesData($configFile)
 	}
 
 	return $result;
+}
+
+/**
+ * Adds a relative width used by the staged-rate charts.
+ */
+function prepareRateCharts(array $stages): array
+{
+	foreach ($stages as &$group) {
+		$maxMultiplier = max(array_column($group, 'multiplier') ?: [1]);
+		foreach ($group as &$stage) {
+			$stage['chartPercent'] = max(3, round(($stage['multiplier'] / $maxMultiplier) * 100, 2));
+		}
+		unset($stage);
+	}
+	unset($group);
+
+	return $stages;
 }

@@ -39,19 +39,53 @@ if(admin()) {
 }
 
 if (empty($_GET['name'])) {
-	// display list of monsters
-	$preview = true;
-	$monsters = LuaMonsterModel::where('hide', '!=', 1)->when(!empty($_GET['boss']), function ($query) {
+	$categories = LuaMonsterModel::where('hide', '!=', 1)
+		->where('rewardboss', '!=', 1)
+		->where('bestiary_class', '!=', '')
+		->selectRaw('bestiary_class AS name, COUNT(*) AS total, MIN(id) AS sample_id')
+		->groupBy('bestiary_class')
+		->orderBy('name')
+		->get()
+		->toArray();
+
+	$bossQuery = LuaMonsterModel::where('hide', '!=', 1)->where('rewardboss', 1);
+	$bossCount = $bossQuery->count();
+	if ($bossCount > 0) {
+		$bossSample = $bossQuery->orderBy('name')->first();
+		$categories[] = ['name' => 'Chefes', 'total' => $bossCount, 'sample_id' => $bossSample->id];
+	}
+
+	$sampleIds = array_values(array_filter(array_column($categories, 'sample_id')));
+	$categorySamples = LuaMonsterModel::whereIn('id', $sampleIds)->get()->keyBy('id');
+
+	$requestedCategory = trim((string)($_GET['category'] ?? ''));
+	$availableCategories = array_column($categories, 'name');
+	$selectedCategory = in_array($requestedCategory, $availableCategories, true)
+		? $requestedCategory
+		: ($availableCategories[0] ?? 'Chefes');
+
+	$query = LuaMonsterModel::where('hide', '!=', 1)->orderBy('name');
+	if ($selectedCategory === 'Chefes') {
 		$query->where('rewardboss', 1);
-	})->get()->toArray();
+	} else {
+		$query->where('rewardboss', '!=', 1)->where('bestiary_class', $selectedCategory);
+	}
+	$monsters = $query->get()->toArray();
 
 	foreach($monsters as $key => &$monster) {
 		$monster['img_link'] = eclipseMonsterImage($monster);
 	}
+	foreach ($categories as &$category) {
+		$sample = $categorySamples->get((int)$category['sample_id']);
+		$category['image'] = $sample ? eclipseMonsterImage($sample->toArray()) : '';
+		$category['link'] = getLink('monsters') . '?category=' . rawurlencode($category['name']);
+		unset($category['sample_id']);
+	}
 
 	$twig->display('lua-monsters/views/monsters.html.twig', array(
 		'monsters' => $monsters,
-		'preview' => $preview,
+		'categories' => $categories,
+		'selectedCategory' => $selectedCategory,
 		'isAdmin' => admin(),
 	));
 

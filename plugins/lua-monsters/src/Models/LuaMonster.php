@@ -9,7 +9,7 @@ class LuaMonster extends Model
 	protected $table = 'myaac_lua_monsters';
 	protected $fillable = [
 		'name',
-		'mana', 'exp', 'health',
+		'mana', 'exp', 'health', 'bestiary_class',
 		'outfit',
 		'speed_lvl', 'use_haste',
 		'immunities', 'elements', 'flags',

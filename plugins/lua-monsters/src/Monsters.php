@@ -55,6 +55,7 @@ class Monsters
 					'mana' => self::number($content, 'manaCost'),
 					'exp' => self::number($content, 'experience'),
 					'health' => self::number($content, 'health'),
+					'bestiary_class' => self::bestiaryClass($content),
 					'outfit' => json_encode($outfit),
 					'speed_lvl' => $speed <= 220 ? 1 : (int)(($speed - 220) / 2),
 					'use_haste' => str_contains($content, 'name = "speed"') ? 1 : 0,
@@ -88,6 +89,12 @@ class Monsters
 	private static function text(string $content, string $key): string
 	{
 		return preg_match('/monster\.' . preg_quote($key, '/') . '\s*=\s*["\']([^"\']*)["\']/', $content, $match) ? $match[1] : '';
+	}
+
+	private static function bestiaryClass(string $content): string
+	{
+		$block = self::block($content, 'Bestiary');
+		return preg_match('/\bclass\s*=\s*["\']([^"\']+)["\']/', $block, $match) ? trim($match[1]) : '';
 	}
 
 	private static function block(string $content, string $key): string
