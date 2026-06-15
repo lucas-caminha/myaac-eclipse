@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS `myaac_lua_monsters` (
 	`exp` int(11) NOT NULL DEFAULT 0,
 	`health` int(11) NOT NULL DEFAULT 0,
 	`bestiary_class` varchar(100) NOT NULL DEFAULT '',
+	`bosstiary_class` varchar(20) NOT NULL DEFAULT '',
 	`outfit` VARCHAR(255) NOT NULL DEFAULT '',
 	`speed_lvl` int(11) NOT NULL default 1,
 	`use_haste` tinyint(1) NOT NULL DEFAULT 0,

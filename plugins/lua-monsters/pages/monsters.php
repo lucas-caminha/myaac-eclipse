@@ -1,6 +1,8 @@
 <?php
 defined('MYAAC') or die('Direct access not allowed!');
-$title = 'Monstros';
+$pageMode = $monsterPageMode ?? 'monsters';
+$isBossPage = $pageMode === 'bosses';
+$title = $isBossPage ? 'Bosses' : 'Monstros';
 
 require_once PLUGINS . 'lua-monsters/src/Models/LuaMonster.php';
 require_once PLUGINS . 'lua-monsters/src/Monsters.php';
@@ -39,47 +41,44 @@ if(admin()) {
 }
 
 if (empty($_GET['name'])) {
-	$categories = LuaMonsterModel::where('hide', '!=', 1)
-		->where('rewardboss', '!=', 1)
-		->where('bestiary_class', '!=', '')
-		->selectRaw('bestiary_class AS name, COUNT(*) AS total, MIN(id) AS sample_id')
-		->groupBy('bestiary_class')
-		->orderBy('name')
-		->get()
-		->toArray();
-
-	$bossQuery = LuaMonsterModel::where('hide', '!=', 1)->where('rewardboss', 1);
-	$bossCount = $bossQuery->count();
-	if ($bossCount > 0) {
-		$bossSample = $bossQuery->orderBy('name')->first();
-		$categories[] = ['name' => 'Chefes', 'total' => $bossCount, 'sample_id' => $bossSample->id];
+	$categoryColumn = $isBossPage ? 'bosstiary_class' : 'bestiary_class';
+	$categoryQuery = LuaMonsterModel::where('hide', '!=', 1)
+		->where($categoryColumn, '!=', '')
+		->when(!$isBossPage, function ($query) {
+			$query->where('bosstiary_class', '');
+		})
+		->selectRaw($categoryColumn . ' AS name, COUNT(*) AS total')
+		->groupBy($categoryColumn);
+	if ($isBossPage) {
+		$categoryQuery->orderByRaw("CASE $categoryColumn WHEN 'Bane' THEN 1 WHEN 'Archfoe' THEN 2 WHEN 'Nemesis' THEN 3 ELSE 4 END");
+	} else {
+		$categoryQuery->orderBy('name');
 	}
-
-	$sampleIds = array_values(array_filter(array_column($categories, 'sample_id')));
-	$categorySamples = LuaMonsterModel::whereIn('id', $sampleIds)->get()->keyBy('id');
+	$categories = $categoryQuery->get()->toArray();
 
 	$requestedCategory = trim((string)($_GET['category'] ?? ''));
 	$availableCategories = array_column($categories, 'name');
 	$selectedCategory = in_array($requestedCategory, $availableCategories, true)
 		? $requestedCategory
-		: ($availableCategories[0] ?? 'Chefes');
+		: ($availableCategories[0] ?? '');
 
-	$query = LuaMonsterModel::where('hide', '!=', 1)->orderBy('name');
-	if ($selectedCategory === 'Chefes') {
-		$query->where('rewardboss', 1);
-	} else {
-		$query->where('rewardboss', '!=', 1)->where('bestiary_class', $selectedCategory);
-	}
+	$query = LuaMonsterModel::where('hide', '!=', 1)
+		->where($categoryColumn, $selectedCategory)
+		->orderBy('name');
+	if (!$isBossPage) $query->where('bosstiary_class', '');
 	$monsters = $query->get()->toArray();
 
 	foreach($monsters as $key => &$monster) {
 		$monster['img_link'] = eclipseMonsterImage($monster);
+		$monster['link'] = getLink($pageMode) . '?name=' . rawurlencode($monster['name']);
 	}
 	foreach ($categories as &$category) {
-		$sample = $categorySamples->get((int)$category['sample_id']);
-		$category['image'] = $sample ? eclipseMonsterImage($sample->toArray()) : '';
-		$category['link'] = getLink('monsters') . '?category=' . rawurlencode($category['name']);
-		unset($category['sample_id']);
+		$imageName = $isBossPage
+			? strtolower($category['name']) . '.gif'
+			: str_replace(' ', '_', $category['name']) . '.png';
+		$imageFolder = $isBossPage ? 'bosstiary/categories/' : 'bestiary/classes/';
+		$category['image'] = rtrim(BASE_URL, '/') . '/plugins/theme-canary/themes/canary/images/' . $imageFolder . $imageName;
+		$category['link'] = getLink($pageMode) . '?category=' . rawurlencode($category['name']);
 	}
 
 	$twig->display('lua-monsters/views/monsters.html.twig', array(
@@ -87,6 +86,8 @@ if (empty($_GET['name'])) {
 		'categories' => $categories,
 		'selectedCategory' => $selectedCategory,
 		'isAdmin' => admin(),
+		'isBossPage' => $isBossPage,
+		'pageMode' => $pageMode,
 	));
 
 	return;
@@ -94,7 +95,9 @@ if (empty($_GET['name'])) {
 
 // display monster
 $monster_name = urldecode(stripslashes(ucwords(strtolower($_GET['name']))));
-$monsterModel = LuaMonsterModel::where('hide', '!=', 1)->where('name', $monster_name)->first();
+$monsterQuery = LuaMonsterModel::where('hide', '!=', 1)->where('name', $monster_name);
+$isBossPage ? $monsterQuery->where('bosstiary_class', '!=', '') : $monsterQuery->where('bosstiary_class', '');
+$monsterModel = $monsterQuery->first();
 
 if ($monsterModel && isset($monsterModel->name)) {
 	/** @var array $monster */
@@ -107,7 +110,7 @@ if ($monsterModel && isset($monsterModel->name)) {
 		return ($a['chance'] > $b['chance']) ? -1 : 1;
 	}
 
-	$title = $monster['name'] . " - Monstros";
+	$title = $monster['name'] . ($isBossPage ? ' - Bosses' : ' - Monstros');
 
 	$outfit = json_decode($monster['outfit'], true);
 
@@ -148,6 +151,7 @@ if ($monsterModel && isset($monsterModel->name)) {
 
 	$twig->display('lua-monsters/views/monster.html.twig', array(
 		'monster' => $monster,
+		'isBossPage' => $isBossPage,
 	));
 
 } else {
@@ -155,4 +159,7 @@ if ($monsterModel && isset($monsterModel->name)) {
 }
 
 // back button
-$twig->display('lua-monsters/views/monsters.back_button.html.twig');
+$twig->display('lua-monsters/views/monsters.back_button.html.twig', [
+	'pageMode' => $pageMode,
+	'isBossPage' => $isBossPage,
+]);

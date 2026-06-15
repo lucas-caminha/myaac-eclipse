@@ -1,22 +1,27 @@
 <div class="eclipse-plugin-page eclipse-monsters-page">
 	<header class="eclipse-plugin-hero">
-		<span class="eclipse-plugin-kicker">Bestiário do Eclipse</span>
-		<h2>Monstros</h2>
-		<p>Escolha uma classe do Bestiary para consultar suas criaturas, atributos e recompensas.</p>
+		<span class="eclipse-plugin-kicker">{{ isBossPage ? 'Bosstiary do Eclipse' : 'Bestiário do Eclipse' }}</span>
+		<h2>{{ isBossPage ? 'Bosses' : 'Monstros' }}</h2>
+		<p>{{ isBossPage ? 'Escolha uma classe do Bosstiary para consultar seus bosses, atributos e recompensas.' : 'Escolha uma classe do Bestiary para consultar suas criaturas, atributos e recompensas.' }}</p>
 	</header>
 
-	<div class="eclipse-bestiary-category-grid" aria-label="Classes do Bestiary">
+	<nav class="eclipse-monster-page-switch" aria-label="Biblioteca de criaturas">
+		<a{% if not isBossPage %} class="is-active"{% endif %} href="{{ getLink('monsters') }}">Monstros</a>
+		<a{% if isBossPage %} class="is-active"{% endif %} href="{{ getLink('bosses') }}">Bosses</a>
+	</nav>
+
+	<div class="eclipse-bestiary-category-grid{% if isBossPage %} is-bosstiary{% endif %}" aria-label="Classes do {{ isBossPage ? 'Bosstiary' : 'Bestiary' }}">
 	{% for category in categories %}
 		<a class="eclipse-bestiary-category{% if category.name == selectedCategory %} is-active{% endif %}" href="{{ category.link }}">
 			<strong>{{ category.name }}</strong>
 			<span class="eclipse-bestiary-category-image">{% if category.image %}<img src="{{ category.image }}" alt="">{% endif %}</span>
-			<small>{{ category.total }} {{ category.total == 1 ? 'criatura' : 'criaturas' }}</small>
+			<small>{{ category.total }} {% if isBossPage %}{{ category.total == 1 ? 'boss' : 'bosses' }}{% else %}{{ category.total == 1 ? 'criatura' : 'criaturas' }}{% endif %}</small>
 		</a>
 	{% endfor %}
 	</div>
 
 	<div class="eclipse-bestiary-results-header">
-		<div><span>Classe selecionada</span><h3>{{ selectedCategory }}</h3><p><strong data-visible-monster-count>{{ monsters|length }}</strong> criaturas exibidas</p></div>
+		<div><span>Classe selecionada</span><h3>{{ selectedCategory }}</h3><p><strong data-visible-monster-count>{{ monsters|length }}</strong> {{ isBossPage ? 'bosses exibidos' : 'criaturas exibidas' }}</p></div>
 		<div class="eclipse-bestiary-actions">
 			<input class="eclipse-plugin-search" type="search" placeholder="Buscar nesta classe" data-monster-search>
 			{% if isAdmin %}<form action="{{ getLink('monsters') }}" method="post">{{ csrf() }}<input type="hidden" name="reload" value="1"><button class="eclipse-plugin-button eclipse-plugin-button-secondary" type="submit">Atualizar bestiário</button></form>{% endif %}
@@ -25,22 +30,23 @@
 
 	<div class="eclipse-monster-grid" data-monster-grid>
 	{% for monster in monsters %}
-		<a class="eclipse-monster-card{% if monster.rewardboss %} is-boss{% endif %}" href="{{ getMonsterLink(monster.name, false)|raw }}" data-name="{{ monster.name|lower }}">
+		<a class="eclipse-monster-card{% if isBossPage %} is-boss{% endif %}" href="{{ monster.link }}" data-name="{{ monster.name|lower }}">
 			<div class="eclipse-monster-portrait"><img src="{{ monster.img_link }}" alt="{{ monster.name }}"></div>
-			<div><strong>{{ monster.name }}</strong><span>{{ monster.rewardboss ? 'Chefe' : selectedCategory }}</span></div>
+			<div><strong>{{ monster.name }}</strong><span>{{ selectedCategory }}</span></div>
 			<dl><div><dt>Vida</dt><dd>{{ monster.health|number_format(0, ',', '.') }}</dd></div><div><dt>EXP</dt><dd>{{ monster.exp|number_format(0, ',', '.') }}</dd></div></dl>
 		</a>
-	{% else %}<div class="eclipse-plugin-empty">Nenhuma criatura encontrada nesta classe.</div>{% endfor %}
+	{% else %}<div class="eclipse-plugin-empty">Nenhum {{ isBossPage ? 'boss' : 'monstro' }} encontrado nesta classe.</div>{% endfor %}
 	</div>
-	<div class="eclipse-plugin-empty eclipse-monster-search-empty" data-monster-empty hidden>Nenhuma criatura encontrada com esse nome.</div>
+	<div class="eclipse-plugin-empty eclipse-monster-search-empty" data-monster-empty hidden>Nenhum {{ isBossPage ? 'boss' : 'monstro' }} encontrado com esse nome.</div>
 </div>
 <script>
 var monsterSearch = document.querySelector('[data-monster-search]');
 if (monsterSearch) monsterSearch.addEventListener('input', function () {
 	var visible = 0;
+	var searchTerm = monsterSearch.value.trim().toLocaleLowerCase('pt-BR');
 	document.querySelectorAll('[data-monster-grid] [data-name]').forEach(function (card) {
-		var matches = card.dataset.name.indexOf(monsterSearch.value.toLowerCase()) !== -1;
-		card.hidden = !matches;
+		var matches = card.dataset.name.toLocaleLowerCase('pt-BR').indexOf(searchTerm) !== -1;
+		card.classList.toggle('is-search-hidden', !matches);
 		if (matches) visible++;
 	});
 	var count = document.querySelector('[data-visible-monster-count]');

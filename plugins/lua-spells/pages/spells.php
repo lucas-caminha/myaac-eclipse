@@ -24,13 +24,14 @@ if(admin()) {
 	echo $twig->render('lua-spells/views/reload.html.twig');
 }
 
-if(isset($_REQUEST['vocation_id'])) {
-	$vocation_id = $_REQUEST['vocation_id'];
+if(isset($_GET['vocation_id'])) {
+	$vocation_id = $_GET['vocation_id'];
 	if($vocation_id == 'all') {
 		$vocation = 'all';
 	}
 	else {
-		$vocation = config('vocations')[$vocation_id];
+		$vocation_id = (int)$vocation_id;
+		$vocation = config('vocations')[$vocation_id] ?? 'all';
 	}
 }
 else {
@@ -48,11 +49,19 @@ else {
 $order = 'name';
 $spells = [];
 $spells_db = LuaSpellModel::where('hide', '!=', 1)->where('type', '<', 4)->orderBy($order)->get();
+$filterVocations = [
+	1 => ['name' => 'Sorcerer', 'ids' => [1, 5]],
+	2 => ['name' => 'Druid', 'ids' => [2, 6]],
+	3 => ['name' => 'Paladin', 'ids' => [3, 7]],
+	4 => ['name' => 'Knight', 'ids' => [4, 8]],
+	9 => ['name' => 'Monk', 'ids' => [9, 10]],
+];
 
 if((string)$vocation_id != 'all') {
+	$selectedVocationIds = $filterVocations[(int)$vocation_id]['ids'] ?? [(int)$vocation_id];
 	foreach($spells_db as $spell) {
 		$spell_vocations = json_decode($spell['vocations'], true);
-		if(in_array($vocation_id, $spell_vocations) || count($spell_vocations) == 0) {
+		if(count(array_intersect($selectedVocationIds, $spell_vocations)) > 0 || count($spell_vocations) == 0) {
 			$spell['vocations'] = null;
 			$spells[] = $spell;
 		}
@@ -83,6 +92,7 @@ $twig->display('lua-spells/views/spells.html.twig', array(
 	'isAdmin' => admin(),
 	'post_vocation_id' => $vocation_id,
 	'post_vocation' => $vocation,
+	'filter_vocations' => $filterVocations,
 	'spells' => $spells,
 	'showColumns' => $showColumns,
 ));

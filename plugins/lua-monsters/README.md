@@ -12,10 +12,12 @@ The PHP Lua extension can be installed on linux (Ubuntu) following this tutorial
 
 On Windows it's a bit tricky to install the extension, but still possible. I will write one day how to do it. For now following info should be enough: you need to download the correct version of Windows DLLs from https://pecl.php.net/package/lua, paste into php/ext folder of xampp/UniServ, and then enable the lua extension in php.ini
 
-## How to access this page?
+## Páginas
 
-Just write /monsters in the browser address.
-Example: http://localhost/index.php/monsters
+- `/monsters`: criaturas organizadas pelas classes do Bestiary.
+- `/bosses`: bosses organizados pelas classes Bane, Archfoe e Nemesis do Bosstiary.
+
+As categorias são extraídas diretamente dos arquivos Lua do Canary durante a recarga.
 
 ## How to reload?
 

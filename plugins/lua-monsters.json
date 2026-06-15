@@ -1,7 +1,7 @@
 {
 	"name": "Eclipse - Monstros",
-	"description": "Bestiário carregado diretamente dos scripts Lua do Canary.",
-	"version": "1.1-eclipse",
+	"description": "Bestiary e Bosstiary carregados diretamente dos scripts Lua do Canary.",
+	"version": "1.2-eclipse",
 	"type": "page",
 	"license": "GPLv3",
 	"author": "slawkens",
@@ -13,6 +13,11 @@
 		"monsters-page": {
 			"pattern": "monsters[/{name:string}]",
 			"file": "plugins/lua-monsters/pages/monsters.php",
+			"method": "get,post"
+		},
+		"bosses-page": {
+			"pattern": "bosses[/{name:string}]",
+			"file": "plugins/lua-monsters/pages/bosses.php",
 			"method": "get,post"
 		}
 	},

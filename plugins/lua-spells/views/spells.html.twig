@@ -6,11 +6,11 @@
 	</header>
 
 	<div class="eclipse-plugin-toolbar eclipse-plugin-toolbar-split">
-		<form action="{{ getLink('spells') }}" method="post">
+		<form action="{{ getLink('spells') }}" method="get">
 			<label for="spell-vocation">Vocação</label>
 			<select id="spell-vocation" name="vocation_id">
 				<option value="all"{% if post_vocation_id == 'all' %} selected{% endif %}>Todas</option>
-				{% for id, vocation in config.vocations %}<option value="{{ id }}"{% if id == post_vocation_id %} selected{% endif %}>{{ vocation }}</option>{% endfor %}
+				{% for id, vocation in filter_vocations %}<option value="{{ id }}"{% if id == post_vocation_id %} selected{% endif %}>{{ vocation.name }}</option>{% endfor %}
 			</select>
 			<button class="eclipse-plugin-button" type="submit">Filtrar</button>
 		</form>

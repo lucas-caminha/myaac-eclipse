@@ -56,6 +56,7 @@ class Monsters
 					'exp' => self::number($content, 'experience'),
 					'health' => self::number($content, 'health'),
 					'bestiary_class' => self::bestiaryClass($content),
+					'bosstiary_class' => self::bosstiaryClass($content),
 					'outfit' => json_encode($outfit),
 					'speed_lvl' => $speed <= 220 ? 1 : (int)(($speed - 220) / 2),
 					'use_haste' => str_contains($content, 'name = "speed"') ? 1 : 0,
@@ -95,6 +96,16 @@ class Monsters
 	{
 		$block = self::block($content, 'Bestiary');
 		return preg_match('/\bclass\s*=\s*["\']([^"\']+)["\']/', $block, $match) ? trim($match[1]) : '';
+	}
+
+	private static function bosstiaryClass(string $content): string
+	{
+		$block = self::block($content, 'bosstiary');
+		if (!preg_match('/\bbossRace\s*=\s*RARITY_(BANE|ARCHFOE|NEMESIS)\b/', $block, $match)) {
+			return '';
+		}
+
+		return ucfirst(strtolower($match[1]));
 	}
 
 	private static function block(string $content, string $key): string

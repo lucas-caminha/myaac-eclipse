@@ -9,6 +9,7 @@ O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0
 ## [Unreleased]
 
 ### Adicionado
+- Página `/bosses` separada por classes Bane, Archfoe e Nemesis do Bosstiary
 - Biblioteca pública de monstros e magias carregada dos dados do Canary
 - Mercado transacional de personagens com pagamento em coins
 - Ranking de guildas poderosas na página de notícias
@@ -19,6 +20,8 @@ O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0
 - Interface em portugues para `/account/lost`, incluindo o estado de recuperacao por e-mail indisponivel
 
 ### Alterado
+- Busca de monstros e filtro de magias com funcionamento e contraste corrigidos
+- Categorias de monstros e bosses com os ícones do projeto Tibia Monk
 - Página de informações com dados do servidor mais compactos e rates em gráficos proporcionais
 - Posicionamento do percentual de drop nos cards de loot do Bestiary
 - Bestiário de monstros organizado por classes, carregadas dos scripts Lua do Canary

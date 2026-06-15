@@ -1,7 +1,7 @@
 <div class="eclipse-plugin-page eclipse-monster-detail">
 	<header class="eclipse-plugin-hero eclipse-monster-detail-hero">
 		<div class="eclipse-monster-detail-image"><img src="{{ monster.img_link }}" alt="{{ monster.name }}"></div>
-		<div><span class="eclipse-plugin-kicker">Bestiário do Eclipse</span><h2>{{ monster.name }}</h2><p>{{ monster.rewardboss ? 'Chefe de recompensa' : monster.race|title }}</p></div>
+		<div><span class="eclipse-plugin-kicker">{{ isBossPage ? 'Bosstiary do Eclipse' : 'Bestiário do Eclipse' }}</span><h2>{{ monster.name }}</h2><p>{{ isBossPage ? monster.bosstiary_class : monster.race|title }}</p></div>
 	</header>
 	<div class="eclipse-stat-grid">
 		<div><span>Vida</span><strong>{{ monster.health|number_format(0, ',', '.') }}</strong></div><div><span>Experiência</span><strong>{{ monster.exp|number_format(0, ',', '.') }}</strong></div><div><span>Defesa</span><strong>{{ monster.defense }}</strong></div><div><span>Armadura</span><strong>{{ monster.armor }}</strong></div>

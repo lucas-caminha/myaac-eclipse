@@ -25,6 +25,7 @@ return [
 	MENU_CATEGORY_LIBRARY => [
 		'VIP & Loyalty' => 'vip-loyalty',
 		'Monstros' => 'monsters',
+		'Bosses' => 'bosses',
 		'Magias' => 'spells',
 		'Comandos e Informações' => 'ots-info',
 	],
