@@ -42,13 +42,8 @@ foreach ($configVocations as $id => $name) {
 $customRankingCandidates = [
 	'charm-points' => [
 		'label' => 'Bestiary (Charm Points)',
-		'table' => 'players',
-		'columns' => ['charm_points', 'charm_points_total', 'bestiary_charm_points'],
-	],
-	'loyalty-points' => [
-		'label' => 'Loyalty Points',
-		'table' => 'accounts',
-		'columns' => ['loyalty_points', 'loyalty'],
+		'table' => 'player_charms',
+		'columns' => ['charm_points'],
 	],
 	'achievement-points' => [
 		'label' => 'Achievement Points',
@@ -56,7 +51,7 @@ $customRankingCandidates = [
 		'columns' => ['achievement_points', 'achievements_points'],
 	],
 	'bosstiary-points' => [
-		'label' => 'Bosstiary Points',
+		'label' => 'Bosstiary (Boss Points)',
 		'table' => 'players',
 		'columns' => ['bosstiary_points', 'boss_points'],
 	],
@@ -76,6 +71,21 @@ foreach ($customRankingCandidates as $key => $ranking) {
 			break;
 		}
 	}
+}
+
+if ($db->hasTableAndColumns('accounts', ['creation', 'premdays', 'premdays_purchased'])) {
+	$loyaltyCreationDay = (int) (configLua('loyaltyPointsPerCreationDay') ?? 1);
+	$loyaltyPremiumSpent = (int) (configLua('loyaltyPointsPerPremiumDaySpent') ?? 4);
+	$loyaltyPremiumPurchased = (int) (configLua('loyaltyPointsPerPremiumDayPurchased') ?? 4);
+	$loyaltyExpression = '(GREATEST(FLOOR((UNIX_TIMESTAMP() - accounts.creation) / 86400), 0) * ' . $loyaltyCreationDay .
+		' + GREATEST(accounts.premdays_purchased - accounts.premdays, 0) * ' . $loyaltyPremiumSpent .
+		' + accounts.premdays_purchased * ' . $loyaltyPremiumPurchased . ')';
+	$customRankings['loyalty-points'] = [
+		'label' => 'Loyalty Points',
+		'table' => 'accounts',
+		'expression' => $loyaltyExpression,
+		'condition' => 'accounts.creation > 0',
+	];
 }
 
 $customRanking = $customRankings[$list] ?? null;
@@ -180,18 +190,28 @@ $query
 	->where('players.group_id', '<', setting('core.highscores_groups_hidden'));
 
 if ($customRanking !== null) {
-	$customColumnReference = $customRanking['table'] . '.' . $customRanking['column'];
+	$customColumnReference = $customRanking['expression'] ?? ($customRanking['table'] . '.' . $customRanking['column']);
 
 	if ($customRanking['table'] === 'accounts') {
 		$query->join('accounts', 'accounts.id', '=', 'players.account_id');
 		$accountsJoined = true;
+	} else if ($customRanking['table'] === 'player_charms') {
+		$query->join('player_charms', 'player_charms.player_id', '=', 'players.id');
 	}
 
-	$query->where($customColumnReference, '>', 0);
+	if (isset($customRanking['expression'])) {
+		$query->whereRaw($customColumnReference . ' > 0');
+	} else {
+		$query->where($customColumnReference, '>', 0);
+	}
+
+	if (isset($customRanking['condition'])) {
+		$query->whereRaw($customRanking['condition']);
+	}
 }
 
 $totalResultsQuery = clone $query;
-$customCacheKey = $customRanking !== null ? $customRanking['table'] . '_' . $customRanking['column'] : $skill;
+$customCacheKey = $customRanking !== null ? $list : $skill;
 $cacheKey = 'highscores_' . $customCacheKey . '_' . $vocation . '_' . $page . '_' . $configHighscoresPerPage;
 $cache = Cache::getInstance();
 
@@ -221,8 +241,9 @@ $query
 
 if (empty($highscores)) {
 	if ($customRanking !== null) {
+		$customValueExpression = $customRanking['expression'] ?? ($customRanking['table'] . '.' . $customRanking['column']);
 		$query
-			->addSelect($customRanking['table'] . '.' . $customRanking['column'] . ' as value')
+			->selectRaw($customValueExpression . ' as value')
 			->orderByDesc('players.experience');
 	} else if ($skill >= POT::SKILL_FIRST && $skill <= POT::SKILL__LAST) {
 		$skill_ids = [

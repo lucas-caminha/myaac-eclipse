@@ -503,6 +503,14 @@ WHERE killers.death_id = '" . $death['id'] . "' ORDER BY killers.final_hit DESC,
 			'icon' => $template_path . '/images/account/icon-tibiacoin.png',
 		];
 	}
+	if ($db->hasColumn('players', 'boss_points')) {
+		$rankingFields['bosstiary-points'] = [
+			'order' => '`boss_points` DESC, `experience` DESC',
+			'label' => 'Top Bosstiary',
+			'icon' => 'https://www.tibiawiki.com.br/images/d/db/Bosstiary_Mastery.png',
+			'positive' => '`boss_points` > 0',
+		];
+	}
 
 	$hiddenRankingIds = setting('core.highscores_ids_hidden');
 	if (!is_array($hiddenRankingIds)) {
@@ -517,7 +525,8 @@ WHERE killers.death_id = '" . $death['id'] . "' ORDER BY killers.final_hit DESC,
 
 	$topRankingSelects = [];
 	foreach ($rankingFields as $slug => $ranking) {
-		$topRankingSelects[] = '(SELECT `id` FROM `players` WHERE ' . $rankingConditions .
+		$positiveCondition = isset($ranking['positive']) ? ' AND ' . $ranking['positive'] : '';
+		$topRankingSelects[] = '(SELECT `id` FROM `players` WHERE ' . $rankingConditions . $positiveCondition .
 			' ORDER BY ' . $ranking['order'] . ', `id` ASC LIMIT 1) AS `' . $slug . '`';
 	}
 	$topRankingPlayers = $db->query('SELECT ' . implode(', ', $topRankingSelects))->fetch();
@@ -528,6 +537,47 @@ WHERE killers.death_id = '" . $death['id'] . "' ORDER BY killers.final_hit DESC,
 				'slug' => $slug,
 				'label' => $ranking['label'],
 				'icon' => $ranking['icon'],
+			];
+		}
+	}
+
+	$aliasedRankingConditions = 'p.`' . $deletionColumn . '` = 0 AND p.`group_id` < ' . (int) setting('core.highscores_groups_hidden');
+	if (!empty($hiddenRankingIds)) {
+		$aliasedRankingConditions .= ' AND p.`id` NOT IN (' . implode(',', $hiddenRankingIds) . ')';
+	}
+
+	if ($db->hasTableAndColumns('player_charms', ['player_id', 'charm_points'])) {
+		$topCharm = $db->query(
+			'SELECT p.`id` FROM `players` p JOIN `player_charms` pc ON pc.`player_id` = p.`id` ' .
+			'WHERE ' . $aliasedRankingConditions . ' AND pc.`charm_points` > 0 ' .
+			'ORDER BY pc.`charm_points` DESC, p.`experience` DESC, p.`id` ASC LIMIT 1'
+		)->fetch();
+		if ($topCharm && (int) $topCharm['id'] === $player->getId()) {
+			$rankingBadges[] = [
+				'slug' => 'charm-points',
+				'label' => 'Top Bestiary',
+				'icon' => 'https://www.tibiawiki.com.br/images/b/b2/Icon_Major_Charm_Points.png',
+			];
+		}
+	}
+
+	if ($db->hasTableAndColumns('accounts', ['creation', 'premdays', 'premdays_purchased'])) {
+		$loyaltyCreationDay = (int) (configLua('loyaltyPointsPerCreationDay') ?? 1);
+		$loyaltyPremiumSpent = (int) (configLua('loyaltyPointsPerPremiumDaySpent') ?? 4);
+		$loyaltyPremiumPurchased = (int) (configLua('loyaltyPointsPerPremiumDayPurchased') ?? 4);
+		$loyaltyExpression = '(GREATEST(FLOOR((UNIX_TIMESTAMP() - a.`creation`) / 86400), 0) * ' . $loyaltyCreationDay .
+			' + GREATEST(a.`premdays_purchased` - a.`premdays`, 0) * ' . $loyaltyPremiumSpent .
+			' + a.`premdays_purchased` * ' . $loyaltyPremiumPurchased . ')';
+		$topLoyalty = $db->query(
+			'SELECT p.`id` FROM `players` p JOIN `accounts` a ON a.`id` = p.`account_id` ' .
+			'WHERE ' . $aliasedRankingConditions . ' AND a.`creation` > 0 AND ' . $loyaltyExpression . ' > 0 ' .
+			'ORDER BY ' . $loyaltyExpression . ' DESC, p.`experience` DESC, p.`id` ASC LIMIT 1'
+		)->fetch();
+		if ($topLoyalty && (int) $topLoyalty['id'] === $player->getId()) {
+			$rankingBadges[] = [
+				'slug' => 'loyalty-points',
+				'label' => 'Top Loyalty',
+				'icon' => 'https://www.tibiawiki.com.br/images/3/3c/Title_Badge_6.gif',
 			];
 		}
 	}

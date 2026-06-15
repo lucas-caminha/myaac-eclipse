@@ -10,7 +10,7 @@ O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0
 
 ### Adicionado
 - Documentacao completa do projeto
-- Override de `/highscores` com suporte a categorias extras dinamicas quando as colunas existirem no banco, incluindo Charm Points, Loyalty Points, Achievement Points, Bosstiary Points, Task Points e Prey Wildcards
+- Override de `/highscores` com suporte a categorias extras dinamicas, incluindo Bestiary/Charm Points, Loyalty Points, Achievement Points, Bosstiary/Boss Points, Task Points e Prey Wildcards
 
 ---
 

@@ -45,7 +45,7 @@ O MyAAC usa Twig como engine de templates. Os principais templates sao:
 | `canary.login-box.html.twig` | Box de login lateral |
 | `canary.download-box.html.twig` | Box de download |
 
-O perfil de personagem tambem exibe selos para os primeiros colocados dos rankings ativos. O calculo fica no override `theme-canary/pages/characters.php` e respeita os mesmos personagens e grupos ocultos configurados nos Highscores.
+O perfil de personagem tambem exibe selos para os primeiros colocados dos rankings ativos. O calculo fica no override `theme-canary/pages/characters.php` e respeita os mesmos personagens e grupos ocultos configurados nos Highscores. Os rankings adicionais usam `players.boss_points` para Bosstiary, `player_charms.charm_points` para Bestiary e a formula de Loyalty configurada pelo Canary para cada conta.
 
 ### Exemplo: Modificando o Template de Login
 
