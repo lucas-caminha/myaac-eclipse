@@ -10,6 +10,7 @@ use MyAAC\Cache\Cache;
 use MyAAC\Models\Player;
 use MyAAC\Models\PlayerDeath;
 use MyAAC\Models\PlayerKillers;
+use MyAAC\Server\XML\Vocations;
 
 defined('MYAAC') or die('Direct access not allowed!');
 
@@ -30,14 +31,7 @@ if (!is_numeric($page) || $page < 1 || $page > PHP_INT_MAX) {
 }
 
 $configVocations = config('vocations');
-$configVocationsAmount = config('vocations_amount');
-$baseVocations = [];
-
-foreach ($configVocations as $id => $name) {
-	if ($id > 0 && $id <= $configVocationsAmount) {
-		$baseVocations[] = $id;
-	}
-}
+$baseVocations = Vocations::getBase(false);
 
 $customRankingCandidates = [
 	'charm-points' => [
@@ -150,13 +144,9 @@ if ($vocation !== 'all') {
 			$vocationId = $id;
 			$add_vocs = [$id];
 
-			if ($id !== 0) {
-				$i = $id + $configVocationsAmount;
-
-				while (isset($configVocations[$i])) {
-					$add_vocs[] = $i;
-					$i += $configVocationsAmount;
-				}
+			while ($promotedVocation = Vocations::getPromoted($id)) {
+				$id = $promotedVocation;
+				$add_vocs[] = $promotedVocation;
 			}
 
 			$query->whereIn('players.vocation', $add_vocs);
