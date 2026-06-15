@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=89" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=92" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -744,9 +744,10 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 	#Themeboxes .serversave_countdown { color: #fff3d5 !important; background: rgba(40,18,12,.72) !important; border-color: #ffe2a1 !important; border-radius: 4px !important; font-size: 22px !important; letter-spacing: 0 !important; }
 	#Themeboxes .searchchar_input { width: 154px !important; height: 32px !important; margin: 0 auto 7px !important; border: 1px solid #8a6230 !important; border-radius: 4px !important; box-sizing: border-box !important; }
 	#Themeboxes .rank_content { padding: 8px 8px 11px !important; }
-	#Themeboxes .rank_player { color: #4d3520 !important; min-height: 42px !important; padding: 6px 2px 6px 4px !important; border-bottom: 1px solid rgba(112,73,33,.35) !important; }
-	#Themeboxes .rank_text { margin-left: 46px !important; color: #4d3520 !important; }
-	#Themeboxes .rank_text a { color: #44140d !important; }
+	#Themeboxes .rank_player { color: #fff1c7 !important; min-height: 42px !important; padding: 6px 2px 6px 4px !important; border-bottom: 1px solid rgba(255,219,135,.30) !important; }
+	#Themeboxes .rank_text { margin-left: 46px !important; color: #fff1c7 !important; text-shadow: 0 1px 2px #000 !important; }
+	#Themeboxes .rank_text a { color: #fff3c4 !important; }
+	#Themeboxes .rank_text small { color: #f4dca9 !important; }
 
 
 
@@ -778,30 +779,38 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		}
 		
 		#Themeboxes .eclipse-boosted-frame {
-		  width: 58px !important;
-		  height: 58px !important;
+		  width: 68px !important;
+		  height: 68px !important;
 		  display: flex !important;
 		  align-items: center !important;
 		  justify-content: center !important;
-		  overflow: visible !important;
+		  padding: 0 !important;
+		  overflow: hidden !important;
 		  box-sizing: border-box !important;
 		}
 		
 		#Themeboxes .eclipse-boosted-frame img {
 		  display: block !important;
-		  margin: auto !important;
+		  width: 64px !important;
+		  height: 64px !important;
+		  max-width: none !important;
+		  max-height: none !important;
+		  margin: 0 !important;
 		  position: static !important;
 		  transform: none !important;
+		  object-fit: contain !important;
+		  object-position: center center !important;
+		  flex: 0 0 64px !important;
 		}
 		
 		#Themeboxes .eclipse-boosted-boss .eclipse-boosted-frame img {
-		  max-width: 76px !important;
-		  max-height: 76px !important;
+		  width: 64px !important;
+		  height: 64px !important;
 		}
 		
 		#Themeboxes .eclipse-boosted-creature .eclipse-boosted-frame img {
-		  max-width: 54px !important;
-		  max-height: 54px !important;
+		  width: 64px !important;
+		  height: 64px !important;
 		}
 		
 		#Themeboxes .eclipse-boosted-item span {

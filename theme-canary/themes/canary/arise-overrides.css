@@ -1536,23 +1536,69 @@ body {
 }
 
 .rank_player {
+  position: relative !important;
   color: #4d3520 !important;
   min-height: 42px !important;
   padding: 6px 2px 6px 4px !important;
   border-bottom: 1px solid rgba(112, 73, 33, 0.35) !important;
+  background-repeat: no-repeat !important;
+  background-position: center 32% !important;
+  background-size: cover !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 219, 135, 0.2) !important;
 }
 
-.rank_text {
+#Themeboxes .rank_player.is-vocation-knight {
+  background-image: linear-gradient(90deg, rgba(12, 10, 8, 0.84), rgba(12, 10, 8, 0.54)), url("images/vocations/knightbanner.png") !important;
+}
+
+#Themeboxes .rank_player.is-vocation-paladin {
+  background-image: linear-gradient(90deg, rgba(12, 10, 8, 0.84), rgba(12, 10, 8, 0.54)), url("images/vocations/paladinbanner.png") !important;
+}
+
+#Themeboxes .rank_player.is-vocation-monk {
+  background-image: linear-gradient(90deg, rgba(12, 10, 8, 0.84), rgba(12, 10, 8, 0.54)), url("images/vocations/monkbanner.png") !important;
+}
+
+#Themeboxes .rank_player.is-vocation-sorcerer {
+  background-image: linear-gradient(90deg, rgba(12, 10, 8, 0.84), rgba(12, 10, 8, 0.54)), url("images/vocations/sorcererbanner.png") !important;
+}
+
+#Themeboxes .rank_player.is-vocation-druid {
+  background-image: linear-gradient(90deg, rgba(12, 10, 8, 0.84), rgba(12, 10, 8, 0.54)), url("images/vocations/druidbanner.png") !important;
+}
+
+#Themeboxes .rank-vip-ribbon {
+  position: absolute !important;
+  z-index: 3 !important;
+  top: 6px !important;
+  right: -8px !important;
+  width: 42px !important;
+  padding: 2px 0 !important;
+  transform: rotate(38deg) !important;
+  border: 1px solid #fff0a6 !important;
+  background: linear-gradient(180deg, #c8321e 0%, #761208 100%) !important;
+  color: #fff !important;
+  font: 800 8px/1 Verdana, Arial, sans-serif !important;
+  text-align: center !important;
+  text-shadow: 0 1px 1px #420300 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.72) !important;
+  pointer-events: none !important;
+}
+
+#Themeboxes .rank_text {
+  position: relative !important;
+  z-index: 1 !important;
   margin-left: 46px !important;
-  color: #4d3520 !important;
+  color: #fff1c7 !important;
+  text-shadow: 0 1px 2px #000 !important;
 }
 
-.rank_text a {
-  color: #44140d !important;
+#Themeboxes .rank_text a {
+  color: #fff3c4 !important;
 }
 
-.rank_text small {
-  color: #5a3c21 !important;
+#Themeboxes .rank_text small {
+  color: #f4dca9 !important;
 }
 
 /* Right column final arrangement: Donate, Boosted, Highscores, Discord. */
@@ -1774,30 +1820,38 @@ body {
 }
 
 #Themeboxes .eclipse-boosted-frame {
-  width: 58px !important;
-  height: 58px !important;
+  width: 68px !important;
+  height: 68px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  overflow: visible !important;
+  padding: 0 !important;
+  overflow: hidden !important;
   box-sizing: border-box !important;
 }
 
 #Themeboxes .eclipse-boosted-frame img {
   display: block !important;
-  margin: auto !important;
+  width: 64px !important;
+  height: 64px !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
   position: static !important;
   transform: none !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  flex: 0 0 64px !important;
 }
 
 #Themeboxes .eclipse-boosted-boss .eclipse-boosted-frame img {
-  max-width: 76px !important;
-  max-height: 76px !important;
+  width: 64px !important;
+  height: 64px !important;
 }
 
 #Themeboxes .eclipse-boosted-creature .eclipse-boosted-frame img {
-  max-width: 54px !important;
-  max-height: 54px !important;
+  width: 64px !important;
+  height: 64px !important;
 }
 
 #Themeboxes .eclipse-boosted-item span {
@@ -6926,5 +6980,261 @@ body {
   color: #180904 !important;
   -webkit-text-fill-color: #180904 !important;
   text-shadow: none !important;
+}
+
+/* Lost account: clear recovery flow with readable controls on the Canary skin. */
+#ContentColumn .eclipse-lost-account,
+#ContentColumn .eclipse-lost-account * {
+  box-sizing: border-box !important;
+  letter-spacing: 0 !important;
+}
+
+#ContentColumn .eclipse-lost-account {
+  width: 100% !important;
+  color: #24140b !important;
+  font-family: Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .lost-account-hero {
+  padding: 22px 24px !important;
+  border: 1px solid #b87928 !important;
+  border-bottom: 0 !important;
+  border-radius: 6px 6px 0 0 !important;
+  background: linear-gradient(180deg, #12394b 0%, #071b27 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 230, 157, .26) !important;
+}
+
+#ContentColumn .lost-account-hero h1,
+#ContentColumn .lost-account-hero p,
+#ContentColumn .lost-account-hero .lost-account-eyebrow {
+  color: #fff0bd !important;
+  -webkit-text-fill-color: #fff0bd !important;
+  text-shadow: 0 1px 2px #000 !important;
+}
+
+#ContentColumn .lost-account-hero h1 {
+  margin: 2px 0 7px !important;
+  font: 700 24px/1.2 Georgia, "Times New Roman", serif !important;
+}
+
+#ContentColumn .lost-account-hero p {
+  max-width: 620px !important;
+  margin: 0 !important;
+  font-size: 12px !important;
+  line-height: 1.55 !important;
+}
+
+#ContentColumn .lost-account-hero .lost-account-eyebrow {
+  margin: 0 !important;
+  color: #e8b85d !important;
+  -webkit-text-fill-color: #e8b85d !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+}
+
+#ContentColumn .lost-account-panel {
+  padding: 22px 24px !important;
+  border: 1px solid #b87928 !important;
+  background: linear-gradient(180deg, #f4d995 0%, #dfb968 100%) !important;
+  color: #24140b !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 246, 205, .58) !important;
+}
+
+#ContentColumn .lost-account-unavailable {
+  display: grid !important;
+  grid-template-columns: 48px minmax(0, 1fr) !important;
+  gap: 16px !important;
+  align-items: start !important;
+}
+
+#ContentColumn .lost-account-status-icon {
+  display: grid !important;
+  place-items: center !important;
+  width: 48px !important;
+  height: 48px !important;
+  border: 1px solid #ffd37a !important;
+  border-radius: 50% !important;
+  background: linear-gradient(180deg, #a63218 0%, #5a1008 100%) !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  font: 800 24px/1 Georgia, serif !important;
+  text-shadow: 0 1px 1px #310300 !important;
+}
+
+#ContentColumn .lost-account-panel h2,
+#ContentColumn .lost-account-panel p,
+#ContentColumn .lost-account-panel label,
+#ContentColumn .lost-account-panel legend,
+#ContentColumn .lost-account-panel small,
+#ContentColumn .lost-account-panel strong {
+  color: #24140b !important;
+  -webkit-text-fill-color: #24140b !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .lost-account-panel h2 {
+  margin: 0 0 8px !important;
+  font: 700 17px/1.3 Georgia, "Times New Roman", serif !important;
+}
+
+#ContentColumn .lost-account-panel p {
+  margin: 5px 0 !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+}
+
+#ContentColumn .lost-account-field label,
+#ContentColumn .lost-account-methods legend {
+  display: block !important;
+  margin-bottom: 7px !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+}
+
+#ContentColumn .lost-account-field input[type="text"] {
+  display: block !important;
+  width: 100% !important;
+  height: 38px !important;
+  padding: 7px 10px !important;
+  border: 1px solid #7d521d !important;
+  border-radius: 4px !important;
+  outline: 0 !important;
+  background: #fff8e7 !important;
+  color: #170b05 !important;
+  -webkit-text-fill-color: #170b05 !important;
+  font: 700 13px Verdana, Arial, sans-serif !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .lost-account-field input[type="text"]:focus {
+  border-color: #9c290f !important;
+  box-shadow: 0 0 0 2px rgba(156, 41, 15, .2) !important;
+}
+
+#ContentColumn .lost-account-field small {
+  display: block !important;
+  margin-top: 6px !important;
+  font-size: 10px !important;
+  line-height: 1.4 !important;
+}
+
+#ContentColumn .lost-account-methods {
+  display: grid !important;
+  gap: 9px !important;
+  margin: 20px 0 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+#ContentColumn .lost-account-method {
+  display: grid !important;
+  grid-template-columns: 18px minmax(0, 1fr) !important;
+  gap: 10px !important;
+  align-items: start !important;
+  min-height: 62px !important;
+  margin: 0 !important;
+  padding: 12px !important;
+  border: 1px solid #a97734 !important;
+  border-radius: 6px !important;
+  background: rgba(255, 248, 225, .66) !important;
+  cursor: pointer !important;
+}
+
+#ContentColumn .lost-account-method:has(input:checked) {
+  border-color: #8c230d !important;
+  background: #fff2c9 !important;
+  box-shadow: inset 4px 0 0 #9c290f !important;
+}
+
+#ContentColumn .lost-account-method input[type="radio"] {
+  width: 16px !important;
+  height: 16px !important;
+  margin: 2px 0 0 !important;
+  accent-color: #9c290f !important;
+}
+
+#ContentColumn .lost-account-method strong,
+#ContentColumn .lost-account-method small {
+  display: block !important;
+}
+
+#ContentColumn .lost-account-method strong {
+  margin-bottom: 4px !important;
+  font-size: 12px !important;
+}
+
+#ContentColumn .lost-account-method small {
+  font-size: 10px !important;
+  line-height: 1.4 !important;
+}
+
+#ContentColumn .lost-account-actions {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  padding: 16px 0 0 !important;
+}
+
+#ContentColumn .lost-account-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 132px !important;
+  min-height: 36px !important;
+  padding: 8px 16px !important;
+  border: 1px solid #ffe09a !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #a83a1a 0%, #641207 100%) !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  font: 800 11px Verdana, Arial, sans-serif !important;
+  text-decoration: none !important;
+  text-shadow: 0 1px 1px #330400 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 237, 174, .38), 0 2px 5px rgba(55, 16, 3, .4) !important;
+  cursor: pointer !important;
+}
+
+#ContentColumn .lost-account-button-secondary {
+  border-color: #7e5b2e !important;
+  background: linear-gradient(180deg, #795f39 0%, #49351f 100%) !important;
+}
+
+#ContentColumn .lost-account-button:hover {
+  filter: brightness(1.12) !important;
+}
+
+#ContentColumn .lost-account-security-note {
+  margin: 0 !important;
+  padding: 11px 14px !important;
+  border: 1px solid #b87928 !important;
+  border-top: 0 !important;
+  border-radius: 0 0 6px 6px !important;
+  background: #ead08e !important;
+  color: #3b2413 !important;
+  -webkit-text-fill-color: #3b2413 !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  text-shadow: none !important;
+}
+
+@media (max-width: 640px) {
+  #ContentColumn .lost-account-hero,
+  #ContentColumn .lost-account-panel {
+    padding: 18px 15px !important;
+  }
+
+  #ContentColumn .lost-account-unavailable {
+    grid-template-columns: 1fr !important;
+  }
+
+  #ContentColumn .lost-account-actions {
+    flex-direction: column-reverse !important;
+  }
+
+  #ContentColumn .lost-account-button {
+    width: 100% !important;
+  }
 }
 

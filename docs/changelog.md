@@ -11,6 +11,12 @@ O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0
 ### Adicionado
 - Documentacao completa do projeto
 - Override de `/highscores` com suporte a categorias extras dinamicas, incluindo Bestiary/Charm Points, Loyalty Points, Achievement Points, Bosstiary/Boss Points, Task Points e Prey Wildcards
+- Fundos por vocacao e identificacao VIP nos personagens da box lateral de Highscores
+- Interface em portugues para `/account/lost`, incluindo o estado de recuperacao por e-mail indisponivel
+
+### Alterado
+- Alinhamento e dimensoes dos sprites de boss e creature na box Boosted
+- Contraste e organizacao visual do fluxo de recuperacao de conta
 
 ---
 

@@ -71,6 +71,22 @@
     <div class="rank_content">
         <?php
         $topPlayers = getTopPlayers(5);
+        $vipPlayerIds = [];
+        $topPlayerIds = array_values(array_filter(array_map(static function ($player) {
+            return isset($player['id']) ? (int) $player['id'] : 0;
+        }, $topPlayers)));
+
+        if (!empty($topPlayerIds)) {
+            $vipRows = $db->query(
+                'SELECT p.`id` FROM `players` p JOIN `accounts` a ON a.`id` = p.`account_id` ' .
+                'WHERE p.`id` IN (' . implode(',', $topPlayerIds) . ') AND a.`premdays` > 0'
+            )->fetchAll();
+
+            foreach ($vipRows as $vipRow) {
+                $vipPlayerIds[(int) $vipRow['id']] = true;
+            }
+        }
+
         foreach($topPlayers as $player){
             $outfit_url = '';
             if ($config['online_outfit']){
@@ -78,8 +94,20 @@
                 $player['outfit'] = $outfit_url;
             }
             $player_voc = $config['vocations'][$player['vocation']];
+            $vocationName = strtolower($player_voc);
+            $vocationBanner = '';
+
+            foreach (['knight', 'paladin', 'monk', 'sorcerer', 'druid'] as $baseVocation) {
+                if (str_contains($vocationName, $baseVocation)) {
+                    $vocationBanner = $baseVocation;
+                    break;
+                }
+            }
         ?>
-        <div class="rank_player">
+        <div class="rank_player<?= $vocationBanner !== '' ? ' is-vocation-' . $vocationBanner : ''; ?><?= isset($vipPlayerIds[(int) $player['id']]) ? ' is-vip-account' : ''; ?>">
+            <?php if (isset($vipPlayerIds[(int) $player['id']])) { ?>
+                <span class="rank-vip-ribbon">VIP</span>
+            <?php } ?>
             <div class="rank_outfit" style="background-image: url('<?php echo $player['outfit'] ?>')"></div>
             <div class="rank_text">
                 <a href="<?php echo getPlayerLink($player['name'], false) ?>"><b><?php echo $player['name'] ?></b></a><br>
