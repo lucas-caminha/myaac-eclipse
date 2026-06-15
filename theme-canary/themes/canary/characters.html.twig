@@ -111,10 +111,27 @@
     {% if equipment is not null %}
       <section class="character-equipment-card">
         <div class="character-card-title">Equipamentos</div>
-        <div class="character-equipment-layout" aria-label="Equipamentos de {{ player.getName() }}">
-          {% for slot in 1..10 %}
-            <div class="character-equipment-slot slot-{{ slot }}">{{ equipment[slot]|raw }}</div>
-          {% endfor %}
+        <div class="character-equipment-shell" aria-label="Equipamentos de {{ player.getName() }}">
+          <div class="character-equipment-layout">
+            <div class="character-equipment-column">
+              <div class="character-equipment-slot">{{ equipment[2]|raw }}</div>
+              <div class="character-equipment-slot">{{ equipment[6]|raw }}</div>
+              <div class="character-equipment-slot">{{ equipment[9]|raw }}</div>
+              <div class="character-equipment-value">Soul: {{ soul }}</div>
+            </div>
+            <div class="character-equipment-column">
+              <div class="character-equipment-slot">{{ equipment[1]|raw }}</div>
+              <div class="character-equipment-slot">{{ equipment[4]|raw }}</div>
+              <div class="character-equipment-slot">{{ equipment[7]|raw }}</div>
+              <div class="character-equipment-slot">{{ equipment[8]|raw }}</div>
+            </div>
+            <div class="character-equipment-column">
+              <div class="character-equipment-slot">{{ equipment[3]|raw }}</div>
+              <div class="character-equipment-slot">{{ equipment[5]|raw }}</div>
+              <div class="character-equipment-slot">{{ equipment[10]|raw }}</div>
+              <div class="character-equipment-value">{% if cap > 0 %}Cap: {{ cap }}{% endif %}</div>
+            </div>
+          </div>
         </div>
       </section>
     {% endif %}

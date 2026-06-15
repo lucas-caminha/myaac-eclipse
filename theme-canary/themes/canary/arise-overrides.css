@@ -6473,20 +6473,32 @@ body {
   box-shadow: inset 0 1px 0 rgba(255,249,219,.72), 0 6px 16px rgba(0,0,0,.24) !important;
 }
 
+#ContentColumn .Content .eclipse-character-compact .character-equipment-shell,
+#ContentColumn #News .BoxContent .eclipse-character-compact .character-equipment-shell {
+  display: flex !important;
+  justify-content: center !important;
+  padding: 18px !important;
+  background: radial-gradient(circle at 50% 42%, rgba(255,239,186,.84), rgba(183,126,47,.22) 68%) !important;
+}
+
 #ContentColumn .Content .eclipse-character-compact .character-equipment-layout,
 #ContentColumn #News .BoxContent .eclipse-character-compact .character-equipment-layout {
-  display: grid !important;
-  grid-template-columns: repeat(3, 44px) !important;
-  grid-template-rows: repeat(4, 44px) !important;
-  grid-template-areas:
-    ". helmet ."
-    "necklace armor backpack"
-    "left legs right"
-    "ring boots ammo" !important;
-  gap: 4px !important;
-  justify-content: center !important;
-  padding: 16px !important;
-  background: radial-gradient(circle at 50% 42%, rgba(255,239,186,.84), rgba(183,126,47,.22) 68%) !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 3px !important;
+  padding: 5px !important;
+  border: 1px solid #80501d !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #102d3d 0%, #07141d 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,225,147,.2), 0 5px 12px rgba(45,20,3,.34) !important;
+}
+
+#ContentColumn .Content .eclipse-character-compact .character-equipment-column,
+#ContentColumn #News .BoxContent .eclipse-character-compact .character-equipment-column {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+  width: 44px !important;
 }
 
 #ContentColumn .Content .eclipse-character-compact .character-equipment-slot,
@@ -6502,6 +6514,22 @@ body {
   box-shadow: inset 0 0 0 1px rgba(255,225,147,.22), 0 2px 5px rgba(45,20,3,.32) !important;
 }
 
+#ContentColumn .Content .eclipse-character-compact .character-equipment-value,
+#ContentColumn #News .BoxContent .eclipse-character-compact .character-equipment-value {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  padding: 2px !important;
+  color: #fff0b5 !important;
+  -webkit-text-fill-color: #fff0b5 !important;
+  font: 700 9px Verdana, Arial, sans-serif !important;
+  line-height: 1.15 !important;
+  text-align: center !important;
+  text-shadow: 0 1px 1px #000 !important;
+}
+
 #ContentColumn .Content .eclipse-character-compact .character-equipment-slot img,
 #ContentColumn #News .BoxContent .eclipse-character-compact .character-equipment-slot img {
   display: block !important;
@@ -6509,17 +6537,6 @@ body {
   height: 40px !important;
   margin: 0 !important;
 }
-
-#ContentColumn .Content .eclipse-character-compact .character-equipment-slot.slot-1 { grid-area: helmet !important; }
-#ContentColumn .Content .eclipse-character-compact .character-equipment-slot.slot-2 { grid-area: necklace !important; }
-#ContentColumn .Content .eclipse-character-compact .character-equipment-slot.slot-3 { grid-area: backpack !important; }
-#ContentColumn .Content .eclipse-character-compact .character-equipment-slot.slot-4 { grid-area: armor !important; }
-#ContentColumn .Content .eclipse-character-compact .character-equipment-slot.slot-5 { grid-area: left !important; }
-#ContentColumn .Content .eclipse-character-compact .character-equipment-slot.slot-6 { grid-area: right !important; }
-#ContentColumn .Content .eclipse-character-compact .character-equipment-slot.slot-7 { grid-area: legs !important; }
-#ContentColumn .Content .eclipse-character-compact .character-equipment-slot.slot-8 { grid-area: boots !important; }
-#ContentColumn .Content .eclipse-character-compact .character-equipment-slot.slot-9 { grid-area: ring !important; }
-#ContentColumn .Content .eclipse-character-compact .character-equipment-slot.slot-10 { grid-area: ammo !important; }
 
 #ContentColumn .Content .eclipse-character-compact .character-info-grid {
   display: grid !important;
