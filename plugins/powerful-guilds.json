@@ -1,0 +1,23 @@
+{
+	"name": "Eclipse - Guildas Poderosas",
+	"description": "Ranking de guildas por frags injustificados na página de notícias.",
+	"version": "2.2-eclipse",
+	"type": "plugin",
+	"license": "GPLv3",
+	"author": "slawkens",
+	"contact": "slawkens@gmail.com",
+	"require": {
+		"php": "8.1",
+		"myaac": "2.0-dev"
+	},
+	"hooks": {
+		"Powerful guilds": {
+			"type": "BEFORE_PAGE",
+			"file": "plugins/powerful-guilds/powerful-guilds.php"
+		}
+	},
+	"uninstall": [
+		"plugins/powerful-guilds.json",
+		"plugins/powerful-guilds"
+	]
+}

@@ -9,6 +9,10 @@ O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0
 ## [Unreleased]
 
 ### Adicionado
+- Biblioteca pública de monstros e magias carregada dos dados do Canary
+- Mercado transacional de personagens com pagamento em coins
+- Ranking de guildas poderosas na página de notícias
+- Migration `sql/009-add-game-library-plugins.sql` e documentação de plugins
 - Documentacao completa do projeto
 - Override de `/highscores` com suporte a categorias extras dinamicas, incluindo Bestiary/Charm Points, Loyalty Points, Achievement Points, Bosstiary/Boss Points, Task Points e Prey Wildcards
 - Fundos por vocacao e identificacao VIP nos personagens da box lateral de Highscores

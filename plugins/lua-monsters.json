@@ -1,0 +1,28 @@
+{
+	"name": "Eclipse - Monstros",
+	"description": "Bestiário carregado diretamente dos scripts Lua do Canary.",
+	"version": "1.1-eclipse",
+	"type": "page",
+	"license": "GPLv3",
+	"author": "slawkens",
+	"contact": "slawkens@gmail.com",
+	"autoload": {
+		"pages": false
+	},
+	"routes": {
+		"monsters-page": {
+			"pattern": "monsters[/{name:string}]",
+			"file": "plugins/lua-monsters/pages/monsters.php",
+			"method": "get,post"
+		}
+	},
+	"require": {
+		"myaac": "2.0-dev",
+		"php": "8.1"
+	},
+	"install": "plugins/lua-monsters/install.php",
+	"uninstall": [
+		"plugins/lua-monsters.json",
+		"plugins/lua-monsters"
+	]
+}

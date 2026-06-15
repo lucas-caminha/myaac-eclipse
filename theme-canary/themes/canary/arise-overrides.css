@@ -1547,6 +1547,99 @@ body {
   box-shadow: inset 0 0 0 1px rgba(255, 219, 135, 0.2) !important;
 }
 
+/* Eclipse plugin library */
+#ContentColumn .eclipse-plugin-page { color:#321c10; font:12px Verdana,Arial,sans-serif; }
+#ContentColumn .eclipse-plugin-page * { box-sizing:border-box; }
+#ContentColumn .eclipse-plugin-hero { display:flex; flex-direction:column; justify-content:center; min-height:132px; margin:0 0 14px; padding:22px 24px; border:1px solid #8b4f16; border-radius:6px; background:#27130d; color:#fff4ce; box-shadow:inset 0 0 0 2px rgba(232,171,62,.18),0 3px 8px rgba(46,20,5,.28); }
+#ContentColumn .eclipse-plugin-hero-compact { min-height:92px; }
+#ContentColumn .eclipse-plugin-kicker { margin-bottom:6px; color:#efbc55; font-size:10px; font-weight:800; text-transform:uppercase; }
+#ContentColumn .eclipse-plugin-hero h2 { margin:0; color:#fff4ce; font:700 25px Georgia,serif; text-shadow:0 2px 2px #000; }
+#ContentColumn .eclipse-plugin-hero p { max-width:650px; margin:7px 0 0; color:#f3dfb0; line-height:1.55; }
+#ContentColumn .eclipse-plugin-toolbar { display:flex; align-items:center; gap:10px; margin:0 0 14px; padding:10px; border:1px solid #b87b26; background:#ead08e; color:#2c180d; }
+#ContentColumn .eclipse-plugin-toolbar-split { justify-content:space-between; flex-wrap:wrap; }
+#ContentColumn .eclipse-plugin-toolbar form { display:flex; align-items:center; gap:8px; margin:0; }
+#ContentColumn .eclipse-plugin-toolbar label { font-weight:800; }
+#ContentColumn .eclipse-plugin-toolbar select,#ContentColumn .eclipse-plugin-toolbar input,#ContentColumn .eclipse-market-sell-form select,#ContentColumn .eclipse-market-sell-form input,#ContentColumn .eclipse-plugin-search { min-height:34px; border:1px solid #806035; border-radius:3px; background:#fff7df; color:#25140b; padding:6px 9px; }
+#ContentColumn .eclipse-plugin-button { display:inline-flex; align-items:center; justify-content:center; min-height:34px; padding:7px 14px; border:1px solid #ffd77b; border-radius:4px; background:#8b250f; color:#fff!important; -webkit-text-fill-color:#fff!important; font-weight:800; text-decoration:none!important; text-shadow:0 1px #300; cursor:pointer; }
+#ContentColumn .eclipse-plugin-button:hover { filter:brightness(1.13); }
+#ContentColumn .eclipse-plugin-button-secondary { border-color:#7d592c; background:#604628; }
+#ContentColumn .eclipse-plugin-button-danger { background:#6e160c; }
+#ContentColumn .eclipse-plugin-button:disabled { opacity:.55; cursor:not-allowed; }
+#ContentColumn .eclipse-category-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+#ContentColumn .eclipse-category-grid a { min-height:78px; padding:15px 17px; border:1px solid #ad7228; border-left:5px solid #8d2a12; border-radius:4px; background:#f0d796; color:#2b170c!important; text-decoration:none!important; box-shadow:0 2px 4px rgba(70,39,8,.2); }
+#ContentColumn .eclipse-category-grid a:hover { background:#f8e6b5; transform:translateY(-1px); }
+#ContentColumn .eclipse-category-grid strong,#ContentColumn .eclipse-category-grid span { display:block; }
+#ContentColumn .eclipse-category-grid strong { margin-bottom:5px; font:700 16px Georgia,serif; }
+#ContentColumn .eclipse-category-grid span { color:#684827; font-size:10px; }
+#ContentColumn .eclipse-plugin-table-wrap { overflow:auto; border:1px solid #9b641f; background:#f1d99c; }
+#ContentColumn .eclipse-plugin-table { width:100%; border-collapse:collapse; color:#25150c; }
+#ContentColumn .eclipse-plugin-table th { padding:11px 10px; background:#092d3c; color:#fff4ce; text-align:left; }
+#ContentColumn .eclipse-plugin-table td { padding:9px 10px; border-top:1px solid #c89a4c; background:#f3dda4; vertical-align:middle; }
+#ContentColumn .eclipse-plugin-table tr:nth-child(even) td { background:#e7c678; }
+#ContentColumn .eclipse-item-image img,#ContentColumn .eclipse-item-sprite { width:32px; height:32px; object-fit:contain; }
+#ContentColumn .eclipse-plugin-empty { grid-column:1/-1; padding:24px!important; background:#ead08e!important; color:#3b2413!important; text-align:center; font-weight:700; }
+#ContentColumn .eclipse-plugin-tab-list { display:flex; gap:3px; }
+#ContentColumn .eclipse-plugin-tab-list button { flex:1; min-height:38px; border:1px solid #81521d; background:#d9b66b; color:#301a0d; font-weight:800; cursor:pointer; }
+#ContentColumn .eclipse-plugin-tab-list button.is-active { background:#092d3c; color:#fff4ce; }
+#ContentColumn .eclipse-plugin-tab-panel { display:none; padding-top:8px; }
+#ContentColumn .eclipse-plugin-tab-panel.is-active { display:block; }
+#ContentColumn .eclipse-plugin-filter-links { display:flex; gap:5px; }
+#ContentColumn .eclipse-plugin-filter-links a { padding:7px 10px; border:1px solid #91611f; background:#fff0c4; color:#3a210f!important; font-weight:800; text-decoration:none!important; }
+#ContentColumn .eclipse-monster-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+#ContentColumn .eclipse-monster-card { display:grid; grid-template-columns:70px 1fr; gap:9px; min-height:118px; padding:10px; border:1px solid #ae7324; border-radius:5px; background:#efd493; color:#27150b!important; text-decoration:none!important; box-shadow:0 2px 5px rgba(59,32,5,.2); }
+#ContentColumn .eclipse-monster-card.is-boss { border-color:#d29022; box-shadow:inset 0 0 0 2px #f4ce66,0 2px 6px rgba(71,34,2,.3); }
+#ContentColumn .eclipse-monster-portrait { display:flex; align-items:center; justify-content:center; width:70px; height:70px; background:#d8b466; border:1px solid #9e6b26; }
+#ContentColumn .eclipse-monster-portrait img { max-width:64px; max-height:64px; }
+#ContentColumn .eclipse-monster-card strong,#ContentColumn .eclipse-monster-card span { display:block; }
+#ContentColumn .eclipse-monster-card span { margin-top:4px; color:#755028; font-size:10px; }
+#ContentColumn .eclipse-monster-card dl { grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr; margin:0; border-top:1px solid #c4984e; }
+#ContentColumn .eclipse-monster-card dl div { display:flex; justify-content:space-between; padding:7px 5px 0; }
+#ContentColumn .eclipse-monster-card dt { font-weight:800; }
+#ContentColumn .eclipse-monster-card dd { margin:0; }
+#ContentColumn .eclipse-monster-detail-hero { flex-direction:row; align-items:center; justify-content:flex-start; gap:18px; }
+#ContentColumn .eclipse-monster-detail-image { display:flex; align-items:center; justify-content:center; width:92px; height:92px; border:1px solid #bc7e27; background:rgba(0,0,0,.3); }
+#ContentColumn .eclipse-monster-detail-image img { max-width:88px; max-height:88px; }
+#ContentColumn .eclipse-stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:12px; }
+#ContentColumn .eclipse-stat-grid div { padding:12px; border:1px solid #ad7228; background:#efd493; text-align:center; }
+#ContentColumn .eclipse-stat-grid span,#ContentColumn .eclipse-stat-grid strong { display:block; }
+#ContentColumn .eclipse-stat-grid span { margin-bottom:5px; color:#795126; font-size:10px; text-transform:uppercase; }
+#ContentColumn .eclipse-stat-grid strong { font-size:16px; }
+#ContentColumn .eclipse-plugin-section { margin:0 0 12px; padding:14px; border:1px solid #ad7228; background:#efd493; color:#2b180d; }
+#ContentColumn .eclipse-plugin-section h3 { margin:-14px -14px 13px; padding:10px 13px; background:#092d3c; color:#fff4ce; font:700 15px Georgia,serif; }
+#ContentColumn .eclipse-detail-list,#ContentColumn .eclipse-element-grid,#ContentColumn .eclipse-plugin-tags { display:flex; flex-wrap:wrap; gap:8px; }
+#ContentColumn .eclipse-detail-list span,#ContentColumn .eclipse-element-grid span,#ContentColumn .eclipse-plugin-tags span { padding:8px 10px; border:1px solid #bd914b; background:#f8e5b4; color:#301b0e; }
+#ContentColumn .eclipse-element-grid span strong { display:block; margin-bottom:3px; }
+#ContentColumn .eclipse-loot-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:7px; }
+#ContentColumn .eclipse-loot-grid div { display:grid; grid-template-columns:36px 1fr; align-items:center; min-height:52px; padding:7px; border:1px solid #bd914b; background:#f8e5b4; }
+#ContentColumn .eclipse-loot-grid img { grid-row:1/3; width:32px; height:32px; }
+#ContentColumn .eclipse-loot-grid span { color:#785129; font-size:10px; }
+#ContentColumn .eclipse-monster-voice { color:#7c220d; font-weight:800; }
+#ContentColumn .eclipse-plugin-notice,#ContentColumn .eclipse-plugin-note { padding:12px; border:1px solid #b87b26; background:#ead08e; color:#321d0f; }
+#ContentColumn .eclipse-market-sell-form { display:grid; grid-template-columns:2fr 1fr auto; gap:10px; align-items:end; }
+#ContentColumn .eclipse-market-sell-form label { display:grid; gap:5px; font-weight:800; }
+#ContentColumn .eclipse-market-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:11px; }
+#ContentColumn .eclipse-market-card { display:grid; grid-template-columns:92px 1fr; gap:12px; padding:13px; border:1px solid #9b641f; border-top:4px solid #8d2a12; border-radius:5px; background:#efd493; }
+#ContentColumn .eclipse-market-outfit { display:flex; align-items:center; justify-content:center; min-height:112px; border:1px solid #b07a32; background:#d9b66b; overflow:hidden; }
+#ContentColumn .eclipse-market-outfit img { max-width:110px; }
+#ContentColumn .eclipse-market-card h3 { margin:4px 0; color:#27150b; font:700 18px Georgia,serif; }
+#ContentColumn .eclipse-market-vocation { color:#7b260e; font-size:10px; font-weight:800; text-transform:uppercase; }
+#ContentColumn .eclipse-market-price { display:block; margin-top:12px; color:#6d190d; font-size:15px; }
+#ContentColumn .eclipse-market-card form { grid-column:1/-1; margin:0; }
+#ContentColumn .eclipse-market-card form button { width:100%; }
+#ContentColumn .eclipse-powerful-guilds { margin:0 0 15px; border:1px solid #8e551b; background:#efd493; color:#2e190d; }
+#ContentColumn .eclipse-powerful-guilds-heading { padding:12px 15px; background:#092d3c; color:#fff4ce; }
+#ContentColumn .eclipse-powerful-guilds-heading span { color:#e9b94f; font-size:9px; font-weight:800; text-transform:uppercase; }
+#ContentColumn .eclipse-powerful-guilds-heading h2 { margin:3px 0 0; font:700 18px Georgia,serif; }
+#ContentColumn .eclipse-powerful-guilds-list { display:grid; grid-template-columns:repeat(5,1fr); }
+#ContentColumn .eclipse-powerful-guilds-list a { display:flex; flex-direction:column; align-items:center; gap:5px; min-width:0; padding:12px 5px; border-right:1px solid #c99b51; color:#2c180d!important; text-align:center; text-decoration:none!important; }
+#ContentColumn .eclipse-powerful-guilds-list a:last-child { border-right:0; }
+#ContentColumn .eclipse-powerful-guilds-list img { width:46px; height:46px; object-fit:contain; }
+#ContentColumn .eclipse-powerful-guilds-list strong,#ContentColumn .eclipse-powerful-guilds-list small { display:block; overflow:hidden; text-overflow:ellipsis; }
+#ContentColumn .eclipse-powerful-guilds-list small { margin-top:3px; color:#725027; font-size:9px; }
+#ContentColumn .eclipse-guild-position { display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; background:#8d2a12; color:#fff; font-weight:800; }
+@media(max-width:760px){#ContentColumn .eclipse-monster-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#ContentColumn .eclipse-loot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#ContentColumn .eclipse-powerful-guilds-list{grid-template-columns:repeat(2,1fr)}#ContentColumn .eclipse-powerful-guilds-list a{border-bottom:1px solid #c99b51}}
+@media(max-width:520px){#ContentColumn .eclipse-category-grid,#ContentColumn .eclipse-monster-grid,#ContentColumn .eclipse-market-grid{grid-template-columns:1fr}#ContentColumn .eclipse-stat-grid{grid-template-columns:repeat(2,1fr)}#ContentColumn .eclipse-market-sell-form{grid-template-columns:1fr}#ContentColumn .eclipse-plugin-toolbar form{align-items:stretch;flex-direction:column;width:100%}#ContentColumn .eclipse-plugin-tab-list{display:grid;grid-template-columns:1fr}#ContentColumn .eclipse-monster-detail-hero{flex-direction:column;align-items:flex-start}}
+
 #Themeboxes .rank_player.is-vocation-knight {
   background-image: linear-gradient(90deg, rgba(12, 10, 8, 0.84), rgba(12, 10, 8, 0.54)), url("images/vocations/knightbanner.png") !important;
 }
@@ -7236,5 +7329,80 @@ body {
   #ContentColumn .lost-account-button {
     width: 100% !important;
   }
+}
+
+/* Keep readable text on the light surfaces used by Eclipse plugins. */
+#ContentColumn .Content .eclipse-plugin-page .eclipse-plugin-toolbar,
+#ContentColumn .Content .eclipse-plugin-page .eclipse-plugin-section,
+#ContentColumn .Content .eclipse-plugin-page .eclipse-plugin-notice,
+#ContentColumn .Content .eclipse-plugin-page .eclipse-plugin-note,
+#ContentColumn .Content .eclipse-plugin-page .eclipse-plugin-empty,
+#ContentColumn .Content .eclipse-plugin-page .eclipse-category-grid a,
+#ContentColumn .Content .eclipse-plugin-page .eclipse-monster-card,
+#ContentColumn .Content .eclipse-plugin-page .eclipse-market-card,
+#ContentColumn .Content .eclipse-plugin-page .eclipse-plugin-table td {
+  color: #2b180d !important;
+  -webkit-text-fill-color: #2b180d !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .Content .eclipse-plugin-page .eclipse-plugin-notice a {
+  color: #711d0c !important;
+  -webkit-text-fill-color: #711d0c !important;
+  font-weight: 800 !important;
+}
+
+#ContentColumn .Content .eclipse-plugin-page .eclipse-plugin-button {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  text-shadow: 0 1px #300 !important;
+}
+
+#ContentColumn .eclipse-plugin-page .eclipse-plugin-table tbody td {
+  background: #f3dda4 !important;
+  color: #2b180d !important;
+  -webkit-text-fill-color: #2b180d !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-plugin-page .eclipse-plugin-table tbody tr:nth-child(even) td {
+  background: #e7c678 !important;
+}
+
+#ContentColumn .eclipse-plugin-page .eclipse-plugin-table tbody td * {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  text-shadow: none !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-plugin-page table.eclipse-plugin-table tbody tr td,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-plugin-page table.eclipse-plugin-table tbody tr td strong,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-plugin-page table.eclipse-plugin-table tbody tr td span {
+  color: #2b180d !important;
+  -webkit-text-fill-color: #2b180d !important;
+  text-shadow: none !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-monsters-page .eclipse-monster-card *,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-monster-detail .eclipse-stat-grid *,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-monster-detail .eclipse-detail-list *,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-monster-detail .eclipse-element-grid *,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-monster-detail .eclipse-plugin-tags *,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-monster-detail .eclipse-loot-grid * {
+  color: #2b180d !important;
+  -webkit-text-fill-color: #2b180d !important;
+  text-shadow: none !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-monster-detail .eclipse-plugin-section * {
+  color: #2b180d !important;
+  -webkit-text-fill-color: #2b180d !important;
+  text-shadow: none !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-monster-detail .eclipse-plugin-section > h3 {
+  color: #fff4ce !important;
+  -webkit-text-fill-color: #fff4ce !important;
+  text-shadow: 0 1px #000 !important;
 }
 

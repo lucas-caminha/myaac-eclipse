@@ -14,6 +14,7 @@ return [
 	],
 	MENU_CATEGORY_COMMUNITY => [
 		'Personagens' => 'characters',
+		'Mercado de Personagens' => 'character-sale',
 		'Quem Está Online?' => 'online',
 		'Highscores' => 'highscores',
 		'Últimas Mortes' => 'last-kills',
@@ -23,6 +24,8 @@ return [
 	],
 	MENU_CATEGORY_LIBRARY => [
 		'VIP & Loyalty' => 'vip-loyalty',
+		'Monstros' => 'monsters',
+		'Magias' => 'spells',
 		'Comandos e Informações' => 'ots-info',
 	],
 	MENU_CATEGORY_SHOP => [

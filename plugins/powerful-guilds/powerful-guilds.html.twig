@@ -1,0 +1,10 @@
+{% if guilds is not empty %}
+<section class="eclipse-powerful-guilds">
+	<div class="eclipse-powerful-guilds-heading"><span>Disputa pelo domínio</span><h2>Guildas Poderosas</h2></div>
+	<div class="eclipse-powerful-guilds-list">
+	{% for guild in guilds %}
+		<a href="{{ guild.link }}"><span class="eclipse-guild-position">{{ loop.index }}</span><img src="{{ constant('BASE_URL') }}images/guilds/{{ guild.logo }}" alt=""><span><strong>{{ guild.name }}</strong><small>{{ guild.members }} membros · {{ guild.frags }} frags</small></span></a>
+	{% endfor %}
+	</div>
+</section>
+{% endif %}

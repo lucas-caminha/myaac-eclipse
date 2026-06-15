@@ -74,6 +74,9 @@ git pull origin main
 # Sincronizar arquivos do tema
 sudo rsync -av theme-canary/themes/canary/ /var/www/html/plugins/theme-canary/themes/canary/
 
+# Sincronizar plugins publicos do Eclipse
+sudo rsync -av plugins/ /var/www/html/plugins/
+
 # Sincronizar paginas publicas do plugin, quando existirem
 sudo rsync -av theme-canary/pages/ /var/www/html/plugins/theme-canary/pages/
 
@@ -85,6 +88,10 @@ sudo rsync -av system/pages/account/change-info.php /var/www/html/system/pages/a
 
 # Ajustar permissoes
 sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/themes/canary
+sudo chown -R www-data:www-data /var/www/html/plugins/character-sale
+sudo chown -R www-data:www-data /var/www/html/plugins/lua-monsters
+sudo chown -R www-data:www-data /var/www/html/plugins/lua-spells
+sudo chown -R www-data:www-data /var/www/html/plugins/powerful-guilds
 sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/pages
 sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/webhooks
 sudo chown www-data:www-data /var/www/html/system/pages/account/change-info.php
@@ -113,9 +120,14 @@ git pull origin main
 
 echo "Sincronizando tema..."
 sudo rsync -av theme-canary/themes/canary/ /var/www/html/plugins/theme-canary/themes/canary/
+sudo rsync -av plugins/ /var/www/html/plugins/
 sudo rsync -av theme-canary/pages/ /var/www/html/plugins/theme-canary/pages/
 sudo rsync -av theme-canary/webhooks/ /var/www/html/plugins/theme-canary/webhooks/
 sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/themes/canary
+sudo chown -R www-data:www-data /var/www/html/plugins/character-sale
+sudo chown -R www-data:www-data /var/www/html/plugins/lua-monsters
+sudo chown -R www-data:www-data /var/www/html/plugins/lua-spells
+sudo chown -R www-data:www-data /var/www/html/plugins/powerful-guilds
 sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/pages
 sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/webhooks
 

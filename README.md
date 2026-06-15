@@ -46,6 +46,7 @@ myaac-eclipse/
 |-- config.local.php.example     # Exemplo de config local do MyAAC
 |-- docs/                        # Documentacao do projeto
 |-- nginx/                       # Exemplo de configuracao Nginx
+|-- plugins/                     # Plugins MyAAC customizados do Eclipse
 |-- scripts/                     # Scripts operacionais de exemplo
 |-- sql/                         # SQLs versionados para conteudo/config
 `-- theme-canary/
@@ -69,6 +70,7 @@ A documentacao completa fica em [docs/](docs/):
 - [Instalacao](docs/install.md)
 - [Configuracao](docs/configuration.md)
 - [Tema Canary](docs/theme.md)
+- [Plugins](docs/plugins.md)
 - [SQL e migrations](docs/sql-migrations.md)
 - [Operacoes](docs/operations.md)
 - [Seguranca](docs/security.md)

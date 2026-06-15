@@ -1,0 +1,18 @@
+{
+	"name": "Eclipse - Mercado de Personagens",
+	"description": "Compra e venda segura de personagens usando Tibia Coins da conta.",
+	"version": "1.0-eclipse",
+	"type": "page",
+	"author": "Eclipse OT",
+	"autoload": { "pages": false },
+	"routes": {
+		"character-sale": {
+			"pattern": "character-sale",
+			"file": "plugins/character-sale/pages/character-sale.php",
+			"method": "get,post"
+		}
+	},
+	"require": { "myaac": "2.0-dev", "php": "8.1" },
+	"install": "plugins/character-sale/install.php",
+	"uninstall": ["plugins/character-sale.json", "plugins/character-sale"]
+}

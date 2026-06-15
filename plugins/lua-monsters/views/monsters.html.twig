@@ -1,0 +1,27 @@
+<div class="eclipse-plugin-page eclipse-monsters-page">
+	<header class="eclipse-plugin-hero">
+		<span class="eclipse-plugin-kicker">Bestiário do Eclipse</span>
+		<h2>Monstros</h2>
+		<p>Explore criaturas, chefes, experiência, vida e informações de combate.</p>
+	</header>
+	<div class="eclipse-plugin-toolbar eclipse-plugin-toolbar-split">
+		<div class="eclipse-plugin-filter-links"><a href="{{ getLink('monsters') }}">Todos</a><a href="{{ getLink('monsters') }}?boss=1">Chefes</a></div>
+		<input class="eclipse-plugin-search" type="search" placeholder="Buscar monstro" data-monster-search>
+		{% if isAdmin %}<form action="{{ getLink('monsters') }}" method="post">{{ csrf() }}<input type="hidden" name="reload" value="1"><button class="eclipse-plugin-button eclipse-plugin-button-secondary" type="submit">Atualizar bestiário</button></form>{% endif %}
+	</div>
+	<div class="eclipse-monster-grid" data-monster-grid>
+	{% for monster in monsters %}
+		<a class="eclipse-monster-card{% if monster.rewardboss %} is-boss{% endif %}" href="{{ getMonsterLink(monster.name, false)|raw }}" data-name="{{ monster.name|lower }}">
+			<div class="eclipse-monster-portrait"><img src="{{ monster.img_link }}" alt="{{ monster.name }}"></div>
+			<div><strong>{{ monster.name }}</strong><span>{{ monster.rewardboss ? 'Chefe' : monster.race|title }}</span></div>
+			<dl><div><dt>Vida</dt><dd>{{ monster.health|number_format(0, ',', '.') }}</dd></div><div><dt>EXP</dt><dd>{{ monster.exp|number_format(0, ',', '.') }}</dd></div></dl>
+		</a>
+	{% else %}<div class="eclipse-plugin-empty">Nenhum monstro carregado. Um administrador pode atualizar o bestiário.</div>{% endfor %}
+	</div>
+</div>
+<script>
+var monsterSearch = document.querySelector('[data-monster-search]');
+if (monsterSearch) monsterSearch.addEventListener('input', function () {
+	document.querySelectorAll('[data-monster-grid] [data-name]').forEach(function (card) { card.hidden = card.dataset.name.indexOf(monsterSearch.value.toLowerCase()) === -1; });
+});
+</script>

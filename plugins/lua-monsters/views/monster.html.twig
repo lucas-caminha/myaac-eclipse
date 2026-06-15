@@ -1,0 +1,14 @@
+<div class="eclipse-plugin-page eclipse-monster-detail">
+	<header class="eclipse-plugin-hero eclipse-monster-detail-hero">
+		<div class="eclipse-monster-detail-image"><img src="{{ monster.img_link }}" alt="{{ monster.name }}"></div>
+		<div><span class="eclipse-plugin-kicker">Bestiário do Eclipse</span><h2>{{ monster.name }}</h2><p>{{ monster.rewardboss ? 'Chefe de recompensa' : monster.race|title }}</p></div>
+	</header>
+	<div class="eclipse-stat-grid">
+		<div><span>Vida</span><strong>{{ monster.health|number_format(0, ',', '.') }}</strong></div><div><span>Experiência</span><strong>{{ monster.exp|number_format(0, ',', '.') }}</strong></div><div><span>Defesa</span><strong>{{ monster.defense }}</strong></div><div><span>Armadura</span><strong>{{ monster.armor }}</strong></div>
+	</div>
+	<section class="eclipse-plugin-section"><h3>Características</h3><div class="eclipse-detail-list"><span>Invocável: <strong>{{ monster.summonable ? monster.mana ~ ' mana' : 'Não' }}</strong></span><span>Convencível: <strong>{{ monster.convinceable ? monster.mana ~ ' mana' : 'Não' }}</strong></span><span>Velocidade: <strong>{{ monster.speed_lvl }}</strong></span></div></section>
+	{% if monster.elements is not empty %}<section class="eclipse-plugin-section"><h3>Elementos</h3><div class="eclipse-element-grid">{% for element in monster.elements %}<span><strong>{{ element.name }}</strong>{{ element.percent }}%</span>{% endfor %}</div></section>{% endif %}
+	{% if monster.immunities is not empty %}<section class="eclipse-plugin-section"><h3>Imunidades</h3><div class="eclipse-plugin-tags">{% for immunity in monster.immunities %}<span>{{ immunity|title }}</span>{% endfor %}</div></section>{% endif %}
+	{% if monster.loot is not empty %}<section class="eclipse-plugin-section"><h3>Loot</h3><div class="eclipse-loot-grid">{% for item in monster.loot %}<div>{% if item.id > 0 %}<img src="{{ setting('core.item_images_url') }}{{ item.id }}{{ setting('core.item_images_extension') }}" alt="{{ item.name }}">{% endif %}<strong>{{ item.name|title }}</strong><span>{{ (item.chance / 1000)|number_format(2, ',', '.') }}%</span></div>{% endfor %}</div></section>{% endif %}
+	{% if monster.voices is not empty %}<section class="eclipse-plugin-section"><h3>Vozes</h3>{% for voice in monster.voices %}<p class="eclipse-monster-voice">“{{ voice }}”</p>{% endfor %}</section>{% endif %}
+</div>
