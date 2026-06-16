@@ -61,6 +61,32 @@ Notas:
 - O webhook consulta o pagamento no Mercado Pago e so credita coins quando o status retornado for `approved`.
 - Depois de alterar variaveis de ambiente, reinicie o servico PHP/Apache usado pelo site.
 
+### Patrocinio de Boosted
+
+A pagina `/boosted-sponsor` usa saldo interno de Tibia Coins:
+
+```bash
+ECLIPSE_BOOSTED_APPLY_TOKEN="token-forte-apenas-se-usar-via-http"
+ECLIPSE_MONSTER_DATA_PATH="/caminho/para/data-otservbr-global/monster"
+```
+
+Notas:
+- Existe 1 slot de `boss` e 1 slot de `creature` para o proximo server save.
+- O custo e fixo: `250 Tibia Coins` para boss e `300 Tibia Coins` para creature.
+- O alvo escolhido entra no proximo server save e depois fica 10 dias em cooldown.
+- Quando `myaac_monsters` nao estiver populada com `raceid`, configure `ECLIPSE_MONSTER_DATA_PATH` apontando para a pasta `monster` do Canary/OTServBR para o aplicador resolver o `raceid` pelos arquivos Lua.
+- Depois do server save, execute:
+
+```bash
+php /var/www/html/plugins/theme-canary/webhooks/boosted-sponsor-apply.php
+```
+
+- Se quiser rodar via HTTP, configure `ECLIPSE_BOOSTED_APPLY_TOKEN` e chame:
+
+```bash
+curl "https://seu-dominio.com/plugins/theme-canary/webhooks/boosted-sponsor-apply.php?token=SEU_TOKEN"
+```
+
 ## Deploy de Atualizacoes
 
 ### Atualizar Tema

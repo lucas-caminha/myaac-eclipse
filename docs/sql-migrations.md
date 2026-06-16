@@ -14,6 +14,7 @@ Este guia documenta os scripts SQL incluidos no projeto e como gerenciar migraco
 | `sql/006-update-downloads-client-15-11.sql` | Atualiza Downloads para o client 15.11 |
 | `sql/007-add-account-donation-profile.sql` | Adiciona campos de perfil usados em doacoes futuras |
 | `sql/008-add-donation-intents.sql` | Adiciona tabela de intencoes de doacao para futuro Pix |
+| `sql/012-add-boosted-sponsorships.sql` | Adiciona pedidos de patrocinio para o proximo boosted |
 
 ## Aplicando Migracoes
 
@@ -184,6 +185,33 @@ CREATE TABLE IF NOT EXISTS eclipse_donation_intents (
 - Reserva campos para QR Code Pix, codigo copia e cola e referencia do gateway
 - Mantem snapshot de nome e CPF para conferencia futura
 - Nao credita coins automaticamente enquanto a integracao de pagamento estiver pendente
+
+### 012-add-boosted-sponsorships.sql
+
+Cria a tabela `eclipse_boosted_sponsorships` para controlar patrocinio de `boss` e `creature` no proximo server save:
+
+```sql
+CREATE TABLE IF NOT EXISTS eclipse_boosted_sponsorships (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  account_id INT(11) UNSIGNED NOT NULL,
+  target_type VARCHAR(20) NOT NULL,
+  target_monster_id INT(11) UNSIGNED NOT NULL,
+  target_name VARCHAR(255) NOT NULL,
+  target_category VARCHAR(100) NOT NULL DEFAULT '',
+  amount_coins INT UNSIGNED NOT NULL,
+  status VARCHAR(40) NOT NULL DEFAULT 'paid',
+  scheduled_for_date DATE NOT NULL,
+  cooldown_until DATE NOT NULL,
+  reservation_expires_at DATETIME DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+```
+
+**O que faz:**
+- Reserva 1 slot de boss e 1 slot de creature por proximo server save
+- Registra alvo, custo em Tibia Coins e status da compra
+- Impoe cooldown de 10 dias apos a entrada do alvo
+- Alimenta o aplicador que atualiza `boosted_boss` e `boosted_creature`
 
 ## Criando Novas Migracoes
 
