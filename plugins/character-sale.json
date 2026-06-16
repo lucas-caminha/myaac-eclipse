@@ -10,6 +10,11 @@
 			"pattern": "character-sale",
 			"file": "plugins/character-sale/pages/character-sale.php",
 			"method": "get,post"
+		},
+		"character-sale-detail": {
+			"pattern": "character-sale/{offer_id:\\d+}",
+			"file": "plugins/character-sale/pages/character-sale.php",
+			"method": "get,post"
 		}
 	},
 	"require": { "myaac": "2.0-dev", "php": "8.1" },

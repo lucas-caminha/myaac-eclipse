@@ -1646,10 +1646,58 @@ body {
 #ContentColumn .eclipse-market-outfit { display:flex; align-items:center; justify-content:center; min-height:112px; border:1px solid #b07a32; background:#d9b66b; overflow:hidden; }
 #ContentColumn .eclipse-market-outfit img { max-width:110px; }
 #ContentColumn .eclipse-market-card h3 { margin:4px 0; color:#27150b; font:700 18px Georgia,serif; }
+#ContentColumn .eclipse-market-card h3 a { color:#27150b!important; -webkit-text-fill-color:#27150b!important; text-decoration:none!important; }
+#ContentColumn .eclipse-market-card h3 a:hover { color:#7a1f0d!important; -webkit-text-fill-color:#7a1f0d!important; }
 #ContentColumn .eclipse-market-vocation { color:#7b260e; font-size:10px; font-weight:800; text-transform:uppercase; }
 #ContentColumn .eclipse-market-price { display:block; margin-top:12px; color:#6d190d; font-size:15px; }
+#ContentColumn .eclipse-market-details-link { display:inline-block; margin-top:8px; color:#6f1d0d!important; -webkit-text-fill-color:#6f1d0d!important; font-size:10px; font-weight:900; text-decoration:underline!important; text-transform:uppercase; }
 #ContentColumn .eclipse-market-card form { grid-column:1/-1; margin:0; }
 #ContentColumn .eclipse-market-card form button { width:100%; }
+#ContentColumn .eclipse-market-detail-page { padding-bottom:14px; }
+#ContentColumn .eclipse-market-detail-page .eclipse-plugin-section { margin:0 0 12px; border:1px solid #a9691c; background:#e4bd65; box-shadow:0 2px 0 rgba(77,34,10,.35); }
+#ContentColumn .eclipse-market-detail-page .eclipse-plugin-section h3 { margin:0; padding:11px 14px; border-bottom:1px solid #c48522; background:linear-gradient(180deg,#064158 0%,#052a38 100%); color:#ffe7a6!important; -webkit-text-fill-color:#ffe7a6!important; font:700 17px Georgia,serif; letter-spacing:0; text-shadow:0 1px 1px #000; }
+#ContentColumn .eclipse-market-detail-page .eclipse-plugin-section > .eclipse-market-detail-stats,
+#ContentColumn .eclipse-market-detail-page .eclipse-plugin-section > .eclipse-market-info-list,
+#ContentColumn .eclipse-market-detail-page .eclipse-plugin-section > .eclipse-market-skill-grid,
+#ContentColumn .eclipse-market-detail-page .eclipse-plugin-section > .eclipse-market-equipment-grid,
+#ContentColumn .eclipse-market-detail-page .eclipse-plugin-section > .eclipse-market-death-list,
+#ContentColumn .eclipse-market-detail-page .eclipse-plugin-section > .eclipse-plugin-note,
+#ContentColumn .eclipse-market-detail-page .eclipse-plugin-section > .eclipse-market-comment { margin:14px; }
+#ContentColumn .eclipse-market-detail-hero { position:relative; display:grid; grid-template-columns:168px minmax(0,1fr); align-items:center; gap:18px; min-height:164px; padding:20px 24px; border:1px solid #a9671a; border-top:3px solid #d9a03c; background:linear-gradient(135deg,rgba(36,9,5,.97) 0%,rgba(70,18,8,.95) 48%,rgba(23,8,5,.98) 100%); box-shadow:0 2px 8px rgba(23,8,4,.55), inset 0 0 0 1px rgba(255,205,103,.16); overflow:hidden; text-align:left; }
+#ContentColumn .eclipse-market-detail-hero:after { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 82% 20%,rgba(218,145,42,.18),transparent 30%),linear-gradient(90deg,transparent,rgba(255,220,139,.08)); }
+#ContentColumn .eclipse-market-detail-hero > * { position:relative; z-index:1; }
+#ContentColumn .eclipse-market-detail-hero h2 { margin:2px 0 3px; color:#fff2c8!important; -webkit-text-fill-color:#fff2c8!important; font-size:29px; line-height:1.05; text-shadow:0 2px 2px #180603; }
+#ContentColumn .eclipse-market-detail-hero p { margin:0; color:#f3d491!important; -webkit-text-fill-color:#f3d491!important; font-size:13px; font-weight:800; text-shadow:none!important; }
+#ContentColumn .eclipse-market-detail-hero .eclipse-plugin-kicker { color:#e5a63a!important; -webkit-text-fill-color:#e5a63a!important; font-size:10px; font-weight:900; letter-spacing:0; text-shadow:none!important; }
+#ContentColumn .eclipse-market-detail-hero .eclipse-market-price { display:inline-flex; align-items:center; min-height:28px; margin-top:12px; padding:0 12px; border:1px solid #e1a23f; background:linear-gradient(180deg,#9f260e 0%,#641205 100%); color:#fff3c9!important; -webkit-text-fill-color:#fff3c9!important; font-size:15px; font-weight:900; box-shadow:inset 0 1px 0 rgba(255,229,146,.25); text-shadow:0 1px 1px #280300!important; }
+#ContentColumn .eclipse-market-detail-outfit { display:flex; align-items:center; justify-content:center; min-height:136px; border:1px solid #d69a38; background:linear-gradient(180deg,#f0d389 0%,#be832c 100%); box-shadow:inset 0 0 0 4px rgba(61,27,8,.16),0 2px 5px rgba(0,0,0,.35); overflow:hidden; }
+#ContentColumn .eclipse-market-detail-outfit img { max-width:132px; filter:drop-shadow(0 3px 2px rgba(0,0,0,.35)); }
+#ContentColumn .eclipse-market-detail-actions { display:flex; flex-wrap:wrap; gap:9px; align-items:center; margin:14px 0 12px; }
+#ContentColumn .eclipse-market-detail-actions form { margin:0; }
+#ContentColumn .eclipse-market-detail-stats,
+#ContentColumn .eclipse-market-info-list,
+#ContentColumn .eclipse-market-skill-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+#ContentColumn .eclipse-market-detail-stats div,
+#ContentColumn .eclipse-market-info-list div,
+#ContentColumn .eclipse-market-skill-grid div { min-height:58px; padding:10px 11px; border:1px solid #bd914b; border-left:3px solid #8e2d13; background:linear-gradient(180deg,#ffefbf 0%,#f1d38d 100%); box-shadow:inset 0 1px 0 rgba(255,255,255,.45); }
+#ContentColumn .eclipse-market-detail-stats span,
+#ContentColumn .eclipse-market-info-list span,
+#ContentColumn .eclipse-market-skill-grid span { display:block; color:#7a4e22!important; -webkit-text-fill-color:#7a4e22!important; font-size:9px; font-weight:900; text-transform:uppercase; }
+#ContentColumn .eclipse-market-detail-stats strong,
+#ContentColumn .eclipse-market-info-list strong,
+#ContentColumn .eclipse-market-skill-grid strong { display:block; margin-top:5px; color:#2b180d!important; -webkit-text-fill-color:#2b180d!important; font-size:14px; line-height:1.25; text-shadow:none!important; }
+#ContentColumn .eclipse-market-equipment-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; }
+#ContentColumn .eclipse-market-equipment-grid div { position:relative; min-height:96px; padding:8px; border:1px solid #bd914b; background:#f8e5b4; text-align:center; }
+#ContentColumn .eclipse-market-equipment-grid img { display:block; width:32px; height:32px; margin:0 auto 6px; }
+#ContentColumn .eclipse-market-equipment-grid span,
+#ContentColumn .eclipse-market-equipment-grid small { display:block; color:#7a4e22!important; -webkit-text-fill-color:#7a4e22!important; font-size:9px; font-weight:900; text-transform:uppercase; }
+#ContentColumn .eclipse-market-equipment-grid strong { display:block; color:#2b180d!important; -webkit-text-fill-color:#2b180d!important; font-size:11px; line-height:1.2; overflow-wrap:anywhere; text-shadow:none!important; }
+#ContentColumn .eclipse-market-death-list { display:grid; gap:7px; }
+#ContentColumn .eclipse-market-death-list div { padding:9px 10px; border:1px solid #bd914b; background:#f8e5b4; }
+#ContentColumn .eclipse-market-death-list span,
+#ContentColumn .eclipse-market-death-list small { display:block; color:#7a4e22!important; -webkit-text-fill-color:#7a4e22!important; font-size:10px; font-weight:800; }
+#ContentColumn .eclipse-market-death-list strong { display:block; color:#2b180d!important; -webkit-text-fill-color:#2b180d!important; font-size:13px; text-shadow:none!important; }
+#ContentColumn .eclipse-market-comment { margin:0; color:#2b180d!important; -webkit-text-fill-color:#2b180d!important; font-weight:800; text-shadow:none!important; }
 #ContentColumn .eclipse-powerful-guilds { margin:0 0 15px; border:1px solid #8e551b; background:#efd493; color:#2e190d; }
 #ContentColumn .eclipse-powerful-guilds-heading { padding:12px 15px; background:#092d3c; color:#fff4ce; }
 #ContentColumn .eclipse-powerful-guilds-heading span { color:#e9b94f; font-size:9px; font-weight:800; text-transform:uppercase; }
@@ -1662,8 +1710,8 @@ body {
 #ContentColumn .eclipse-powerful-guilds-list small { margin-top:3px; color:#725027; font-size:9px; }
 #ContentColumn .eclipse-guild-position { display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; background:#8d2a12; color:#fff; font-weight:800; }
 @media(max-width:900px){#ContentColumn .eclipse-bestiary-category-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media(max-width:760px){#ContentColumn .eclipse-bestiary-category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#ContentColumn .eclipse-monster-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#ContentColumn .eclipse-loot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#ContentColumn .eclipse-powerful-guilds-list{grid-template-columns:repeat(2,1fr)}#ContentColumn .eclipse-powerful-guilds-list a{border-bottom:1px solid #c99b51}#ContentColumn .eclipse-bestiary-results-header{align-items:stretch;flex-direction:column}#ContentColumn .eclipse-bestiary-actions{align-items:stretch}}
-@media(max-width:520px){#ContentColumn .eclipse-category-grid,#ContentColumn .eclipse-monster-grid,#ContentColumn .eclipse-market-grid{grid-template-columns:1fr}#ContentColumn .eclipse-bestiary-category-grid,#ContentColumn .eclipse-bestiary-category-grid.is-bosstiary{grid-template-columns:repeat(2,minmax(0,1fr))}#ContentColumn .eclipse-stat-grid{grid-template-columns:repeat(2,1fr)}#ContentColumn .eclipse-market-sell-form{grid-template-columns:1fr}#ContentColumn .eclipse-plugin-toolbar form{align-items:stretch;flex-direction:column;width:100%}#ContentColumn .eclipse-plugin-tab-list{display:grid;grid-template-columns:1fr}#ContentColumn .eclipse-monster-detail-hero{flex-direction:column;align-items:flex-start}#ContentColumn .eclipse-bestiary-actions{flex-direction:column}#ContentColumn .eclipse-bestiary-actions .eclipse-plugin-search,#ContentColumn .eclipse-bestiary-actions .eclipse-plugin-button{width:100%}}
+@media(max-width:760px){#ContentColumn .eclipse-bestiary-category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#ContentColumn .eclipse-monster-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#ContentColumn .eclipse-loot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#ContentColumn .eclipse-market-detail-stats,#ContentColumn .eclipse-market-info-list,#ContentColumn .eclipse-market-skill-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#ContentColumn .eclipse-market-equipment-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#ContentColumn .eclipse-powerful-guilds-list{grid-template-columns:repeat(2,1fr)}#ContentColumn .eclipse-powerful-guilds-list a{border-bottom:1px solid #c99b51}#ContentColumn .eclipse-bestiary-results-header{align-items:stretch;flex-direction:column}#ContentColumn .eclipse-bestiary-actions{align-items:stretch}}
+@media(max-width:520px){#ContentColumn .eclipse-category-grid,#ContentColumn .eclipse-monster-grid,#ContentColumn .eclipse-market-grid{grid-template-columns:1fr}#ContentColumn .eclipse-bestiary-category-grid,#ContentColumn .eclipse-bestiary-category-grid.is-bosstiary{grid-template-columns:repeat(2,minmax(0,1fr))}#ContentColumn .eclipse-stat-grid{grid-template-columns:repeat(2,1fr)}#ContentColumn .eclipse-market-sell-form,#ContentColumn .eclipse-market-detail-hero,#ContentColumn .eclipse-market-detail-stats,#ContentColumn .eclipse-market-info-list,#ContentColumn .eclipse-market-skill-grid{grid-template-columns:1fr}#ContentColumn .eclipse-market-equipment-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#ContentColumn .eclipse-market-detail-actions{align-items:stretch;flex-direction:column}#ContentColumn .eclipse-market-detail-actions .eclipse-plugin-button,#ContentColumn .eclipse-market-detail-actions form,#ContentColumn .eclipse-market-detail-actions button{width:100%}#ContentColumn .eclipse-plugin-toolbar form{align-items:stretch;flex-direction:column;width:100%}#ContentColumn .eclipse-plugin-tab-list{display:grid;grid-template-columns:1fr}#ContentColumn .eclipse-monster-detail-hero{flex-direction:column;align-items:flex-start}#ContentColumn .eclipse-bestiary-actions{flex-direction:column}#ContentColumn .eclipse-bestiary-actions .eclipse-plugin-search,#ContentColumn .eclipse-bestiary-actions .eclipse-plugin-button{width:100%}}
 
 #Themeboxes .rank_player.is-vocation-knight {
   background-image: linear-gradient(90deg, rgba(12, 10, 8, 0.84), rgba(12, 10, 8, 0.54)), url("images/vocations/knightbanner.png") !important;
@@ -7515,6 +7563,49 @@ html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-plugin-pag
   color: #71583e !important;
   -webkit-text-fill-color: #71583e !important;
   opacity: 1 !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-card h3 a,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-card-body p,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-details-link {
+  color: #2b180d !important;
+  -webkit-text-fill-color: #2b180d !important;
+  text-shadow: none !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-vocation,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-price {
+  color: #6f1d0d !important;
+  -webkit-text-fill-color: #6f1d0d !important;
+  text-shadow: none !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-detail-hero .eclipse-market-price {
+  color: #fff3c9 !important;
+  -webkit-text-fill-color: #fff3c9 !important;
+  text-shadow: 0 1px 1px #280300 !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-detail-stats *,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-info-list *,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-skill-grid *,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-equipment-grid *,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-death-list *,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-comment {
+  color: #2b180d !important;
+  -webkit-text-fill-color: #2b180d !important;
+  text-shadow: none !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-detail-stats span,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-info-list span,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-skill-grid span,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-equipment-grid span,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-equipment-grid small,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-death-list span,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-market .eclipse-market-death-list small {
+  color: #7a4e22 !important;
+  -webkit-text-fill-color: #7a4e22 !important;
 }
 
 html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-spells-page .eclipse-plugin-toolbar label {

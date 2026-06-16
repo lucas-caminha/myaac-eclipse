@@ -9,6 +9,7 @@ O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0
 ## [Unreleased]
 
 ### Adicionado
+- Página de detalhes para personagens anunciados no mercado, com atributos, progressão, dados de combate, skills, equipamentos e histórico recente
 - Página `/bosses` separada por classes Bane, Archfoe e Nemesis do Bosstiary
 - Biblioteca pública de monstros e magias carregada dos dados do Canary
 - Mercado transacional de personagens com pagamento em coins
