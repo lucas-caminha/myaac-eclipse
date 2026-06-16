@@ -1983,6 +1983,21 @@ body {
   align-items: center !important;
   justify-content: flex-start !important;
   text-align: center !important;
+  color: #18384f !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: transform .15s ease, filter .15s ease;
+}
+
+#Themeboxes a.eclipse-boosted-item:hover {
+  transform: translateY(-1px) !important;
+  filter: brightness(1.04) !important;
+}
+
+#Themeboxes a.eclipse-boosted-item strong,
+#Themeboxes a.eclipse-boosted-item span {
+  color: inherit !important;
+  text-decoration: none !important;
 }
 
 #Themeboxes .eclipse-boosted-frame {

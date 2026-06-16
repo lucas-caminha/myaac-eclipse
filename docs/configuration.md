@@ -79,7 +79,7 @@ $config['logo_image'] = 'logo-eclipse-transparent.png';
 $config['status_bar'] = true;
 
 // Links das redes sociais (deixe vazio para ocultar)
-$config['discord_link'] = 'https://discord.gg/seu-servidor';
+$config['discord_link'] = 'https://discord.gg/nmx5V5jpkR';
 $config['whatsapp_link'] = '';
 $config['instagram_link'] = '';
 $config['facebook_link'] = '';

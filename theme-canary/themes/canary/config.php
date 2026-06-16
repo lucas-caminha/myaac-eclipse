@@ -7,7 +7,7 @@ $config['logo_image'] = 'logo-eclipse-transparent.png';
 
 // status bar
 $config['status_bar'] = true;
-$config['discord_link'] = '#';
+$config['discord_link'] = 'https://discord.gg/nmx5V5jpkR';
 $config['whatsapp_link'] = '';
 $config['instagram_link'] = '';
 $config['facebook_link'] = '';
