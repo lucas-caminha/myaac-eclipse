@@ -60,14 +60,24 @@ function eclipseMpWebhookPaymentId(): ?string
 	return null;
 }
 
-function eclipseMpWebhookCreditDonation(PDO $db, array $intent, array $payment): bool
+function eclipseMpWebhookCreditDonation(PDO $db, int $intentId, array $payment): bool
 {
-	if($intent['status'] === 'paid') {
-		return true;
-	}
-
 	$db->beginTransaction();
 	try {
+		$intentStmt = $db->prepare('SELECT * FROM eclipse_donation_intents WHERE id = ? FOR UPDATE');
+		$intentStmt->execute([$intentId]);
+		$intent = $intentStmt->fetch(PDO::FETCH_ASSOC);
+
+		if(!$intent) {
+			$db->rollBack();
+			return false;
+		}
+
+		if($intent['status'] === 'paid') {
+			$db->commit();
+			return true;
+		}
+
 		$db->query(
 			'UPDATE `accounts` SET `coins` = `coins` + ' . (int)$intent['coins'] .
 			' WHERE `id` = ' . (int)$intent['account_id'] . ' LIMIT 1'
@@ -135,7 +145,7 @@ if(!$intent) {
 }
 
 if(($payment['status'] ?? '') === 'approved') {
-	eclipseMpWebhookCreditDonation($db, $intent, $payment);
+	eclipseMpWebhookCreditDonation($db, (int)$intent['id'], $payment);
 	eclipseMpWebhookJson(200, ['ok' => true, 'credited' => true]);
 	return;
 }

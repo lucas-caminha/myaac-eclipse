@@ -314,7 +314,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $step = eclipseDonationStep();
-$selectedPackageKey = (string)($_POST['package'] ?? $_GET['package'] ?? '');
+$isPostRequest = $_SERVER['REQUEST_METHOD'] === 'POST';
+if($step === 'checkout' && !$isPostRequest) {
+	$step = 'packages';
+}
+
+$selectedPackageKey = (string)($_POST['package'] ?? '');
 $selectedPackage = eclipseDonationPackage($packages, $selectedPackageKey);
 
 $account = null;

@@ -11,7 +11,7 @@ function eclipseBoostedSponsorApplyJson(int $status, array $payload): void
 }
 
 $isCli = PHP_SAPI === 'cli';
-$token = $_GET['token'] ?? $_SERVER['HTTP_X_ECLIPSE_TOKEN'] ?? '';
+$token = $_SERVER['HTTP_X_ECLIPSE_TOKEN'] ?? '';
 $expectedToken = eclipseBoostedSponsorEnv('ECLIPSE_BOOSTED_APPLY_TOKEN');
 
 if(!$isCli) {
