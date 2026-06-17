@@ -1,0 +1,10 @@
+<div class="eclipse-error-page">
+	<div class="eclipse-error-panel">
+		<div class="eclipse-error-title">Algo precisa de atenção</div>
+		<ul class="eclipse-error-list">
+			{% for error in errors %}
+				<li>{{ error|striptags('<b><a>')|raw }}</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>

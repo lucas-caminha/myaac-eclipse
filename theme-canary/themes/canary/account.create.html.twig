@@ -72,7 +72,7 @@
 								<tr class="eclipse-registration-panel-intro">
 									<td colspan="2">
 										<strong>Crie seus dados de acesso</strong>
-										<span>Use um email real e uma senha forte. Esses dados serao usados para recuperar sua conta e acessar o painel.</span>
+										<span>Use um email real e uma senha forte. Esses dados serão usados para recuperar sua conta e acessar o painel.</span>
 									</td>
 								</tr>
 
@@ -94,7 +94,7 @@
 								{% endif %}
 								<tr><td></td><td><span id="account_error" class="FormFieldError">{% if errors.account is defined %}{{ errors.account }}{% endif %}</span></td></tr>
 								{% if not config.account_login_by_email %}
-								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">Escolha um nome facil de lembrar e que voce ainda nao use em outros jogos.</span></td></tr>
+								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">Escolha um nome fácil de lembrar e que você ainda não use em outros jogos.</span></td></tr>
 								{% endif %}
 								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_ACCOUNT') }}
 								<tr>
@@ -109,7 +109,7 @@
 								<tr>
 									<td></td><td><span id="email_error" class="FormFieldError">{% if errors.email is defined %}{{ errors.email }}{% endif %}</span></td>
 								</tr>
-								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">Confira bem o email antes de continuar. Ele pode ser necessario para confirmar ou recuperar sua conta.</span></td></tr>
+								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">Confira bem o email antes de continuar. Ele pode ser necessário para confirmar ou recuperar sua conta.</span></td></tr>
 
 								{% if setting('core.mail_enabled') and setting('core.account_mail_verify') %}
 									<tr><td></td><td><span><strong>Use um email valido.<br/>Vamos enviar um link para confirmar seu cadastro.</strong></span></td></tr>
@@ -135,7 +135,7 @@
 									</td>
 								</tr>
 								<tr><td></td><td><span id="password_error" class="FormFieldError">{% if errors.password is defined %}{{ errors.password }}{% endif %}</span></td></tr>
-								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">Use letras, numeros e simbolos. Evite repetir senha de outros servicos.</span></td></tr>
+								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">Use letras, números e símbolos. Evite repetir senha de outros serviços.</span></td></tr>
 
 								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_PASSWORD') }}
 
@@ -252,7 +252,7 @@
 													<input type="radio" name="vocation" id="vocation{{ key }}" value="{{ key }}"
 															{% if vocation is not null and vocation == key %} checked="checked"{% endif %}>
 													{% if guide %}
-														<img src="{{ template_path }}/images/vocations/{{ guide.image }}" alt="Vocacao {{ vocation_display_name }}" loading="lazy">
+														<img src="{{ template_path }}/images/vocations/{{ guide.image }}" alt="Vocação {{ vocation_display_name }}" loading="lazy">
 													{% endif %}
 													<span class="eclipse-vocation-name">{{ vocation_display_name }}</span>
 													{% if guide %}
@@ -329,7 +329,7 @@
 								<tr class="eclipse-registration-panel-intro">
 									<td colspan="2">
 										<strong>Finalize com as regras do servidor</strong>
-										<span>Essa etapa libera quando as informacoes anteriores estiverem preenchidas.</span>
+										<span>Essa etapa libera quando as informações anteriores estiverem preenchidas.</span>
 									</td>
 								</tr>
 								<tr>

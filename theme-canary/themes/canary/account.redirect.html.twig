@@ -1,0 +1,15 @@
+<div class="eclipse-success-page eclipse-account-feedback">
+	<div class="eclipse-success-panel">
+		<div class="eclipse-success-title">Login concluído</div>
+		<div class="eclipse-success-body">
+			Você entrou com sucesso. Se o redirecionamento não acontecer automaticamente,
+			<a href="{{ redirect }}">clique aqui para continuar</a>.
+		</div>
+	</div>
+</div>
+
+<script>
+	setTimeout(function () {
+		window.location = {{ redirect|json_encode|raw }};
+	}, 900);
+</script>
