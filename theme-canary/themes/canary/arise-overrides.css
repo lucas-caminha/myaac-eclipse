@@ -4890,6 +4890,41 @@ body {
   font-weight: 800 !important;
 }
 
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page div,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page span,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page p,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page b,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page strong,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page a,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-error-page,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-error-page div,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-error-page span,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-error-page p,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-error-page li,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-error-page b,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-error-page strong,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-error-page a {
+  color: #27150c !important;
+  -webkit-text-fill-color: #27150c !important;
+  text-shadow: none !important;
+}
+
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-success-title,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-success-title *,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-error-page .eclipse-error-title,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-error-page .eclipse-error-title * {
+  color: #fff0c6 !important;
+  -webkit-text-fill-color: #fff0c6 !important;
+  text-shadow: 0 1px 1px #000 !important;
+}
+
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-success-body a,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-error-page .eclipse-error-list a {
+  color: #7d190e !important;
+  -webkit-text-fill-color: #7d190e !important;
+}
+
 /* Final account management typography. */
 #ContentColumn .Content .eclipse-account-manage-page,
 #ContentColumn .Content .eclipse-account-manage-page *:not(.CaptionContainer):not(.CaptionContainer *):not(.CaptionInnerContainer):not(.CaptionInnerContainer *):not(.BorderTitleText):not(.BorderTitleText *):not(.Title):not(.Title *):not(.BigButton):not(.BigButton *):not(.BigButtonText):not(.MediumButtonText):not(button):not(button *):not(input[type="submit"]):not(input[type="button"]) {
