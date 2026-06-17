@@ -37,6 +37,107 @@ sudo systemctl restart php8.2-fpm
 sudo systemctl restart mariadb
 ```
 
+### Dominio, DNS e HTTPS
+
+Configuracao atual de producao:
+
+| Item | Valor |
+|------|-------|
+| Dominio principal | `eclipseot.com.br` |
+| Alias | `www.eclipseot.com.br` |
+| IP publico atual | `143.95.209.234` |
+| Porta SSH do VPS | `22022` |
+| E-mail do certificado | `adm.eclipseot@gmail.com` |
+
+Procedimento usado para ativar o dominio em producao:
+
+1. Criar/validar os registros DNS:
+   - `A @ -> 143.95.209.234`
+   - `CNAME www -> eclipseot.com.br`
+2. Ajustar o vhost Nginx:
+
+```nginx
+server_name eclipseot.com.br www.eclipseot.com.br;
+```
+
+3. Atualizar a URL publica do MyAAC em `/var/www/html/config.local.php`:
+
+```php
+$config['site_url'] = 'https://eclipseot.com.br/';
+```
+
+4. Testar o Nginx:
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+5. Limpar o cache do MyAAC:
+
+```bash
+sudo find /var/www/html/system/cache -type f -delete
+```
+
+6. Instalar Certbot no Ubuntu quando necessario:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y certbot python3-certbot-nginx
+```
+
+7. Emitir e instalar o certificado:
+
+```bash
+sudo certbot --nginx -d eclipseot.com.br -d www.eclipseot.com.br --non-interactive --agree-tos -m adm.eclipseot@gmail.com --redirect
+```
+
+8. Validar:
+
+```bash
+curl -I http://eclipseot.com.br
+curl -I https://eclipseot.com.br
+curl -I http://www.eclipseot.com.br
+curl -I https://www.eclipseot.com.br
+```
+
+Resultados esperados:
+
+- `http://` responde `301 Moved Permanently`
+- `https://` responde `200 OK`
+
+### Observacao Sobre IPv6 e Certbot
+
+Durante a primeira emissao do certificado, o `certbot` apresentou `ReadTimeout` ao falar com a API da Let's Encrypt, embora `curl` funcionasse normalmente.
+
+O workaround aplicado no VPS foi priorizar IPv4 em `/etc/gai.conf`:
+
+```bash
+echo 'precedence ::ffff:0:0/96  100' | sudo tee -a /etc/gai.conf
+```
+
+Depois disso, a emissao do certificado funcionou normalmente.
+
+Se o erro voltar a acontecer:
+
+1. Teste conectividade com:
+
+```bash
+curl -I https://acme-v02.api.letsencrypt.org/directory
+```
+
+2. Confirme a preferencia IPv4 em `/etc/gai.conf`
+3. Tente novamente o `certbot`
+
+### Renovacao do Certificado
+
+O `certbot` ja deixou uma tarefa automatica de renovacao. Ainda assim, vale conferir periodicamente:
+
+```bash
+sudo certbot renew --dry-run
+systemctl list-timers | grep certbot
+```
+
 ### Verificar Status dos Servicos
 
 ```bash

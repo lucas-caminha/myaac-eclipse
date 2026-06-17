@@ -156,6 +156,43 @@ return [
 
 **ATENCAO**: Este arquivo contem credenciais sensiveis e nunca deve ser commitado!
 
+### Snapshot Atual de Producao
+
+Sem expor segredos, o ambiente de producao ficou padronizado assim:
+
+| Item | Valor atual |
+|------|-------------|
+| Dominio principal | `https://eclipseot.com.br/` |
+| Alias | `https://www.eclipseot.com.br/` |
+| URL publica do MyAAC | `$config['site_url'] = 'https://eclipseot.com.br/';` |
+| Tema ativo | `canary` |
+| VHost Nginx | `/etc/nginx/sites-available/myaac` |
+| Certificado SSL | Let's Encrypt via `certbot` |
+
+### Dominio e HTTPS
+
+Durante a configuracao do dominio `eclipseot.com.br`, os pontos abaixo foram aplicados no VPS:
+
+1. DNS externo apontado para o IP publico `143.95.209.234`
+2. `CNAME` de `www` apontando para `eclipseot.com.br`
+3. `server_name` do Nginx ajustado para:
+
+```nginx
+server_name eclipseot.com.br www.eclipseot.com.br;
+```
+
+4. `site_url` do MyAAC atualizado do IP para o dominio
+5. Emissao de certificado SSL para os dois hosts com `certbot`
+6. Redirecionamento ativo de `http` para `https`
+7. Limpeza do cache do MyAAC apos a troca de URL
+
+### Observacoes Para Proximos Agentes
+
+- O site nao deve mais usar o IP publico como URL principal.
+- Se links internos voltarem a apontar para IP, verifique primeiro `config.local.php` e depois limpe `/var/www/html/system/cache`.
+- Mudancas em dominio, `server_name`, SSL ou redirects devem ser refletidas em `docs/operations.md`.
+- Nao commitar `config.local.php`; documente apenas os valores publicos e o procedimento.
+
 ## Configuracoes via CLI
 
 O MyAAC oferece comandos CLI para gerenciar configuracoes:

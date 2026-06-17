@@ -32,7 +32,16 @@ O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0
 - Aba de runas simplificada sem imagens de itens
 - Alinhamento e dimensoes dos sprites de boss e creature na box Boosted
 - Contraste e organizacao visual do fluxo de recuperacao de conta
+- Documentacao operacional expandida com a configuracao de dominio, HTTPS, Certbot, `site_url` e troubleshooting de emissao SSL
 
+### Infraestrutura
+- Dominio de producao definido como `eclipseot.com.br`
+- Alias publico `www.eclipseot.com.br` apontando para o dominio principal
+- Nginx de producao configurado com `server_name eclipseot.com.br www.eclipseot.com.br`
+- Certificado Let's Encrypt emitido e instalado para os dois hosts
+- Redirecionamento automatico de `http` para `https` habilitado
+- `config.local.php` de producao atualizado para usar `https://eclipseot.com.br/`
+ 
 ---
 
 ## [1.1.0] - 2026-06-02

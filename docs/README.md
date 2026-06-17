@@ -14,6 +14,22 @@ Bem-vindo a documentacao do **MyAAC Eclipse OT**, um fork personalizado do [MyAA
 - [Seguranca](./security.md) - Boas praticas de seguranca
 - [Changelog](./changelog.md) - Historico de alteracoes
 
+## Estado Atual de Producao
+
+No momento, a instalacao publica do Eclipse OT opera com:
+
+- Dominio principal: `https://eclipseot.com.br`
+- Alias publico: `https://www.eclipseot.com.br`
+- Redirecionamento ativo de `http` para `https`
+- Certificado Let's Encrypt gerenciado por `certbot`
+- Tema ativo: `canary`
+- URL publica configurada no MyAAC via `config.local.php`
+
+Para detalhes do procedimento usado na configuracao do dominio e do HTTPS, consulte:
+
+- [Configuracao](./configuration.md)
+- [Operacoes](./operations.md)
+
 ## Links Uteis
 
 - [Documentacao Oficial MyAAC](https://docs.my-aac.org/)
