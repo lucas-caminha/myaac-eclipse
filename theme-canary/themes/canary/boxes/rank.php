@@ -1,7 +1,6 @@
 <style>
     .rank{
         width: 180px;
-        max-height: 360px;
     }
     .rank_header{
         height: 45px;
@@ -19,9 +18,8 @@
         background-image: url('<?php echo $template_path ?>/images/themeboxes/box_bottom.png');
     }
     .rank_content{
-        padding: 0px 10px;
+        padding: 0px 10px 10px;
         width: 160px;
-        max-height: 290px;
         background-image: url('<?php echo $template_path ?>/images/themeboxes/box_bg.png');
     }
     .rank_player{
@@ -51,8 +49,10 @@
         color: #d5c3af;
     }
     .rank_button{
+        display: block;
         height: 30px;
         width: 148px;
+        margin: 8px auto 0;
         border: 0;
         background: url('<?php echo $template_path ?>/images/themeboxes/button.png');
         font-family: Verdana;

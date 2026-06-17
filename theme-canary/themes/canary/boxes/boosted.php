@@ -18,19 +18,27 @@ $creatureName = ucwords(strtolower(trim($creature['boostname'])));
 $bossName = ucwords(strtolower(trim($boss['boostname'])));
 $creatureLink = getLink('monsters') . '?name=' . rawurlencode($creatureName);
 $bossLink = getLink('bosses') . '?name=' . rawurlencode($bossName);
+$boostedSponsorLink = getLink('boosted-sponsor');
 ?>
 <div class="eclipse-rightbox eclipse-boosted">
     <div class="eclipse-rightbox-title">BOOSTED</div>
     <div class="eclipse-rightbox-content eclipse-boosted-grid">
-        <a class="eclipse-boosted-item eclipse-boosted-boss" href="<?= htmlspecialchars($bossLink) ?>" title="Abrir boss boosted: <?= htmlspecialchars($bossName) ?>">
-            <div class="eclipse-boosted-frame"><img src="<?= $bossImage ?>" alt="Boss boosted"></div>
-            <strong>BOSS</strong>
-            <span><?= htmlspecialchars($bossName) ?></span>
-        </a>
-        <a class="eclipse-boosted-item eclipse-boosted-creature" href="<?= htmlspecialchars($creatureLink) ?>" title="Abrir criatura boosted: <?= htmlspecialchars($creatureName) ?>">
-            <div class="eclipse-boosted-frame"><img src="<?= $creatureImage ?>" alt="Creature boosted"></div>
-            <strong>CREATURE</strong>
-            <span><?= htmlspecialchars($creatureName) ?></span>
-        </a>
+        <div class="eclipse-boosted-item eclipse-boosted-boss">
+            <a class="eclipse-boosted-card-link" href="<?= htmlspecialchars($bossLink) ?>" title="Abrir boss boosted: <?= htmlspecialchars($bossName) ?>">
+                <div class="eclipse-boosted-frame"><img src="<?= $bossImage ?>" alt="Boss boosted"></div>
+                <strong>BOSS</strong>
+                <span><?= htmlspecialchars($bossName) ?></span>
+            </a>
+        </div>
+        <div class="eclipse-boosted-item eclipse-boosted-creature">
+            <a class="eclipse-boosted-card-link" href="<?= htmlspecialchars($creatureLink) ?>" title="Abrir criatura boosted: <?= htmlspecialchars($creatureName) ?>">
+                <div class="eclipse-boosted-frame"><img src="<?= $creatureImage ?>" alt="Creature boosted"></div>
+                <strong>CREATURE</strong>
+                <span><?= htmlspecialchars($creatureName) ?></span>
+            </a>
+        </div>
+        <div class="eclipse-boosted-footer">
+            <a class="eclipse-boosted-action" href="<?= htmlspecialchars($boostedSponsorLink) ?>">Boostar Pr&oacute;ximo</a>
+        </div>
     </div>
 </div>

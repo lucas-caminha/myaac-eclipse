@@ -154,7 +154,9 @@ function eclipseBoostedSponsorTypeLabel(string $type): string
 function eclipseBoostedSponsorActiveSlot($db, string $type, string $scheduledForDate): ?array
 {
 	$stmt = $db->prepare(
-		'SELECT * FROM eclipse_boosted_sponsorships
+		'SELECT s.*, a.name AS sponsor_account_name
+		FROM eclipse_boosted_sponsorships s
+		LEFT JOIN accounts a ON a.id = s.account_id
 		WHERE target_type = :type AND scheduled_for_date = :scheduled
 		  AND status IN ("paid", "applied")
 		ORDER BY id ASC LIMIT 1'
@@ -166,6 +168,25 @@ function eclipseBoostedSponsorActiveSlot($db, string $type, string $scheduledFor
 
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 	return $row ?: null;
+}
+
+function eclipseBoostedSponsorPublicSponsorName(?array $slot): string
+{
+	if(!$slot) {
+		return 'Alguem';
+	}
+
+	$name = trim((string)($slot['sponsor_account_name'] ?? ''));
+	if($name !== '') {
+		return $name;
+	}
+
+	$name = trim((string)($slot['payer_name'] ?? ''));
+	if($name !== '') {
+		return $name;
+	}
+
+	return 'Alguem';
 }
 
 function eclipseBoostedSponsorRecentApplied($db, string $type, int $limit = 6): array

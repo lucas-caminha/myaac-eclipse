@@ -1983,21 +1983,63 @@ body {
   align-items: center !important;
   justify-content: flex-start !important;
   text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  color: #18384f !important;
+  text-decoration: none !important;
+}
+
+#Themeboxes .eclipse-boosted-footer {
+  grid-column: 1 / -1 !important;
+  margin-top: 10px !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+#Themeboxes .eclipse-boosted-card-link {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
   color: #18384f !important;
   text-decoration: none !important;
   cursor: pointer !important;
   transition: transform .15s ease, filter .15s ease;
 }
 
-#Themeboxes a.eclipse-boosted-item:hover {
+#Themeboxes a.eclipse-boosted-card-link:hover {
   transform: translateY(-1px) !important;
   filter: brightness(1.04) !important;
 }
 
-#Themeboxes a.eclipse-boosted-item strong,
-#Themeboxes a.eclipse-boosted-item span {
+#Themeboxes a.eclipse-boosted-card-link strong,
+#Themeboxes a.eclipse-boosted-card-link span {
   color: inherit !important;
   text-decoration: none !important;
+}
+
+#Themeboxes .eclipse-boosted-action {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 126px !important;
+  margin-top: 0 !important;
+  padding: 6px 14px !important;
+  border: 1px solid #ffe5a2 !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #ff9d26 0%, #c45608 100%) !important;
+  color: #fff8dc !important;
+  font: 800 10px Verdana, Arial, sans-serif !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  text-shadow: 0 1px 1px #4c1200 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.32), 0 2px 7px rgba(0,0,0,.35) !important;
+}
+
+#Themeboxes .eclipse-boosted-action:hover {
+  background: linear-gradient(180deg, #ffc04f 0%, #d86108 100%) !important;
+  color: #fff !important;
 }
 
 #Themeboxes .eclipse-boosted-frame {
