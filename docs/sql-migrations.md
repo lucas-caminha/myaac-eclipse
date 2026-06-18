@@ -17,6 +17,7 @@ Este guia documenta os scripts SQL incluidos no projeto e como gerenciar migraco
 | `sql/012-add-boosted-sponsorships.sql` | Adiciona pedidos de patrocinio para o proximo boosted |
 | `sql/013-add-lgpd-consents-and-requests.sql` | Adiciona consentimentos e solicitacoes LGPD |
 | `sql/014-add-privacy-menu.sql` | Adiciona Privacidade e LGPD ao menu Conta |
+| `sql/015-add-duo-donations.sql` | Adiciona pedidos e recompensas de donate em dupla |
 
 ## Aplicando Migracoes
 
@@ -214,6 +215,31 @@ CREATE TABLE IF NOT EXISTS eclipse_boosted_sponsorships (
 - Registra alvo, custo em Tibia Coins e status da compra
 - Impoe cooldown de 10 dias apos a entrada do alvo
 - Alimenta o aplicador que atualiza `boosted_boss` e `boosted_creature`
+
+### 015-add-duo-donations.sql
+
+Cria as tabelas usadas pelo fluxo `/duo-donate`:
+
+```sql
+CREATE TABLE IF NOT EXISTS eclipse_duo_donation_orders (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  payer_account_id INT(11) UNSIGNED NOT NULL,
+  partner_account_id INT(11) UNSIGNED NOT NULL,
+  package_key VARCHAR(50) NOT NULL,
+  total_coins INT(11) UNSIGNED NOT NULL,
+  status VARCHAR(40) NOT NULL DEFAULT 'pending_partner',
+  partner_token CHAR(64) NOT NULL,
+  donation_intent_id BIGINT UNSIGNED DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+```
+
+**O que faz:**
+- Registra o jogador principal, o parceiro, o pacote, o outfit escolhido e o aceite do parceiro
+- Usa `eclipse_donation_intents` para gerar Pix via Mercado Pago depois do aceite
+- Divide os Eclipse Coins entre as duas contas quando o webhook confirma o pagamento
+- Aplica boost de experiencia de 2 horas nos dois personagens usando `7200` segundos em `players.xpboost_stamina` e o percentual em `players.xpboost_value`
+- Registra o outfit escolhido em `eclipse_duo_donation_rewards` com status `pending_server`, para entrega posterior pelo servidor
 
 ### 013-add-lgpd-consents-and-requests.sql
 

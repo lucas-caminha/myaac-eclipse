@@ -162,6 +162,18 @@ Notas:
 - O webhook consulta o pagamento no Mercado Pago e so credita coins quando o status retornado for `approved`.
 - Depois de alterar variaveis de ambiente, reinicie o servico PHP/Apache usado pelo site.
 
+### Donate em Dupla
+
+A pagina `/duo-donate` usa a mesma configuracao de Mercado Pago do fluxo `/points`, mas exige aceite do parceiro antes de gerar o Pix.
+
+Notas:
+- O jogador principal escolhe um personagem da propria conta, informa o personagem parceiro e seleciona um outfit no modal.
+- O parceiro precisa estar logado na conta dona do personagem informado para aceitar o convite.
+- O pagamento so pode ser gerado depois do aceite.
+- Ao receber webhook `approved`, o site divide os Eclipse Coins entre as duas contas e aplica 2 horas de boost nos dois personagens (`7200` segundos em `players.xpboost_stamina`).
+- O outfit escolhido fica registrado em `eclipse_duo_donation_rewards` com status `pending_server`, para entrega por script do servidor.
+- A migration obrigatoria e `sql/015-add-duo-donations.sql`.
+
 ### Patrocinio de Boosted
 
 A pagina `/boosted-sponsor` usa saldo interno de Tibia Coins:

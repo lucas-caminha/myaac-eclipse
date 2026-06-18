@@ -244,6 +244,12 @@ function eclipseDonationRenderPackages(array $packages, bool $profileComplete): 
 			</div>
 		<?php endif; ?>
 
+		<div class="donation-warning">
+			<strong>Donate em dupla</strong>
+			<span>Monte um apoio com dois personagens, aceite do parceiro, outfit escolhido em conjunto e boost de 2 horas para os dois.</span>
+			<a href="<?= getLink('duo-donate') ?>">Abrir donate em dupla</a>
+		</div>
+
 		<div class="donation-package-list">
 			<?php foreach($packages as $key => $package): ?>
 				<form class="donation-package<?= !empty($package['badge']) ? ' is-featured' : '' ?>" method="post" action="<?= getLink('points') ?>">
