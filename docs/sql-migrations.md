@@ -16,6 +16,7 @@ Este guia documenta os scripts SQL incluidos no projeto e como gerenciar migraco
 | `sql/008-add-donation-intents.sql` | Adiciona tabela de intencoes de doacao para futuro Pix |
 | `sql/012-add-boosted-sponsorships.sql` | Adiciona pedidos de patrocinio para o proximo boosted |
 | `sql/013-add-lgpd-consents-and-requests.sql` | Adiciona consentimentos e solicitacoes LGPD |
+| `sql/014-add-privacy-menu.sql` | Adiciona Privacidade e LGPD ao menu Conta |
 
 ## Aplicando Migracoes
 
@@ -242,6 +243,25 @@ CREATE TABLE IF NOT EXISTS eclipse_privacy_requests (
 - Prepara registro de aceite de termos, privacidade e consentimentos opcionais
 - Permite que o painel `/account/privacy` registre solicitacoes LGPD
 - Mantem historico minimo para auditoria e atendimento ao titular
+
+### 014-add-privacy-menu.sql
+
+Adiciona a pagina publica de privacidade ao menu lateral de Conta no template Canary:
+
+```sql
+INSERT INTO myaac_menu (template, name, link, access, blank, color, category, ordering, enabled)
+SELECT 'canary', 'Privacidade e LGPD', 'privacy', 0, 0, '', 2, 4, 1
+WHERE NOT EXISTS (...);
+```
+
+Tambem reposiciona `rules` e `downloads` para manter a ordem visual:
+
+1. Gerenciar Conta
+2. Criar Conta
+3. Recuperar Conta
+4. Privacidade e LGPD
+5. Regras do Servidor
+6. Downloads
 
 ## Criando Novas Migracoes
 
