@@ -1547,6 +1547,263 @@ body {
   box-shadow: inset 0 0 0 1px rgba(255, 219, 135, 0.2) !important;
 }
 
+/* Character creation page polish. */
+#ContentColumn .Content .eclipse-create-character-page {
+  padding: 14px !important;
+  background: linear-gradient(180deg, #f3dfa9 0%, #d7ae62 100%) !important;
+  border: 1px solid #b36a15 !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 244, 197, .38), 0 3px 12px rgba(0, 0, 0, .25) !important;
+}
+
+#ContentColumn .Content .eclipse-create-character-page,
+#ContentColumn .Content .eclipse-create-character-page * {
+  color: #24100a !important;
+  text-shadow: none !important;
+  box-sizing: border-box !important;
+}
+
+#ContentColumn .Content .eclipse-character-create-hero {
+  margin: 0 0 14px !important;
+  padding: 22px 24px !important;
+  border: 1px solid #9a4a0b !important;
+  background:
+    linear-gradient(90deg, rgba(58, 8, 5, .96), rgba(83, 18, 9, .88)) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 223, 143, .22), 0 3px 10px rgba(0, 0, 0, .30) !important;
+}
+
+#ContentColumn .Content .eclipse-character-create-hero span {
+  display: inline-block !important;
+  margin-bottom: 8px !important;
+  color: #ffcf75 !important;
+  font: 900 10px Verdana, Arial, sans-serif !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+}
+
+#ContentColumn .Content .eclipse-character-create-hero h2 {
+  margin: 0 0 7px !important;
+  color: #fff0bd !important;
+  font: 900 25px Georgia, "Times New Roman", serif !important;
+  letter-spacing: 0 !important;
+  line-height: 1.15 !important;
+}
+
+#ContentColumn .Content .eclipse-character-create-hero p,
+#ContentColumn .Content .eclipse-character-create-hero a {
+  max-width: 760px !important;
+  margin: 0 !important;
+  color: #fce7b0 !important;
+  font: 700 12px/1.55 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .Content .eclipse-character-create-hero a {
+  color: #ffd16c !important;
+  text-decoration: underline !important;
+}
+
+#ContentColumn .Content .eclipse-character-create-alert {
+  margin: 0 0 14px !important;
+  padding: 12px 14px !important;
+  border: 1px solid #9c1f10 !important;
+  background: #fff0ca !important;
+  color: #6c1309 !important;
+  font: 900 12px/1.45 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .Content .eclipse-character-create-form {
+  display: block !important;
+  margin: 0 !important;
+}
+
+#ContentColumn .Content .eclipse-character-create-section {
+  margin: 0 0 14px !important;
+  padding: 16px !important;
+  border: 1px solid rgba(133, 82, 25, .70) !important;
+  background: rgba(255, 239, 191, .66) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35) !important;
+}
+
+#ContentColumn .Content .eclipse-character-create-section-title {
+  display: flex !important;
+  gap: 12px !important;
+  align-items: flex-start !important;
+  margin-bottom: 14px !important;
+}
+
+#ContentColumn .Content .eclipse-character-create-section-title > span {
+  display: grid !important;
+  place-items: center !important;
+  width: 30px !important;
+  height: 30px !important;
+  flex: 0 0 30px !important;
+  border: 1px solid #a65612 !important;
+  background: linear-gradient(180deg, #541307, #210503) !important;
+  color: #ffe5a6 !important;
+  font: 900 14px Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .Content .eclipse-character-create-section-title h3 {
+  margin: 0 0 3px !important;
+  color: #3a0905 !important;
+  font: 900 18px Georgia, "Times New Roman", serif !important;
+}
+
+#ContentColumn .Content .eclipse-character-create-section-title p {
+  margin: 0 !important;
+  color: #503019 !important;
+  font: 700 11px/1.45 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .Content .eclipse-character-create-grid {
+  display: grid !important;
+  grid-template-columns: minmax(260px, 1fr) minmax(220px, .7fr) !important;
+  gap: 14px !important;
+}
+
+#ContentColumn .Content .eclipse-character-field {
+  display: block !important;
+  min-width: 0 !important;
+  padding: 12px !important;
+  border: 1px solid rgba(127, 77, 20, .50) !important;
+  background: rgba(255, 247, 218, .65) !important;
+}
+
+#ContentColumn .Content .eclipse-character-field > span {
+  display: block !important;
+  margin-bottom: 8px !important;
+  color: #4b1308 !important;
+  font: 900 11px Verdana, Arial, sans-serif !important;
+  text-transform: uppercase !important;
+}
+
+#ContentColumn .Content .eclipse-character-name-row {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 22px !important;
+  gap: 8px !important;
+  align-items: center !important;
+}
+
+#ContentColumn .Content .eclipse-character-name-row input {
+  width: 100% !important;
+  height: 35px !important;
+  padding: 0 10px !important;
+  border: 1px solid #8b5a22 !important;
+  background: #fff6d6 !important;
+  color: #190906 !important;
+  font: 900 13px Verdana, Arial, sans-serif !important;
+  outline: none !important;
+}
+
+#ContentColumn .Content .eclipse-character-name-row input:focus {
+  border-color: #5f160c !important;
+  box-shadow: 0 0 0 2px rgba(95, 22, 12, .18) !important;
+}
+
+#ContentColumn .Content .eclipse-character-name-row img {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+#ContentColumn .Content #character_error {
+  display: block !important;
+  min-height: 16px !important;
+  margin-top: 7px !important;
+  color: #6d1b0d !important;
+  font: 800 11px Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .Content .eclipse-character-choice-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+#ContentColumn .Content .eclipse-character-choice {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  min-height: 35px !important;
+  padding: 8px 12px !important;
+  border: 1px solid rgba(114, 65, 20, .62) !important;
+  background: #f4d89a !important;
+  cursor: pointer !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35) !important;
+}
+
+#ContentColumn .Content .eclipse-character-choice:has(input:checked) {
+  border-color: #5f160c !important;
+  background: #fff0bd !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .42), 0 0 0 2px rgba(95, 22, 12, .18) !important;
+}
+
+#ContentColumn .Content .eclipse-character-choice input {
+  margin: 0 !important;
+}
+
+#ContentColumn .Content .eclipse-character-choice span {
+  color: #2a1007 !important;
+  font: 900 12px Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .Content .eclipse-character-vocation-grid {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)) !important;
+  gap: 12px !important;
+}
+
+#ContentColumn .Content .eclipse-create-character-page .eclipse-vocation-card {
+  min-height: 260px !important;
+  padding: 10px !important;
+  border-radius: 4px !important;
+}
+
+#ContentColumn .Content .eclipse-create-character-page .eclipse-vocation-card img {
+  height: 128px !important;
+  object-fit: contain !important;
+}
+
+#ContentColumn .Content .eclipse-character-create-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+  padding: 4px 0 2px !important;
+}
+
+#ContentColumn .Content .eclipse-character-back-button,
+#ContentColumn .Content .eclipse-character-back-button:link,
+#ContentColumn .Content .eclipse-character-back-button:visited {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 34px !important;
+  padding: 0 18px !important;
+  border: 1px solid #6d3f1a !important;
+  background: linear-gradient(180deg, #8a5b2d, #523018) !important;
+  color: #fff2c0 !important;
+  font: 900 12px Verdana, Arial, sans-serif !important;
+  text-decoration: none !important;
+  box-shadow: inset 0 1px 0 rgba(255, 235, 180, .32), 0 2px 6px rgba(0, 0, 0, .22) !important;
+}
+
+#ContentColumn .Content .eclipse-character-back-button:hover {
+  filter: brightness(1.08) !important;
+}
+
+@media (max-width: 760px) {
+  #ContentColumn .Content .eclipse-character-create-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  #ContentColumn .Content .eclipse-character-create-hero {
+    padding: 18px !important;
+  }
+
+  #ContentColumn .Content .eclipse-character-create-hero h2 {
+    font-size: 21px !important;
+  }
+}
+
 /* Eclipse plugin library */
 #ContentColumn .eclipse-plugin-page { color:#321c10; font:12px Verdana,Arial,sans-serif; }
 #ContentColumn .eclipse-plugin-page * { box-sizing:border-box; }
@@ -7949,5 +8206,29 @@ html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-account-pr
   html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-data-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Final character creation overrides, kept at the end to beat legacy table/card rules. */
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-create-character-page .eclipse-character-vocation-grid {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)) !important;
+  gap: 12px !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-create-character-page .eclipse-vocation-card {
+  min-height: 260px !important;
+  padding: 10px !important;
+  border-radius: 4px !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-create-character-page .eclipse-vocation-card img {
+  height: 128px !important;
+  object-fit: contain !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-create-character-page .eclipse-character-create-hero h2,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-create-character-page .eclipse-character-create-hero p,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-create-character-page .eclipse-character-create-hero a,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-create-character-page .eclipse-character-create-hero span {
+  text-shadow: none !important;
 }
 
