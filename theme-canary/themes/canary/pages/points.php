@@ -16,22 +16,28 @@ $packages = [
 	'starter' => [
 		'label' => 'Apoio Inicial',
 		'amount_cents' => 1000,
-		'coins' => 100,
+		'coins' => 150,
 	],
 	'adventurer' => [
 		'label' => 'Apoio Aventureiro',
 		'amount_cents' => 2500,
-		'coins' => 300,
+		'coins' => 350,
 	],
 	'guardian' => [
 		'label' => 'Apoio Guardião',
 		'amount_cents' => 5000,
-		'coins' => 700,
+		'coins' => 800,
 	],
 	'eclipse' => [
 		'label' => 'Apoio Eclipse',
 		'amount_cents' => 10000,
-		'coins' => 1500,
+		'coins' => 1800,
+		'badge' => 'Melhor custo-benefício',
+	],
+	'supreme' => [
+		'label' => 'Apoio Supremo',
+		'amount_cents' => 20000,
+		'coins' => 4000,
 	],
 ];
 
@@ -240,11 +246,16 @@ function eclipseDonationRenderPackages(array $packages, bool $profileComplete): 
 
 		<div class="donation-package-list">
 			<?php foreach($packages as $key => $package): ?>
-				<form class="donation-package" method="post" action="<?= getLink('points') ?>">
+				<form class="donation-package<?= !empty($package['badge']) ? ' is-featured' : '' ?>" method="post" action="<?= getLink('points') ?>">
 					<?= csrf(true) ?>
 					<input type="hidden" name="step" value="checkout">
 					<input type="hidden" name="package" value="<?= htmlspecialchars($key) ?>">
-					<strong><?= htmlspecialchars($package['label']) ?></strong>
+					<strong>
+						<?= htmlspecialchars($package['label']) ?>
+						<?php if(!empty($package['badge'])): ?>
+							<em><?= htmlspecialchars($package['badge']) ?></em>
+						<?php endif; ?>
+					</strong>
 					<span class="package-coins"><?= number_format($package['coins'], 0, ',', '.') ?> Eclipse Coins</span>
 					<span class="package-amount"><?= eclipseDonationMoney($package['amount_cents']) ?></span>
 					<button class="eclipse-btn" type="submit" <?= $profileComplete ? '' : 'disabled' ?>>Selecionar</button>
@@ -570,10 +581,30 @@ else {
 	border: 1px solid rgba(137,83,33,.52);
 }
 
+.eclipse-donation-page .donation-package.is-featured {
+	background: linear-gradient(180deg, rgba(255,248,221,.92) 0%, rgba(248,219,142,.9) 100%);
+	border-color: #a15f1c;
+	box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 0 0 2px rgba(111,21,10,.12);
+}
+
 .eclipse-donation-page .donation-package strong,
 .eclipse-donation-page .package-coins,
 .eclipse-donation-page .package-amount {
 	font: 900 13px Verdana, Arial, sans-serif;
+}
+
+.eclipse-donation-page .donation-package strong em {
+	display: inline-block;
+	margin-left: 8px;
+	padding: 3px 7px;
+	background: linear-gradient(180deg, #5a1208, #280503);
+	border: 1px solid #c9842f;
+	color: #fff0c5 !important;
+	-webkit-text-fill-color: #fff0c5 !important;
+	font: 900 10px Verdana, Arial, sans-serif;
+	font-style: normal;
+	text-transform: uppercase;
+	vertical-align: middle;
 }
 
 .eclipse-donation-page button[disabled] {
