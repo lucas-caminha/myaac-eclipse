@@ -1,5 +1,5 @@
-<div class="eclipse-create-character-page">
 {% set title = 'Criar Personagem' %}
+<div class="eclipse-privacy-page eclipse-create-character-page">
 {% set eclipse_vocation_guides = {
 	'knight': {
 		'image': 'knightbanner.png',
@@ -28,7 +28,7 @@
 	}
 } %}
 
-<section class="eclipse-character-create-hero">
+<section class="privacy-hero">
 	<span>Novo personagem</span>
 	<h2>Escolha sua vocação e comece sua jornada</h2>
 	<p>Defina um nome, selecione o sexo e escolha a vocação que combina com seu estilo de jogo. O nome precisa respeitar as <a href="?subtopic=rules" target="_blank" rel="noopener">regras do Eclipse OT</a>.</p>
@@ -46,7 +46,7 @@
 
 	{{ hook('HOOK_ACCOUNT_CREATE_CHARACTER_BEFORE_FIRST_TABLE') }}
 
-	<section class="eclipse-character-create-section">
+	<section class="privacy-section eclipse-character-create-section">
 		<div class="eclipse-character-create-section-title">
 			<span>1</span>
 			<div>
@@ -85,7 +85,7 @@
 	{{ hook('HOOK_ACCOUNT_CREATE_CHARACTER_BEFORE_VOCATION') }}
 
 	{% if config.character_samples|length > 1 %}
-	<section class="eclipse-character-create-section">
+	<section class="privacy-section eclipse-character-create-section">
 		<div class="eclipse-character-create-section-title">
 			<span>2</span>
 			<div>
@@ -119,7 +119,7 @@
 	{{ hook('HOOK_ACCOUNT_CREATE_CHARACTER_BEFORE_TOWNS') }}
 
 	{% if config.character_towns|length > 1 %}
-	<section class="eclipse-character-create-section">
+	<section class="privacy-section eclipse-character-create-section">
 		<div class="eclipse-character-create-section-title">
 			<span>3</span>
 			<div>
@@ -142,12 +142,9 @@
 	{{ hook('HOOK_ACCOUNT_CREATE_CHARACTER_AFTER_TOWNS') }}
 	{{ hook('HOOK_ACCOUNT_CREATE_CHARACTER_AFTER_SECOND_TABLE') }}
 
-	<div class="eclipse-character-create-actions">
-		<div>
-			{% set button_name = 'Criar personagem' %}
-			{{ include('buttons.submit.html.twig') }}
-		</div>
-		<a class="eclipse-character-back-button" href="{{ getLink('account/manage') }}">Voltar para minha conta</a>
+	<div class="privacy-actions">
+		<button type="submit" class="eclipse-btn">Criar personagem</button>
+		<a class="eclipse-btn eclipse-btn-secondary" href="{{ getLink('account/manage') }}">Voltar para minha conta</a>
 	</div>
 </form>
 

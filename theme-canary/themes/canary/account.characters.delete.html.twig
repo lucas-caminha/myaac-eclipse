@@ -1,16 +1,19 @@
 {% set title = 'Excluir Personagem' %}
-<div class="eclipse-character-action-page eclipse-character-delete-page">
-	<section class="eclipse-character-action-hero is-danger">
+<div class="eclipse-privacy-page eclipse-character-action-page eclipse-character-delete-page">
+	<section class="privacy-hero">
 		<span>Conta</span>
 		<h2>Excluir personagem</h2>
 		<p>Digite o nome exato do personagem e confirme com a senha da conta. Esta ação remove o personagem da sua conta e não deve ser feita por impulso.</p>
 	</section>
 
-	<form id="form" class="eclipse-character-action-form" action="{{ getLink('account/characters/delete') }}" method="post">
+	<form id="form" class="privacy-section eclipse-character-action-form" action="{{ getLink('account/characters/delete') }}" method="post">
 		{{ csrf() }}
 		<input type="hidden" name="deletecharactersave" value="1">
 
-		<div class="eclipse-character-action-card">
+		<h3>Confirmação</h3>
+		<p>Para proteger sua conta, confirme os dados abaixo antes de excluir o personagem.</p>
+
+		<div class="privacy-data-grid eclipse-character-action-card">
 			<label class="eclipse-character-field" for="delete_name">
 				<span>Nome do personagem</span>
 				<input id="delete_name" name="delete_name" value="" maxlength="29" autocomplete="off">
@@ -26,12 +29,9 @@
 			<strong>Atenção:</strong> personagens online, donos de casa ou líderes de guilda não podem ser excluídos.
 		</div>
 
-		<div class="eclipse-character-create-actions">
-			<div>
-				{% set button_name = 'Excluir personagem' %}
-				{{ include('buttons.submit.html.twig') }}
-			</div>
-			<a class="eclipse-character-back-button" href="{{ getLink('account/manage') }}">Voltar para minha conta</a>
+		<div class="privacy-actions">
+			<button type="submit" class="eclipse-btn">Excluir personagem</button>
+			<a class="eclipse-btn eclipse-btn-secondary" href="{{ getLink('account/manage') }}">Voltar para minha conta</a>
 		</div>
 	</form>
 </div>

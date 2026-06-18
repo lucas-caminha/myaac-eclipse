@@ -8504,3 +8504,174 @@ html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-
   }
 }
 
+/* Character account screens now reuse the privacy page visual language. */
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page.eclipse-create-character-page,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page.eclipse-character-action-page {
+  display: grid !important;
+  gap: 14px !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-hero a,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-hero a:link,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-hero a:visited {
+  color: #ffd269 !important;
+  -webkit-text-fill-color: #ffd269 !important;
+  text-decoration: underline !important;
+  font-weight: 900 !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-create-form,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-action-form {
+  display: grid !important;
+  gap: 14px !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-create-section,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-action-card,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-comment-field {
+  margin: 0 !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-action-card.privacy-data-grid {
+  margin: 12px 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-field,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-readonly {
+  display: grid !important;
+  gap: 7px !important;
+  min-width: 0 !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-field > span,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-readonly > span {
+  margin: 0 !important;
+  color: #4b1308 !important;
+  -webkit-text-fill-color: #4b1308 !important;
+  font: 900 11px Verdana, Arial, sans-serif !important;
+  text-transform: uppercase !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-field input[type="text"],
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-field input[type="password"],
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-field input:not([type]),
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-field textarea,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-name-row input {
+  width: 100% !important;
+  min-height: 36px !important;
+  padding: 8px 10px !important;
+  border: 1px solid #83511d !important;
+  background: #fff6d6 !important;
+  color: #1b0905 !important;
+  -webkit-text-fill-color: #1b0905 !important;
+  font: 800 13px Verdana, Arial, sans-serif !important;
+  outline: none !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-field textarea {
+  min-height: 230px !important;
+  resize: vertical !important;
+  line-height: 1.45 !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-field input:focus,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-field textarea:focus {
+  border-color: #5f160c !important;
+  box-shadow: 0 0 0 2px rgba(95, 22, 12, .18) !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-field small,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page #character_error {
+  display: block !important;
+  min-height: 16px !important;
+  color: #6d1b0d !important;
+  -webkit-text-fill-color: #6d1b0d !important;
+  font: 800 11px/1.35 Verdana, Arial, sans-serif !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-warning,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-create-alert {
+  padding: 11px 12px !important;
+  border: 1px solid #a33a18 !important;
+  background: #fff0ca !important;
+  color: #681609 !important;
+  -webkit-text-fill-color: #681609 !important;
+  font: 800 12px/1.45 Verdana, Arial, sans-serif !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-warning strong {
+  color: #681609 !important;
+  -webkit-text-fill-color: #681609 !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-choice-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-choice,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-toggle {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-height: 36px !important;
+  padding: 8px 12px !important;
+  border: 1px solid rgba(114, 65, 20, .62) !important;
+  background: #f7e4b0 !important;
+  color: #2a1007 !important;
+  -webkit-text-fill-color: #2a1007 !important;
+  cursor: pointer !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35) !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-choice:has(input:checked),
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-toggle:has(input:checked) {
+  border-color: #5f160c !important;
+  background: #fff0bd !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .42), 0 0 0 2px rgba(95, 22, 12, .18) !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-choice span,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-toggle span {
+  color: #2a1007 !important;
+  -webkit-text-fill-color: #2a1007 !important;
+  font: 900 12px Verdana, Arial, sans-serif !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-create-grid {
+  display: grid !important;
+  grid-template-columns: minmax(260px, 1fr) minmax(230px, .75fr) !important;
+  gap: 14px !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-vocation-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)) !important;
+  gap: 12px !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-vocation-card {
+  min-height: 235px !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-vocation-card img {
+  width: 100% !important;
+  height: 120px !important;
+  object-fit: contain !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-actions {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 760px) {
+  html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-create-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
