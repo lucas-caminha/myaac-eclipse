@@ -1,0 +1,50 @@
+{% set title = 'Editar Comentário' %}
+<div class="eclipse-character-action-page eclipse-character-comment-page">
+	<section class="eclipse-character-action-hero">
+		<span>Personagem</span>
+		<h2>Editar comentário público</h2>
+		<p>Atualize as informações exibidas no perfil do personagem. Deixe o campo em branco se não quiser mostrar nenhum comentário.</p>
+	</section>
+
+	<form class="eclipse-character-action-form" action="{{ getLink('account/characters/change-comment') }}" method="post">
+		{{ csrf() }}
+		<input type="hidden" name="name" value="{{ player.name }}">
+		<input type="hidden" name="changecommentsave" value="1">
+
+		<div class="eclipse-character-action-card">
+			<div class="eclipse-character-readonly">
+				<span>Personagem</span>
+				<strong>{{ player.name }}</strong>
+			</div>
+
+			{{ hook('HOOK_ACCOUNT_CHARACTERS_CHANGE_COMMENT_AFTER_NAME') }}
+
+			<label class="eclipse-character-toggle" for="accountvisible">
+				<input type="hidden" value="0" name="accountvisible">
+				<input type="checkbox" name="accountvisible" id="accountvisible" value="1" {% if player.hide %}checked="checked"{% endif %}>
+				<span>Ocultar as informações da conta no perfil público</span>
+			</label>
+			{% if player.group_id > 1 %}
+				<div class="eclipse-character-warning">Ao ocultar a conta, o personagem também será ocultado da página da equipe.</div>
+			{% endif %}
+
+			{{ hook('HOOK_ACCOUNT_CHARACTERS_CHANGE_COMMENT_AFTER_HIDE_ACCOUNT') }}
+		</div>
+
+		<label class="eclipse-character-field eclipse-character-comment-field" for="comment">
+			<span>Comentário</span>
+			<textarea id="comment" name="comment" rows="12" maxlength="2000">{{ player.comment|raw }}</textarea>
+			<small>Máximo de 2000 caracteres. Evite dados pessoais ou informações sensíveis.</small>
+		</label>
+
+		{{ hook('HOOK_ACCOUNT_CHARACTERS_CHANGE_COMMENT_AFTER_COMMENT') }}
+
+		<div class="eclipse-character-create-actions">
+			<div>
+				{% set button_name = 'Salvar comentário' %}
+				{{ include('buttons.submit.html.twig') }}
+			</div>
+			<a class="eclipse-character-back-button" href="{{ getLink('account/manage') }}">Voltar para minha conta</a>
+		</div>
+	</form>
+</div>
