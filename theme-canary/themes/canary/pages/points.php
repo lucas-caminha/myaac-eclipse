@@ -365,7 +365,7 @@ else {
 					'status' => 'pending_gateway',
 					'gateway' => 'pending_pix',
 					'payer_name' => $account->rlname,
-					'payer_cpf' => $account->cpf,
+					'payer_cpf' => null,
 					'notes' => 'Pix gateway integration pending.',
 				]);
 

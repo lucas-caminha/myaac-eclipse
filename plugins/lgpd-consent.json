@@ -1,0 +1,21 @@
+{
+	"name": "Eclipse - LGPD Consent",
+	"description": "Valida aceite de privacidade em fluxos sensiveis do Eclipse OT.",
+	"version": "1.0-eclipse",
+	"type": "plugin",
+	"author": "Eclipse OT",
+	"require": {
+		"php": "8.1",
+		"myaac": "2.0-dev"
+	},
+	"hooks": {
+		"LGPD consent guard": {
+			"type": "BEFORE_PAGE",
+			"file": "plugins/lgpd-consent/lgpd-consent.php"
+		}
+	},
+	"uninstall": [
+		"plugins/lgpd-consent.json",
+		"plugins/lgpd-consent"
+	]
+}

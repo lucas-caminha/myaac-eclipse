@@ -7772,3 +7772,182 @@ html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-spells-pag
   text-shadow: none !important;
 }
 
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page * {
+  box-sizing: border-box;
+  color: #2b180d !important;
+  -webkit-text-fill-color: #2b180d !important;
+  text-shadow: none !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page {
+  background: linear-gradient(180deg, #f6dfa9 0%, #e0ba70 68%, #c99345 100%);
+  border: 2px solid #a2631e;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 3px 8px rgba(0,0,0,.35);
+  padding: 16px;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-hero {
+  background: linear-gradient(180deg, #40100a 0%, #170302 100%);
+  border: 1px solid #b96d22;
+  padding: 20px;
+  text-align: center;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-hero span,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-hero h2,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-hero p {
+  color: #fff0c5 !important;
+  -webkit-text-fill-color: #fff0c5 !important;
+  text-shadow: 0 1px 1px #000 !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-hero span {
+  display: block;
+  font: 900 11px Verdana, Arial, sans-serif;
+  text-transform: uppercase;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-hero h2 {
+  margin: 5px 0 7px;
+  font: 900 25px Georgia, "Times New Roman", serif;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-hero p {
+  margin: 0;
+  font: 700 13px/1.45 Verdana, Arial, sans-serif;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-section {
+  margin-top: 14px;
+  padding: 15px;
+  background: rgba(255, 245, 210, .78);
+  border: 1px solid rgba(130, 78, 25, .55);
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-section h3 {
+  margin: 0 0 10px;
+  font: 900 18px Georgia, "Times New Roman", serif;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-section p,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-section li {
+  font: 700 13px/1.55 Verdana, Arial, sans-serif;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-grid,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-data-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-grid article,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-data-grid div {
+  padding: 12px;
+  background: #fff6d8;
+  border: 1px solid rgba(130, 78, 25, .5);
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-data-grid span {
+  display: block;
+  margin-bottom: 4px;
+  color: #7a4e22 !important;
+  -webkit-text-fill-color: #7a4e22 !important;
+  font: 900 11px Verdana, Arial, sans-serif;
+  text-transform: uppercase;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-data-grid strong,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-grid strong {
+  font: 900 13px Verdana, Arial, sans-serif;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-request-form {
+  display: grid;
+  gap: 12px;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-request-form label {
+  display: grid;
+  gap: 6px;
+  font: 900 12px Verdana, Arial, sans-serif;
+  text-transform: uppercase;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-request-form select,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-request-form textarea {
+  width: 100%;
+  padding: 10px;
+  background: #fff6d8 !important;
+  border: 1px solid #8c5b27;
+  font: 700 13px Verdana, Arial, sans-serif;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-request-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-request-table th,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-request-table td {
+  padding: 9px;
+  border: 1px solid rgba(130, 78, 25, .5);
+  background: #fff6d8;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-btn,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-btn:link,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-btn:visited,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page button.eclipse-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 8px 16px;
+  background: linear-gradient(180deg, #b84012 0%, #741004 100%);
+  border: 1px solid #f0a33a;
+  color: #fff2cf !important;
+  -webkit-text-fill-color: #fff2cf !important;
+  text-shadow: 0 1px 0 #000 !important;
+  font: 900 12px Verdana, Arial, sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-btn-secondary {
+  background: linear-gradient(180deg, #765733 0%, #4f3219 100%);
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-account-privacy-link,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-account-privacy-link:link,
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-account-privacy-link:visited {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 25px;
+  margin-left: 8px;
+  padding: 5px 10px;
+  background: linear-gradient(180deg, #765733 0%, #4f3219 100%);
+  border: 1px solid #d08a35;
+  color: #fff2cf !important;
+  -webkit-text-fill-color: #fff2cf !important;
+  text-shadow: 0 1px #000 !important;
+  font: 900 11px Verdana, Arial, sans-serif;
+  text-decoration: none;
+}
+
+@media (max-width: 760px) {
+  html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-grid,
+  html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .privacy-data-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

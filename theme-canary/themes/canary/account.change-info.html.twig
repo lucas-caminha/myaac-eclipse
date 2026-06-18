@@ -27,7 +27,7 @@
 
 						<div class="change-info-field">
 							<label for="info_cpf">CPF <span>*</span></label>
-							<input id="info_cpf" name="info_cpf" value="{{ account_cpf }}" maxlength="14" inputmode="numeric" required autocomplete="off" placeholder="000.000.000-00">
+							<input id="info_cpf" name="info_cpf" value="{{ account_cpf_masked|default(account_cpf) }}" maxlength="14" inputmode="numeric" required autocomplete="off" placeholder="000.000.000-00">
 							<small>Use apenas o CPF do titular da conta.</small>
 						</div>
 					</div>

@@ -401,7 +401,7 @@ if($step === 'checkout' || $step === 'confirm') {
 				'scheduled_for_date' => $scheduledForDate,
 				'cooldown_until' => $cooldownUntil,
 				'payer_name' => $account->rlname,
-				'payer_cpf' => $account->cpf,
+				'payer_cpf' => null,
 				'confirmed_at' => date('Y-m-d H:i:s'),
 				'notes' => 'Boosted sponsorship purchased with Tibia Coins.',
 			]);

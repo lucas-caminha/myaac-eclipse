@@ -56,6 +56,16 @@ function eclipseIsValidBirthDate($date)
 	return $parsed && $parsed->format('Y-m-d') === $date && $parsed <= new DateTime('today');
 }
 
+function eclipseMaskCpf($cpf)
+{
+	$cpf = eclipseNormalizeCpf($cpf);
+	if(strlen($cpf) !== 11) {
+		return '';
+	}
+
+	return '***.***.***-' . substr($cpf, -2);
+}
+
 $account = Account::find($account_logged->getId());
 
 $show_form = true;
@@ -66,6 +76,12 @@ $new_location = isset($_POST['info_location']) ? htmlspecialchars(stripslashes($
 $new_country = isset($_POST['info_country']) ? htmlspecialchars(stripslashes($_POST['info_country'])) : '';
 
 if(isset($_POST['changeinfosave']) && $_POST['changeinfosave'] == 1) {
+	$currentCpf = eclipseNormalizeCpf($account->cpf ?? '');
+	$submittedMaskedCpf = strpos((string)($_POST['info_cpf'] ?? ''), '*') !== false;
+	if($submittedMaskedCpf && strlen($currentCpf) === 11) {
+		$new_cpf = $currentCpf;
+	}
+
 	if(strlen($new_rlname) < 3) {
 		$errors[] = 'Informe seu nome completo.';
 	}
@@ -131,6 +147,7 @@ if($show_form) {
 		'account_rlname' => $account_rlname,
 		'account_birth_date' => $account_birth_date,
 		'account_cpf' => $account_cpf,
+		'account_cpf_masked' => eclipseMaskCpf($account_cpf),
 		'account_location' => $account_location,
 		'account_country' => $account_country ?? ''
 	));

@@ -340,6 +340,11 @@
 										<span><input type="checkbox" id="accept_rules" name="accept_rules" value="true"{% if accept_rules %}checked{% endif %}/> <label for="accept_rules">Eu li e aceito as <a href="?subtopic=rules" target="_blank">regras do {{ config.lua.serverName }}</a>.</label></span>
 									</td>
 								</tr>
+								<tr>
+									<td colspan="2" >
+										<span><input type="checkbox" id="accept_privacy" name="accept_privacy" value="true" required/> <label for="accept_privacy">Eu li e aceito a <a href="{{ getLink('privacy') }}" target="_blank" rel="noopener">Politica de Privacidade</a> e entendo como meus dados serao usados no Eclipse OT.</label></span>
+									</td>
+								</tr>
 								{% if errors.accept_rules is defined %}
 									<tr>
 										<td colspan="2">
@@ -477,7 +482,7 @@
 				var unlocked = !!allowed[stepName];
 				step.disabled = !unlocked;
 				step.classList.toggle('is-locked', !unlocked);
-				step.classList.toggle('is-complete', stepName === 'account' ? accountReady() : stepName === 'character' ? characterReady() : !!byId('accept_rules') && byId('accept_rules').checked);
+				step.classList.toggle('is-complete', stepName === 'account' ? accountReady() : stepName === 'character' ? characterReady() : !!byId('accept_rules') && byId('accept_rules').checked && !!byId('accept_privacy') && byId('accept_privacy').checked);
 			});
 
 			panels.forEach(function (panel) {

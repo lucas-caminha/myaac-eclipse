@@ -15,6 +15,7 @@ Este guia documenta os scripts SQL incluidos no projeto e como gerenciar migraco
 | `sql/007-add-account-donation-profile.sql` | Adiciona campos de perfil usados em doacoes futuras |
 | `sql/008-add-donation-intents.sql` | Adiciona tabela de intencoes de doacao para futuro Pix |
 | `sql/012-add-boosted-sponsorships.sql` | Adiciona pedidos de patrocinio para o proximo boosted |
+| `sql/013-add-lgpd-consents-and-requests.sql` | Adiciona consentimentos e solicitacoes LGPD |
 
 ## Aplicando Migracoes
 
@@ -183,7 +184,7 @@ CREATE TABLE IF NOT EXISTS eclipse_donation_intents (
 **O que faz:**
 - Registra conta, pacote, valor em centavos, coins e status da intencao
 - Reserva campos para QR Code Pix, codigo copia e cola e referencia do gateway
-- Mantem snapshot de nome e CPF para conferencia futura
+- Mantem snapshot de nome quando necessario, mas novos registros nao devem duplicar CPF em `payer_cpf`
 - Nao credita coins automaticamente enquanto a integracao de pagamento estiver pendente
 
 ### 012-add-boosted-sponsorships.sql
@@ -212,6 +213,35 @@ CREATE TABLE IF NOT EXISTS eclipse_boosted_sponsorships (
 - Registra alvo, custo em Tibia Coins e status da compra
 - Impoe cooldown de 10 dias apos a entrada do alvo
 - Alimenta o aplicador que atualiza `boosted_boss` e `boosted_creature`
+
+### 013-add-lgpd-consents-and-requests.sql
+
+Cria tabelas para registrar consentimentos e solicitacoes relacionadas a privacidade:
+
+```sql
+CREATE TABLE IF NOT EXISTS eclipse_account_consents (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  account_id INT(11) UNSIGNED NOT NULL,
+  consent_type VARCHAR(40) NOT NULL,
+  consent_version VARCHAR(40) NOT NULL,
+  consented_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS eclipse_privacy_requests (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  account_id INT(11) UNSIGNED NOT NULL,
+  request_type ENUM('access','correction','deletion','anonymization','portability','consent_revocation','other') NOT NULL,
+  status ENUM('open','in_review','completed','rejected') NOT NULL DEFAULT 'open',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+);
+```
+
+**O que faz:**
+- Prepara registro de aceite de termos, privacidade e consentimentos opcionais
+- Permite que o painel `/account/privacy` registre solicitacoes LGPD
+- Mantem historico minimo para auditoria e atendimento ao titular
 
 ## Criando Novas Migracoes
 

@@ -12,6 +12,8 @@ Bem-vindo a documentacao do **MyAAC Eclipse OT**, um fork personalizado do [MyAA
 - [Migrações SQL](./sql-migrations.md) - Scripts de banco de dados
 - [Operacoes](./operations.md) - Manutencao e operacoes do servidor
 - [Seguranca](./security.md) - Boas praticas de seguranca
+- [Mapa LGPD](./lgpd-data-map.md) - Inventario de dados pessoais e cuidados por fluxo
+- [Incidentes LGPD](./lgpd-incident-response.md) - Roteiro de resposta a incidentes
 - [Changelog](./changelog.md) - Historico de alteracoes
 
 ## Estado Atual de Producao

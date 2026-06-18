@@ -9,6 +9,7 @@ return [
 		'Gerenciar Conta' => 'account/manage',
 		'Criar Conta' => 'account/create',
 		'Recuperar Conta' => 'account/lost',
+		'Privacidade' => 'privacy',
 		'Regras do Servidor' => 'rules',
 		'Downloads' => 'downloads',
 	],
