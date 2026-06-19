@@ -18,6 +18,7 @@ Este guia documenta os scripts SQL incluidos no projeto e como gerenciar migraco
 | `sql/013-add-lgpd-consents-and-requests.sql` | Adiciona consentimentos e solicitacoes LGPD |
 | `sql/014-add-privacy-menu.sql` | Adiciona Privacidade e LGPD ao menu Conta |
 | `sql/015-add-duo-donations.sql` | Adiciona pedidos e recompensas de donate em dupla |
+| `sql/016-add-scheduled-boosted.sql` | Adiciona agendamentos consumidos pelo servidor para o proximo boosted |
 
 ## Aplicando Migracoes
 
@@ -240,6 +241,29 @@ CREATE TABLE IF NOT EXISTS eclipse_duo_donation_orders (
 - Divide os Eclipse Coins entre as duas contas quando o webhook confirma o pagamento
 - Aplica boost de experiencia de 2 horas nos dois personagens usando `7200` segundos em `players.xpboost_stamina` e o percentual em `players.xpboost_value`
 - Registra o outfit escolhido em `eclipse_duo_donation_rewards` com status `pending_server`, para entrega posterior pelo servidor
+
+### 016-add-scheduled-boosted.sql
+
+Cria a tabela `scheduled_boosted`, consumida pelo Canary na proxima rotacao diaria:
+
+```sql
+CREATE TABLE IF NOT EXISTS scheduled_boosted (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  type ENUM('creature', 'boss') NOT NULL,
+  boostname VARCHAR(255) NOT NULL,
+  raceid INT NOT NULL,
+  status ENUM('pending', 'applied', 'cancelled') NOT NULL DEFAULT 'pending',
+  scheduled_for DATE NOT NULL,
+  source_order_id BIGINT UNSIGNED NULL,
+  PRIMARY KEY (id)
+);
+```
+
+**O que faz:**
+- Guarda o proximo `boss` ou `creature` escolhido pelo jogador sem alterar o boosted atual
+- Permite que o servidor aplique o alvo na proxima rotacao e marque o registro como `applied`
+- Mantem vinculo opcional com `eclipse_boosted_sponsorships.source_order_id` para auditoria do pedido pago com Tibia Coins
+- A regra de 1 slot por tipo/data continua sendo aplicada pela pagina `/boosted-sponsor` dentro da transacao
 
 ### 013-add-lgpd-consents-and-requests.sql
 

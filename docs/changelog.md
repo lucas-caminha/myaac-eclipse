@@ -15,6 +15,7 @@ O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0
 - Plugin `lgpd-consent` para impedir criacao de conta sem aceite da Politica de Privacidade
 - Fluxo `/boosted-sponsor` para patrocinar o boss ou creature do proximo server save com Tibia Coins
 - Migration `sql/012-add-boosted-sponsorships.sql` com controle de slot, cooldown e historico de patrocinio
+- Migration `sql/016-add-scheduled-boosted.sql` para agendar o proximo boosted consumido pelo Canary na rotacao diaria
 - Fluxo `/duo-donate` para donate em dupla com convite, aceite do parceiro, escolha de outfit em modal, Pix Mercado Pago e boost de 2 horas
 - Migration `sql/015-add-duo-donations.sql` com pedidos, tokens de aceite e recompensas de donate em dupla
 - Aviso no topo de `/account/manage` para aceitar ou recusar convites pendentes de donate em dupla
@@ -34,6 +35,7 @@ O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0
 - CPF passa a ser exibido mascarado no fluxo de atualizacao cadastral
 - Novas intencoes de doacao deixam de duplicar CPF no campo `payer_cpf`
 - Webhook Mercado Pago passa a dividir coins, aplicar boost e registrar recompensa de outfit para pedidos de donate em dupla
+- `/boosted-sponsor` passa a gravar `scheduled_boosted` em vez de alterar o boosted atual no momento da compra
 - Novo item da Loja para acesso ao patrocinio de boosted
 - Busca de monstros e filtro de magias com funcionamento e contraste corrigidos
 - Categorias de monstros e bosses com os ícones do projeto Tibia Monk

@@ -12,6 +12,40 @@
 	</table>
 	<br/>
 </div>
+{% if duo_invites is defined and duo_invites is not empty and duo_invites_rendered is not defined %}
+	<div class="eclipse-duo-invites">
+		<div class="duo-invites-title">
+			<strong>Convite de Donate em Dupla</strong>
+			<span>Voce foi convidado para participar de um apoio em dupla. Aceite somente se reconhecer o jogador principal.</span>
+		</div>
+		<div class="duo-invites-list">
+			{% for invite in duo_invites %}
+				<div class="duo-invite-card">
+					<div>
+						<strong>{{ invite.payer_player_name }} convidou {{ invite.partner_player_name }}</strong>
+						<span>R$ {{ (invite.amount_brl_cents / 100)|number_format(2, ',', '.') }} &bull; {{ invite.partner_coins|number_format(0, ',', '.') }} Eclipse Coins para voce &bull; Outfit {{ invite.outfit_name }} &bull; Boost de 2 horas</span>
+						<small>Expira em {{ invite.expires_at|date('d/m/Y H:i') }}</small>
+					</div>
+					<div class="duo-invite-actions">
+						<form method="post" action="{{ getLink('duo-donate') }}">
+							{{ csrf() }}
+							<input type="hidden" name="duo_action" value="accept">
+							<input type="hidden" name="token" value="{{ invite.partner_token }}">
+							<button type="submit">Aceitar</button>
+						</form>
+						<form method="post" action="{{ getLink('duo-donate') }}">
+							{{ csrf() }}
+							<input type="hidden" name="duo_action" value="decline">
+							<input type="hidden" name="token" value="{{ invite.partner_token }}">
+							<button type="submit" class="secondary">Recusar</button>
+						</form>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	<br/>
+{% endif %}
 <div class="TableContainer">
 	<div class="CaptionContainer">
 	<div class="CaptionInnerContainer">
@@ -475,8 +509,9 @@
 {% endif %}
 
 {{ hook('HOOK_ACCOUNT_MANAGE_BEFORE_GENERAL_INFORMATION') }}
+{% set duo_invites_rendered = true %}
 
-{% if duo_invites is defined and duo_invites is not empty %}
+{% if duo_invites is defined and duo_invites is not empty and duo_invites_rendered is not defined %}
 	<div class="eclipse-duo-invites">
 		<div class="duo-invites-title">
 			<strong>Convite de Donate em Dupla</strong>

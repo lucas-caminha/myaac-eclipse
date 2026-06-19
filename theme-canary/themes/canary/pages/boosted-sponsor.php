@@ -42,7 +42,7 @@ function eclipseBoostedSponsorRenderShellStart(string $step): void
 	echo '<div class="boosted-sponsor-shell">';
 	echo '<div class="boosted-sponsor-title">';
 	echo '<strong>Patrocine o pr&oacute;ximo boosted</strong>';
-	echo '<span>Escolha um boss por 250 Tibia Coins ou uma criatura por 300 Tibia Coins para o pr&oacute;ximo server save.</span>';
+	echo '<span>Escolha um boss por 250 Tibia Coins ou uma criatura por 300 Tibia Coins para a pr&oacute;xima rota&ccedil;&atilde;o di&aacute;ria do servidor.</span>';
 	echo '</div>';
 	eclipseBoostedSponsorRenderProgress($step);
 }
@@ -72,8 +72,8 @@ function eclipseBoostedSponsorRenderIntro(DateTimeImmutable $nextServerSave, ?ar
 ?>
 	<div class="boosted-sponsor-panel">
 		<h2>Como funciona</h2>
-		<p>Este apoio permite definir o boss boosted ou a creature boosted do pr&oacute;ximo server save usando Tibia Coins da pr&oacute;pria conta.</p>
-		<p>O custo &eacute; fixo: <strong>250 Tibia Coins para boss</strong> e <strong>300 Tibia Coins para creature</strong>. Depois de confirmado, o alvo entra no pr&oacute;ximo server save e fica 10 dias em cooldown.</p>
+		<p>Este apoio permite definir o boss boosted ou a creature boosted da pr&oacute;xima rota&ccedil;&atilde;o di&aacute;ria usando Tibia Coins da pr&oacute;pria conta.</p>
+		<p>O custo &eacute; fixo: <strong>250 Tibia Coins para boss</strong> e <strong>300 Tibia Coins para creature</strong>. Depois de confirmado, o alvo fica agendado para a pr&oacute;xima rota&ccedil;&atilde;o e entra em cooldown de 10 dias ap&oacute;s ser aplicado.</p>
 		<p>O pr&oacute;ximo fechamento desta rodada acontece em <strong><?= eclipseBoostedSponsorFormatDate($nextServerSave) ?></strong>.</p>
 
 		<div class="boosted-sponsor-slot-grid">
@@ -121,7 +121,7 @@ function eclipseBoostedSponsorRenderSelection(
 
 		<div class="boosted-sponsor-summary-grid">
 			<div class="boosted-sponsor-summary-card">
-				<small>Pr&oacute;ximo server save</small>
+				<small>Pr&oacute;xima rota&ccedil;&atilde;o</small>
 				<strong><?= eclipseBoostedSponsorFormatDate($nextServerSave) ?></strong>
 				<span>S&oacute; existe um slot de <?= strtolower($typeLabel) ?> por rodada.</span>
 			</div>
@@ -245,7 +245,7 @@ function eclipseBoostedSponsorRenderCheckoutPreview(array $target, DateTimeImmut
 			<div>
 				<small><?= eclipseBoostedSponsorTypeLabel((string)($_POST['target_type'] ?? 'boss')) ?></small>
 				<strong><?= htmlspecialchars($target['name']) ?></strong>
-				<span><?= htmlspecialchars($target['category']) ?> &bull; entra no server save de <?= $nextServerSave->format('d/m/Y') ?></span>
+				<span><?= htmlspecialchars($target['category']) ?> &bull; entra na rota&ccedil;&atilde;o de <?= $nextServerSave->format('d/m/Y') ?></span>
 			</div>
 		</div>
 		<div class="boosted-sponsor-donation-summary">
@@ -254,7 +254,7 @@ function eclipseBoostedSponsorRenderCheckoutPreview(array $target, DateTimeImmut
 			<div><span>Seu saldo atual</span><strong><?= number_format($balance, 0, ',', '.') ?> Tibia Coins</strong></div>
 		</div>
 		<div class="boosted-sponsor-actions">
-			<p class="boosted-sponsor-confirm-copy">Ao confirmar, os Tibia Coins ser&atilde;o debitados imediatamente e este slot ficar&aacute; bloqueado para todos os jogadores.</p>
+			<p class="boosted-sponsor-confirm-copy">Ao confirmar, os Tibia Coins ser&atilde;o debitados imediatamente e este alvo ficar&aacute; agendado para a pr&oacute;xima rota&ccedil;&atilde;o di&aacute;ria do servidor.</p>
 			<form method="post" action="<?= getLink('boosted-sponsor') ?>">
 				<?= csrf(true) ?>
 				<input type="hidden" name="step" value="confirm">
@@ -278,7 +278,7 @@ function eclipseBoostedSponsorRenderCheckoutSuccess(array $target, DateTimeImmut
 			<div>
 				<small><?= eclipseBoostedSponsorTypeLabel((string)($_POST['target_type'] ?? 'boss')) ?></small>
 				<strong><?= htmlspecialchars($target['name']) ?></strong>
-				<span><?= htmlspecialchars($target['category']) ?> &bull; entra no server save de <?= $nextServerSave->format('d/m/Y') ?></span>
+				<span><?= htmlspecialchars($target['category']) ?> &bull; entra na rota&ccedil;&atilde;o de <?= $nextServerSave->format('d/m/Y') ?></span>
 			</div>
 		</div>
 		<div class="boosted-sponsor-donation-summary">
@@ -286,7 +286,7 @@ function eclipseBoostedSponsorRenderCheckoutSuccess(array $target, DateTimeImmut
 			<div><span>Cooldown depois da entrada</span><strong>10 dias</strong></div>
 			<div><span>Saldo restante</span><strong><?= number_format($balanceAfter, 0, ',', '.') ?> Tibia Coins</strong></div>
 		</div>
-		<p class="boosted-sponsor-status">Pedido #<?= (int)$orderId ?> confirmado com sucesso. O alvo <?= htmlspecialchars($target['name']) ?> foi garantido para o pr&oacute;ximo server save e o slot ficou bloqueado para os demais jogadores.</p>
+		<p class="boosted-sponsor-status">Pedido #<?= (int)$orderId ?> confirmado com sucesso. O alvo <?= htmlspecialchars($target['name']) ?> foi agendado para a pr&oacute;xima rota&ccedil;&atilde;o di&aacute;ria e o slot ficou bloqueado para os demais jogadores.</p>
 		<div class="boosted-sponsor-actions">
 			<a class="eclipse-btn" href="<?= getLink('boosted-sponsor') ?>?step=select&type=<?= htmlspecialchars((string)($_POST['target_type'] ?? 'boss')) ?>">Escolher outro alvo</a>
 		</div>
@@ -330,8 +330,8 @@ if(!$logged) {
 	return;
 }
 
-if(!$db->hasTable('eclipse_boosted_sponsorships')) {
-	echo '<div class="boosted-sponsor-panel boosted-sponsor-error"><h2>Migracao pendente</h2><p>A tabela de patrocinio boosted ainda nao existe. Aplique a migracao SQL <code>sql/012-add-boosted-sponsorships.sql</code> antes de ativar este fluxo.</p></div>';
+if(!$db->hasTable('eclipse_boosted_sponsorships') || !$db->hasTable('scheduled_boosted')) {
+	echo '<div class="boosted-sponsor-panel boosted-sponsor-error"><h2>Migra&ccedil;&atilde;o pendente</h2><p>As tabelas de patroc&iacute;nio boosted ainda n&atilde;o est&atilde;o completas. Aplique <code>sql/012-add-boosted-sponsorships.sql</code> e <code>sql/016-add-scheduled-boosted.sql</code> antes de ativar este fluxo.</p></div>';
 	eclipseBoostedSponsorRenderShellEnd();
 	eclipseBoostedSponsorRenderAssets();
 	return;
@@ -348,7 +348,7 @@ if($step === 'checkout' || $step === 'confirm') {
 		$step = 'select';
 	}
 	else if($currentSlot) {
-		error('Este slot ja foi reservado para o proximo server save.');
+		error('Este slot ja foi reservado para a proxima rotacao.');
 		$step = 'select';
 	}
 	else if(eclipseBoostedSponsorCooldownConflict($db, $type, $target['name'], $scheduledForDate)) {
@@ -373,6 +373,17 @@ if($step === 'checkout' || $step === 'confirm') {
 				throw new RuntimeException('Este slot acabou de ser reservado por outro apoio. Escolha outro tipo ou volte em alguns minutos.');
 			}
 
+			$scheduledLock = $db->prepare(
+				'SELECT id, boostname FROM scheduled_boosted
+				  WHERE type = ? AND scheduled_for = ? AND status = "pending"
+				  ORDER BY id ASC LIMIT 1 FOR UPDATE'
+			);
+			$scheduledLock->execute([$type, $scheduledForDate]);
+			$scheduledConflict = $scheduledLock->fetch(PDO::FETCH_ASSOC);
+			if($scheduledConflict) {
+				throw new RuntimeException('Este slot acabou de ser agendado para ' . $scheduledConflict['boostname'] . '.');
+			}
+
 			$cooldownConflict = eclipseBoostedSponsorCooldownConflict($db, $type, $target['name'], $scheduledForDate);
 			if($cooldownConflict) {
 				throw new RuntimeException('Este alvo entrou em cooldown enquanto voce navegava pela pagina.');
@@ -388,6 +399,7 @@ if($step === 'checkout' || $step === 'confirm') {
 
 			$balanceAfter = $currentCoins - $priceCoins;
 			$cooldownUntil = $nextServerSave->modify('+10 days')->format('Y-m-d');
+			$targetRaceId = eclipseBoostedSponsorResolveRaceId($target);
 
 			$orderSaved = $db->insert('eclipse_boosted_sponsorships', [
 				'account_id' => $account->id,
@@ -410,6 +422,22 @@ if($step === 'checkout' || $step === 'confirm') {
 				throw new RuntimeException('Nao foi possivel criar o pedido de patrocinio.');
 			}
 
+			$orderId = (int)$db->lastInsertId();
+			$scheduledSaved = $db->insert('scheduled_boosted', [
+				'type' => $type,
+				'boostname' => $target['name'],
+				'raceid' => $targetRaceId,
+				'player_id' => null,
+				'account_id' => (int)$account->id,
+				'status' => 'pending',
+				'scheduled_for' => $scheduledForDate,
+				'source_order_id' => $orderId,
+			]);
+
+			if(!$scheduledSaved) {
+				throw new RuntimeException('Nao foi possivel agendar o boosted para a proxima rotacao.');
+			}
+
 			$db->prepare('UPDATE accounts SET coins = coins - ? WHERE id = ?')->execute([$priceCoins, (int)$account->id]);
 			if($db->hasTable('coins_transactions')) {
 				$db->insert('coins_transactions', [
@@ -421,7 +449,6 @@ if($step === 'checkout' || $step === 'confirm') {
 				]);
 			}
 
-			$orderId = (int)$db->lastInsertId();
 			$db->commit();
 
 			eclipseBoostedSponsorRenderCheckoutSuccess($target, $nextServerSave, $orderId, $priceCoins, $balanceAfter, (string)$account_logged->getName());

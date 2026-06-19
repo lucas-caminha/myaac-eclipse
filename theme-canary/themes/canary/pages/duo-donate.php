@@ -657,6 +657,13 @@ function eclipseDuoRenderAssets(): void
 	text-shadow: none !important;
 	font: 700 12px Verdana, Arial, sans-serif;
 }
+.eclipse-duo-page select:focus,
+.eclipse-duo-page select option:checked,
+.eclipse-duo-page select option:hover {
+	background: #f2cf83 !important;
+	color: #210905 !important;
+	-webkit-text-fill-color: #210905 !important;
+}
 .eclipse-duo-page .duo-grid {
 	display: grid;
 	gap: 12px;

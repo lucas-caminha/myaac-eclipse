@@ -186,9 +186,13 @@ ECLIPSE_MONSTER_DATA_PATH="/caminho/para/data-otservbr-global/monster"
 Notas:
 - Existe 1 slot de `boss` e 1 slot de `creature` para o proximo server save.
 - O custo e fixo: `250 Tibia Coins` para boss e `300 Tibia Coins` para creature.
-- O alvo escolhido entra no proximo server save e depois fica 10 dias em cooldown.
-- Quando `myaac_monsters` nao estiver populada com `raceid`, configure `ECLIPSE_MONSTER_DATA_PATH` apontando para a pasta `monster` do Canary/OTServBR para o aplicador resolver o `raceid` pelos arquivos Lua.
-- Depois do server save, execute:
+- O alvo escolhido e gravado em `scheduled_boosted` como `pending`; o site nao altera `boosted_boss` nem `boosted_creature` no momento da compra.
+- O servidor Canary deve consultar `scheduled_boosted` na rotacao diaria/restart, aplicar o registro `pending` da data atual e marcar como `applied`.
+- O alvo fica 10 dias em cooldown depois de reservado pelo site.
+- Bosses listados para patrocinio seguem a regra do servidor e usam apenas `Archfoe`.
+- Quando `myaac_monsters` nao estiver populada com `raceid`, configure `ECLIPSE_MONSTER_DATA_PATH` apontando para a pasta `monster` do Canary/OTServBR para o site resolver o `raceid` pelos arquivos Lua antes de criar o agendamento.
+- A migration obrigatoria para o agendamento e `sql/016-add-scheduled-boosted.sql`.
+- O aplicador HTTP antigo abaixo deve ser tratado como legado. Use apenas se o servidor ainda nao estiver lendo `scheduled_boosted` diretamente:
 
 ```bash
 php /var/www/html/plugins/theme-canary/webhooks/boosted-sponsor-apply.php

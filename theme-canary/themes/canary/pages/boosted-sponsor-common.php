@@ -153,6 +153,32 @@ function eclipseBoostedSponsorTypeLabel(string $type): string
 
 function eclipseBoostedSponsorActiveSlot($db, string $type, string $scheduledForDate): ?array
 {
+	if($db->hasTable('scheduled_boosted')) {
+		$stmt = $db->prepare(
+			'SELECT sb.id, sb.type AS target_type, sb.boostname AS target_name, sb.scheduled_for AS scheduled_for_date,
+				COALESCE(s.amount_coins, :price) AS amount_coins,
+				COALESCE(s.target_category, "") AS target_category,
+				a.name AS sponsor_account_name
+			FROM scheduled_boosted sb
+			LEFT JOIN eclipse_boosted_sponsorships s ON s.id = sb.source_order_id
+			LEFT JOIN accounts a ON a.id = sb.account_id
+			WHERE sb.type = :type
+			  AND sb.scheduled_for = :scheduled
+			  AND sb.status = "pending"
+			ORDER BY sb.id ASC LIMIT 1'
+		);
+		$stmt->execute([
+			':price' => eclipseBoostedSponsorPriceCoins($type),
+			':type' => $type,
+			':scheduled' => $scheduledForDate,
+		]);
+
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		if($row) {
+			return $row;
+		}
+	}
+
 	$stmt = $db->prepare(
 		'SELECT s.*, a.name AS sponsor_account_name
 		FROM eclipse_boosted_sponsorships s
@@ -206,7 +232,17 @@ function eclipseBoostedSponsorCandidates($db, string $type, string $scheduledFor
 {
 	$isBoss = $type === 'boss';
 	$categoryColumn = $isBoss ? 'lm.bosstiary_class' : 'lm.bestiary_class';
-	$typeFilter = $isBoss ? "lm.bosstiary_class != ''" : "lm.bosstiary_class = ''";
+	$typeFilter = $isBoss ? "LOWER(lm.bosstiary_class) = 'archfoe'" : "lm.bosstiary_class = ''";
+	$scheduledFilter = '';
+	if($db->hasTable('scheduled_boosted')) {
+		$scheduledFilter = ' AND NOT EXISTS (
+			SELECT 1 FROM scheduled_boosted sb
+			WHERE sb.type = :type
+			  AND sb.boostname COLLATE utf8mb4_general_ci = lm.name COLLATE utf8mb4_general_ci
+			  AND sb.status IN ("pending", "applied")
+			  AND sb.scheduled_for = :scheduled
+		  )';
+	}
 
 	$sql = 'SELECT lm.id, lm.name, lm.outfit, lm.health, lm.exp, ' . $categoryColumn . ' AS category
 		FROM myaac_lua_monsters lm
@@ -224,6 +260,7 @@ function eclipseBoostedSponsorCandidates($db, string $type, string $scheduledFor
 				OR s.cooldown_until >= :scheduled
 			  )
 		  )
+		  ' . $scheduledFilter . '
 		ORDER BY lm.name ASC';
 
 	$stmt = $db->prepare($sql);
@@ -243,7 +280,7 @@ function eclipseBoostedSponsorCandidates($db, string $type, string $scheduledFor
 function eclipseBoostedSponsorLoadTarget($db, string $type, int $targetId): ?array
 {
 	$isBoss = $type === 'boss';
-	$typeFilter = $isBoss ? "lm.bosstiary_class != ''" : "lm.bosstiary_class = ''";
+	$typeFilter = $isBoss ? "LOWER(lm.bosstiary_class) = 'archfoe'" : "lm.bosstiary_class = ''";
 	$categoryColumn = $isBoss ? 'lm.bosstiary_class' : 'lm.bestiary_class';
 
 	$stmt = $db->prepare(
@@ -262,6 +299,21 @@ function eclipseBoostedSponsorLoadTarget($db, string $type, int $targetId): ?arr
 
 	$row['img_link'] = eclipseBoostedSponsorBuildImage($row);
 	return $row;
+}
+
+function eclipseBoostedSponsorResolveRaceId(array $target): int
+{
+	$source = eclipseBoostedSponsorResolveMonsterSource((string)$target['name']);
+	$raceId = (int)($source['raceid'] ?? 0);
+	if($raceId <= 0) {
+		$raceId = (int)($target['raceid'] ?? 0);
+	}
+
+	if($raceId <= 0) {
+		throw new RuntimeException('Nao foi possivel resolver o raceid de ' . $target['name'] . '. Configure ECLIPSE_MONSTER_DATA_PATH apontando para a pasta monster do servidor.');
+	}
+
+	return $raceId;
 }
 
 function eclipseBoostedSponsorSlotConflict($db, string $type, string $scheduledForDate, int $ignoreId = 0): ?array
