@@ -71,6 +71,7 @@ function eclipseBoostedSponsorMonsterSourceDirs(): array
 
 	$dirs[] = 'D:/otserver/server/data-otservbr-global/monster';
 	$dirs[] = '/opt/canary/data-otservbr-global/monster';
+	$dirs[] = '/opt/otserver/canary/data-otservbr-global/monster';
 	$dirs[] = '/opt/otserver/server/data-otservbr-global/monster';
 	$dirs[] = '/home/canary/data-otservbr-global/monster';
 	$dirs[] = '/srv/canary/data-otservbr-global/monster';
