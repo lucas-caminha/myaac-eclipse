@@ -17,6 +17,7 @@ O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0
 - Migration `sql/012-add-boosted-sponsorships.sql` com controle de slot, cooldown e historico de patrocinio
 - Fluxo `/duo-donate` para donate em dupla com convite, aceite do parceiro, escolha de outfit em modal, Pix Mercado Pago e boost de 2 horas
 - Migration `sql/015-add-duo-donations.sql` com pedidos, tokens de aceite e recompensas de donate em dupla
+- Aviso no topo de `/account/manage` para aceitar ou recusar convites pendentes de donate em dupla
 - Página de detalhes para personagens anunciados no mercado, com atributos, progressão, dados de combate, skills, equipamentos e histórico recente
 - Página `/bosses` separada por classes Bane, Archfoe e Nemesis do Bosstiary
 - Biblioteca pública de monstros e magias carregada dos dados do Canary
