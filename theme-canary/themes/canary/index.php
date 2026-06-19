@@ -2647,6 +2647,115 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
 		}
 
+		#ContentColumn .eclipse-account-manage-page .eclipse-duo-invites,
+		#ContentColumn .eclipse-account-manage-page .eclipse-duo-invites * {
+		  box-sizing: border-box !important;
+		  color: #210905 !important;
+		  -webkit-text-fill-color: #210905 !important;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn .eclipse-account-manage-page .eclipse-duo-invites {
+		  margin: 0 0 16px !important;
+		  padding: 14px !important;
+		  background: linear-gradient(180deg, #f7dfaa 0%, #dfb96f 65%, #c59143 100%) !important;
+		  border: 2px solid #a56620 !important;
+		  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 3px 8px rgba(0,0,0,.35) !important;
+		}
+
+		#ContentColumn .eclipse-account-manage-page .duo-invites-title {
+		  background: linear-gradient(180deg, #40100a 0%, #180403 100%) !important;
+		  border: 1px solid #b96d22 !important;
+		  padding: 14px !important;
+		  text-align: center !important;
+		}
+
+		#ContentColumn .eclipse-account-manage-page .duo-invites-title strong {
+		  display: block !important;
+		  color: #fff0c5 !important;
+		  -webkit-text-fill-color: #fff0c5 !important;
+		  font: 900 20px Georgia, "Times New Roman", serif !important;
+		}
+
+		#ContentColumn .eclipse-account-manage-page .duo-invites-title span {
+		  display: block !important;
+		  margin-top: 5px !important;
+		  color: #f3d792 !important;
+		  -webkit-text-fill-color: #f3d792 !important;
+		  font: 700 12px Verdana, Arial, sans-serif !important;
+		}
+
+		#ContentColumn .eclipse-account-manage-page .duo-invites-list {
+		  display: grid !important;
+		  gap: 10px !important;
+		  margin-top: 12px !important;
+		}
+
+		#ContentColumn .eclipse-account-manage-page .duo-invite-card {
+		  display: grid !important;
+		  grid-template-columns: 1fr auto !important;
+		  gap: 12px !important;
+		  align-items: center !important;
+		  padding: 12px !important;
+		  background: rgba(255,248,221,.78) !important;
+		  border: 1px solid rgba(137,83,33,.55) !important;
+		}
+
+		#ContentColumn .eclipse-account-manage-page .duo-invite-card strong,
+		#ContentColumn .eclipse-account-manage-page .duo-invite-card span,
+		#ContentColumn .eclipse-account-manage-page .duo-invite-card small {
+		  display: block !important;
+		  font-family: Verdana, Arial, sans-serif !important;
+		}
+
+		#ContentColumn .eclipse-account-manage-page .duo-invite-card strong {
+		  font-size: 13px !important;
+		  font-weight: 900 !important;
+		}
+
+		#ContentColumn .eclipse-account-manage-page .duo-invite-card span {
+		  margin-top: 5px !important;
+		  font-size: 12px !important;
+		  font-weight: 800 !important;
+		  line-height: 1.45 !important;
+		}
+
+		#ContentColumn .eclipse-account-manage-page .duo-invite-card small {
+		  margin-top: 4px !important;
+		  font-size: 11px !important;
+		  font-weight: 700 !important;
+		}
+
+		#ContentColumn .eclipse-account-manage-page .duo-invite-actions {
+		  display: flex !important;
+		  gap: 8px !important;
+		  flex-wrap: wrap !important;
+		  justify-content: flex-end !important;
+		}
+
+		#ContentColumn .eclipse-account-manage-page .duo-invite-actions form {
+		  margin: 0 !important;
+		  padding: 0 !important;
+		}
+
+		#ContentColumn .eclipse-account-manage-page .duo-invite-actions button {
+		  min-height: 32px !important;
+		  padding: 7px 14px !important;
+		  background: linear-gradient(180deg, #a83b12 0%, #661003 100%) !important;
+		  border: 1px solid #f0a748 !important;
+		  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 2px 4px rgba(0,0,0,.35) !important;
+		  color: #fff2cf !important;
+		  -webkit-text-fill-color: #fff2cf !important;
+		  text-shadow: 0 1px 0 #000 !important;
+		  font: 900 12px Verdana, Arial, sans-serif !important;
+		  text-transform: uppercase !important;
+		  cursor: pointer !important;
+		}
+
+		#ContentColumn .eclipse-account-manage-page .duo-invite-actions button.secondary {
+		  background: linear-gradient(180deg, #6b4a2f 0%, #362011 100%) !important;
+		}
+
 		/* Downloads page: keep the beige panels readable despite generic dark-content rules. */
 		#ContentColumn .Content .eclipse-download-page,
 		#ContentColumn .Content .eclipse-download-page *:not(.download-button):not(.download-button *):not(.download-step) {

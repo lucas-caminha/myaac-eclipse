@@ -488,17 +488,27 @@ try {
 		success('Convite criado. Envie o link de aceite para o parceiro.');
 		$token = '';
 	}
-	else if($action === 'accept') {
+	else if($action === 'accept' || $action === 'decline') {
 		$order = eclipseDuoOrderByToken($db, $token);
 		if(!$order || (int)$order['partner_account_id'] !== (int)$account->id || $order['status'] !== 'pending_partner' || strtotime((string)$order['expires_at']) < time()) {
-			throw new RuntimeException('Este convite não está disponível para aceite.');
+			throw new RuntimeException('Este convite não está disponível.');
 		}
-		$db->update('eclipse_duo_donation_orders', [
-			'status' => 'partner_accepted',
-			'partner_accepted_at' => date('Y-m-d H:i:s'),
-			'updated_at' => date('Y-m-d H:i:s'),
-		], ['id' => (int)$order['id']]);
-		success('Convite aceito. O jogador principal já pode gerar o Pix.');
+		if($action === 'accept') {
+			$db->update('eclipse_duo_donation_orders', [
+				'status' => 'partner_accepted',
+				'partner_accepted_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s'),
+			], ['id' => (int)$order['id']]);
+			success('Convite aceito. O jogador principal já pode gerar o Pix.');
+		}
+		else {
+			$db->update('eclipse_duo_donation_orders', [
+				'status' => 'declined',
+				'updated_at' => date('Y-m-d H:i:s'),
+			], ['id' => (int)$order['id']]);
+			success('Convite recusado.');
+		}
+		$token = '';
 	}
 	else if($action === 'pay') {
 		if(!$db->hasTable('eclipse_donation_intents')) {
@@ -634,8 +644,17 @@ function eclipseDuoRenderAssets(): void
 .eclipse-duo-page textarea {
 	width: 100%;
 	padding: 9px 10px;
-	background: #fff6d8;
+	background: #fff6d8 !important;
 	border: 1px solid #8c5b27;
+	color: #210905 !important;
+	-webkit-text-fill-color: #210905 !important;
+	font: 700 12px Verdana, Arial, sans-serif;
+}
+.eclipse-duo-page select option {
+	background: #fff6d8 !important;
+	color: #210905 !important;
+	-webkit-text-fill-color: #210905 !important;
+	text-shadow: none !important;
 	font: 700 12px Verdana, Arial, sans-serif;
 }
 .eclipse-duo-page .duo-grid {
