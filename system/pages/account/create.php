@@ -110,6 +110,7 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 	$serverName = eclipseCreateAccountEscape(configLua('serverName'));
 	$characterCard = '';
 	$heroStyle = '';
+	$vocationImage = '';
 	$intro = $characterEnabled
 		? 'Sua conta e seu personagem foram criados. Agora é só entrar no jogo e escolher o outfit inicial.'
 		: 'Sua conta foi criada. Entre no painel para criar seu primeiro personagem quando quiser.';
@@ -122,11 +123,13 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 			$vocationImageStyle = '--eclipse-create-vocation-image: url(' . $vocationBannerUrl . ');';
 			$bannerStyle = ' style="' . $vocationImageStyle . '"';
 			$heroStyle = ' style="' . $vocationImageStyle . '"';
+			$vocationImage = '<img class="eclipse-create-success-art" src="' . $vocationBannerUrl . '" alt="">';
 		}
 
 		$characterCard = '
 			<section class="eclipse-create-success-card eclipse-create-success-character">
 				<div class="eclipse-create-success-banner"' . $bannerStyle . '>
+					' . $vocationImage . '
 					<div>
 						<span>Personagem inicial</span>
 						<strong>' . $characterNameText . '</strong>
@@ -140,6 +143,7 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 	$description = '
 		<div class="eclipse-create-success">
 			<section class="eclipse-create-success-hero"' . $heroStyle . '>
+				' . $vocationImage . '
 				<span>Cadastro concluído</span>
 				<h2>Bem-vindo ao ' . $serverName . '</h2>
 				<p>' . eclipseCreateAccountEscape($intro) . '</p>
@@ -395,8 +399,6 @@ if($save)
 			if(_mail($email, 'Nova conta no ' . $config['lua']['serverName'], $body_html))
 			{
 				warning("Antes de entrar, você precisa confirmar seu email. O link de verificação foi enviado para $email. Se a mensagem não chegar, verifique também a caixa de spam.");
-
-				eclipseRenderCreateAccountSuccess($twig, $account_type, $tmp_account, setting('core.account_create_character_create'), $character_name ?? '', $character_vocation ?? null);
 			}
 			else
 			{
@@ -422,8 +424,6 @@ if($save)
 				header('Location: ' . getLink('account/manage'));
 			}
 
-			eclipseRenderCreateAccountSuccess($twig, $account_type, $tmp_account, setting('core.account_create_character_create'), $character_name ?? '', $character_vocation ?? null);
-
 			if(setting('core.mail_enabled') && setting('core.account_welcome_mail'))
 			{
 				$mailBody = $twig->render('account.welcome_mail.html.twig', array(
@@ -440,12 +440,18 @@ if($save)
 
 		if(setting('core.account_create_character_create')) {
 			// character creation
+			ob_start();
 			$character_created = $createCharacter->doCreate($character_name, $character_sex, $character_vocation, $character_town, $new_account, $errors);
+			$characterCreationOutput = ob_get_clean();
 			if (!$character_created) {
+				echo $characterCreationOutput;
 				error('There was an error creating your character. Please create your character later in account management page.');
 				error(implode(' ', $errors));
+				return;
 			}
 		}
+
+		eclipseRenderCreateAccountSuccess($twig, $account_type, $tmp_account, setting('core.account_create_character_create'), $character_name ?? '', $character_vocation ?? null);
 
 		return;
 	}

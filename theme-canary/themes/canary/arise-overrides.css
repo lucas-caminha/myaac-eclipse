@@ -5963,6 +5963,82 @@ html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-error-page .e
   -webkit-text-fill-color: #7d190e !important;
 }
 
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-hero,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-banner {
+  position: relative !important;
+  isolation: isolate !important;
+}
+
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-art {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center right !important;
+  opacity: .72 !important;
+}
+
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-banner .eclipse-create-success-art {
+  object-position: center !important;
+  opacity: .84 !important;
+}
+
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-hero::before,
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-banner::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  background: linear-gradient(90deg, rgba(9, 4, 3, .94) 0%, rgba(20, 7, 4, .76) 46%, rgba(20, 7, 4, .36) 100%) !important;
+  pointer-events: none !important;
+}
+
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-banner::before {
+  background: linear-gradient(180deg, rgba(10, 6, 4, .18), rgba(22, 7, 4, .88)) !important;
+}
+
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-hero > :not(.eclipse-create-success-art),
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-banner > :not(.eclipse-create-success-art) {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-hero span {
+  color: #fff0bf !important;
+  -webkit-text-fill-color: #fff0bf !important;
+  text-shadow: 0 1px 1px #000 !important;
+}
+
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-hero h2 {
+  color: #fff7dc !important;
+  -webkit-text-fill-color: #fff7dc !important;
+  text-shadow: 0 2px 2px #000, 0 0 12px rgba(255, 189, 77, .44) !important;
+}
+
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-hero p {
+  color: #ffe9bd !important;
+  -webkit-text-fill-color: #ffe9bd !important;
+  text-shadow: 0 1px 1px #000 !important;
+}
+
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-banner span {
+  color: #ffd97a !important;
+  -webkit-text-fill-color: #ffd97a !important;
+}
+
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-banner strong {
+  color: #fff0c6 !important;
+  -webkit-text-fill-color: #fff0c6 !important;
+  text-shadow: 0 2px 0 #220804, 0 0 10px rgba(255, 177, 67, .36) !important;
+}
+
+html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-banner small {
+  color: #f4d6a0 !important;
+  -webkit-text-fill-color: #f4d6a0 !important;
+}
+
 /* Final account management typography. */
 #ContentColumn .Content .eclipse-account-manage-page,
 #ContentColumn .Content .eclipse-account-manage-page *:not(.CaptionContainer):not(.CaptionContainer *):not(.CaptionInnerContainer):not(.CaptionInnerContainer *):not(.BorderTitleText):not(.BorderTitleText *):not(.Title):not(.Title *):not(.BigButton):not(.BigButton *):not(.BigButtonText):not(.MediumButtonText):not(button):not(button *):not(input[type="submit"]):not(input[type="button"]) {
