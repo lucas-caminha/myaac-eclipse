@@ -32,6 +32,9 @@ O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0
 - Interface em portugues para `/account/lost`, incluindo o estado de recuperacao por e-mail indisponivel
 
 ### Alterado
+- `/account/manage` passa a exibir benefícios VIP/Loyalty com dados da configuração atual e um painel cadastral mais completo
+- `/account/privacy` recebeu correções de acentuação nos textos de LGPD
+- Tela de sucesso do cadastro passa a destacar o nome da conta e o personagem inicial com banner de vocacao
 - Imagens de itens passam a usar a base OTBR/Canary `latest_otbr`, corrigindo sprites quebrados ou incorretos em equipamentos modernos
 - Cadastro passa a exibir aceite obrigatorio da Politica de Privacidade
 - CPF passa a ser exibido mascarado no fluxo de atualizacao cadastral

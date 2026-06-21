@@ -14,13 +14,13 @@ function eclipseMaskCpfForPrivacy($cpf)
 {
 	$digits = preg_replace('/\D+/', '', (string)$cpf);
 	if(strlen($digits) !== 11) {
-		return 'Nao informado';
+		return 'Não informado';
 	}
 
 	return '***.***.***-' . substr($digits, -2);
 }
 
-function eclipsePrivacyValue($value, $fallback = 'Nao informado')
+function eclipsePrivacyValue($value, $fallback = 'Não informado')
 {
 	$value = trim((string)$value);
 	return $value !== '' ? htmlspecialchars($value, ENT_QUOTES, 'UTF-8') : $fallback;
@@ -48,13 +48,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 		]);
 
 		$twig->display('success.html.twig', [
-			'title' => 'Solicitacao registrada',
-			'description' => 'Recebemos sua solicitacao de privacidade. A equipe ira analisar e responder pelo canal de suporte da conta.'
+			'title' => 'Solicitação registrada',
+			'description' => 'Recebemos sua solicitação de privacidade. A equipe irá analisar e responder pelo canal de suporte da conta.'
 		]);
 	}
 	else {
 		$twig->display('error_box.html.twig', [
-			'errors' => ['A tabela de solicitacoes LGPD ainda nao foi aplicada. Execute a migration sql/013-add-lgpd-consents-and-requests.sql.']
+			'errors' => ['A tabela de solicitações LGPD ainda não foi aplicada. Execute a migration sql/013-add-lgpd-consents-and-requests.sql.']
 		]);
 	}
 }
@@ -67,7 +67,7 @@ if($db->hasTable('eclipse_privacy_requests')) {
 	<section class="privacy-hero">
 		<span>Minha Conta</span>
 		<h2>Privacidade da Conta</h2>
-		<p>Consulte os principais dados associados a sua conta e registre solicitacoes relacionadas a LGPD.</p>
+		<p>Consulte os principais dados associados à sua conta e registre solicitações relacionadas à LGPD.</p>
 	</section>
 
 	<section class="privacy-section">
@@ -78,9 +78,9 @@ if($db->hasTable('eclipse_privacy_requests')) {
 			<div><span>Nome completo</span><strong><?= eclipsePrivacyValue($account->rlname ?? '') ?></strong></div>
 			<div><span>Data de nascimento</span><strong><?= eclipsePrivacyValue($account->birth_date ?? '') ?></strong></div>
 			<div><span>CPF</span><strong><?= eclipseMaskCpfForPrivacy($account->cpf ?? '') ?></strong></div>
-			<div><span>Localizacao</span><strong><?= eclipsePrivacyValue($account->location ?? '') ?></strong></div>
+			<div><span>Localização</span><strong><?= eclipsePrivacyValue($account->location ?? '') ?></strong></div>
 		</div>
-		<p class="privacy-note">CPF e dados de doacao ficam mascarados em tela. A senha nao pode ser consultada porque e armazenada em formato protegido.</p>
+		<p class="privacy-note">CPF e dados de doação ficam mascarados em tela. A senha não pode ser consultada porque é armazenada em formato protegido.</p>
 	</section>
 
 	<section class="privacy-section">
@@ -88,28 +88,28 @@ if($db->hasTable('eclipse_privacy_requests')) {
 		<form class="privacy-request-form" method="post" action="<?= getLink('account/privacy') ?>">
 			<?= csrf(true) ?>
 			<label>
-				Tipo de solicitacao
+				Tipo de solicitação
 				<select name="request_type">
 					<option value="access">Acesso aos dados</option>
-					<option value="correction">Correcao de dados</option>
-					<option value="deletion">Exclusao quando aplicavel</option>
-					<option value="anonymization">Anonimizacao quando aplicavel</option>
+					<option value="correction">Correção de dados</option>
+					<option value="deletion">Exclusão quando aplicável</option>
+					<option value="anonymization">Anonimização quando aplicável</option>
 					<option value="portability">Portabilidade</option>
-					<option value="consent_revocation">Revogacao de consentimento opcional</option>
+					<option value="consent_revocation">Revogação de consentimento opcional</option>
 					<option value="other">Outro assunto</option>
 				</select>
 			</label>
 			<label>
 				Detalhes
-				<textarea name="message" rows="5" maxlength="1200" placeholder="Descreva sua solicitacao sem informar senha ou Recovery Key."></textarea>
+				<textarea name="message" rows="5" maxlength="1200" placeholder="Descreva sua solicitação sem informar senha ou Recovery Key."></textarea>
 			</label>
-			<button class="eclipse-btn" type="submit">Enviar solicitacao</button>
+			<button class="eclipse-btn" type="submit">Enviar solicitação</button>
 		</form>
 	</section>
 
 	<?php if(!empty($requests)): ?>
 	<section class="privacy-section">
-		<h3>Ultimas solicitacoes</h3>
+		<h3>Últimas solicitações</h3>
 		<table class="privacy-request-table">
 			<tr><th>Tipo</th><th>Status</th><th>Data</th></tr>
 			<?php foreach($requests as $request): ?>
@@ -123,4 +123,3 @@ if($db->hasTable('eclipse_privacy_requests')) {
 	</section>
 	<?php endif; ?>
 </div>
-

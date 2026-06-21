@@ -131,6 +131,23 @@
 										<tbody>
 										<tr>
 											<td class="premiumbenefits">
+												<div class="eclipse-manage-benefits-head">
+													<strong>Benefícios VIP & Loyalty</strong>
+													<span>Valores atualizados a partir da configuração atual do servidor.</span>
+													<a href="{{ getLink('vip-loyalty') }}">Ver detalhes</a>
+												</div>
+												<div class="eclipse-manage-benefits-grid">
+													{% for benefit in vip_benefits %}
+														<div class="eclipse-manage-benefit-card">
+															<img src="{{ template_path }}/images/premiumfeatures/{{ benefit.icon }}" alt="">
+															<div>
+																<span>{{ benefit.label }}</span>
+																<strong>{{ benefit.value }}</strong>
+																<small>{{ benefit.description }}</small>
+															</div>
+														</div>
+													{% endfor %}
+												</div>
 												<div style="justify-content: flex-start">
 													<img class="PremiumFeatureImage1"
 														 src="{{ template_path }}/images/premiumfeatures/PremiumIcon-Travel.png"
@@ -582,7 +599,7 @@
 						</tr>
 						<tr style="background-color: {{ config.darkborder }};">
 							<td class="LabelV">Último login:</td>
-							<td>{{ account_web_lastlogin|date("j F Y, G:i:s") }}</td>
+							<td>{% if account_web_lastlogin > 0 %}{{ account_web_lastlogin|date("j F Y, G:i:s") }}{% else %}Nunca{% endif %}</td>
 						</tr>
 						<tr style="background-color: {{ config.lightborder }};">
 							<td class="LabelV">Status da conta:</td>
@@ -721,7 +738,30 @@
 										<table class="TableContent" width="100%">
 											<tr>
 												<td>
-													<table style="width:100%;">
+													<div class="eclipse-public-info-panel">
+														<div class="eclipse-public-info-intro">
+															<div>
+																<strong>Resumo cadastral</strong>
+																<span>Dados usados para perfil, segurança e atendimento da conta.</span>
+															</div>
+															{% if not account_update_info_on_register %}
+																<form action="{{ getLink('account/change-info') }}" method="post">
+																	{{ csrf() }}
+																	<button class="eclipse-public-info-edit" type="submit">Editar dados</button>
+																</form>
+															{% endif %}
+														</div>
+														<div class="eclipse-public-info-grid">
+															{% for item in public_info_cards %}
+																<div class="eclipse-public-info-card">
+																	<span>{{ item.label }}</span>
+																	<strong>{{ item.value }}</strong>
+																	<small>{{ item.hint }}</small>
+																</div>
+															{% endfor %}
+														</div>
+													</div>
+													<table class="eclipse-public-info-legacy" style="width:100%;">
 														<tr>
 															<td class="LabelV">Nome real:</td>
 															<td style="width:90%;">{{ account_rlname }}</td>
@@ -737,7 +777,7 @@
 													</table>
 												</td>
 												{% if not account_update_info_on_register %}
-													<td align=right>
+													<td class="eclipse-public-info-legacy-edit" align=right>
 														<table border="0" cellspacing="0" cellpadding="0">
 															<tr>
 																<td style="border:0px;">

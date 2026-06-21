@@ -5194,6 +5194,210 @@ body {
   background: rgba(255,243,211,.34) !important;
 }
 
+#ContentColumn .eclipse-account-manage-page .premiumbenefits {
+  display: block !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .premiumbenefits > div:not(.eclipse-manage-benefits-head):not(.eclipse-manage-benefits-grid) {
+  display: none !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-head {
+  min-height: 0 !important;
+  margin-bottom: 10px !important;
+  padding: 10px 12px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  gap: 3px 10px !important;
+  align-items: center !important;
+  background: linear-gradient(180deg, #fff0bf 0%, #e3bd73 100%) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-head strong {
+  color: #3a0905 !important;
+  font: 900 16px Georgia, 'Times New Roman', serif !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-head span {
+  color: #41200f !important;
+  font: 700 12px/1.35 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-head a {
+  grid-row: 1 / span 2 !important;
+  grid-column: 2 !important;
+  padding: 7px 10px !important;
+  border: 1px solid #7b2a12 !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #8f2a13 0%, #4d1007 100%) !important;
+  color: #fff8dc !important;
+  font: 900 11px Verdana, Arial, sans-serif !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-grid {
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  background: transparent !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefit-card {
+  min-height: 96px !important;
+  display: grid !important;
+  grid-template-columns: 36px minmax(0, 1fr) !important;
+  gap: 9px !important;
+  align-items: start !important;
+  padding: 10px !important;
+  border: 1px solid rgba(107,58,20,.45) !important;
+  border-radius: 5px !important;
+  background: linear-gradient(180deg, #fff4cf 0%, #e7c279 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.62) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefit-card img {
+  width: 34px !important;
+  height: 34px !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 2px 2px rgba(70,30,7,.3)) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefit-card span,
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-card span {
+  display: block !important;
+  color: #681b0e !important;
+  font: 900 10px Verdana, Arial, sans-serif !important;
+  letter-spacing: .02em !important;
+  text-transform: uppercase !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefit-card strong {
+  display: block !important;
+  margin: 2px 0 4px !important;
+  color: #220803 !important;
+  font: 900 18px Georgia, 'Times New Roman', serif !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefit-card small,
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-card small {
+  display: block !important;
+  color: #3a1a0c !important;
+  font: 700 11px/1.35 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-panel {
+  display: block !important;
+  padding: 4px !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-intro {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  align-items: center !important;
+  margin-bottom: 10px !important;
+  padding: 11px 12px !important;
+  border: 1px solid rgba(107,58,20,.45) !important;
+  border-radius: 5px !important;
+  background: linear-gradient(180deg, #fff0bf 0%, #e3bd73 100%) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-intro strong {
+  display: block !important;
+  color: #3a0905 !important;
+  font: 900 16px Georgia, 'Times New Roman', serif !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-intro span {
+  display: block !important;
+  color: #41200f !important;
+  font: 700 12px/1.35 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-edit {
+  min-height: 30px !important;
+  padding: 0 12px !important;
+  border: 1px solid #7b2a12 !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #8f2a13 0%, #4d1007 100%) !important;
+  color: #fff8dc !important;
+  font: 900 11px Verdana, Arial, sans-serif !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-card {
+  min-height: 82px !important;
+  padding: 10px !important;
+  border: 1px solid rgba(107,58,20,.45) !important;
+  border-radius: 5px !important;
+  background: linear-gradient(180deg, #fff4cf 0%, #e7c279 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.62) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-card strong {
+  display: block !important;
+  margin: 5px 0 !important;
+  color: #220803 !important;
+  font: 900 13px/1.3 Verdana, Arial, sans-serif !important;
+  word-break: break-word !important;
+}
+
+#ContentColumn .eclipse-account-manage-page a[name="Public+Information"] + .TopButtonContainer + .TableContainer .CaptionContainer .Text {
+  font-size: 0 !important;
+}
+
+#ContentColumn .eclipse-account-manage-page a[name="Public+Information"] + .TopButtonContainer + .TableContainer .CaptionContainer .Text::after {
+  content: "Informações Públicas" !important;
+  color: #f7e7bd !important;
+  font: 900 16px Georgia, 'Times New Roman', serif !important;
+  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-legacy,
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-legacy-edit {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  #ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-grid,
+  #ContentColumn .eclipse-account-manage-page .eclipse-public-info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  #ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-head {
+    grid-template-columns: 1fr !important;
+  }
+
+  #ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-head a {
+    grid-row: auto !important;
+    grid-column: auto !important;
+    justify-self: start !important;
+  }
+}
+
+@media (max-width: 560px) {
+  #ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-grid,
+  #ContentColumn .eclipse-account-manage-page .eclipse-public-info-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  #ContentColumn .eclipse-account-manage-page .eclipse-public-info-intro {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+}
+
 #ContentColumn .eclipse-account-manage-page .BigButtonText,
 #ContentColumn .eclipse-account-manage-page .MediumButtonText,
 #ContentColumn .eclipse-account-manage-page input[type="submit"],
@@ -5295,6 +5499,217 @@ body {
   color: #b62814 !important;
   -webkit-text-fill-color: #b62814 !important;
   text-decoration: underline !important;
+}
+
+#ContentColumn .eclipse-create-success,
+#ContentColumn .eclipse-create-success * {
+  box-sizing: border-box !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-create-success {
+  display: grid !important;
+  gap: 14px !important;
+}
+
+#ContentColumn .eclipse-create-success-hero {
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 118px !important;
+  padding: 20px 22px !important;
+  border: 1px solid rgba(255, 194, 86, .54) !important;
+  border-radius: 5px !important;
+  background:
+    linear-gradient(90deg, rgba(29, 7, 5, .93), rgba(74, 15, 8, .78)),
+    url("images/vocations/monkbanner.png") center right / cover no-repeat !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 232, 170, .18), 0 8px 20px rgba(45, 12, 5, .30) !important;
+}
+
+#ContentColumn .eclipse-create-success-hero::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: radial-gradient(circle at 18% 20%, rgba(255, 180, 66, .24), transparent 36%) !important;
+  pointer-events: none !important;
+}
+
+#ContentColumn .eclipse-create-success-hero > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+#ContentColumn .eclipse-create-success-hero span {
+  display: inline-block !important;
+  margin-bottom: 7px !important;
+  padding: 4px 9px !important;
+  border: 1px solid rgba(255, 215, 124, .44) !important;
+  border-radius: 999px !important;
+  background: rgba(10, 20, 30, .70) !important;
+  color: #ffe8a5 !important;
+  -webkit-text-fill-color: #ffe8a5 !important;
+  font: 900 10px/1 Verdana, Arial, sans-serif !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+
+#ContentColumn .eclipse-create-success-hero h2 {
+  margin: 0 0 8px !important;
+  color: #fff0c6 !important;
+  -webkit-text-fill-color: #fff0c6 !important;
+  font: 900 26px/1.08 Georgia, "Times New Roman", serif !important;
+  text-shadow: 0 2px 0 #220804, 0 0 14px rgba(255, 177, 67, .45) !important;
+}
+
+#ContentColumn .eclipse-create-success-hero p {
+  max-width: 610px !important;
+  margin: 0 !important;
+  color: #f6ddb0 !important;
+  -webkit-text-fill-color: #f6ddb0 !important;
+  font: 800 13px/1.55 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-create-success-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr) !important;
+  gap: 14px !important;
+}
+
+#ContentColumn .eclipse-create-success-card {
+  overflow: hidden !important;
+  min-height: 164px !important;
+  border: 1px solid #a86b23 !important;
+  border-radius: 5px !important;
+  background: linear-gradient(180deg, #f8e5ad 0%, #d9ac5d 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 247, 205, .56), 0 5px 14px rgba(0, 0, 0, .22) !important;
+}
+
+#ContentColumn .eclipse-create-success-account {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding: 19px 20px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 236, 178, .94), rgba(214, 164, 84, .94)),
+    radial-gradient(circle at 90% 0%, rgba(111, 21, 11, .18), transparent 42%) !important;
+}
+
+#ContentColumn .eclipse-create-success-account span {
+  color: #68190d !important;
+  -webkit-text-fill-color: #68190d !important;
+  font: 900 11px/1 Verdana, Arial, sans-serif !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+
+#ContentColumn .eclipse-create-success-account strong {
+  display: block !important;
+  max-width: 100% !important;
+  margin: 9px 0 12px !important;
+  padding: 12px 14px !important;
+  overflow-wrap: anywhere !important;
+  border: 1px solid rgba(111, 39, 12, .50) !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #fff6cf, #f0c66d) !important;
+  color: #2c0b05 !important;
+  -webkit-text-fill-color: #2c0b05 !important;
+  font: 900 24px/1.1 Georgia, "Times New Roman", serif !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.65), 0 3px 8px rgba(75, 28, 8, .18) !important;
+}
+
+#ContentColumn .eclipse-create-success-account p,
+#ContentColumn .eclipse-create-success-character p {
+  margin: 0 !important;
+  color: #281208 !important;
+  -webkit-text-fill-color: #281208 !important;
+  font: 800 12px/1.55 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-create-success-banner {
+  min-height: 118px !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  padding: 14px 16px !important;
+  background:
+    linear-gradient(180deg, rgba(10, 13, 18, .12), rgba(24, 7, 4, .88)),
+    radial-gradient(circle at 20% 20%, rgba(255, 183, 61, .22), transparent 38%) !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+#ContentColumn .eclipse-create-success-banner span,
+#ContentColumn .eclipse-create-success-banner strong,
+#ContentColumn .eclipse-create-success-banner small {
+  display: block !important;
+}
+
+#ContentColumn .eclipse-create-success-banner span {
+  color: #ffd97a !important;
+  -webkit-text-fill-color: #ffd97a !important;
+  font: 900 10px/1 Verdana, Arial, sans-serif !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+
+#ContentColumn .eclipse-create-success-banner strong {
+  margin-top: 4px !important;
+  color: #fff0c6 !important;
+  -webkit-text-fill-color: #fff0c6 !important;
+  font: 900 23px/1 Georgia, "Times New Roman", serif !important;
+  text-shadow: 0 2px 0 #220804, 0 0 10px rgba(255, 177, 67, .36) !important;
+}
+
+#ContentColumn .eclipse-create-success-banner small {
+  margin-top: 6px !important;
+  color: #f4d6a0 !important;
+  -webkit-text-fill-color: #f4d6a0 !important;
+  font: 800 11px/1.2 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-create-success-character p {
+  padding: 14px 16px 16px !important;
+}
+
+#ContentColumn .eclipse-create-success-next {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 12px 14px !important;
+  border: 1px solid rgba(87, 31, 10, .38) !important;
+  border-radius: 5px !important;
+  background: rgba(255, 244, 207, .44) !important;
+}
+
+#ContentColumn .eclipse-create-success-next strong {
+  color: #5e170d !important;
+  -webkit-text-fill-color: #5e170d !important;
+  font: 900 12px/1 Verdana, Arial, sans-serif !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+#ContentColumn .eclipse-create-success-next span {
+  color: #24100a !important;
+  -webkit-text-fill-color: #24100a !important;
+  font: 800 12px/1.45 Verdana, Arial, sans-serif !important;
+}
+
+@media (max-width: 760px) {
+  #ContentColumn .eclipse-create-success-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  #ContentColumn .eclipse-create-success-hero {
+    padding: 17px 16px !important;
+  }
+
+  #ContentColumn .eclipse-create-success-hero h2 {
+    font-size: 22px !important;
+  }
+
+  #ContentColumn .eclipse-create-success-next {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
 }
 
 #ContentColumn .eclipse-error-page,

@@ -227,6 +227,7 @@ sudo rsync -av theme-canary/pages/ /var/www/html/plugins/theme-canary/pages/
 sudo rsync -av theme-canary/webhooks/ /var/www/html/plugins/theme-canary/webhooks/
 
 # Sincronizar overrides de paginas do MyAAC, quando existirem
+sudo rsync -av system/pages/account/create.php /var/www/html/system/pages/account/create.php
 sudo rsync -av system/pages/account/change-info.php /var/www/html/system/pages/account/change-info.php
 sudo rsync -av system/pages/account/privacy.php /var/www/html/system/pages/account/privacy.php
 
@@ -239,6 +240,7 @@ sudo chown -R www-data:www-data /var/www/html/plugins/lgpd-consent
 sudo chown -R www-data:www-data /var/www/html/plugins/powerful-guilds
 sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/pages
 sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/webhooks
+sudo chown www-data:www-data /var/www/html/system/pages/account/create.php
 sudo chown www-data:www-data /var/www/html/system/pages/account/change-info.php
 sudo chown www-data:www-data /var/www/html/system/pages/account/privacy.php
 
@@ -269,6 +271,7 @@ sudo rsync -av theme-canary/themes/canary/ /var/www/html/plugins/theme-canary/th
 sudo rsync -av plugins/ /var/www/html/plugins/
 sudo rsync -av theme-canary/pages/ /var/www/html/plugins/theme-canary/pages/
 sudo rsync -av theme-canary/webhooks/ /var/www/html/plugins/theme-canary/webhooks/
+sudo rsync -av system/pages/account/create.php /var/www/html/system/pages/account/create.php
 sudo rsync -av system/pages/account/change-info.php /var/www/html/system/pages/account/change-info.php
 sudo rsync -av system/pages/account/privacy.php /var/www/html/system/pages/account/privacy.php
 sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/themes/canary
@@ -279,6 +282,7 @@ sudo chown -R www-data:www-data /var/www/html/plugins/lgpd-consent
 sudo chown -R www-data:www-data /var/www/html/plugins/powerful-guilds
 sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/pages
 sudo chown -R www-data:www-data /var/www/html/plugins/theme-canary/webhooks
+sudo chown www-data:www-data /var/www/html/system/pages/account/create.php
 sudo chown www-data:www-data /var/www/html/system/pages/account/change-info.php
 sudo chown www-data:www-data /var/www/html/system/pages/account/privacy.php
 
