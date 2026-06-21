@@ -288,9 +288,12 @@ if ($player->isLoaded() && !$player->isDeleted()) {
 			}
 		} else {
 			global $db;
-			$eq_sql = $db->query('SELECT `pid`, `itemtype` FROM player_items WHERE player_id = ' . $player->getId() . ' AND (`pid` >= 1 and `pid` <= 10)');
-			foreach ($eq_sql as $eq)
-				$equipment[$eq['pid']] = $eq['itemtype'];
+			$eq_sql = $db->query('SELECT `pid`, `itemtype` FROM player_items WHERE player_id = ' . $player->getId() . ' AND (`pid` >= 1 and `pid` <= 10) ORDER BY `pid`, `sid` DESC');
+			foreach ($eq_sql as $eq) {
+				$slot = (int)$eq['pid'];
+				if (!isset($equipment[$slot]))
+					$equipment[$slot] = $eq['itemtype'];
+			}
 
 			for ($i = 0; $i <= 10; $i++) {
 				if (!isset($equipment[$i]) || $equipment[$i] == 0)

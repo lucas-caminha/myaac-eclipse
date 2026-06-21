@@ -19,6 +19,7 @@ Este guia documenta os scripts SQL incluidos no projeto e como gerenciar migraco
 | `sql/014-add-privacy-menu.sql` | Adiciona Privacidade e LGPD ao menu Conta |
 | `sql/015-add-duo-donations.sql` | Adiciona pedidos e recompensas de donate em dupla |
 | `sql/016-add-scheduled-boosted.sql` | Adiciona agendamentos consumidos pelo servidor para o proximo boosted |
+| `sql/017-update-otbr-item-images-url.sql` | Atualiza sprites de itens para a base OTBR/Canary |
 
 ## Aplicando Migracoes
 
@@ -264,6 +265,22 @@ CREATE TABLE IF NOT EXISTS scheduled_boosted (
 - Permite que o servidor aplique o alvo na proxima rotacao e marque o registro como `applied`
 - Mantem vinculo opcional com `eclipse_boosted_sponsorships.source_order_id` para auditoria do pedido pago com Tibia Coins
 - A regra de 1 slot por tipo/data continua sendo aplicada pela pagina `/boosted-sponsor` dentro da transacao
+
+### 017-update-otbr-item-images-url.sql
+
+Atualiza `core.item_images_url` para a base de imagens compativel com Canary/OTBR:
+
+```sql
+UPDATE myaac_settings
+SET value = 'https://item-images.ots.me/latest_otbr/'
+WHERE name = 'core'
+  AND `key` = 'item_images_url'
+  AND value IN ('https://item-images.ots.me/1092/', 'https://item-images.ots.me/1092');
+```
+
+**O que faz:**
+- Corrige imagens quebradas ou incorretas para itens modernos, como equipamentos de Monk com IDs acima da base 10.92
+- Mantem a migration idempotente e nao altera configuracoes customizadas que ja usam outra URL
 
 ### 013-add-lgpd-consents-and-requests.sql
 
