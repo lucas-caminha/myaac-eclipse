@@ -585,6 +585,26 @@ WHERE killers.death_id = '" . $death['id'] . "' ORDER BY killers.final_hit DESC,
 		}
 	}
 
+	if ($db->hasTableAndColumns('eclipse_donation_intents', ['account_id', 'coins', 'status'])) {
+		$subRankingConditions = 'p2.`' . $deletionColumn . '` = 0 AND p2.`group_id` < ' . (int) setting('core.highscores_groups_hidden') . ' AND p2.`account_id` = p.`account_id`';
+		if (!empty($hiddenRankingIds)) {
+			$subRankingConditions .= ' AND p2.`id` NOT IN (' . implode(',', $hiddenRankingIds) . ')';
+		}
+		$topDonator = $db->query(
+			'SELECT p.`id` FROM (SELECT `account_id`, SUM(`coins`) AS `value` FROM `eclipse_donation_intents` WHERE `status` = ' . $db->quote('paid') . ' GROUP BY `account_id` HAVING `value` > 0) dt ' .
+			'JOIN `players` p ON p.`account_id` = dt.`account_id` ' .
+			'WHERE ' . $aliasedRankingConditions . ' AND p.`id` = (SELECT p2.`id` FROM `players` p2 WHERE ' . $subRankingConditions . ' ORDER BY p2.`experience` DESC, p2.`id` ASC LIMIT 1) ' .
+			'ORDER BY dt.`value` DESC, p.`experience` DESC, p.`id` ASC LIMIT 1'
+		)->fetch();
+		if ($topDonator && (int) $topDonator['id'] === $player->getId()) {
+			$rankingBadges[] = [
+				'slug' => 'top-donators',
+				'label' => 'Top Donator',
+				'icon' => $template_path . '/images/account/icon-tibiacoin.png',
+			];
+		}
+	}
+
 	if (setting('core.highscores_frags')) {
 		$fragRankingConditions = 'p.`' . $deletionColumn . '` = 0 AND p.`group_id` < ' . (int) setting('core.highscores_groups_hidden');
 		if (!empty($hiddenRankingIds)) {

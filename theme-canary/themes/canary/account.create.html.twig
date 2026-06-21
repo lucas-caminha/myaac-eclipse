@@ -181,7 +181,7 @@
 
 								{{ hook('HOOK_ACCOUNT_CREATE_BEFORE_CHARACTER_NAME') }}
 
-								<tr>
+								<tr class="eclipse-character-name-row">
 									<td class="LabelV" style="width: 150px">
 										<span{% if errors.name is defined %} class="red"{% endif %}>Nome do personagem:</span>
 									</td>
@@ -201,7 +201,7 @@
 
 								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_CHARACTER_NAME') }}
 
-								<tr>
+								<tr class="eclipse-character-sex-row">
 									<td class="LabelV" style="width: 150px">
 										<span{% if errors.sex is defined %} class="red"{% endif %}>Sexo:</span>
 									</td>
@@ -237,7 +237,7 @@
 								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_SEX') }}
 
 								{% if config.character_samples|length > 1 %}
-								<tr>
+								<tr class="eclipse-character-vocation-row">
 									<td class="LabelV" style="width: 150px">
 										<span{% if errors.vocation is defined %} class="red"{% endif %}>Vocação:</span>
 									</td>
@@ -333,14 +333,24 @@
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2" ><b>Confirme a leitura das regras:</b></td>
-								</tr>
-								<tr>
-									<td colspan="2" >
-										<span><input type="checkbox" id="accept_rules" name="accept_rules" value="true"{% if accept_rules %}checked{% endif %}/> <label for="accept_rules">Eu li e aceito as <a href="?subtopic=rules" target="_blank">regras do {{ config.lua.serverName }}</a>.</label></span>
+									<td colspan="2" class="eclipse-rules-summary">
+										<strong>Antes de criar a conta</strong>
+										<p>Leia as regras em uma nova aba e confirme que entendeu os pontos principais do servidor.</p>
+										<div class="eclipse-rules-links">
+											<a href="{{ getLink('rules') }}" target="_blank" rel="noopener">Abrir regras do servidor</a>
+											<a href="{{ getLink('privacy') }}" target="_blank" rel="noopener">Abrir privacidade e LGPD</a>
+										</div>
 									</td>
 								</tr>
 								<tr>
+									<td colspan="2" ><b>Confirme a leitura das regras:</b></td>
+								</tr>
+								<tr class="eclipse-registration-checkbox-row">
+									<td colspan="2" >
+										<span><input type="checkbox" id="accept_rules" name="accept_rules" value="true"{% if accept_rules %}checked{% endif %}/> <label for="accept_rules">Eu li e aceito as <a href="{{ getLink('rules') }}" target="_blank" rel="noopener">regras do {{ config.lua.serverName }}</a>.</label></span>
+									</td>
+								</tr>
+								<tr class="eclipse-registration-checkbox-row">
 									<td colspan="2" >
 										<span><input type="checkbox" id="accept_privacy" name="accept_privacy" value="true" required/> <label for="accept_privacy">Eu li e aceito a <a href="{{ getLink('privacy') }}" target="_blank" rel="noopener">Política de Privacidade</a> e entendo como meus dados serão usados no Eclipse OT.</label></span>
 									</td>

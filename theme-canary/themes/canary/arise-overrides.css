@@ -4595,29 +4595,50 @@ body {
 }
 
 #ContentColumn .eclipse-create-account-page .eclipse-registration-steps {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
-  gap: 8px !important;
-  margin: 0 0 12px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  margin: 4px 0 16px !important;
+  padding: 12px 14px !important;
+  border: 1px solid rgba(142, 84, 31, .58) !important;
+  border-radius: 5px !important;
+  background: linear-gradient(180deg, rgba(255,239,195,.72), rgba(195,139,68,.34)) !important;
+  box-shadow: inset 0 1px 0 rgba(255,246,204,.68), 0 5px 16px rgba(0,0,0,.28) !important;
 }
 
 #ContentColumn .eclipse-create-account-page .eclipse-registration-step {
-  min-height: 45px !important;
-  padding: 6px 10px !important;
+  position: relative !important;
+  width: 148px !important;
+  min-height: 58px !important;
+  padding: 0 8px !important;
   display: flex !important;
+  flex-direction: column !important;
   align-items: center !important;
-  gap: 8px !important;
-  border: 1px solid rgba(141, 82, 29, .78) !important;
-  border-radius: 5px !important;
-  background: linear-gradient(180deg, #f0d9a0 0%, #d1a45e 100%) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 246, 204, .62), 0 3px 10px rgba(0, 0, 0, .32) !important;
+  justify-content: flex-start !important;
+  gap: 7px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
   cursor: pointer !important;
 }
 
+#ContentColumn .eclipse-create-account-page .eclipse-registration-step:not(:last-child)::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 15px !important;
+  left: calc(50% + 17px) !important;
+  width: calc(100% - 34px) !important;
+  height: 3px !important;
+  border-top: 1px solid rgba(95,44,15,.55) !important;
+  border-bottom: 1px solid rgba(255,239,190,.45) !important;
+  background: linear-gradient(90deg, #8a5522, #d69d43) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,.25) !important;
+}
+
 #ContentColumn .eclipse-create-account-page .eclipse-registration-step.is-active {
-  border-color: #6e1f11 !important;
-  background: linear-gradient(180deg, #244f66 0%, #0c2638 58%, #06131c 100%) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 244, 198, .22), 0 0 0 2px rgba(199, 133, 40, .28), 0 5px 16px rgba(0, 0, 0, .44) !important;
+  filter: none !important;
 }
 
 #ContentColumn .eclipse-create-account-page .eclipse-registration-step.is-locked {
@@ -4627,34 +4648,87 @@ body {
 }
 
 #ContentColumn .eclipse-create-account-page .eclipse-registration-step-number {
-  width: 24px !important;
-  height: 24px !important;
-  flex: 0 0 24px !important;
+  position: relative !important;
+  z-index: 1 !important;
+  width: 34px !important;
+  height: 34px !important;
+  flex: 0 0 34px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  border: 1px solid rgba(99, 43, 12, .58) !important;
+  border: 2px solid rgba(255, 232, 169, .86) !important;
   border-radius: 50% !important;
-  background: #5e170d !important;
+  background: radial-gradient(circle at 35% 25%, #ffe6a1 0%, #d88a2a 34%, #6b1c10 100%) !important;
   color: #fff5ce !important;
-  font: 900 12px/1 Verdana, Arial, sans-serif !important;
+  font: 900 13px/1 Verdana, Arial, sans-serif !important;
   text-shadow: 0 1px 1px #240804 !important;
+  box-shadow: 0 0 0 3px rgba(74,24,9,.45), 0 4px 10px rgba(0,0,0,.38) !important;
 }
 
 #ContentColumn .eclipse-create-account-page .eclipse-registration-step.is-complete .eclipse-registration-step-number {
-  background: #1e5c31 !important;
+  background: radial-gradient(circle at 35% 25%, #e8ffd0 0%, #3b8a42 38%, #17441f 100%) !important;
+}
+
+#ContentColumn .eclipse-create-account-page .eclipse-registration-step.is-active .eclipse-registration-step-number {
+  background: radial-gradient(circle at 35% 25%, #d9f3ff 0%, #24566e 42%, #07131d 100%) !important;
+  box-shadow: 0 0 0 3px rgba(112,39,16,.62), 0 0 16px rgba(255,177,67,.52) !important;
 }
 
 #ContentColumn .eclipse-create-account-page .eclipse-registration-step-text {
+  width: 100% !important;
   color: #3a0905 !important;
-  font: 900 12px/1.2 Verdana, Arial, sans-serif !important;
+  font: 900 11px/1.25 Verdana, Arial, sans-serif !important;
   text-transform: uppercase !important;
+  text-align: center !important;
   text-shadow: 0 1px 0 rgba(255, 235, 183, .68) !important;
 }
 
 #ContentColumn .eclipse-create-account-page .eclipse-registration-step.is-active .eclipse-registration-step-text {
-  color: #f7e7bd !important;
-  text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
+  color: #5e170d !important;
+  text-shadow: 0 1px 0 rgba(255,235,183,.68), 0 0 8px rgba(255,176,69,.34) !important;
+}
+
+#ContentColumn .eclipse-create-account-page .eclipse-registration-step-text::after {
+  display: block !important;
+  margin-top: 3px !important;
+  color: #6f401d !important;
+  font: 800 10px/1 Verdana, Arial, sans-serif !important;
+  text-transform: none !important;
+  content: "Pendente" !important;
+}
+
+#ContentColumn .eclipse-create-account-page .eclipse-registration-step.is-active .eclipse-registration-step-text::after {
+  color: #0b354b !important;
+  content: "Etapa atual" !important;
+}
+
+#ContentColumn .eclipse-create-account-page .eclipse-registration-step.is-complete .eclipse-registration-step-text::after {
+  color: #1f5a2d !important;
+  content: "Concluida" !important;
+}
+
+@media (max-width: 760px) {
+  #ContentColumn .eclipse-create-account-page .eclipse-registration-steps {
+    padding: 10px 6px !important;
+  }
+
+  #ContentColumn .eclipse-create-account-page .eclipse-registration-step {
+    width: 112px !important;
+    padding: 0 4px !important;
+  }
+
+  #ContentColumn .eclipse-create-account-page .eclipse-registration-step-text {
+    font-size: 10px !important;
+  }
+
+  #ContentColumn .eclipse-create-account-page .eclipse-registration-step-text::after {
+    font-size: 9px !important;
+  }
+
+  #ContentColumn .eclipse-create-account-page .eclipse-registration-step:not(:last-child)::after {
+    left: calc(50% + 15px) !important;
+    width: calc(100% - 30px) !important;
+  }
 }
 
 #ContentColumn .eclipse-create-account-page form#createaccount > .TableContainer {
@@ -4777,6 +4851,22 @@ body {
   vertical-align: middle !important;
 }
 
+#ContentColumn .eclipse-create-account-page form#createaccount [data-registration-panel="character"].is-active td {
+  padding-top: 9px !important;
+  padding-bottom: 9px !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount [data-registration-panel="character"].is-active .eclipse-character-name-row td,
+#ContentColumn .eclipse-create-account-page form#createaccount [data-registration-panel="character"].is-active .eclipse-character-sex-row td,
+#ContentColumn .eclipse-create-account-page form#createaccount [data-registration-panel="character"].is-active .eclipse-character-vocation-row td {
+  border-top: 1px solid rgba(126,70,22,.22) !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount [data-registration-panel="character"].is-active .eclipse-character-vocation-row .LabelV {
+  padding-top: 18px !important;
+  vertical-align: top !important;
+}
+
 #ContentColumn .eclipse-create-account-page form#createaccount .TableContent tr:has(.FormFieldError:empty) td {
   height: 0 !important;
   padding-top: 0 !important;
@@ -4846,20 +4936,120 @@ body {
 }
 
 #ContentColumn .eclipse-create-account-page form#createaccount .eclipse-vocation-grid {
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr)) !important;
   gap: 12px !important;
-  padding: 2px 0 !important;
+  padding: 8px 0 2px !important;
 }
 
 #ContentColumn .eclipse-create-account-page form#createaccount .eclipse-vocation-card {
-  min-height: 245px !important;
-  padding: 9px !important;
+  min-height: 232px !important;
+  padding: 10px !important;
   border-color: rgba(108,56,21,.65) !important;
   background: linear-gradient(180deg, #f4dda8 0%, #dbb46f 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,246,204,.62), 0 4px 10px rgba(0,0,0,.24) !important;
 }
 
 #ContentColumn .eclipse-create-account-page form#createaccount .eclipse-vocation-card img {
-  height: 116px !important;
+  width: 100% !important;
+  height: 110px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border-radius: 4px !important;
+  border: 1px solid rgba(77,37,14,.48) !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-vocation-card .eclipse-vocation-name {
+  margin-top: 8px !important;
+  color: #3a0905 !important;
+  font: 900 16px Georgia, 'Times New Roman', serif !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-vocation-card .eclipse-vocation-role {
+  margin-top: 2px !important;
+  color: #6a250d !important;
+  font: 900 10px/1.2 Verdana, Arial, sans-serif !important;
+  text-transform: uppercase !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-vocation-card .eclipse-vocation-description {
+  margin-top: 7px !important;
+  color: #2a1208 !important;
+  font: 700 11px/1.35 Verdana, Arial, sans-serif !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-vocation-card:has(input:checked),
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-vocation-card.is-selected {
+  border-color: #6e1f11 !important;
+  background: linear-gradient(180deg, #ffe5a4 0%, #d8993e 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,246,204,.82), 0 0 0 2px rgba(111,31,16,.28), 0 5px 14px rgba(0,0,0,.34) !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-rules-summary {
+  padding: 14px 16px !important;
+  background: linear-gradient(180deg, #fff0bd 0%, #e3bd72 100%) !important;
+  border-bottom: 1px solid rgba(126,70,22,.38) !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-rules-summary strong {
+  display: block !important;
+  margin-bottom: 4px !important;
+  color: #3a0905 !important;
+  font: 900 15px Georgia, 'Times New Roman', serif !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-rules-summary p {
+  margin: 0 0 10px !important;
+  color: #2a1208 !important;
+  font: 700 12px/1.45 Verdana, Arial, sans-serif !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-rules-links {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-rules-links a {
+  display: inline-flex !important;
+  min-height: 32px !important;
+  align-items: center !important;
+  padding: 0 12px !important;
+  border: 1px solid #7b2a12 !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #8f2a13 0%, #4d1007 100%) !important;
+  color: #fff8dc !important;
+  font: 900 11px Verdana, Arial, sans-serif !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 1px 1px #2b0804 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 2px 7px rgba(0,0,0,.28) !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-registration-checkbox-row td {
+  padding: 10px 16px !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-registration-checkbox-row span {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 9px !important;
+  color: #2a1208 !important;
+  font: 800 12px/1.45 Verdana, Arial, sans-serif !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-registration-checkbox-row label,
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-registration-checkbox-row a {
+  color: #2a1208 !important;
+  text-shadow: none !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-registration-checkbox-row a {
+  color: #6e1f11 !important;
+  font-weight: 900 !important;
 }
 
 #ContentColumn .eclipse-create-account-page form#createaccount .BigButton {

@@ -27,7 +27,7 @@ O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0
 - Ranking de guildas poderosas na página de notícias
 - Migration `sql/009-add-game-library-plugins.sql` e documentação de plugins
 - Documentacao completa do projeto
-- Override de `/highscores` com suporte a categorias extras dinamicas, incluindo Bestiary/Charm Points, Loyalty Points, Achievement Points, Bosstiary/Boss Points, Task Points e Prey Wildcards
+- Override de `/highscores` com suporte a categorias extras dinamicas, incluindo Bestiary/Charm Points, Loyalty Points, Achievement Points, Bosstiary/Boss Points, Task Points, Prey Wildcards e Top Donators
 - Fundos por vocacao e identificacao VIP nos personagens da box lateral de Highscores
 - Interface em portugues para `/account/lost`, incluindo o estado de recuperacao por e-mail indisponivel
 

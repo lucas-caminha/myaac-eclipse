@@ -33,6 +33,18 @@ if (!is_numeric($page) || $page < 1 || $page > PHP_INT_MAX) {
 $configVocations = config('vocations');
 $baseVocations = Vocations::getBase(false);
 
+if (!function_exists('eclipseHighscoresHiddenPlayerIds')) {
+	function eclipseHighscoresHiddenPlayerIds(): array
+	{
+		$hiddenIds = setting('core.highscores_ids_hidden');
+		if (!is_array($hiddenIds)) {
+			$hiddenIds = preg_split('/[^0-9]+/', (string) $hiddenIds, -1, PREG_SPLIT_NO_EMPTY);
+		}
+
+		return array_values(array_filter(array_map('intval', $hiddenIds)));
+	}
+}
+
 $customRankingCandidates = [
 	'charm-points' => [
 		'label' => 'Bestiary (Charm Points)',
@@ -65,6 +77,14 @@ foreach ($customRankingCandidates as $key => $ranking) {
 			break;
 		}
 	}
+}
+
+if ($db->hasTableAndColumns('eclipse_donation_intents', ['account_id', 'coins', 'status'])) {
+	$customRankings['top-donators'] = [
+		'label' => 'Top Donators',
+		'table' => 'eclipse_donation_intents',
+		'source' => 'donations',
+	];
 }
 
 if ($db->hasTableAndColumns('accounts', ['creation', 'premdays', 'premdays_purchased'])) {
@@ -137,6 +157,7 @@ if ($customRanking === null) {
 
 $query = Player::query();
 $vocationId = null;
+$vocationIds = null;
 
 if ($vocation !== 'all') {
 	foreach ($configVocations as $id => $name) {
@@ -150,6 +171,7 @@ if ($vocation !== 'all') {
 			}
 
 			$query->whereIn('players.vocation', $add_vocs);
+			$vocationIds = $add_vocs;
 			break;
 		}
 	}
@@ -179,7 +201,7 @@ $query
 	->notDeleted()
 	->where('players.group_id', '<', setting('core.highscores_groups_hidden'));
 
-if ($customRanking !== null) {
+if ($customRanking !== null && ($customRanking['source'] ?? '') !== 'donations') {
 	$customColumnReference = $customRanking['expression'] ?? ($customRanking['table'] . '.' . $customRanking['column']);
 
 	if ($customRanking['table'] === 'accounts') {
@@ -219,17 +241,81 @@ if ($cache->enabled() && $highscoresTTL > 0) {
 
 $offset = ($page - 1) * $configHighscoresPerPage;
 
-if (!$accountsJoined) {
-	$query->join('accounts', 'accounts.id', '=', 'players.account_id');
+if (empty($highscores) && $customRanking !== null && ($customRanking['source'] ?? '') === 'donations') {
+	$deletionColumn = $db->hasColumn('players', 'deletion') ? 'deletion' : 'deleted';
+	$hiddenPlayerIds = eclipseHighscoresHiddenPlayerIds();
+	$groupLimit = (int) setting('core.highscores_groups_hidden');
+	$playerConditions = [
+		'p.`' . $deletionColumn . '` = 0',
+		'p.`group_id` < ' . $groupLimit,
+	];
+	$subPlayerConditions = [
+		'p2.`' . $deletionColumn . '` = 0',
+		'p2.`group_id` < ' . $groupLimit,
+		'p2.`account_id` = p.`account_id`',
+	];
+
+	if (!empty($hiddenPlayerIds)) {
+		$hiddenList = implode(',', $hiddenPlayerIds);
+		$playerConditions[] = 'p.`id` NOT IN (' . $hiddenList . ')';
+		$subPlayerConditions[] = 'p2.`id` NOT IN (' . $hiddenList . ')';
+	}
+
+	if ($vocationIds !== null) {
+		$vocationList = implode(',', array_map('intval', $vocationIds));
+		$playerConditions[] = 'p.`vocation` IN (' . $vocationList . ')';
+		$subPlayerConditions[] = 'p2.`vocation` IN (' . $vocationList . ')';
+	}
+
+	$donationTotalsSql = 'SELECT `account_id`, SUM(`coins`) AS `value` FROM `eclipse_donation_intents` WHERE `status` = ' . $db->quote('paid') . ' GROUP BY `account_id` HAVING `value` > 0';
+	$bestPlayerSql = 'SELECT p2.`id` FROM `players` p2 WHERE ' . implode(' AND ', $subPlayerConditions) . ' ORDER BY p2.`experience` DESC, p2.`id` ASC LIMIT 1';
+	$whereSql = implode(' AND ', $playerConditions) . ' AND p.`id` = (' . $bestPlayerSql . ')';
+	$playerSelectColumns = str_replace('players.', 'p.', $outfit . $promotion);
+	$onlineSelect = '0 AS `online`';
+	$onlineJoin = '';
+	if ($db->hasTable('players_online')) {
+		$onlineSelect = 'IF(po.`player_id` IS NULL, 0, 1) AS `online`';
+		$onlineJoin = 'LEFT JOIN `players_online` po ON po.`player_id` = p.`id` ';
+	}
+
+	$selectSql = 'SELECT accounts.`country`, p.`id`, p.`name`, p.`account_id`, p.`level`, p.`vocation`' . $playerSelectColumns . ', dt.`value`, ' . $onlineSelect . ' ' .
+		'FROM (' . $donationTotalsSql . ') dt ' .
+		'JOIN `players` p ON p.`account_id` = dt.`account_id` ' .
+		'JOIN `accounts` accounts ON accounts.`id` = p.`account_id` ' .
+		$onlineJoin .
+		'WHERE ' . $whereSql . ' ' .
+		'ORDER BY dt.`value` DESC, p.`experience` DESC, p.`id` ASC ' .
+		'LIMIT ' . (int) $limit . ' OFFSET ' . (int) $offset;
+
+	$countSql = 'SELECT COUNT(*) FROM (' . $donationTotalsSql . ') dt ' .
+		'JOIN `players` p ON p.`account_id` = dt.`account_id` ' .
+		'WHERE ' . $whereSql;
+
+	$highscores = array_map(function ($row) use ($configVocations) {
+		$row['online'] = (int) $row['online'];
+		$row['vocation'] = $configVocations[(int) $row['vocation']] ?? (string) $row['vocation'];
+		$row['link'] = getPlayerLink($row['name'], false);
+
+		return $row;
+	}, $db->query($selectSql)->fetchAll(PDO::FETCH_ASSOC));
+
+	$totalResults = (int) $db->query($countSql)->fetchColumn();
+	$updatedAt = time();
 }
 
-$query
-	->limit($limit)
-	->offset($offset)
-	->selectRaw('accounts.country, players.id, players.name, players.account_id, players.level, players.vocation' . $outfit . $promotion)
-	->orderByDesc('value');
+if (($customRanking['source'] ?? '') !== 'donations') {
+	if (!$accountsJoined) {
+		$query->join('accounts', 'accounts.id', '=', 'players.account_id');
+	}
 
-if (empty($highscores)) {
+	$query
+		->limit($limit)
+		->offset($offset)
+		->selectRaw('accounts.country, players.id, players.name, players.account_id, players.level, players.vocation' . $outfit . $promotion)
+		->orderByDesc('value');
+}
+
+if (empty($highscores) && (($customRanking['source'] ?? '') !== 'donations')) {
 	if ($customRanking !== null) {
 		$customValueExpression = $customRanking['expression'] ?? ($customRanking['table'] . '.' . $customRanking['column']);
 		$query
