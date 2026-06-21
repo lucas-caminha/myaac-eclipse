@@ -1676,14 +1676,14 @@ body {
   text-transform: uppercase !important;
 }
 
-#ContentColumn .Content .eclipse-character-name-row {
+#ContentColumn .Content div.eclipse-character-name-row {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) 22px !important;
   gap: 8px !important;
   align-items: center !important;
 }
 
-#ContentColumn .Content .eclipse-character-name-row input {
+#ContentColumn .Content div.eclipse-character-name-row input {
   width: 100% !important;
   height: 35px !important;
   padding: 0 10px !important;
@@ -1694,12 +1694,12 @@ body {
   outline: none !important;
 }
 
-#ContentColumn .Content .eclipse-character-name-row input:focus {
+#ContentColumn .Content div.eclipse-character-name-row input:focus {
   border-color: #5f160c !important;
   box-shadow: 0 0 0 2px rgba(95, 22, 12, .18) !important;
 }
 
-#ContentColumn .Content .eclipse-character-name-row img {
+#ContentColumn .Content div.eclipse-character-name-row img {
   width: 16px !important;
   height: 16px !important;
 }
@@ -4854,6 +4854,14 @@ body {
 #ContentColumn .eclipse-create-account-page form#createaccount [data-registration-panel="character"].is-active td {
   padding-top: 9px !important;
   padding-bottom: 9px !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount tr.eclipse-character-name-row {
+  display: table-row !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount tr.eclipse-character-name-row td {
+  display: table-cell !important;
 }
 
 #ContentColumn .eclipse-create-account-page form#createaccount [data-registration-panel="character"].is-active .eclipse-character-name-row td,
@@ -8552,7 +8560,7 @@ html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-
   text-transform: uppercase !important;
 }
 
-html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-name-row {
+html body #Bodycontainer #ContentColumn .Content .BoxContent div.eclipse-character-name-row {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) 18px !important;
   gap: 8px !important;
@@ -8563,7 +8571,7 @@ html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-
 html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-field input[type="password"],
 html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-field input:not([type]),
 html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-field textarea,
-html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-character-name-row input {
+html body #Bodycontainer #ContentColumn .Content .BoxContent div.eclipse-character-name-row input {
   width: 100% !important;
   min-height: 36px !important;
   padding: 8px 10px !important;

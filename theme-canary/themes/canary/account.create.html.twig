@@ -409,6 +409,7 @@
 
 		var steps = Array.prototype.slice.call(form.querySelectorAll('[data-registration-step]'));
 		var panels = Array.prototype.slice.call(form.querySelectorAll('[data-registration-panel]'));
+		var submitButton = form.querySelector('.BigButtonText');
 		var activeStep = 'account';
 		var hasCharacterStep = !!form.querySelector('[data-registration-panel="character"]');
 
@@ -482,6 +483,81 @@
 				var isActive = panel.getAttribute('data-registration-panel') === activeStep;
 				panel.classList.toggle('is-active', isActive);
 			});
+
+			refreshSubmitButton();
+		}
+
+		function nextStepName() {
+			if (activeStep === 'account') {
+				return hasCharacterStep ? 'character' : 'rules';
+			}
+
+			if (activeStep === 'character') {
+				return 'rules';
+			}
+
+			return null;
+		}
+
+		function refreshSubmitButton() {
+			if (!submitButton) {
+				return;
+			}
+
+			var isFinalStep = activeStep === 'rules';
+			var label = isFinalStep ? 'Criar conta' : 'Pr\u00f3xima etapa';
+			submitButton.type = isFinalStep ? 'submit' : 'button';
+			submitButton.value = label;
+			submitButton.setAttribute('aria-label', label);
+		}
+
+		function focusFirstMissingField() {
+			var field = null;
+
+			if (activeStep === 'account') {
+				if (!fieldFilled('account_input')) {
+					field = byId('account_input');
+				}
+				else if (!validEmail()) {
+					field = byId('email');
+				}
+				else if (!validPassword()) {
+					field = byId('password');
+				}
+			}
+
+			if (activeStep === 'character') {
+				if (!fieldFilled('character_name')) {
+					field = byId('character_name');
+				}
+				else if (!selected('sex')) {
+					field = form.querySelector('input[name="sex"]');
+				}
+				else if (form.querySelector('input[name="vocation"]') && !selected('vocation')) {
+					field = form.querySelector('input[name="vocation"]');
+				}
+				else if (form.querySelector('input[name="town"]') && !selected('town')) {
+					field = form.querySelector('input[name="town"]');
+				}
+			}
+
+			if (field && typeof field.focus === 'function') {
+				field.focus();
+			}
+		}
+
+		function goToNextStep() {
+			var allowed = allowedSteps();
+			var nextStep = nextStepName();
+
+			if (nextStep && allowed[nextStep]) {
+				setActiveStep(nextStep);
+				refresh();
+				return true;
+			}
+
+			focusFirstMissingField();
+			return false;
 		}
 
 		function refresh() {
@@ -503,6 +579,8 @@
 			if (!allowed[activeStep]) {
 				setActiveStep('account');
 			}
+
+			refreshSubmitButton();
 		}
 
 		steps.forEach(function (step) {
@@ -515,6 +593,24 @@
 
 		form.addEventListener('input', refresh);
 		form.addEventListener('change', refresh);
+		if (submitButton) {
+			submitButton.addEventListener('click', function (event) {
+				if (activeStep === 'rules') {
+					return;
+				}
+
+				event.preventDefault();
+				goToNextStep();
+			});
+		}
+		form.addEventListener('submit', function (event) {
+			if (activeStep === 'rules') {
+				return;
+			}
+
+			event.preventDefault();
+			goToNextStep();
+		});
 		refresh();
 	})();
 </script>
