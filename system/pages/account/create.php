@@ -57,19 +57,19 @@ function eclipseCreateAccountVocationGuide($vocationId)
 			'image' => 'knightbanner.png',
 			'name' => 'Cavaleiro',
 			'role' => 'Defensor de linha de frente',
-			'description' => 'Feito para combate corpo a corpo, armaduras pesadas e pressao constante no centro da batalha.',
+			'description' => 'Feito para combate corpo a corpo, armaduras pesadas e pressão constante no centro da batalha.',
 		],
 		'paladin' => [
 			'image' => 'paladinbanner.png',
 			'name' => 'Paladino',
-			'role' => 'Hibrido de distancia',
-			'description' => 'Um atirador flexivel que mistura dano a distancia, sobrevivencia e magia util.',
+			'role' => 'Híbrido de distância',
+			'description' => 'Um atirador flexível que mistura dano à distância, sobrevivência e magia útil.',
 		],
 		'monk' => [
 			'image' => 'monkbanner.png',
 			'name' => 'Monge',
-			'role' => 'Espirito marcial',
-			'description' => 'Um lutador disciplinado que combina forca fisica com tecnicas espirituais.',
+			'role' => 'Espírito marcial',
+			'description' => 'Um lutador disciplinado que combina força física com técnicas espirituais.',
 		],
 		'sorcerer' => [
 			'image' => 'sorcererbanner.png',
@@ -81,7 +81,7 @@ function eclipseCreateAccountVocationGuide($vocationId)
 			'image' => 'druidbanner.png',
 			'name' => 'Druida',
 			'role' => 'Suporte e cura',
-			'description' => 'Um conjurador ligado a natureza, com cura, suporte e utilidade confiavel para o grupo.',
+			'description' => 'Um conjurador ligado à natureza, com cura, suporte e utilidade confiável para o grupo.',
 		],
 	];
 
@@ -95,7 +95,7 @@ function eclipseCreateAccountVocationGuide($vocationId)
 		'image' => '',
 		'name' => $vocationName,
 		'role' => 'Aventureiro de Eclipse',
-		'description' => 'Seu personagem esta pronto para iniciar a jornada, evoluir e disputar seu espaco no servidor.',
+		'description' => 'Seu personagem está pronto para iniciar a jornada, evoluir e disputar seu espaço no servidor.',
 	];
 }
 
@@ -111,7 +111,7 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 	$characterCard = '';
 	$heroStyle = '';
 	$intro = $characterEnabled
-		? 'Sua conta e seu personagem foram criados. Agora e so entrar no jogo e escolher o outfit inicial.'
+		? 'Sua conta e seu personagem foram criados. Agora é só entrar no jogo e escolher o outfit inicial.'
 		: 'Sua conta foi criada. Entre no painel para criar seu primeiro personagem quando quiser.';
 
 	if ($characterEnabled) {
@@ -119,8 +119,9 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 		$bannerStyle = '';
 		if (!empty($guide['image'])) {
 			$vocationBannerUrl = eclipseCreateAccountEscape($template_path . '/images/vocations/' . $guide['image']);
-			$bannerStyle = ' style="background-image: url(' . $vocationBannerUrl . ');"';
-			$heroStyle = ' style="--eclipse-create-hero-image: url(' . $vocationBannerUrl . ');"';
+			$vocationImageStyle = '--eclipse-create-vocation-image: url(' . $vocationBannerUrl . ');';
+			$bannerStyle = ' style="' . $vocationImageStyle . '"';
+			$heroStyle = ' style="' . $vocationImageStyle . '"';
 		}
 
 		$characterCard = '
@@ -139,7 +140,7 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 	$description = '
 		<div class="eclipse-create-success">
 			<section class="eclipse-create-success-hero"' . $heroStyle . '>
-				<span>Cadastro concluido</span>
+				<span>Cadastro concluído</span>
 				<h2>Bem-vindo ao ' . $serverName . '</h2>
 				<p>' . eclipseCreateAccountEscape($intro) . '</p>
 			</section>
@@ -147,12 +148,12 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 				<section class="eclipse-create-success-card eclipse-create-success-account">
 					<span>' . eclipseCreateAccountEscape($accountTypeLabel) . '</span>
 					<strong>' . $accountValueText . '</strong>
-					<p>Guarde seu ' . $accountTypeText . ' e sua senha em um lugar seguro. Esses dados sao necessarios para jogar e acessar sua conta.</p>
+					<p>Guarde seu ' . $accountTypeText . ' e sua senha em um lugar seguro. Esses dados são necessários para jogar e acessar sua conta.</p>
 				</section>
 				' . $characterCard . '
 			</div>
 			<div class="eclipse-create-success-next">
-				<strong>Proximo passo</strong>
+				<strong>Próximo passo</strong>
 				<span>Abra o client, entre com sua conta e comece sua jornada em Eclipse OT.</span>
 			</div>
 		</div>';
@@ -393,13 +394,13 @@ if($save)
 
 			if(_mail($email, 'Nova conta no ' . $config['lua']['serverName'], $body_html))
 			{
-				warning("Antes de entrar, voce precisa confirmar seu email. O link de verificacao foi enviado para $email. Se a mensagem nao chegar, verifique tambem a caixa de spam.");
+				warning("Antes de entrar, você precisa confirmar seu email. O link de verificação foi enviado para $email. Se a mensagem não chegar, verifique também a caixa de spam.");
 
 				eclipseRenderCreateAccountSuccess($twig, $account_type, $tmp_account, setting('core.account_create_character_create'), $character_name ?? '', $character_vocation ?? null);
 			}
 			else
 			{
-				error('Ocorreu um erro ao enviar o email! A conta nao foi criada. Tente novamente. Para o admin: mais informacoes estao em system/logs/mailer-error.log');
+				error('Ocorreu um erro ao enviar o email! A conta não foi criada. Tente novamente. Para o admin: mais informações estão em system/logs/mailer-error.log');
 				$new_account->delete();
 
 				return;
@@ -430,9 +431,9 @@ if($save)
 				));
 
 				if(_mail($email, 'Sua conta no ' . $config['lua']['serverName'], $mailBody))
-					echo '<br /><small>Essas informacoes foram enviadas para o email <b>' . $email . '</b>.';
+					echo '<br /><small>Essas informações foram enviadas para o email <b>' . $email . '</b>.';
 				else {
-					error('Ocorreu um erro ao enviar o email. Para o admin: mais informacoes estao em system/logs/mailer-error.log');
+					error('Ocorreu um erro ao enviar o email. Para o admin: mais informações estão em system/logs/mailer-error.log');
 				}
 			}
 		}
