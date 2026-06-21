@@ -132,20 +132,30 @@
 										<tr>
 											<td class="premiumbenefits">
 												<div class="eclipse-manage-benefits-head">
-													<strong>Benefícios VIP & Loyalty</strong>
-													<span>Valores atualizados a partir da configuração atual do servidor.</span>
-													<a href="{{ getLink('vip-loyalty') }}">Ver detalhes</a>
+													<div>
+														<strong>VIP & Loyalty</strong>
+														<span>Benefícios ativos na configuração atual do servidor.</span>
+													</div>
+													<a href="{{ getLink('vip-loyalty') }}">Detalhes</a>
 												</div>
 												<div class="eclipse-manage-benefits-grid">
 													{% for benefit in vip_benefits %}
-														<div class="eclipse-manage-benefit-card">
-															<img src="{{ template_path }}/images/premiumfeatures/{{ benefit.icon }}" alt="">
-															<div>
-																<span>{{ benefit.label }}</span>
-																<strong>{{ benefit.value }}</strong>
-																<small>{{ benefit.description }}</small>
+														{% if loop.index <= 4 %}
+															<div class="eclipse-manage-benefit-card">
+																<img src="{{ template_path }}/images/premiumfeatures/{{ benefit.icon }}" alt="">
+																<div>
+																	<span>{{ benefit.label }}</span>
+																	<strong>{{ benefit.value }}</strong>
+																</div>
 															</div>
-														</div>
+														{% endif %}
+													{% endfor %}
+												</div>
+												<div class="eclipse-manage-benefit-flags">
+													{% for benefit in vip_benefits %}
+														{% if loop.index > 4 %}
+															<span>{{ benefit.label }}: <strong>{{ benefit.value }}</strong></span>
+														{% endif %}
 													{% endfor %}
 												</div>
 												<div style="justify-content: flex-start">
@@ -741,13 +751,13 @@
 													<div class="eclipse-public-info-panel">
 														<div class="eclipse-public-info-intro">
 															<div>
-																<strong>Resumo cadastral</strong>
-																<span>Dados usados para perfil, segurança e atendimento da conta.</span>
+																<strong>Informações da conta</strong>
+																<span>Resumo público e operacional do seu cadastro.</span>
 															</div>
 															{% if not account_update_info_on_register %}
 																<form action="{{ getLink('account/change-info') }}" method="post">
 																	{{ csrf() }}
-																	<button class="eclipse-public-info-edit" type="submit">Editar dados</button>
+																	<button class="eclipse-public-info-edit" type="submit">Editar</button>
 																</form>
 															{% endif %}
 														</div>

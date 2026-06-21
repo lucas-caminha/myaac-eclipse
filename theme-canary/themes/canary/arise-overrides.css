@@ -5398,6 +5398,165 @@ body {
   }
 }
 
+/* Account management refinement: compact, closer to the Canary account tables. */
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-head {
+  min-height: 0 !important;
+  margin: 0 0 7px !important;
+  padding: 8px 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  border: 1px solid rgba(101, 54, 18, .34) !important;
+  border-radius: 3px !important;
+  background: linear-gradient(180deg, #f4d99f 0%, #d7b16c 100%) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-head strong {
+  font: 900 14px Georgia, 'Times New Roman', serif !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-head span {
+  font: 700 11px/1.3 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-head a {
+  grid-row: auto !important;
+  grid-column: auto !important;
+  padding: 5px 8px !important;
+  border-radius: 3px !important;
+  font-size: 10px !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefit-card {
+  min-height: 56px !important;
+  grid-template-columns: 28px minmax(0, 1fr) !important;
+  gap: 7px !important;
+  align-items: center !important;
+  padding: 7px 8px !important;
+  border-radius: 3px !important;
+  background: linear-gradient(180deg, #f8e5ad 0%, #dbb76f 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 247, 206, .55) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefit-card img {
+  width: 26px !important;
+  height: 26px !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefit-card span {
+  font-size: 9px !important;
+  letter-spacing: 0 !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefit-card strong {
+  margin: 1px 0 0 !important;
+  font: 900 16px Georgia, 'Times New Roman', serif !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefit-card small {
+  display: none !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefit-flags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 5px !important;
+  margin-top: 7px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefit-flags span {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  min-height: 24px !important;
+  padding: 3px 7px !important;
+  border: 1px solid rgba(101, 54, 18, .34) !important;
+  border-radius: 3px !important;
+  background: rgba(255, 244, 211, .42) !important;
+  color: #35170a !important;
+  font: 700 10px Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-manage-benefit-flags strong {
+  color: #5f180d !important;
+  font-weight: 900 !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-panel {
+  padding: 0 !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-intro {
+  margin: 0 0 7px !important;
+  padding: 8px 10px !important;
+  border-radius: 3px !important;
+  background: linear-gradient(180deg, #f4d99f 0%, #d7b16c 100%) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-intro strong {
+  font: 900 14px Georgia, 'Times New Roman', serif !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-intro span {
+  font: 700 11px/1.3 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-edit {
+  min-height: 26px !important;
+  padding: 0 10px !important;
+  border-radius: 3px !important;
+  font-size: 10px !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-card {
+  min-height: 0 !important;
+  padding: 7px 9px !important;
+  border-radius: 3px !important;
+  background: rgba(255, 244, 211, .42) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 247, 206, .45) !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-card span {
+  margin-bottom: 3px !important;
+  font-size: 9px !important;
+  letter-spacing: 0 !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-card strong {
+  margin: 0 0 2px !important;
+  font: 900 12px/1.25 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-account-manage-page .eclipse-public-info-card small {
+  font-size: 10px !important;
+}
+
+@media (max-width: 760px) {
+  #ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-grid,
+  #ContentColumn .eclipse-account-manage-page .eclipse-public-info-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  #ContentColumn .eclipse-account-manage-page .eclipse-manage-benefits-head {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+  }
+}
+
 #ContentColumn .eclipse-account-manage-page .BigButtonText,
 #ContentColumn .eclipse-account-manage-page .MediumButtonText,
 #ContentColumn .eclipse-account-manage-page input[type="submit"],

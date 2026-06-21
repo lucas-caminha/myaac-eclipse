@@ -280,16 +280,6 @@ $public_info_cards = [
 		'hint' => 'Informação pública exibida no perfil da conta.'
 	],
 	[
-		'label' => 'Data de nascimento',
-		'value' => eclipseManageDisplayValue($account_birth_date),
-		'hint' => 'Dado privado usado para segurança cadastral.'
-	],
-	[
-		'label' => 'CPF',
-		'value' => eclipseManageMaskCpf($account_cpf),
-		'hint' => 'Sempre exibido mascarado.'
-	],
-	[
 		'label' => 'Personagens',
 		'value' => $players_count . ' criado(s)',
 		'hint' => $online_players_count . ' online agora.'
