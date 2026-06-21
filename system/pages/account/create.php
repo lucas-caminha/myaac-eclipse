@@ -109,6 +109,7 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 	$characterNameText = eclipseCreateAccountEscape($characterName ?: 'Personagem inicial');
 	$serverName = eclipseCreateAccountEscape(configLua('serverName'));
 	$characterCard = '';
+	$heroStyle = '';
 	$intro = $characterEnabled
 		? 'Sua conta e seu personagem foram criados. Agora e so entrar no jogo e escolher o outfit inicial.'
 		: 'Sua conta foi criada. Entre no painel para criar seu primeiro personagem quando quiser.';
@@ -117,7 +118,9 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 		$guide = eclipseCreateAccountVocationGuide($characterVocation);
 		$bannerStyle = '';
 		if (!empty($guide['image'])) {
-			$bannerStyle = ' style="background-image: url(' . eclipseCreateAccountEscape($template_path . '/images/vocations/' . $guide['image']) . ');"';
+			$vocationBannerUrl = eclipseCreateAccountEscape($template_path . '/images/vocations/' . $guide['image']);
+			$bannerStyle = ' style="background-image: url(' . $vocationBannerUrl . ');"';
+			$heroStyle = ' style="--eclipse-create-hero-image: url(' . $vocationBannerUrl . ');"';
 		}
 
 		$characterCard = '
@@ -135,7 +138,7 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 
 	$description = '
 		<div class="eclipse-create-success">
-			<section class="eclipse-create-success-hero">
+			<section class="eclipse-create-success-hero"' . $heroStyle . '>
 				<span>Cadastro concluido</span>
 				<h2>Bem-vindo ao ' . $serverName . '</h2>
 				<p>' . eclipseCreateAccountEscape($intro) . '</p>

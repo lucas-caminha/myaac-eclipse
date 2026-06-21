@@ -5679,8 +5679,8 @@ body {
   border: 1px solid rgba(255, 194, 86, .54) !important;
   border-radius: 5px !important;
   background:
-    linear-gradient(90deg, rgba(29, 7, 5, .93), rgba(74, 15, 8, .78)),
-    url("images/vocations/monkbanner.png") center right / cover no-repeat !important;
+    linear-gradient(90deg, rgba(9, 4, 3, .97) 0%, rgba(23, 7, 4, .88) 43%, rgba(23, 7, 4, .58) 100%),
+    var(--eclipse-create-hero-image, url("images/vocations/monkbanner.png")) center right / cover no-repeat !important;
   box-shadow: inset 0 0 0 1px rgba(255, 232, 170, .18), 0 8px 20px rgba(45, 12, 5, .30) !important;
 }
 
@@ -5688,7 +5688,9 @@ body {
   content: "" !important;
   position: absolute !important;
   inset: 0 !important;
-  background: radial-gradient(circle at 18% 20%, rgba(255, 180, 66, .24), transparent 36%) !important;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, .16), rgba(0, 0, 0, .38)),
+    radial-gradient(circle at 18% 20%, rgba(255, 180, 66, .20), transparent 36%) !important;
   pointer-events: none !important;
 }
 
@@ -5700,31 +5702,37 @@ body {
 #ContentColumn .eclipse-create-success-hero span {
   display: inline-block !important;
   margin-bottom: 7px !important;
-  padding: 4px 9px !important;
-  border: 1px solid rgba(255, 215, 124, .44) !important;
+  padding: 5px 10px !important;
+  border: 1px solid rgba(255, 215, 124, .62) !important;
   border-radius: 999px !important;
-  background: rgba(10, 20, 30, .70) !important;
-  color: #ffe8a5 !important;
-  -webkit-text-fill-color: #ffe8a5 !important;
+  background: rgba(18, 7, 4, .86) !important;
+  color: #fff0bf !important;
+  -webkit-text-fill-color: #fff0bf !important;
   font: 900 10px/1 Verdana, Arial, sans-serif !important;
   letter-spacing: .08em !important;
   text-transform: uppercase !important;
+  text-shadow: 0 1px 1px #000 !important;
 }
 
 #ContentColumn .eclipse-create-success-hero h2 {
   margin: 0 0 8px !important;
-  color: #fff0c6 !important;
-  -webkit-text-fill-color: #fff0c6 !important;
-  font: 900 26px/1.08 Georgia, "Times New Roman", serif !important;
-  text-shadow: 0 2px 0 #220804, 0 0 14px rgba(255, 177, 67, .45) !important;
+  color: #fff7dc !important;
+  -webkit-text-fill-color: #fff7dc !important;
+  font: 900 28px/1.05 Georgia, "Times New Roman", serif !important;
+  text-shadow: 0 2px 2px #000, 0 0 12px rgba(255, 189, 77, .44) !important;
 }
 
 #ContentColumn .eclipse-create-success-hero p {
   max-width: 610px !important;
   margin: 0 !important;
-  color: #f6ddb0 !important;
-  -webkit-text-fill-color: #f6ddb0 !important;
+  padding: 8px 10px !important;
+  border: 1px solid rgba(255, 222, 151, .18) !important;
+  border-radius: 4px !important;
+  background: rgba(8, 4, 3, .46) !important;
+  color: #ffe9bd !important;
+  -webkit-text-fill-color: #ffe9bd !important;
   font: 800 13px/1.55 Verdana, Arial, sans-serif !important;
+  text-shadow: 0 1px 1px #000 !important;
 }
 
 #ContentColumn .eclipse-create-success-grid {
