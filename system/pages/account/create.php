@@ -109,7 +109,8 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 	$characterNameText = eclipseCreateAccountEscape($characterName ?: 'Personagem inicial');
 	$serverName = eclipseCreateAccountEscape(configLua('serverName'));
 	$characterCard = '';
-	$heroStyle = '';
+	$serverHeroUrl = eclipseCreateAccountEscape($template_path . '/images/header/bgs/arise-red-fortress.png');
+	$heroImage = '<img class="eclipse-create-success-art eclipse-create-success-server-art" src="' . $serverHeroUrl . '" alt="">';
 	$vocationImage = '';
 	$intro = $characterEnabled
 		? 'Sua conta e seu personagem foram criados. Agora é só entrar no jogo e escolher o outfit inicial.'
@@ -122,7 +123,6 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 			$vocationBannerUrl = eclipseCreateAccountEscape($template_path . '/images/vocations/' . $guide['image']);
 			$vocationImageStyle = '--eclipse-create-vocation-image: url(' . $vocationBannerUrl . ');';
 			$bannerStyle = ' style="' . $vocationImageStyle . '"';
-			$heroStyle = ' style="' . $vocationImageStyle . '"';
 			$vocationImage = '<img class="eclipse-create-success-art" src="' . $vocationBannerUrl . '" alt="">';
 		}
 
@@ -142,8 +142,8 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 
 	$description = '
 		<div class="eclipse-create-success">
-			<section class="eclipse-create-success-hero"' . $heroStyle . '>
-				' . $vocationImage . '
+			<section class="eclipse-create-success-hero">
+				' . $heroImage . '
 				<span>Cadastro concluído</span>
 				<h2>Bem-vindo ao ' . $serverName . '</h2>
 				<p>' . eclipseCreateAccountEscape($intro) . '</p>
