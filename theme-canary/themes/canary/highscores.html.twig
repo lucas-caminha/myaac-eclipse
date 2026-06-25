@@ -1,5 +1,17 @@
 <div class="eclipse-highscores-page">
 
+<div class="highscores-hero">
+	<div class="highscores-hero-copy">
+		<span class="highscores-eyebrow">Ranking ativo</span>
+		<h2>{{ skillName }}</h2>
+		<p>Compare os melhores personagens do Eclipse OT por voca&ccedil;&atilde;o, categoria e desempenho.</p>
+	</div>
+	<div class="highscores-hero-stat">
+		<span>{{ totalResults }}</span>
+		<small>resultados</small>
+	</div>
+</div>
+
 {% set pageNavigation %}
 
 	{% set pagesLimit = min((totalResults/setting('core.highscores_per_page'))|round(0, 'ceil'), 20) %}
@@ -57,7 +69,7 @@
 		<tr>
 			<td>
 				<div class="InnerTableContainer">
-					<table style="width:100%;">
+					<table class="highscores-filter-table" style="width:100%;">
 						<tbody>
 						<tr>
 							<td style="width:150px">
@@ -146,33 +158,34 @@
 										</tr>
 
 										{% if highscores|length < 1 %}
-											<tr bgcolor="{{ config('darkborder') }}"><td colspan="100%">Nenhum registro encontrado.</td></tr>
+											<tr bgcolor="{{ config('darkborder') }}"><td colspan="100%" class="highscores-empty">Nenhum registro encontrado.</td></tr>
 										{% else %}
 
 											{% set row = 0 %}
 
 											{% for player in highscores %}
 												{% set row = row + 1 %}
+												{% set rankClass = row <= 3 ? 'is-rank-top is-rank-' ~ row : '' %}
 
-												<tr>
-													<td>{{ player.rank }}</td>
+												<tr class="{{ rankClass }}">
+													<td class="rank-cell"><span class="rank-badge {% if row <= 3 %}rank-badge-{{ row }}{% endif %}">{{ player.rank }}</span></td>
 
-												<td class="DoNotBreak">
+												<td class="DoNotBreak highscore-name-cell">
 													<a href="{{ player.link }}">
 														<span {% if setting('core.highscores_online_status') %}style="color: {% if player.online > 0 %}green{% else %}red{% endif %}"{% endif %}>{{ player.name }}</span>
 													</a>
 												</td>
 
 												{% if setting('core.highscores_vocation') %}
-													<td class="DoNotBreak" style="text-align:right;">{{ player.vocation }}</td>
+													<td class="DoNotBreak vocation-cell" style="text-align:right;">{{ player.vocation }}</td>
 												{% endif %}
 
-												<td>
-													<div style="text-align:right;">{{ player.value }}</div>
+												<td class="score-cell">
+													<div class="score-value" style="text-align:right;">{{ player.value }}</div>
 												</td>
 
 												{% if skill == constant('POT::SKILL__LEVEL') %}
-													<td><div style="text-align:right">{{ player.experience }}</div></td>
+													<td class="score-cell"><div class="score-value score-muted" style="text-align:right">{{ player.experience }}</div></td>
 												{% endif %}
 											</tr>
 										{% endfor %}
