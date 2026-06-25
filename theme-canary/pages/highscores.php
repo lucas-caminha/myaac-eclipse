@@ -258,7 +258,7 @@ if ($customRanking !== null && ($customRanking['source'] ?? '') !== 'donations')
 
 $totalResultsQuery = clone $query;
 $customCacheKey = $customRanking !== null ? $list : $skill;
-$cacheKey = 'highscores_v2_' . $customCacheKey . '_' . $vocation . '_' . $page . '_' . $configHighscoresPerPage;
+$cacheKey = 'highscores_v3_' . $customCacheKey . '_' . $vocation . '_' . $page . '_' . $configHighscoresPerPage;
 $cache = Cache::getInstance();
 
 if ($cache->enabled() && $highscoresTTL > 0) {
@@ -355,6 +355,10 @@ if (empty($highscores) && (($customRanking['source'] ?? '') !== 'donations')) {
 		$query
 			->selectRaw($customValueExpression . ' as value')
 			->orderByDesc('players.experience');
+	} else if ($skill == POT::SKILL__MAGLEVEL) {
+		$query
+			->addSelect('players.maglevel as value', 'players.maglevel')
+			->orderByDesc('players.manaspent');
 	} else if ($skill >= POT::SKILL_FIRST && $skill <= POT::SKILL__LAST) {
 		$skill_ids = [
 			POT::SKILL_FIST => 'skill_fist',
@@ -388,16 +392,10 @@ if (empty($highscores) && (($customRanking['source'] ?? '') !== 'donations')) {
 	} else if ($skill == SKILL_BALANCE) {
 		$query->addSelect('players.balance as value');
 	} else {
-		if ($skill == POT::SKILL__MAGLEVEL) {
-			$query
-				->addSelect('players.maglevel as value', 'players.maglevel')
-				->orderByDesc('manaspent');
-		} else {
-			$query
-				->addSelect('players.level as value', 'players.experience')
-				->orderByDesc('experience');
-			$list = 'experience';
-		}
+		$query
+			->addSelect('players.level as value', 'players.experience')
+			->orderByDesc('players.experience');
+		$list = 'experience';
 	}
 
 	$highscores = $query->get()->map(function ($row) {
@@ -502,6 +500,9 @@ if ($highscoresTTL > 0 && $cache->enabled()) {
 if ($customRanking !== null) {
 	$skillName = $customRanking['label'];
 	$levelName = $customRanking['label'];
+} else if ($skill == POT::SKILL__MAGLEVEL) {
+	$skillName = 'Magic Level';
+	$levelName = 'Magic Level';
 } else {
 	$skillName = ($skill == SKILL_FRAGS ? 'Frags' : ($skill == SKILL_BALANCE ? 'Balance' : getSkillName($skill)));
 	$levelName = ($skill != SKILL_FRAGS && $skill != SKILL_BALANCE ? 'Level' : ($skill == SKILL_BALANCE ? 'Balance' : 'Frags'));
