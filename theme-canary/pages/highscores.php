@@ -504,8 +504,18 @@ if ($customRanking !== null) {
 	$skillName = 'Magic Level';
 	$levelName = 'Magic Level';
 } else {
-	$skillName = ($skill == SKILL_FRAGS ? 'Frags' : ($skill == SKILL_BALANCE ? 'Balance' : getSkillName($skill)));
-	$levelName = ($skill != SKILL_FRAGS && $skill != SKILL_BALANCE ? 'Level' : ($skill == SKILL_BALANCE ? 'Balance' : 'Frags'));
+	$skillLabels = [
+		POT::SKILL_FIST => 'Fist',
+		POT::SKILL_CLUB => 'Club',
+		POT::SKILL_SWORD => 'Sword',
+		POT::SKILL_AXE => 'Axe',
+		POT::SKILL_DIST => 'Distance',
+		POT::SKILL_SHIELD => 'Shielding',
+		POT::SKILL_FISH => 'Fishing',
+		POT::SKILL__LEVEL => 'Level',
+	];
+	$skillName = ($skill == SKILL_FRAGS ? 'Frags' : ($skill == SKILL_BALANCE ? 'Balance' : ($skillLabels[$skill] ?? getSkillName($skill))));
+	$levelName = $skill == POT::SKILL__LEVEL ? 'Level' : $skillName;
 }
 
 /** @var Twig\Environment $twig */
