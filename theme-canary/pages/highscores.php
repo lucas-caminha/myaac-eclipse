@@ -61,6 +61,21 @@ $customRankingCandidates = [
 		'table' => 'players',
 		'columns' => ['bosstiary_points', 'boss_points'],
 	],
+	'task-points' => [
+		'label' => 'Task Points',
+		'table' => 'players',
+		'columns' => ['task_points'],
+	],
+	'prey-wildcards' => [
+		'label' => 'Prey Wildcards',
+		'table' => 'players',
+		'columns' => ['prey_wildcard', 'prey_wildcards'],
+	],
+	'forge-dusts' => [
+		'label' => 'Forge Dusts',
+		'table' => 'players',
+		'columns' => ['forge_dusts'],
+	],
 ];
 
 $customRankings = [];
@@ -104,54 +119,72 @@ if ($db->hasTableAndColumns('accounts', ['creation', 'premdays', 'premdays_purch
 
 $customRanking = $customRankings[$list] ?? null;
 $skill = POT::SKILL__LEVEL;
+$listResolved = $customRanking !== null;
 
 if ($customRanking === null) {
 	if (is_numeric($list)) {
 		$list = (int) $list;
 		if ($list >= POT::SKILL_FIRST && $list <= POT::SKILL__LAST) {
 			$skill = $list;
+			$listResolved = true;
 		}
 	} else {
 		switch ($list) {
 			case 'fist':
 				$skill = POT::SKILL_FIST;
+				$listResolved = true;
 				break;
 			case 'club':
 				$skill = POT::SKILL_CLUB;
+				$listResolved = true;
 				break;
 			case 'sword':
 				$skill = POT::SKILL_SWORD;
+				$listResolved = true;
 				break;
 			case 'axe':
 				$skill = POT::SKILL_AXE;
+				$listResolved = true;
 				break;
 			case 'distance':
 				$skill = POT::SKILL_DIST;
+				$listResolved = true;
 				break;
 			case 'shield':
 				$skill = POT::SKILL_SHIELD;
+				$listResolved = true;
 				break;
 			case 'fishing':
 				$skill = POT::SKILL_FISH;
+				$listResolved = true;
 				break;
 			case 'level':
 			case 'experience':
 				$skill = POT::SKILL__LEVEL;
+				$listResolved = true;
 				break;
 			case 'magic':
 				$skill = POT::SKILL__MAGLEVEL;
+				$listResolved = true;
 				break;
 			case 'frags':
 				if (setting('core.highscores_frags')) {
 					$skill = SKILL_FRAGS;
+					$listResolved = true;
 				}
 				break;
 			case 'balance':
 				if (setting('core.highscores_balance')) {
 					$skill = SKILL_BALANCE;
+					$listResolved = true;
 				}
 				break;
 		}
+	}
+
+	if (!$listResolved) {
+		$list = 'experience';
+		$skill = POT::SKILL__LEVEL;
 	}
 }
 
@@ -202,7 +235,8 @@ $query
 	->where('players.group_id', '<', setting('core.highscores_groups_hidden'));
 
 if ($customRanking !== null && ($customRanking['source'] ?? '') !== 'donations') {
-	$customColumnReference = $customRanking['expression'] ?? ($customRanking['table'] . '.' . $customRanking['column']);
+	$hasCustomExpression = isset($customRanking['expression']);
+	$customColumnReference = $hasCustomExpression ? null : $customRanking['table'] . '.' . $customRanking['column'];
 
 	if ($customRanking['table'] === 'accounts') {
 		$query->join('accounts', 'accounts.id', '=', 'players.account_id');
@@ -211,8 +245,8 @@ if ($customRanking !== null && ($customRanking['source'] ?? '') !== 'donations')
 		$query->join('player_charms', 'player_charms.player_id', '=', 'players.id');
 	}
 
-	if (isset($customRanking['expression'])) {
-		$query->whereRaw($customColumnReference . ' > 0');
+	if ($hasCustomExpression) {
+		$query->whereRaw($customRanking['expression'] . ' > 0');
 	} else {
 		$query->where($customColumnReference, '>', 0);
 	}
@@ -224,7 +258,7 @@ if ($customRanking !== null && ($customRanking['source'] ?? '') !== 'donations')
 
 $totalResultsQuery = clone $query;
 $customCacheKey = $customRanking !== null ? $list : $skill;
-$cacheKey = 'highscores_' . $customCacheKey . '_' . $vocation . '_' . $page . '_' . $configHighscoresPerPage;
+$cacheKey = 'highscores_v2_' . $customCacheKey . '_' . $vocation . '_' . $page . '_' . $configHighscoresPerPage;
 $cache = Cache::getInstance();
 
 if ($cache->enabled() && $highscoresTTL > 0) {
@@ -317,7 +351,7 @@ if (($customRanking['source'] ?? '') !== 'donations') {
 
 if (empty($highscores) && (($customRanking['source'] ?? '') !== 'donations')) {
 	if ($customRanking !== null) {
-		$customValueExpression = $customRanking['expression'] ?? ($customRanking['table'] . '.' . $customRanking['column']);
+		$customValueExpression = $customRanking['expression'] ?? ('COALESCE(' . $customRanking['table'] . '.' . $customRanking['column'] . ', 0)');
 		$query
 			->selectRaw($customValueExpression . ' as value')
 			->orderByDesc('players.experience');
