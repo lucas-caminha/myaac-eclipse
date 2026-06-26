@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=106" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=107" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -3650,10 +3650,10 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		#ContentColumn .Content .eclipse-highscores-page .highscores-hero {
 		  display: flex !important;
 		  align-items: center !important;
-		  justify-content: space-between !important;
+		  justify-content: flex-start !important;
 		  gap: 16px !important;
 		  margin: 0 0 14px !important;
-		  padding: 16px 18px !important;
+		  padding: 14px 18px !important;
 		  border: 1px solid rgba(208,139,45,.82) !important;
 		  border-radius: 6px !important;
 		  background:
