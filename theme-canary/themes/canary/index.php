@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=108" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=109" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -4033,7 +4033,7 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		#ContentColumn #News .BoxContent .online-overview-grid {
 		  display: grid;
 		  gap: 10px;
-		  grid-template-columns: repeat(4, minmax(0, 1fr));
+		  grid-template-columns: repeat(3, minmax(0, 1fr));
 		  padding: 12px;
 		}
 

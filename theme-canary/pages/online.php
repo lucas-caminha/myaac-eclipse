@@ -340,8 +340,6 @@ $cached = Cache::remember('online_rich_' . $order, setting('core.online_cache_tt
 		'vocations' => $vocations,
 		'overview' => [
 			'boosted' => eclipseOnlineGetBoosted($db),
-			'topPlayers' => eclipseOnlineGetTopPlayers($db),
-			'latestUpdate' => eclipseOnlineGetLatestUpdate($db),
 			'activeEvent' => eclipseOnlineGetActiveEvent(),
 			'serverSave' => eclipseOnlineGetServerSave(),
 		],
@@ -357,5 +355,3 @@ $twig->display('online.html.twig', [
 	'baseVocations' => Vocations::getBase(false),
 	'serverOverview' => $cached['overview'],
 ]);
-
-$twig->display('characters.form.html.twig');

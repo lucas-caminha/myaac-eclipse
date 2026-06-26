@@ -1,7 +1,7 @@
 <div class="eclipse-online-page">
 	<section class="online-hero">
 		<div>
-			<h2>Quem está online?</h2>
+			<h2>Quem est&aacute; online?</h2>
 			<p>Acompanhe os jogadores ativos no Eclipse OT.</p>
 		</div>
 		<div class="online-total">
@@ -32,103 +32,35 @@
 					<small>Veja a agenda de eventos</small>
 				{% endif %}
 			</div>
-			<div class="online-overview-item">
-				<span>&Uacute;ltimo update</span>
-				<strong>{{ serverOverview.latestUpdate.title }}</strong>
-				{% if serverOverview.latestUpdate.date %}
-					<small>{{ serverOverview.latestUpdate.date|date('d/m/Y H:i') }}</small>
-				{% else %}
-					<small>Changelog do projeto</small>
-				{% endif %}
-			</div>
 		</div>
 	</section>
 
-	<div class="online-grid online-feature-grid">
-		<section class="online-card online-boosted-card">
-			<div class="online-card-title">Boosted de Hoje</div>
-			<div class="online-boosted-list">
-				{% if serverOverview.boosted.boss %}
-					<a href="{{ serverOverview.boosted.boss.link }}" class="online-boosted-entry">
-						<img src="{{ serverOverview.boosted.boss.image }}" alt="Boss boosted">
-						<span>Boss</span>
-						<strong>{{ serverOverview.boosted.boss.name }}</strong>
-					</a>
-				{% endif %}
-				{% if serverOverview.boosted.creature %}
-					<a href="{{ serverOverview.boosted.creature.link }}" class="online-boosted-entry">
-						<img src="{{ serverOverview.boosted.creature.image }}" alt="Creature boosted">
-						<span>Creature</span>
-						<strong>{{ serverOverview.boosted.creature.name }}</strong>
-					</a>
-				{% endif %}
-			</div>
-		</section>
-
-		<section class="online-card online-top-card">
-			<div class="online-card-title">Top 3 Highscores</div>
-			<div class="online-top-list">
-				{% for topPlayer in serverOverview.topPlayers %}
-					<a href="{{ topPlayer.link }}" class="online-top-entry">
-						<span>#{{ topPlayer.rank }}</span>
-						<strong>{{ topPlayer.name }}</strong>
-						<small>Level {{ topPlayer.level }} / {{ topPlayer.vocation }}</small>
-					</a>
-				{% else %}
-					<div class="online-empty online-empty-compact">
-						<strong>Nenhum personagem encontrado.</strong>
-					</div>
-				{% endfor %}
-			</div>
-		</section>
-	</div>
-
-	<div class="online-grid">
-		<section class="online-card online-world-card">
-			<div class="online-card-title">Informações do Mundo</div>
-			<div class="online-info-list">
-				{% if not status.online %}
-					<div class="online-offline">
-						<strong>{{ config.lua.serverName }} está offline.</strong>
-						<span>Tente novamente em alguns minutos.</span>
-					</div>
-				{% else %}
-					<div><span>Status</span><strong class="online-status">Online</strong></div>
-					<div><span>Jogadores Online</span><strong>{{ players|length }}</strong></div>
-					<div><span>Recorde Online</span><strong>{{ record|raw }}</strong></div>
-					<div>
-						<span>Datacenter</span>
-						<strong>{{ setting('core.online_datacenter')|raw }}</strong>
-					</div>
-					<div>
-						<span>Data do servidor</span>
-						<strong>{{ "now"|date("d/m/Y H:i:s") }}</strong>
-					</div>
-				{% endif %}
-			</div>
-		</section>
-
-		<section class="online-card online-frags-card">
-			<div class="online-card-title">Frags</div>
-			<div class="online-frag-list">
+	<section class="online-card online-world-card">
+		<div class="online-card-title">Informa&ccedil;&otilde;es do Mundo</div>
+		<div class="online-info-list">
+			{% if not status.online %}
+				<div class="online-offline">
+					<strong>{{ config.lua.serverName }} est&aacute; offline.</strong>
+					<span>Tente novamente em alguns minutos.</span>
+				</div>
+			{% else %}
+				<div><span>Status</span><strong class="online-status">Online</strong></div>
+				<div><span>Jogadores Online</span><strong>{{ players|length }}</strong></div>
+				<div><span>Recorde Online</span><strong>{{ record|raw }}</strong></div>
 				<div>
-					<img src="images/white_skull.gif" alt="White Skull">
-					<span>1 - 6 frags</span>
+					<span>Datacenter</span>
+					<strong>{{ setting('core.online_datacenter')|raw }}</strong>
 				</div>
 				<div>
-					<img src="images/red_skull.gif" alt="Red Skull">
-					<span>6+ frags ou Red Skull</span>
+					<span>Data do servidor</span>
+					<strong>{{ "now"|date("d/m/Y H:i:s") }}</strong>
 				</div>
-				<div>
-					<img src="images/black_skull.gif" alt="Black Skull">
-					<span>10+ frags ou Black Skull</span>
-				</div>
-			</div>
-		</section>
-	</div>
+			{% endif %}
+		</div>
+	</section>
 
 	<section class="online-card online-vocations-card">
-		<div class="online-card-title">Vocações Online</div>
+		<div class="online-card-title">Voca&ccedil;&otilde;es Online</div>
 		<div class="online-vocation-grid">
 			{% for vocationId in baseVocations %}
 				<div class="online-vocation">
@@ -144,7 +76,7 @@
 		{% if players|length == 0 %}
 			<div class="online-empty">
 				<strong>Nenhum jogador online no momento.</strong>
-				<span>O próximo aventureiro pode ser você.</span>
+				<span>O pr&oacute;ximo aventureiro pode ser voc&ecirc;.</span>
 			</div>
 		{% else %}
 			<div class="online-table-wrap">
@@ -164,7 +96,7 @@
 							<a href="{{ getLink('online')}}?order=level_{{ order == 'level_asc' ? 'desc' : 'asc' }}">Level</a>
 						</th>
 						<th>
-							<a href="{{ getLink('online')}}?order=vocation_{{ order == 'vocation_asc' ? 'desc' : 'asc' }}">Vocação</a>
+							<a href="{{ getLink('online')}}?order=vocation_{{ order == 'vocation_asc' ? 'desc' : 'asc' }}">Voca&ccedil;&atilde;o</a>
 						</th>
 					</tr>
 					</thead>
@@ -188,5 +120,25 @@
 				</table>
 			</div>
 		{% endif %}
+	</section>
+
+	<section class="online-card online-boosted-card">
+		<div class="online-card-title">Boosted de Hoje</div>
+		<div class="online-boosted-list">
+			{% if serverOverview.boosted.boss %}
+				<a href="{{ serverOverview.boosted.boss.link }}" class="online-boosted-entry">
+					<img src="{{ serverOverview.boosted.boss.image }}" alt="Boss boosted">
+					<span>Boss</span>
+					<strong>{{ serverOverview.boosted.boss.name }}</strong>
+				</a>
+			{% endif %}
+			{% if serverOverview.boosted.creature %}
+				<a href="{{ serverOverview.boosted.creature.link }}" class="online-boosted-entry">
+					<img src="{{ serverOverview.boosted.creature.image }}" alt="Creature boosted">
+					<span>Creature</span>
+					<strong>{{ serverOverview.boosted.creature.name }}</strong>
+				</a>
+			{% endif %}
+		</div>
 	</section>
 </div>
