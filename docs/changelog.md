@@ -9,6 +9,7 @@ O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0
 ## [Unreleased]
 
 ### Adicionado
+- Painel enriquecido em `/online` com status do servidor, server save, boosted atual, evento ativo, top 3 highscores e ultimo update
 - Pagina publica de Privacidade/LGPD e painel `/account/privacy` para consulta e solicitacoes do titular
 - Migration `sql/013-add-lgpd-consents-and-requests.sql` com tabelas de consentimentos e solicitacoes LGPD
 - Documentos `docs/lgpd-data-map.md` e `docs/lgpd-incident-response.md`

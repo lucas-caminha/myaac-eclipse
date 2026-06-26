@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=107" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=108" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -4028,6 +4028,131 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		  color: #180904 !important;
 		  -webkit-text-fill-color: #180904 !important;
 		  text-shadow: none !important;
+		}
+
+		#ContentColumn #News .BoxContent .online-overview-grid {
+		  display: grid;
+		  gap: 10px;
+		  grid-template-columns: repeat(4, minmax(0, 1fr));
+		  padding: 12px;
+		}
+
+		#ContentColumn #News .BoxContent .online-overview-item {
+		  background: linear-gradient(180deg, #fff0bd, #d7aa54) !important;
+		  border: 1px solid rgba(91, 47, 8, .34);
+		  box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 5px 12px rgba(72, 36, 4, .16);
+		  min-height: 92px;
+		  padding: 12px;
+		}
+
+		#ContentColumn #News .BoxContent .online-overview-item span,
+		#ContentColumn #News .BoxContent .online-boosted-entry span,
+		#ContentColumn #News .BoxContent .online-top-entry span {
+		  color: #5e170d !important;
+		  -webkit-text-fill-color: #5e170d !important;
+		  display: block;
+		  font-size: 10px;
+		  font-weight: 900;
+		  letter-spacing: .04em;
+		  text-transform: uppercase;
+		}
+
+		#ContentColumn #News .BoxContent .online-overview-item strong,
+		#ContentColumn #News .BoxContent .online-boosted-entry strong,
+		#ContentColumn #News .BoxContent .online-top-entry strong {
+		  color: #180904 !important;
+		  -webkit-text-fill-color: #180904 !important;
+		  display: block;
+		  font-size: 15px;
+		  font-weight: 900;
+		  line-height: 1.2;
+		  margin-top: 5px;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn #News .BoxContent .online-overview-item small,
+		#ContentColumn #News .BoxContent .online-top-entry small {
+		  color: #4b2110 !important;
+		  -webkit-text-fill-color: #4b2110 !important;
+		  display: block;
+		  font-size: 11px;
+		  font-weight: 800;
+		  line-height: 1.3;
+		  margin-top: 6px;
+		  text-shadow: none !important;
+		}
+
+		#ContentColumn #News .BoxContent .online-status-item.is-online {
+		  background: linear-gradient(180deg, #dbf1ad, #91c85a) !important;
+		}
+
+		#ContentColumn #News .BoxContent .online-status-item.is-offline {
+		  background: linear-gradient(180deg, #f0c09d, #c96b4d) !important;
+		}
+
+		#ContentColumn #News .BoxContent .online-feature-grid {
+		  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		}
+
+		#ContentColumn #News .BoxContent .online-boosted-list,
+		#ContentColumn #News .BoxContent .online-top-list {
+		  display: grid;
+		  gap: 10px;
+		  padding: 12px;
+		}
+
+		#ContentColumn #News .BoxContent .online-boosted-list {
+		  grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		#ContentColumn #News .BoxContent .online-boosted-entry,
+		#ContentColumn #News .BoxContent .online-top-entry {
+		  background: #f2d795 !important;
+		  border: 1px solid rgba(91, 47, 8, .24);
+		  display: grid;
+		  gap: 8px;
+		  min-height: 76px;
+		  padding: 10px;
+		  text-decoration: none !important;
+		}
+
+		#ContentColumn #News .BoxContent .online-boosted-entry {
+		  align-items: center;
+		  grid-template-columns: 70px minmax(0, 1fr);
+		}
+
+		#ContentColumn #News .BoxContent .online-boosted-entry img {
+		  display: block;
+		  margin: 0 auto;
+		  max-height: 62px;
+		  max-width: 68px;
+		}
+
+		#ContentColumn #News .BoxContent .online-boosted-entry span,
+		#ContentColumn #News .BoxContent .online-boosted-entry strong {
+		  grid-column: 2;
+		}
+
+		#ContentColumn #News .BoxContent .online-top-entry {
+		  grid-template-columns: 44px minmax(0, 1fr);
+		}
+
+		#ContentColumn #News .BoxContent .online-top-entry span {
+		  align-items: center;
+		  background: linear-gradient(180deg, #fff8b8 0%, #d5972d 100%) !important;
+		  border: 1px solid rgba(71,22,8,.62);
+		  border-radius: 999px;
+		  display: flex;
+		  grid-row: span 2;
+		  justify-content: center;
+		  min-height: 36px;
+		}
+
+		@media (max-width: 900px) {
+		  #ContentColumn #News .BoxContent .online-overview-grid,
+		  #ContentColumn #News .BoxContent .online-boosted-list {
+		    grid-template-columns: 1fr;
+		  }
 		}
 		</style>
 <style>

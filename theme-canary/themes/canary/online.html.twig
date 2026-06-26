@@ -10,6 +10,79 @@
 		</div>
 	</section>
 
+	<section class="online-card online-overview-card">
+		<div class="online-overview-grid">
+			<div class="online-overview-item online-status-item {{ status.online ? 'is-online' : 'is-offline' }}">
+				<span>Status</span>
+				<strong>{{ status.online ? 'Online' : 'Offline' }}</strong>
+				<small>{{ players|length }} jogador{{ players|length == 1 ? '' : 'es' }} online</small>
+			</div>
+			<div class="online-overview-item">
+				<span>Server Save</span>
+				<strong>{{ serverOverview.serverSave.time }}</strong>
+				<small>Pr&oacute;ximo: {{ serverOverview.serverSave.next }}</small>
+			</div>
+			<div class="online-overview-item">
+				<span>Evento ativo</span>
+				{% if serverOverview.activeEvent %}
+					<strong>{{ serverOverview.activeEvent.name }}</strong>
+					<small>{{ serverOverview.activeEvent.description ?: 'Evento em andamento' }}</small>
+				{% else %}
+					<strong>Nenhum</strong>
+					<small>Veja a agenda de eventos</small>
+				{% endif %}
+			</div>
+			<div class="online-overview-item">
+				<span>&Uacute;ltimo update</span>
+				<strong>{{ serverOverview.latestUpdate.title }}</strong>
+				{% if serverOverview.latestUpdate.date %}
+					<small>{{ serverOverview.latestUpdate.date|date('d/m/Y H:i') }}</small>
+				{% else %}
+					<small>Changelog do projeto</small>
+				{% endif %}
+			</div>
+		</div>
+	</section>
+
+	<div class="online-grid online-feature-grid">
+		<section class="online-card online-boosted-card">
+			<div class="online-card-title">Boosted de Hoje</div>
+			<div class="online-boosted-list">
+				{% if serverOverview.boosted.boss %}
+					<a href="{{ serverOverview.boosted.boss.link }}" class="online-boosted-entry">
+						<img src="{{ serverOverview.boosted.boss.image }}" alt="Boss boosted">
+						<span>Boss</span>
+						<strong>{{ serverOverview.boosted.boss.name }}</strong>
+					</a>
+				{% endif %}
+				{% if serverOverview.boosted.creature %}
+					<a href="{{ serverOverview.boosted.creature.link }}" class="online-boosted-entry">
+						<img src="{{ serverOverview.boosted.creature.image }}" alt="Creature boosted">
+						<span>Creature</span>
+						<strong>{{ serverOverview.boosted.creature.name }}</strong>
+					</a>
+				{% endif %}
+			</div>
+		</section>
+
+		<section class="online-card online-top-card">
+			<div class="online-card-title">Top 3 Highscores</div>
+			<div class="online-top-list">
+				{% for topPlayer in serverOverview.topPlayers %}
+					<a href="{{ topPlayer.link }}" class="online-top-entry">
+						<span>#{{ topPlayer.rank }}</span>
+						<strong>{{ topPlayer.name }}</strong>
+						<small>Level {{ topPlayer.level }} / {{ topPlayer.vocation }}</small>
+					</a>
+				{% else %}
+					<div class="online-empty online-empty-compact">
+						<strong>Nenhum personagem encontrado.</strong>
+					</div>
+				{% endfor %}
+			</div>
+		</section>
+	</div>
+
 	<div class="online-grid">
 		<section class="online-card online-world-card">
 			<div class="online-card-title">Informações do Mundo</div>
