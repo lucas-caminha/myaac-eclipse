@@ -1,12 +1,129 @@
-<div class="eclipse-plugin-page eclipse-character-market">
-	<header class="eclipse-plugin-hero"><span class="eclipse-plugin-kicker">Negociação entre jogadores</span><h2>Mercado de Personagens</h2><p>Negocie personagens com coins de forma automática. Confira nome, nível, vocação e preço antes de confirmar.</p></header>
+<div class="eclipse-plugin-page eclipse-character-market eclipse-character-auctions">
 	{% if logged %}
-	<section class="eclipse-plugin-section"><h3>Anunciar personagem</h3><form class="eclipse-market-sell-form" action="{{ getLink('character-sale') }}" method="post">{{ csrf() }}<input type="hidden" name="market_action" value="sell"><label>Personagem<select name="player_id" required><option value="">Selecione</option>{% for player in accountPlayers %}<option value="{{ player.id }}">{{ player.name }} — nível {{ player.level }}, {{ player.vocation_name }}</option>{% endfor %}</select></label><label>Preço em coins<input type="number" name="price" min="25" max="100000" step="1" required></label><button class="eclipse-plugin-button" type="submit"{% if accountPlayers is empty %} disabled{% endif %}>Criar anúncio</button></form>{% if accountPlayers is empty %}<p class="eclipse-plugin-note">Seus personagens offline e ainda não anunciados aparecerão aqui.</p>{% endif %}</section>
-	{% else %}<div class="eclipse-plugin-notice">Você pode consultar as ofertas, mas precisa <a href="{{ getLink('account/manage') }}">entrar na conta</a> para comprar ou anunciar.</div>{% endif %}
-	<div class="eclipse-market-grid">
-	{% for offer in offers %}
-		<article class="eclipse-market-card"><a class="eclipse-market-outfit" href="{{ offer.detail_link }}"><img src="{{ offer.outfit }}" alt="{{ offer.name }}"></a><div class="eclipse-market-card-body"><span class="eclipse-market-vocation">{{ offer.vocation_name }}</span><h3><a href="{{ offer.detail_link }}">{{ offer.name }}</a></h3><p>Nível {{ offer.level }} • {{ offer.status_name }}</p><strong class="eclipse-market-price">{{ offer.price|number_format(0, ',', '.') }} coins</strong><a class="eclipse-market-details-link" href="{{ offer.detail_link }}">Ver detalhes</a></div>
-		{% if logged %}<form action="{{ getLink('character-sale') }}" method="post">{{ csrf() }}<input type="hidden" name="offer_id" value="{{ offer.id }}">{% if offer.seller_account_id == accountId %}<input type="hidden" name="market_action" value="cancel"><button class="eclipse-plugin-button eclipse-plugin-button-danger" type="submit">Cancelar oferta</button>{% else %}<input type="hidden" name="market_action" value="buy"><button class="eclipse-plugin-button" type="submit" onclick="return confirm('Confirmar a compra de {{ offer.name|e('js') }}?')">Comprar personagem</button>{% endif %}</form>{% endif %}</article>
-	{% else %}<div class="eclipse-plugin-empty">Ainda não há personagens anunciados.</div>{% endfor %}
+	<section class="eclipse-plugin-section eclipse-auction-sell-section">
+		<h3>Anunciar personagem</h3>
+		<form class="eclipse-market-sell-form" action="{{ getLink('character-sale') }}" method="post">
+			{{ csrf() }}
+			<input type="hidden" name="market_action" value="sell">
+			<label>Personagem
+				<select name="player_id" required>
+					<option value="">Selecione</option>
+					{% for player in accountPlayers %}
+						<option value="{{ player.id }}">{{ player.name }} - n&iacute;vel {{ player.level }}, {{ player.vocation_name }}</option>
+					{% endfor %}
+				</select>
+			</label>
+			<label>Pre&ccedil;o em coins
+				<input type="number" name="price" min="25" max="100000" step="1" required>
+			</label>
+			<button class="eclipse-plugin-button" type="submit"{% if accountPlayers is empty %} disabled{% endif %}>Criar an&uacute;ncio</button>
+		</form>
+		{% if accountPlayers is empty %}
+			<p class="eclipse-plugin-note">Seus personagens offline e ainda n&atilde;o anunciados aparecer&atilde;o aqui.</p>
+		{% endif %}
+	</section>
+	{% else %}
+	<div class="eclipse-plugin-notice eclipse-auction-login-notice">
+		<strong>Entre na sua conta para comprar ou vender personagens.</strong>
+		<span>Voc&ecirc; ainda pode consultar todas as ofertas p&uacute;blicas.</span>
+		<a class="eclipse-plugin-button" href="{{ getLink('account/manage') }}">Entrar</a>
 	</div>
+	{% endif %}
+
+	<section class="eclipse-auction-filter" data-auction-filter>
+		<div class="eclipse-auction-filter-title">Filtrar ofertas</div>
+		<div class="eclipse-auction-filter-grid">
+			<label>Busca
+				<input type="search" class="eclipse-plugin-search" data-auction-search placeholder="Nome do personagem">
+			</label>
+			<label>Voca&ccedil;&atilde;o
+				<select data-auction-vocation>
+					<option value="">Todas</option>
+					{% for vocationId, vocationName in vocationFilterOptions %}
+						<option value="{{ vocationId }}">{{ vocationName }}</option>
+					{% endfor %}
+				</select>
+			</label>
+			<label>Level m&iacute;n.
+				<input type="number" min="1" step="1" data-auction-min-level placeholder="Ex: 250">
+			</label>
+			<label>Charm m&iacute;n.
+				<input type="number" min="0" step="1" data-auction-min-charm placeholder="Ex: 500">
+			</label>
+			<label>Pre&ccedil;o m&aacute;x.
+				<input type="number" min="0" step="1" data-auction-max-price placeholder="Coins">
+			</label>
+			<label>Ordenar por
+				<select data-auction-sort>
+					<option value="recent">Mais recentes</option>
+					<option value="main">Skill principal</option>
+					<option value="charm">Charm Points</option>
+					<option value="price">Menor pre&ccedil;o</option>
+					<option value="level">Maior n&iacute;vel</option>
+					<option value="magic">Magic Level</option>
+					<option value="distance">Distance</option>
+					<option value="shield">Shielding</option>
+				</select>
+			</label>
+			<button class="eclipse-plugin-button eclipse-plugin-button-secondary" type="button" data-auction-apply>Aplicar</button>
+		</div>
+	</section>
+
+	<section class="eclipse-auction-list">
+		<div class="eclipse-auction-list-title">
+			<strong>Ofertas atuais</strong>
+			<span>{{ offers|length }} resultado{{ offers|length == 1 ? '' : 's' }}</span>
+		</div>
+
+		{% for offer in offers %}
+			<article class="eclipse-market-card eclipse-auction-card" data-auction-card data-name="{{ offer.name|lower|e('html_attr') }}" data-vocation="{{ offer.vocation }}" data-price="{{ offer.price }}" data-level="{{ offer.level }}" data-posted="{{ offer.posted_sort }}" data-charm="{{ offer.charm_points }}" data-main="{{ offer.main_skill.value }}" data-magic="{{ offer.maglevel }}" data-distance="{{ offer.skill_dist }}" data-shield="{{ offer.skill_shielding }}">
+				<div class="eclipse-auction-card-heading">
+					<div>
+						<a class="eclipse-auction-name" href="{{ offer.detail_link }}">{{ offer.name }}</a>
+						<span>Level {{ offer.level }} | Voca&ccedil;&atilde;o: {{ offer.vocation_name }} | {{ offer.status_name }}</span>
+					</div>
+					<a class="eclipse-market-details-link" href="{{ offer.detail_link }}">Ver detalhes</a>
+				</div>
+
+				<a class="eclipse-market-outfit eclipse-auction-outfit" href="{{ offer.detail_link }}">
+					<img src="{{ offer.outfit }}" alt="{{ offer.name }}">
+				</a>
+
+				<div class="eclipse-auction-summary">
+					<div class="eclipse-auction-data">
+						<div><span>Skill principal</span><strong>{{ offer.main_skill.label }} {{ offer.main_skill.value }}</strong></div>
+						<div><span>Level</span><strong>{{ offer.level }}</strong></div>
+						<div><span>Charm Points</span><strong>{{ offer.charm_points|number_format(0, ',', '.') }}</strong></div>
+					</div>
+					<div class="eclipse-auction-skills">
+						{% for skill in offer.skill_preview %}
+							<div><span>{{ skill.label }}</span><strong>{{ skill.value }}</strong></div>
+						{% endfor %}
+					</div>
+				</div>
+
+				<aside class="eclipse-auction-bidbox">
+					<span>Pre&ccedil;o atual</span>
+					<strong class="eclipse-market-price">{{ offer.price|number_format(0, ',', '.') }} coins</strong>
+					{% if logged %}
+						<form action="{{ getLink('character-sale') }}" method="post">
+							{{ csrf() }}
+							<input type="hidden" name="offer_id" value="{{ offer.id }}">
+							{% if offer.seller_account_id == accountId %}
+								<input type="hidden" name="market_action" value="cancel">
+								<button class="eclipse-plugin-button eclipse-plugin-button-danger" type="submit">Cancelar oferta</button>
+							{% else %}
+								<input type="hidden" name="market_action" value="buy">
+								<button class="eclipse-plugin-button" type="submit" onclick="return confirm('Confirmar a compra de {{ offer.name|e('js') }}?')">Comprar personagem</button>
+							{% endif %}
+						</form>
+					{% else %}
+						<a class="eclipse-plugin-button" href="{{ getLink('account/manage') }}">Entrar para comprar</a>
+					{% endif %}
+				</aside>
+			</article>
+		{% else %}
+			<div class="eclipse-plugin-empty">Ainda n&atilde;o h&aacute; personagens anunciados.</div>
+		{% endfor %}
+	</section>
 </div>

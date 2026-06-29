@@ -104,21 +104,37 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 	global $template_path;
 
 	$accountTypeLabel = $accountType === 'nome' ? 'Nome da conta' : ucfirst($accountType) . ' da conta';
-	$accountTypeText = eclipseCreateAccountEscape($accountType);
+	$accountTypeText = $accountType === 'nome' ? 'nome da conta' : eclipseCreateAccountEscape($accountType);
 	$accountValueText = eclipseCreateAccountEscape($accountValue);
 	$characterNameText = eclipseCreateAccountEscape($characterName ?: 'Personagem inicial');
 	$serverName = eclipseCreateAccountEscape(configLua('serverName'));
 	$characterCard = '';
 	$serverHeroUrl = eclipseCreateAccountEscape($template_path . '/images/header/bgs/arise-red-fortress.png');
 	$heroImage = '<img class="eclipse-create-success-art eclipse-create-success-server-art" src="' . $serverHeroUrl . '" alt="">';
-	$vocationImage = '';
 	$intro = $characterEnabled
 		? 'Sua conta e seu personagem foram criados. Agora é só entrar no jogo e escolher o outfit inicial.'
 		: 'Sua conta foi criada. Entre no painel para criar seu primeiro personagem quando quiser.';
 
+	$intro = $characterEnabled
+		? 'Sua conta e seu personagem foram criados. Agora &eacute; s&oacute; entrar no jogo e escolher o outfit inicial.'
+		: 'Sua conta foi criada. Entre no painel para criar seu primeiro personagem quando quiser.';
+
 	if ($characterEnabled) {
 		$guide = eclipseCreateAccountVocationGuide($characterVocation);
+		$guideHtml = [
+			'knightbanner.png' => ['Cavaleiro', 'Defensor de linha de frente', 'Feito para combate corpo a corpo, armaduras pesadas e press&atilde;o constante no centro da batalha.'],
+			'paladinbanner.png' => ['Paladino', 'H&iacute;brido de dist&acirc;ncia', 'Um atirador flex&iacute;vel que mistura dano &agrave; dist&acirc;ncia, sobreviv&ecirc;ncia e magia &uacute;til.'],
+			'monkbanner.png' => ['Monge', 'Esp&iacute;rito marcial', 'Um lutador disciplinado que combina for&ccedil;a f&iacute;sica com t&eacute;cnicas espirituais.'],
+			'sorcererbanner.png' => ['Feiticeiro', 'Dano elemental', 'Focado em magias destrutivas, dano explosivo e poder ofensivo.'],
+			'druidbanner.png' => ['Druida', 'Suporte e cura', 'Um conjurador ligado &agrave; natureza, com cura, suporte e utilidade confi&aacute;vel para o grupo.'],
+		];
+		if (isset($guideHtml[$guide['image']])) {
+			$guide['name'] = $guideHtml[$guide['image']][0];
+			$guide['role'] = $guideHtml[$guide['image']][1];
+			$guide['description'] = $guideHtml[$guide['image']][2];
+		}
 		$bannerStyle = '';
+		$vocationImage = '';
 		if (!empty($guide['image'])) {
 			$vocationBannerUrl = eclipseCreateAccountEscape($template_path . '/images/vocations/' . $guide['image']);
 			$vocationImageStyle = '--eclipse-create-vocation-image: url(' . $vocationBannerUrl . ');';
@@ -128,15 +144,17 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 
 		$characterCard = '
 			<section class="eclipse-create-success-card eclipse-create-success-character">
+				<h3 class="eclipse-create-success-card-title">Personagem criado</h3>
 				<div class="eclipse-create-success-banner"' . $bannerStyle . '>
 					' . $vocationImage . '
 					<div>
-						<span>Personagem inicial</span>
+						<span>Voca&ccedil;&atilde;o escolhida</span>
 						<strong>' . $characterNameText . '</strong>
-						<small>' . eclipseCreateAccountEscape($guide['name']) . ' - ' . eclipseCreateAccountEscape($guide['role']) . '</small>
+						<small>' . $guide['name'] . ' - ' . $guide['role'] . '</small>
 					</div>
 				</div>
-				<p>' . eclipseCreateAccountEscape($guide['description']) . '</p>
+				<p>O personagem <strong>' . $characterNameText . '</strong> foi criado. Escolha o outfit ao entrar no jogo pela primeira vez.</p>
+				<p class="eclipse-create-success-vocation-desc">' . $guide['description'] . '</p>
 			</section>';
 	}
 
@@ -159,6 +177,30 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 			<div class="eclipse-create-success-next">
 				<strong>Próximo passo</strong>
 				<span>Abra o client, entre com sua conta e comece sua jornada em Eclipse OT.</span>
+			</div>
+		</div>';
+
+	$description = '
+		<div class="eclipse-create-success">
+			<section class="eclipse-create-success-hero">
+				' . $heroImage . '
+				<span>Banner do servidor</span>
+				<h2>Bem-vindo ao ' . $serverName . '</h2>
+				<p>' . $intro . '</p>
+			</section>
+			<div class="eclipse-create-success-grid">
+				<section class="eclipse-create-success-card eclipse-create-success-account">
+					<h3 class="eclipse-create-success-card-title">Conta criada</h3>
+					<span>' . eclipseCreateAccountEscape($accountTypeLabel) . '</span>
+					<strong>' . $accountValueText . '</strong>
+					<p>Voc&ecirc; precisar&aacute; do ' . $accountTypeText . ' e da sua senha para jogar no Eclipse OT.</p>
+					<p>Guarde esses dados em um lugar seguro e nunca compartilhe com outras pessoas.</p>
+				</section>
+				' . $characterCard . '
+			</div>
+			<div class="eclipse-create-success-next">
+				<strong>Nos vemos no Eclipse OT!</strong>
+				<span>Abra o client, entre com sua conta e comece sua jornada.</span>
 			</div>
 		</div>';
 

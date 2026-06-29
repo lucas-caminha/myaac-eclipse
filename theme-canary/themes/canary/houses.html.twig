@@ -9,11 +9,6 @@
 			{% endfor %}
 		</div>
 	{% else %}
-		<div class="directory-note">
-			<strong>Casas e Guildhalls</strong>
-			<span>Consulte casas disponiveis, alugadas e guildhalls do Eclipse OT.</span>
-		</div>
-
 		{% if cleanOldHouse is not empty or rentType != 'never' %}
 			<div class="directory-hint">
 				A limpeza automatica acontece durante o server save. Casas de donos inativos por {{ cleanOldHouse }} dias{% if rentType != 'never' %} ou com aluguel {{ rentType }} em atraso{% endif %} podem ser liberadas.
@@ -36,10 +31,10 @@
 
 						{% for house in houses %}
 							<tr>
-								<td><strong>{{ house.name }}</strong></td>
-								<td>{{ house.size }} sqm</td>
-								<td>{{ house.rent }} gold</td>
-								<td>{{ house.rentedBy|raw }}</td>
+								<td><strong class="directory-primary-name">{{ house.name }}</strong></td>
+								<td><span class="directory-pill">{{ house.size }} sqm</span></td>
+								<td><span class="directory-pill">{{ house.rent }} gold</span></td>
+								<td><span class="directory-status-text">{{ house.rentedBy|raw }}</span></td>
 								<td class="directory-action">
 									<a href="{{ house.link }}">{{ include('buttons.view.html.twig') }}</a>
 								</td>

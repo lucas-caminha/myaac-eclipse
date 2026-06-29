@@ -11,10 +11,13 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=109" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=120" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
+	<?php if (PAGE === 'character-sale') { ?>
+		<script type="text/javascript" src="<?= $template_path; ?>/js/character-sale.js?v=1"></script>
+	<?php } ?>
 	<script id="twitter-wjs" src="<?= $template_path; ?>/js/twitter.js"></script>
 	<script id="facebook-jssdk" async src="https://connect.facebook.net/en_US/all.js"></script>
 
@@ -571,7 +574,7 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 
 					<div id="ContentHelper">
 						<?= tickers(); ?>
-						<div id="News" class="Box">
+						<div id="News" class="Box<?= PAGE === 'news' ? ' eclipse-news-page-box' : ''; ?>">
 							<div class="Corner-tl"
 								 style="background-image:url(<?= $template_path; ?>/images/content/corner-tl.gif);"></div>
 							<div class="Corner-tr"
@@ -580,12 +583,6 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 								 style="background-image:url(<?= $template_path; ?>/images/content/border-1.gif);"></div>
 							<div class="BorderTitleText"
 								 style="background-image:url(<?= $template_path; ?>/images/content/title-background-green.gif);"></div>
-							<?php
-							$headline = $template_path . '/images/header/headline-' . PAGE . '.gif';
-							if (!file_exists($headline))
-								$headline = $template_path . '/headline.php?t=' . ucfirst($title);
-							?>
-							<img class="Title" src="<?= $headline; ?>" alt="Contentbox headline"/>
 							<div class="Border_2">
 								<div class="Border_3">
 									<?php $hooks->trigger(HOOK_TIBIACOM_BORDER_3); ?>
@@ -2529,6 +2526,15 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		  margin-top: 16px !important;
 		}
 
+		html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-success-actions .eclipse-btn,
+		html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-success-actions .eclipse-btn:link,
+		html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-success-actions .eclipse-btn:visited,
+		html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-success-actions .eclipse-btn:hover {
+		  color: #fff8dc !important;
+		  -webkit-text-fill-color: #fff8dc !important;
+		  text-shadow: 0 1px 1px #000 !important;
+		}
+
 		/* Final account management typography. */
 		#ContentColumn .Content .eclipse-account-manage-page,
 		#ContentColumn .Content .eclipse-account-manage-page *:not(.CaptionContainer):not(.CaptionContainer *):not(.CaptionInnerContainer):not(.CaptionInnerContainer *):not(.BorderTitleText):not(.BorderTitleText *):not(.Title):not(.Title *):not(.BigButton):not(.BigButton *):not(.BigButtonText):not(.MediumButtonText):not(button):not(button *):not(input[type="submit"]):not(input[type="button"]) {
@@ -2758,7 +2764,7 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 
 		/* Downloads page: keep the beige panels readable despite generic dark-content rules. */
 		#ContentColumn .Content .eclipse-download-page,
-		#ContentColumn .Content .eclipse-download-page *:not(.download-button):not(.download-button *):not(.download-step) {
+		#ContentColumn .Content .eclipse-download-page *:not(.download-button):not(.download-button *):not(.download-step):not(.download-eyebrow):not(.download-eyebrow *) {
 		  color: #1f0804 !important;
 		  -webkit-text-fill-color: #1f0804 !important;
 		  font-weight: 800 !important;
@@ -4153,6 +4159,64 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		  #ContentColumn #News .BoxContent .online-boosted-list {
 		    grid-template-columns: 1fr;
 		  }
+		}
+
+		html body #ContentColumn #News .BoxContent .eclipse-characters-search .BigButton,
+		html body #ContentColumn #News .BoxContent .eclipse-characters-search .BigButton > div {
+		  display: inline-flex !important;
+		  align-items: center !important;
+		  justify-content: center !important;
+		  width: 86px !important;
+		  min-width: 86px !important;
+		  max-width: 86px !important;
+		  height: 27px !important;
+		}
+
+		html body #ContentColumn #News .BoxContent .eclipse-characters-search .BigButtonText,
+		html body #ContentColumn #News .BoxContent .eclipse-characters-search input.BigButtonText {
+		  height: 27px !important;
+		  width: 86px !important;
+		  min-width: 86px !important;
+		  max-width: 86px !important;
+		  padding: 0 10px !important;
+		  font-size: 10px !important;
+		  line-height: 27px !important;
+		}
+
+		html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-card-title {
+		  margin: 0 !important;
+		  padding: 10px 14px !important;
+		  background: linear-gradient(180deg, #5d1007 0%, #250402 100%) !important;
+		  color: #fff8dc !important;
+		  -webkit-text-fill-color: #fff8dc !important;
+		  font: 900 15px Georgia, "Times New Roman", serif !important;
+		  text-shadow: 0 1px 1px #000 !important;
+		}
+
+		html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-account {
+		  justify-content: flex-start !important;
+		  padding: 0 20px 18px !important;
+		}
+
+		html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-account > span {
+		  margin-top: 16px !important;
+		}
+
+		html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-character > p {
+		  padding: 11px 16px 0 !important;
+		}
+
+		html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-success-page .eclipse-create-success-character > p:last-child {
+		  padding-bottom: 16px !important;
+		}
+
+		html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-create-account-page form#createaccount .eclipse-rules-links a,
+		html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-create-account-page form#createaccount .eclipse-rules-links a:link,
+		html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-create-account-page form#createaccount .eclipse-rules-links a:visited,
+		html body #Bodycontainer #ContentColumn #News .BoxContent .eclipse-create-account-page form#createaccount .eclipse-rules-links a:hover {
+		  color: #fff8dc !important;
+		  -webkit-text-fill-color: #fff8dc !important;
+		  text-shadow: 0 1px 1px #2b0804 !important;
 		}
 		</style>
 <style>

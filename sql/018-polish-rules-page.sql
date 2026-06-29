@@ -1,12 +1,12 @@
-<?php
-/**
- * Custom server rules page for Eclipse OT.
- */
-defined('MYAAC') or die('Direct access not allowed!');
-$title = 'Regras do Servidor';
-?>
+-- Polish the public server rules page registered in MyAAC.
+-- Mirrors the theme page at theme-canary/themes/canary/pages/rules.php.
 
-<style>
+UPDATE `myaac_pages`
+SET
+  `title` = 'Regras do Servidor',
+  `php` = 0,
+  `hide` = 0,
+  `body` = '<style>
 	.eclipse-rules-page,
 	.eclipse-rules-page * {
 		box-sizing: border-box;
@@ -334,4 +334,5 @@ $title = 'Regras do Servidor';
 			</p>
 		</div>
 	</div>
-</div>
+</div>'
+WHERE `name` = 'rules';

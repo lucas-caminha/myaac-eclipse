@@ -20,6 +20,21 @@ $clientUrl = '/downloads/eclipse-client-15.11.c9d1cf.zip';
 		box-sizing: border-box;
 	}
 
+	.eclipse-download-page .download-eyebrow {
+		display: inline-block;
+		margin-bottom: 10px;
+		padding: 5px 9px;
+		border: 1px solid rgba(91, 22, 9, .35);
+		border-radius: 4px;
+		background: linear-gradient(180deg, #6d1a0e 0%, #2b0604 100%);
+		color: #fff8dc !important;
+		-webkit-text-fill-color: #fff8dc !important;
+		font: 900 11px Verdana, Arial, sans-serif;
+		letter-spacing: .08em;
+		text-transform: uppercase;
+		text-shadow: 0 1px 1px #000 !important;
+	}
+
 	#News:has(.eclipse-download-page) > img.Title[src*="headline-downloads"] {
 		display: none !important;
 	}
@@ -163,7 +178,6 @@ $clientUrl = '/downloads/eclipse-client-15.11.c9d1cf.zip';
 		<div class="download-hero">
 			<div class="download-hero-copy">
 				<span class="download-eyebrow">Launcher oficial</span>
-				<h2 class="download-title">Baixar Cliente</h2>
 				<p class="download-lead">
 					Use o cliente oficial Tibia <?php echo htmlspecialchars($clientVersion); ?> para jogar no Eclipse OT.
 					Baixe o launcher para instalar e atualizar o cliente automaticamente.

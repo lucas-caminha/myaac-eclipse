@@ -2,11 +2,6 @@
 {% set content %}
 
 <div class="eclipse-directory-page eclipse-guilds-page">
-	<div class="directory-note">
-		<strong>Guildas Ativas</strong>
-		<span>Veja as comunidades organizadas no Eclipse OT.</span>
-	</div>
-
 	<div class="directory-card">
 		<div class="directory-card-title">Lista de Guildas</div>
 		<table class="directory-table guilds-table">
@@ -14,7 +9,7 @@
 			{% if guilds|length > 0 %}
 				<tr class="LabelH">
 					<td class="guild-logo-cell">Logo</td>
-					<td>Descricao</td>
+					<td>Descri&ccedil;&atilde;o</td>
 					<td></td>
 				</tr>
 
@@ -31,7 +26,7 @@
 							{% if guild.description is not empty %}
 								<p>{{ guild.description }}</p>
 							{% else %}
-								<p>Esta guilda ainda não possui descrição pública.</p>
+								<p>Esta guilda ainda n&atilde;o possui descri&ccedil;&atilde;o p&uacute;blica.</p>
 							{% endif %}
 						</td>
 						<td class="directory-action">
@@ -46,7 +41,7 @@
 				<tr>
 					<td class="directory-empty">
 						Nenhuma guilda ativa encontrada.
-						{% if logged %}Voce pode criar a primeira guilda do servidor.{% endif %}
+						{% if logged %}Voc&ecirc; pode criar a primeira guilda do servidor.{% endif %}
 					</td>
 				</tr>
 			{% endif %}
@@ -56,10 +51,10 @@
 
 	<div class="directory-note guilds-action-note">
 		{% if logged %}
-			<span>Nao encontrou uma guilda para chamar de sua?</span>
+			<span>N&atilde;o encontrou uma guilda para chamar de sua?</span>
 			<form action="{{ getLink('guilds') }}?action=create" method="post">
 				{{ csrf() }}
-				{% set button_name = 'Found Guild' %}
+				{% set button_name = 'Criar Guilda' %}
 				{% set button_image = '_sbutton_foundguild' %}
 				{% include('buttons.base.html.twig') %}
 			</form>

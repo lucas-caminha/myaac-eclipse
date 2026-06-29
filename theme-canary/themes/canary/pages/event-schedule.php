@@ -101,11 +101,13 @@
 	margin-right: 5px;
   }
 
+  .eventschedule-weekdays,
   .eventschedule-weekdays td {
-	color: #fff !important;
+	color: #000 !important;
+	-webkit-text-fill-color: #000 !important;
 	background: #0d2535 !important;
 	border-color: rgba(255,214,145,.34) !important;
-	text-shadow: 0 1px 1px #000 !important;
+	text-shadow: none !important;
   }
 
   td#default {
@@ -160,6 +162,7 @@
   .eclipse-event-schedule-note {
 	margin: 10px 14px 0;
 	color: #000 !important;
+	-webkit-text-fill-color: #000 !important;
 	font-weight: 800;
 	text-shadow: none !important;
   }
@@ -226,9 +229,9 @@ function showCalendar($month, $year): string
 	$amountDays = date('t', mktime(0, 0, 0, $month, 1, $year));
 	$currentDay = 0;
 
-	$firstDayOfWeek = jddayofweek(cal_to_jd(CAL_GREGORIAN, $month, "01", $year), 0) - 1;
+	$firstDayOfWeek = (int) date('w', mktime(0, 0, 0, $month, 1, $year)) - 1;
 
-	$outDays = "<tr class='eventschedule-weekdays' style='text-align:center; width:120px; background-color:#0d2535; color:#fff !important;'>" . showWeeks() . "</tr>";
+	$outDays = "<tr class='eventschedule-weekdays' style='text-align:center; width:120px; background-color:#0d2535; color:#000 !important; -webkit-text-fill-color:#000 !important; text-shadow:none !important;'>" . showWeeks() . "</tr>";
 
 	$events_xml = config('data_path') . 'XML/events.xml';
 

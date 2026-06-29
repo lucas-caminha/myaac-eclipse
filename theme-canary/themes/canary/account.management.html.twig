@@ -134,9 +134,60 @@
 												<div class="eclipse-manage-benefits-head">
 													<div>
 														<strong>VIP & Loyalty</strong>
+														<span class="eclipse-vip-benefits-subtitle-fixed">Benef&iacute;cios VIP aplicados automaticamente no Eclipse OT.</span>
 														<span>Benefícios ativos na configuração atual do servidor.</span>
 													</div>
 													<a href="{{ getLink('vip-loyalty') }}">Detalhes</a>
+												</div>
+												<div class="eclipse-vip-benefits-showcase">
+													<div class="eclipse-manage-benefit-card">
+														<img src="{{ template_path }}/images/premiumfeatures/PremiumIcon-Stamina.png" alt="">
+														<div>
+															<span>Experi&ecirc;ncia</span>
+															<strong>{{ vip_benefits[0].value|default('0%') }}</strong>
+															<small>B&ocirc;nus de progresso ativo para contas premium.</small>
+														</div>
+													</div>
+													<div class="eclipse-manage-benefit-card">
+														<img src="{{ template_path }}/images/premiumfeatures/PremiumIcon-TrackLoot.png" alt="">
+														<div>
+															<span>Loot</span>
+															<strong>{{ vip_benefits[1].value|default('0%') }}</strong>
+															<small>Mais retorno durante hunts e bosses.</small>
+														</div>
+													</div>
+													<div class="eclipse-manage-benefit-card">
+														<img src="{{ template_path }}/images/premiumfeatures/PremiumIcon-Trainingstatues.png" alt="">
+														<div>
+															<span>Skills</span>
+															<strong>{{ vip_benefits[2].value|default('0%') }}</strong>
+															<small>Avan&ccedil;o acelerado em skills e treino.</small>
+														</div>
+													</div>
+													<div class="eclipse-manage-benefit-card">
+														<img src="{{ template_path }}/images/premiumfeatures/PremiumIcon-QuickLoot.png" alt="">
+														<div>
+															<span>Auto Loot VIP</span>
+															<strong>{{ account_logged.isPremium() ? 'Ativo' : 'Desativado' }}</strong>
+															<small>Facilidades para jogar com menos fric&ccedil;&atilde;o.</small>
+														</div>
+													</div>
+													<div class="eclipse-manage-benefit-card">
+														<img src="{{ template_path }}/images/premiumfeatures/PremiumIcon-Login.png" alt="">
+														<div>
+															<span>Idle protegido</span>
+															<strong>{{ account_logged.isPremium() ? 'Ativo' : 'Desativado' }}</strong>
+															<small>Benef&iacute;cio conforme a regra atual do servidor.</small>
+														</div>
+													</div>
+													<div class="eclipse-manage-benefit-card">
+														<img src="{{ template_path }}/images/premiumfeatures/PremiumIcon-House.png" alt="">
+														<div>
+															<span>Manter house</span>
+															<strong>{{ account_logged.isPremium() ? 'Ativo' : 'Desativado' }}</strong>
+															<small>Prote&ccedil;&atilde;o extra para propriedades premium.</small>
+														</div>
+													</div>
 												</div>
 												<div class="eclipse-manage-benefits-grid">
 													{% for benefit in vip_benefits %}
@@ -260,6 +311,22 @@
 <br>
 
 {% if recovery_key is empty %}
+	<div class="eclipse-register-callout">
+		<div class="eclipse-register-callout-icon">
+			<img src="{{ template_path }}/images/content/info.gif" alt="">
+		</div>
+		<div class="eclipse-register-callout-copy">
+			<strong>Sua conta ainda n&atilde;o est&aacute; registrada.</strong>
+			<span>Registre sua conta para aumentar a prote&ccedil;&atilde;o e receber sua Recovery Key gratuita hoje.</span>
+		</div>
+		<form action="{{ getLink('account/register') }}" method="post">
+			{{ csrf() }}
+			<div class="eclipse-register-callout-action">
+				{{ include('buttons.register_account.html.twig') }}
+			</div>
+		</form>
+	</div>
+	<br/>
 	<div class="SmallBox">
 		<div class="MessageContainer">
 			<div class="BoxFrameHorizontal"
@@ -751,6 +818,8 @@
 													<div class="eclipse-public-info-panel">
 														<div class="eclipse-public-info-intro">
 															<div>
+																<strong class="eclipse-public-info-title-fixed">Informa&ccedil;&otilde;es da conta</strong>
+																<span class="eclipse-public-info-subtitle-fixed">Resumo p&uacute;blico e operacional do seu cadastro.</span>
 																<strong>Informações da conta</strong>
 																<span>Resumo público e operacional do seu cadastro.</span>
 															</div>

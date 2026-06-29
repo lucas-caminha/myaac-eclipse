@@ -6,7 +6,6 @@ $title = 'Privacidade e LGPD';
 <div class="eclipse-privacy-page">
 	<section class="privacy-hero">
 		<span>LGPD</span>
-		<h2>Privacidade e Proteção de Dados</h2>
 		<p>Esta página resume como o Eclipse OT trata dados pessoais usados para conta, segurança, jogo, doações e suporte.</p>
 	</section>
 

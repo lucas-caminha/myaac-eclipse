@@ -3,15 +3,13 @@
 {% set i = 0 %}
 
 <div class="eclipse-directory-page eclipse-team-page">
-	<div class="directory-note">
-		<strong>Equipe do Servidor</strong>
-		<span>Jogadores responsaveis pelo suporte e administracao do Eclipse OT.</span>
-	</div>
-
 	{% for group in groupmember|reverse %}
 		{% if group.members is not empty %}
 			<div class="directory-card team-group-card">
-				<div class="directory-card-title">{{ group.group_name|capitalize }}</div>
+				<div class="directory-card-title team-group-title">
+					<span>{{ group.group_name|capitalize }}</span>
+					<small>{{ group.members|length }} membro{{ group.members|length == 1 ? '' : 's' }}</small>
+				</div>
 				<table class="directory-table team-table">
 					<tbody>
 					<tr class="LabelH">
@@ -24,9 +22,6 @@
 						{% endif %}
 						{% if (setting('core.multiworld') or setting('core.team_world')) %}
 							<td>Mundo</td>
-						{% endif %}
-						{% if setting('core.team_lastlogin') %}
-							<td>Ultimo login</td>
 						{% endif %}
 					</tr>
 
@@ -55,9 +50,6 @@
 							{% endif %}
 							{% if (setting('core.multiworld') or setting('core.team_world')) %}
 								<td><strong>{{ member.world_name }}</strong></td>
-							{% endif %}
-							{% if setting('core.team_lastlogin') %}
-								<td>{{ member.last_login }}</td>
 							{% endif %}
 						</tr>
 					{% endfor %}

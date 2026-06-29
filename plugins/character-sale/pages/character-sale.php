@@ -65,6 +65,56 @@ function eclipseMarketAddStat(array &$stats, string $label, $value, bool $show =
 	}
 }
 
+function eclipseMarketMeleeSkill(array $offer): array
+{
+	$skills = [
+		'Club' => (int)$offer['skill_club'],
+		'Sword' => (int)$offer['skill_sword'],
+		'Axe' => (int)$offer['skill_axe'],
+	];
+	arsort($skills);
+	$label = (string)array_key_first($skills);
+
+	return ['label' => $label, 'value' => (int)$skills[$label]];
+}
+
+function eclipseMarketMainSkill(array $offer): array
+{
+	$vocation = (int)$offer['vocation'];
+	if (in_array($vocation, [1, 2, 5, 6], true)) {
+		return ['label' => 'Magic Level', 'value' => (int)$offer['maglevel']];
+	}
+
+	if (in_array($vocation, [3, 7], true)) {
+		return ['label' => 'Distance', 'value' => (int)$offer['skill_dist']];
+	}
+
+	if (in_array($vocation, [9, 10], true)) {
+		return ['label' => 'Fist', 'value' => (int)$offer['skill_fist']];
+	}
+
+	return eclipseMarketMeleeSkill($offer);
+}
+
+function eclipseMarketOfferHighlights(array $offer): array
+{
+	$mainSkill = eclipseMarketMainSkill($offer);
+	$highlights = [
+		$mainSkill,
+		['label' => 'Charm Points', 'value' => (int)($offer['charm_points'] ?? 0)],
+		['label' => 'Boss Points', 'value' => (int)($offer['boss_points'] ?? 0)],
+	];
+
+	$vocation = (int)$offer['vocation'];
+	if (in_array($vocation, [1, 2, 5, 6, 9, 10], true)) {
+		$highlights[] = ['label' => 'Mana Leech', 'value' => eclipseMarketPercentValue($offer['skill_mana_leech_amount'])];
+	} elseif (in_array($vocation, [3, 4, 7, 8], true)) {
+		$highlights[] = ['label' => 'Shielding', 'value' => (int)$offer['skill_shielding']];
+	}
+
+	return array_slice($highlights, 0, 4);
+}
+
 function eclipseMarketAchievementPoints($db, int $playerId): int
 {
 	if (!$db->hasTable('player_storage') || !defined('PLUGINS')) {
@@ -141,6 +191,10 @@ if (isRequestMethod('post')) {
 	}
 }
 
+$hasCharmTable = $db->hasTableAndColumns('player_charms', ['player_id', 'charm_points']);
+$charmSelect = $hasCharmTable ? 'COALESCE(pc.charm_points, 0) AS charm_points,' : '0 AS charm_points,';
+$charmJoin = $hasCharmTable ? 'LEFT JOIN player_charms pc ON pc.player_id = p.id' : '';
+
 $offerSql = 'SELECT o.id, o.price, o.seller_account_id, o.created_at,
 	p.id AS player_id, p.name, p.level, p.vocation, p.health, p.healthmax, p.mana, p.manamax,
 	p.maglevel, p.soul, p.cap, p.sex, p.town_id, p.lastlogin, p.lastlogout, p.onlinetime,
@@ -152,9 +206,11 @@ $offerSql = 'SELECT o.id, o.price, o.seller_account_id, o.created_at,
 	p.skill_life_leech_amount, p.skill_mana_leech_chance, p.skill_mana_leech_amount,
 	p.skill_fist, p.skill_club, p.skill_sword, p.skill_axe, p.skill_dist, p.skill_shielding, p.skill_fishing,
 	p.looktype, p.lookaddons, p.lookhead, p.lookbody, p.looklegs, p.lookfeet,
+	' . $charmSelect . '
 	t.name AS town_name, g.name AS guild_name, gr.name AS guild_rank, po.player_id AS online_id
 	FROM myaac_character_offers o
 	INNER JOIN players p ON p.id = o.player_id
+	' . $charmJoin . '
 	LEFT JOIN towns t ON t.id = p.town_id
 	LEFT JOIN guild_membership gm ON gm.player_id = p.id
 	LEFT JOIN guilds g ON g.id = gm.guild_id
@@ -183,6 +239,8 @@ if ($offerIdParam > 0) {
 	$offer['stamina_readable'] = eclipseMarketStamina((int)$offer['stamina']);
 	$offer['posted_readable'] = date('d/m/Y H:i', strtotime($offer['created_at']));
 	$offer['xpboost_stamina_readable'] = eclipseMarketStamina((int)$offer['xpboost_stamina']);
+	$offer['main_skill'] = eclipseMarketMainSkill($offer);
+	$offer['melee_skill'] = eclipseMarketMeleeSkill($offer);
 
 	$summaryStats = [];
 	eclipseMarketAddStat($summaryStats, 'Nível', number_format((int)$offer['level'], 0, ',', '.'));
@@ -207,12 +265,7 @@ if ($offerIdParam > 0) {
 
 	$progressStats = [];
 	$achievementPoints = eclipseMarketAchievementPoints($db, (int)$offer['player_id']);
-	$charmPoints = 0;
-	if ($db->hasTableAndColumns('player_charms', ['player_id', 'charm_points'])) {
-		$stmt = $db->prepare('SELECT charm_points FROM player_charms WHERE player_id = ? LIMIT 1');
-		$stmt->execute([(int)$offer['player_id']]);
-		$charmPoints = (int)($stmt->fetchColumn() ?: 0);
-	}
+	$charmPoints = (int)($offer['charm_points'] ?? 0);
 	eclipseMarketAddStat($progressStats, 'Boss Points', number_format((int)$offer['boss_points'], 0, ',', '.'));
 	eclipseMarketAddStat($progressStats, 'Charm Points', number_format($charmPoints, 0, ',', '.'), $charmPoints > 0);
 	eclipseMarketAddStat($progressStats, 'Achievement Points', number_format($achievementPoints, 0, ',', '.'), $achievementPoints > 0);
@@ -282,12 +335,20 @@ if ($offerIdParam > 0) {
 }
 
 $offers = $db->query($offerSql . ' ORDER BY o.created_at DESC')->fetchAll(PDO::FETCH_ASSOC);
+$vocationFilterOptions = [];
 foreach ($offers as &$offer) {
 	$offer['vocation_name'] = config('vocations')[(int)$offer['vocation']] ?? 'Sem vocação';
 	$offer['outfit'] = eclipseMarketOutfit($offer);
 	$offer['detail_link'] = eclipseMarketOfferLink((int)$offer['id']);
 	$offer['status_name'] = !empty($offer['online_id']) ? 'Online' : 'Offline';
+	$offer['posted_readable'] = date('d/m/Y H:i', strtotime($offer['created_at']));
+	$offer['posted_sort'] = strtotime($offer['created_at']) ?: 0;
+	$vocationFilterOptions[(int)$offer['vocation']] = $offer['vocation_name'];
+	$offer['main_skill'] = eclipseMarketMainSkill($offer);
+	$offer['melee_skill'] = eclipseMarketMeleeSkill($offer);
+	$offer['skill_preview'] = eclipseMarketOfferHighlights($offer);
 }
+asort($vocationFilterOptions);
 
 $accountPlayers = [];
 if ($logged) {
@@ -297,4 +358,9 @@ if ($logged) {
 	foreach ($accountPlayers as &$player) $player['vocation_name'] = config('vocations')[(int)$player['vocation']] ?? 'Sem vocação';
 }
 
-$twig->display('character-sale/views/market.html.twig', ['offers' => $offers, 'accountPlayers' => $accountPlayers, 'accountId' => $accountId]);
+$twig->display('character-sale/views/market.html.twig', [
+	'offers' => $offers,
+	'accountPlayers' => $accountPlayers,
+	'accountId' => $accountId,
+	'vocationFilterOptions' => $vocationFilterOptions,
+]);

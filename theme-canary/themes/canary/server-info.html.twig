@@ -33,13 +33,25 @@
 
   <section id="server-details" class="serverinfo-card">
       <div class="serverinfo-card-title">Informações do Servidor</div>
-      <dl class="serverinfo-list">
-        <div><dt>IP</dt><dd>{{ serverIp }} (porta {{ config.lua.loginPort ?? config.lua.loginProtocolPort }})</dd></div>
-        <div><dt>Cliente</dt><dd>{{ clientVersion }}</dd></div>
-        <div><dt>Uptime</dt><dd>{{ status.uptimeReadable }}</dd></div>
-        <div><dt>Global Save</dt><dd>{{ serverSave.0 }}:{{ serverSave.1 }}</dd></div>
-        <div><dt>Tipo de Mundo</dt><dd>{{ config.lua.worldType|upper }}</dd></div>
-        <div><dt>Protection Level</dt><dd>{{ protectionLevel }}</dd></div>
+      <div class="serverinfo-overview">
+        <div class="serverinfo-feature-card is-primary">
+          <span>Conexão</span>
+          <strong>{{ serverIp }}</strong>
+          <small>Porta {{ config.lua.loginPort ?? config.lua.loginProtocolPort }} • Cliente {{ clientVersion }}</small>
+        </div>
+        <div class="serverinfo-feature-card">
+          <span>Server Save</span>
+          <strong>{{ serverSave.0 }}:{{ serverSave.1 }}</strong>
+          <small>Uptime: {{ status.uptimeReadable }}</small>
+        </div>
+        <div class="serverinfo-feature-card">
+          <span>Mundo</span>
+          <strong>{{ config.lua.worldType|upper }}</strong>
+          <small>Protection level {{ protectionLevel }}</small>
+        </div>
+      </div>
+
+      <dl class="serverinfo-list serverinfo-compact-list">
         <div><dt>Loot</dt><dd>x{{ rateLoot }}</dd></div>
         <div><dt>Spawn</dt><dd>x{{ rateSpawn }}</dd></div>
         <div><dt>Aluguel de casas</dt><dd>{{ houseRent }}</dd></div>

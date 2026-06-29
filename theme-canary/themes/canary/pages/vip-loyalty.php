@@ -131,7 +131,8 @@ function eclipseLoadLoyaltyFromLua(string $file, array $fallbackTitles, array $f
 	#ContentColumn #News .eclipse-vip-page .vip-source-note,
 	#ContentColumn #News .eclipse-vip-page .vip-source-note *,
 	#ContentColumn #News .eclipse-vip-page .vip-table,
-	#ContentColumn #News .eclipse-vip-page .vip-table * {
+	#ContentColumn #News .eclipse-vip-page .vip-table td,
+	#ContentColumn #News .eclipse-vip-page .vip-table td * {
 		color: #1f0804 !important;
 		-webkit-text-fill-color: #1f0804 !important;
 		text-shadow: none !important;
@@ -354,10 +355,13 @@ function eclipseLoadLoyaltyFromLua(string $file, array $fallbackTitles, array $f
 		text-align: left;
 	}
 
-	.eclipse-vip-page .vip-table th {
-		background: #cfb98c;
-		color: #2a0d06 !important;
+	#ContentColumn #News .eclipse-vip-page .vip-table thead th,
+	#ContentColumn #News .eclipse-vip-page .vip-table thead th * {
+		background: linear-gradient(180deg, #5d1007 0%, #250402 100%);
+		color: #fff8dc !important;
+		-webkit-text-fill-color: #fff8dc !important;
 		font-weight: 900;
+		text-shadow: 0 1px 1px #000 !important;
 	}
 
 	.eclipse-vip-page .vip-table tbody tr:nth-child(even) td {
@@ -420,7 +424,6 @@ function eclipseLoadLoyaltyFromLua(string $file, array $fallbackTitles, array $f
 				<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-Loyalty.png" alt="Loyalty">
 			</div>
 			<div>
-				<h2 class="vip-title">VIP & Loyalty</h2>
 				<p class="vip-lead">
 					Entenda como a conta VIP e o sistema de Loyalty melhoram sua jornada no Eclipse OT.
 					O VIP usa dias premium ativos na conta, enquanto o Loyalty recompensa o tempo de conta e, se configurado, os dias premium comprados ou utilizados.

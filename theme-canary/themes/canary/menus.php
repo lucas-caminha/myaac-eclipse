@@ -33,7 +33,5 @@ return [
 	MENU_CATEGORY_SHOP => [
 		'Comprar Points' => 'points',
 		'Patrocinar Boosted' => 'boosted-sponsor',
-		'Ofertas da Loja' => 'gifts',
-		'Histórico da Loja' => 'gifts/history',
 	],
 ];
