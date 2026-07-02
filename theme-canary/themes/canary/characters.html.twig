@@ -15,8 +15,8 @@
 <div class="eclipse-characters-page eclipse-characters-result eclipse-character-compact{% if account.isPremium() %} is-vip-account{% endif %}">
   {% if canEdit %}
     <div class="character-admin-action">
-      <a href="admin/?p=players&id={{ player.getId() }}" title="Editar no painel admin" target="_blank">
-        {% set button_name = 'Editar personagem' %}
+      <a href="admin/?p=players&id={{ player.getId() }}" title="{{ t('characters.edit_admin') }}" target="_blank">
+        {% set button_name = t('characters.edit_character') %}
         {% include('buttons.base.html.twig') %}
       </a>
     </div>
@@ -29,17 +29,17 @@
 
     {% if outfit is not null %}
       <div class="character-outfit-frame">
-        <img src="{{ outfit }}" alt="Outfit de {{ player.getName() }}">
+        <img src="{{ outfit }}" alt="{{ t('characters.outfit_alt', {'name': player.getName()}) }}">
       </div>
     {% endif %}
 
     <div class="character-profile-main">
-      <span class="character-profile-kicker">Personagem</span>
+      <span class="character-profile-kicker">{{ t('characters.profile_kicker') }}</span>
       <h2>{{ player.getName() }}</h2>
       {% if rankingBadges is not empty %}
-        <div class="character-ranking-badges" aria-label="Primeiro lugar nos rankings">
+        <div class="character-ranking-badges" aria-label="{{ t('characters.ranking_badges') }}">
           {% for badge in rankingBadges %}
-            <a class="character-ranking-badge is-{{ badge.slug }}" href="{{ getLink('highscores') }}/{{ badge.slug }}" title="Ver ranking de {{ badge.label }}">
+            <a class="character-ranking-badge is-{{ badge.slug }}" href="{{ getLink('highscores') }}/{{ badge.slug }}" title="{{ t('characters.view_ranking', {'ranking': badge.label}) }}">
               <span class="character-ranking-icon"><img src="{{ badge.icon }}" alt=""></span>
               <span>{{ badge.label }}</span>
             </a>
@@ -55,12 +55,12 @@
 
   {% if hidden %}
     <div class="character-hidden-message">
-      Este personagem está oculto.
+      {{ t('characters.hidden') }}
     </div>
   {% else %}
     <div class="character-info-grid">
       <section class="character-data-card">
-        <div class="character-card-title">Informações do Personagem</div>
+        <div class="character-card-title">{{ t('characters.info_title') }}</div>
         <table class="character-data-table">
           <tbody>
           <tr>
@@ -68,7 +68,7 @@
             <td>{{ sex }}</td>
           </tr>
           <tr>
-            <th>Vocação:</th>
+            <th>{{ t('common.vocation') }}:</th>
             <td>{{ vocation }}</td>
           </tr>
           <tr>
@@ -76,31 +76,31 @@
             <td>{{ player.getLevel() }}</td>
           </tr>
           <tr>
-            <th>Achievement Points:</th>
+            <th>{{ t('characters.achievement_points') }}:</th>
             <td>{{ achievementPoints }}</td>
           </tr>
           <tr>
-            <th>Residence:</th>
+            <th>{{ t('characters.residence') }}:</th>
             <td>{{ town }}</td>
           </tr>
           <tr>
-            <th>Last Login:</th>
-            <td>{% if player.getLastLogin() == 0 %}Nunca entrou.{% else %}{{ player.getLastLogin()|date("d/m/Y H:i:s") }}{% endif %}</td>
+            <th>{{ t('characters.last_login') }}:</th>
+            <td>{% if player.getLastLogin() == 0 %}{{ t('characters.never_logged') }}{% else %}{{ player.getLastLogin()|date("d/m/Y H:i:s") }}{% endif %}</td>
           </tr>
           <tr>
-            <th>Account Status:</th>
-            <td>{% if account.isPremium() %}Premium Account{% else %}Free Account{% endif %}</td>
+            <th>{{ t('characters.account_status') }}:</th>
+            <td>{% if account.isPremium() %}{{ t('characters.premium_account') }}{% else %}{{ t('characters.free_account') }}{% endif %}</td>
           </tr>
           </tbody>
         </table>
       </section>
 
       <section class="character-data-card">
-        <div class="character-card-title">Account Information</div>
+        <div class="character-card-title">{{ t('characters.account_info') }}</div>
         <table class="character-data-table">
           <tbody>
           <tr>
-            <th>Created:</th>
+            <th>{{ t('common.created') }}:</th>
             <td>{{ account.getCreated()|date("d/m/Y H:i:s") }}</td>
           </tr>
           </tbody>
@@ -110,8 +110,8 @@
 
     {% if equipment is not null %}
       <section class="character-equipment-card">
-        <div class="character-card-title">Equipamentos</div>
-        <div class="character-equipment-shell" aria-label="Equipamentos de {{ player.getName() }}">
+        <div class="character-card-title">{{ t('characters.equipment') }}</div>
+        <div class="character-equipment-shell" aria-label="{{ t('characters.equipment_of', {'name': player.getName()}) }}">
           <div class="character-equipment-layout">
             <div class="character-equipment-column">
               <div class="character-equipment-slot">{{ equipment[2]|raw }}</div>
@@ -170,7 +170,7 @@
             {% for skill in skills %}
               <td>{{ skill.value }}</td>
             {% else %}
-              <td colspan="8">Skills indisponíveis.</td>
+              <td colspan="8">{{ t('characters.skills_unavailable') }}</td>
             {% endfor %}
           </tr>
           </tbody>
@@ -180,13 +180,13 @@
 
     {% if account_players is not null and account_players|length > 0 %}
       <section class="character-data-card character-characters-card">
-        <div class="character-card-title">Characters</div>
+        <div class="character-card-title">{{ t('characters.characters') }}</div>
         <table class="character-data-table character-list-table">
           <thead>
           <tr>
-            <th>Name</th>
+            <th>{{ t('common.name') }}</th>
             <th>Level</th>
-            <th>Vocation</th>
+            <th>{{ t('common.vocation') }}</th>
             <th>Status</th>
           </tr>
           </thead>

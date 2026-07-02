@@ -1,7 +1,7 @@
-<?php
+﻿<?php
 defined('MYAAC') or die('Direct access not allowed!');
 
-$title = 'Mercado de Personagens';
+$title = t('market.page_title');
 $accountId = $logged ? (int)$account_logged->getId() : 0;
 $action = $_POST['market_action'] ?? '';
 $offerIdParam = isset($_GET['offer_id']) ? (int)$_GET['offer_id'] : 0;
@@ -13,11 +13,11 @@ function eclipseMarketOutfit(array $player): string
 
 function eclipseMarketTimeAgo(?int $timestamp): string
 {
-	if (empty($timestamp)) return 'Nunca';
+	if (empty($timestamp)) return t('market.never');
 	$days = max(0, floor((time() - $timestamp) / 86400));
-	if ($days === 0) return 'Hoje';
-	if ($days === 1) return '1 dia atrás';
-	return $days . ' dias atrás';
+	if ($days === 0) return t('market.today');
+	if ($days === 1) return t('market.days_ago_singular');
+	return t('market.days_ago_plural', ['days' => $days]);
 }
 
 function eclipseMarketDuration(int $seconds): string
@@ -143,49 +143,49 @@ function eclipseMarketAchievementPoints($db, int $playerId): int
 if (isRequestMethod('post')) {
 	csrfProtect();
 	if (!$logged) {
-		error('Você precisa entrar na sua conta para negociar personagens.');
+		error(t('market.need_login'));
 	} else {
 		try {
 			if ($action === 'sell') {
 				$playerId = (int)($_POST['player_id'] ?? 0);
 				$price = (int)($_POST['price'] ?? 0);
-				if ($price < 25 || $price > 100000) throw new RuntimeException('Informe um valor entre 25 e 100.000 coins.');
+				if ($price < 25 || $price > 100000) throw new RuntimeException(t('market.price_error'));
 				$stmt = $db->prepare('SELECT p.id, p.name FROM players p LEFT JOIN players_online po ON po.player_id = p.id WHERE p.id = ? AND p.account_id = ? AND p.deletion = 0 AND po.player_id IS NULL');
 				$stmt->execute([$playerId, $accountId]);
 				$player = $stmt->fetch(PDO::FETCH_ASSOC);
-				if (!$player) throw new RuntimeException('O personagem não pertence à sua conta ou está online.');
+				if (!$player) throw new RuntimeException(t('market.not_owner_or_online'));
 				$stmt = $db->prepare('INSERT INTO myaac_character_offers (player_id, seller_account_id, price) VALUES (?, ?, ?)');
 				$stmt->execute([$playerId, $accountId, $price]);
-				success($player['name'] . ' foi anunciado no mercado.');
+				success(t('market.created_success', ['name' => $player['name']]));
 			} elseif ($action === 'cancel') {
 				$stmt = $db->prepare('DELETE FROM myaac_character_offers WHERE id = ? AND seller_account_id = ?');
 				$stmt->execute([(int)($_POST['offer_id'] ?? 0), $accountId]);
-				if (!$stmt->rowCount()) throw new RuntimeException('Oferta não encontrada.');
-				success('Oferta cancelada.');
+				if (!$stmt->rowCount()) throw new RuntimeException(t('market.cancel_not_found'));
+				success(t('market.cancel_success'));
 			} elseif ($action === 'buy') {
 				$offerId = (int)($_POST['offer_id'] ?? 0);
 				$db->beginTransaction();
 				$stmt = $db->prepare('SELECT o.id, o.price, o.player_id, o.seller_account_id, p.name FROM myaac_character_offers o INNER JOIN players p ON p.id = o.player_id LEFT JOIN players_online po ON po.player_id = p.id WHERE o.id = ? AND p.account_id = o.seller_account_id AND p.deletion = 0 AND po.player_id IS NULL FOR UPDATE');
 				$stmt->execute([$offerId]);
 				$offer = $stmt->fetch(PDO::FETCH_ASSOC);
-				if (!$offer) throw new RuntimeException('A oferta não está mais disponível ou o personagem está online.');
-				if ((int)$offer['seller_account_id'] === $accountId) throw new RuntimeException('Você não pode comprar seu próprio personagem.');
+				if (!$offer) throw new RuntimeException(t('market.unavailable_or_online'));
+				if ((int)$offer['seller_account_id'] === $accountId) throw new RuntimeException(t('market.cannot_buy_self'));
 				$stmt = $db->prepare('SELECT coins FROM accounts WHERE id = ? FOR UPDATE');
 				$stmt->execute([$accountId]);
 				$buyer = $stmt->fetch(PDO::FETCH_ASSOC);
-				if (!$buyer || (int)$buyer['coins'] < (int)$offer['price']) throw new RuntimeException('Saldo de coins insuficiente.');
+				if (!$buyer || (int)$buyer['coins'] < (int)$offer['price']) throw new RuntimeException(t('market.not_enough_coins'));
 				$db->prepare('UPDATE accounts SET coins = coins - ? WHERE id = ?')->execute([(int)$offer['price'], $accountId]);
 				$db->prepare('UPDATE accounts SET coins = coins + ? WHERE id = ?')->execute([(int)$offer['price'], (int)$offer['seller_account_id']]);
 				$transfer = $db->prepare('UPDATE players SET account_id = ? WHERE id = ? AND account_id = ?');
 				$transfer->execute([$accountId, (int)$offer['player_id'], (int)$offer['seller_account_id']]);
-				if ($transfer->rowCount() !== 1) throw new RuntimeException('A propriedade do personagem mudou durante a compra.');
+				if ($transfer->rowCount() !== 1) throw new RuntimeException(t('market.owner_changed'));
 				$db->prepare('DELETE FROM myaac_character_offers WHERE id = ?')->execute([$offerId]);
 				$db->commit();
-				success($offer['name'] . ' agora pertence à sua conta.');
+				success(t('market.buy_success', ['name' => $offer['name']]));
 			}
 		} catch (Throwable $exception) {
 			if ($db->inTransaction()) $db->rollBack();
-			if ($exception instanceof PDOException && (string)$exception->getCode() === '23000') error('Este personagem já está anunciado.');
+			if ($exception instanceof PDOException && (string)$exception->getCode() === '23000') error(t('market.already_listed'));
 			else error(htmlspecialchars($exception->getMessage()));
 		}
 	}
@@ -223,17 +223,17 @@ if ($offerIdParam > 0) {
 	$stmt->execute([$offerIdParam]);
 	$offer = $stmt->fetch(PDO::FETCH_ASSOC);
 	if (!$offer) {
-		error('Oferta não encontrada ou indisponível.');
+		error(t('market.offer_unavailable'));
 		$twig->display('character-sale/views/detail.html.twig', ['offer' => null]);
 		return;
 	}
 
-	$offer['vocation_name'] = config('vocations')[(int)$offer['vocation']] ?? 'Sem vocação';
+	$offer['vocation_name'] = config('vocations')[(int)$offer['vocation']] ?? t('market.no_vocation');
 	$offer['outfit'] = eclipseMarketOutfit($offer);
 	$offer['detail_link'] = eclipseMarketOfferLink((int)$offer['id']);
-	$offer['sex_name'] = ((int)$offer['sex'] === 0) ? 'Feminino' : 'Masculino';
+	$offer['sex_name'] = ((int)$offer['sex'] === 0) ? t('market.female') : t('market.male');
 	$offer['status_name'] = !empty($offer['online_id']) ? 'Online' : 'Offline';
-	$offer['created_readable'] = !empty($offer['created']) ? date('d/m/Y', (int)$offer['created']) : 'Não informado';
+	$offer['created_readable'] = !empty($offer['created']) ? date('d/m/Y', (int)$offer['created']) : t('market.not_informed');
 	$offer['lastlogin_readable'] = eclipseMarketTimeAgo((int)$offer['lastlogin']);
 	$offer['onlinetime_readable'] = eclipseMarketDuration((int)$offer['onlinetime']);
 	$offer['stamina_readable'] = eclipseMarketStamina((int)$offer['stamina']);
@@ -243,10 +243,10 @@ if ($offerIdParam > 0) {
 	$offer['melee_skill'] = eclipseMarketMeleeSkill($offer);
 
 	$summaryStats = [];
-	eclipseMarketAddStat($summaryStats, 'Nível', number_format((int)$offer['level'], 0, ',', '.'));
-	eclipseMarketAddStat($summaryStats, 'Vocação', $offer['vocation_name']);
+	eclipseMarketAddStat($summaryStats, t('common.level'), number_format((int)$offer['level'], 0, ',', '.'));
+	eclipseMarketAddStat($summaryStats, t('common.vocation'), $offer['vocation_name']);
 	eclipseMarketAddStat($summaryStats, 'Magic Level', number_format((int)$offer['maglevel'], 0, ',', '.'));
-	eclipseMarketAddStat($summaryStats, 'Experiência', number_format((int)$offer['experience'], 0, ',', '.'));
+	eclipseMarketAddStat($summaryStats, t('monsters.experience'), number_format((int)$offer['experience'], 0, ',', '.'));
 	eclipseMarketAddStat($summaryStats, 'HP', $offer['health'] . '/' . $offer['healthmax']);
 	eclipseMarketAddStat($summaryStats, 'Mana', $offer['mana'] . '/' . $offer['manamax']);
 	eclipseMarketAddStat($summaryStats, 'Soul', number_format((int)$offer['soul'], 0, ',', '.'));
@@ -254,14 +254,14 @@ if ($offerIdParam > 0) {
 	eclipseMarketAddStat($summaryStats, 'Stamina', $offer['stamina_readable']);
 
 	$infoStats = [];
-	eclipseMarketAddStat($infoStats, 'Cidade', $offer['town_name'] ?: 'Não informada');
-	eclipseMarketAddStat($infoStats, 'Guild', $offer['guild_name'] ? $offer['guild_rank'] . ' de ' . $offer['guild_name'] : 'Sem guild');
-	eclipseMarketAddStat($infoStats, 'Sexo', $offer['sex_name']);
-	eclipseMarketAddStat($infoStats, 'Criado em', $offer['created_readable']);
-	eclipseMarketAddStat($infoStats, 'Último login', $offer['lastlogin_readable']);
-	eclipseMarketAddStat($infoStats, 'Tempo online', $offer['onlinetime_readable']);
-	eclipseMarketAddStat($infoStats, 'Anunciado em', $offer['posted_readable']);
-	eclipseMarketAddStat($infoStats, 'Banco', number_format((int)$offer['balance'], 0, ',', '.') . ' gold');
+	eclipseMarketAddStat($infoStats, t('market.city'), $offer['town_name'] ?: t('market.not_informed_f'));
+	eclipseMarketAddStat($infoStats, 'Guild', $offer['guild_name'] ? $offer['guild_rank'] . ' de ' . $offer['guild_name'] : t('market.no_guild'));
+	eclipseMarketAddStat($infoStats, t('market.sex'), $offer['sex_name']);
+	eclipseMarketAddStat($infoStats, t('market.created_at'), $offer['created_readable']);
+	eclipseMarketAddStat($infoStats, t('market.last_login'), $offer['lastlogin_readable']);
+	eclipseMarketAddStat($infoStats, t('market.online_time'), $offer['onlinetime_readable']);
+	eclipseMarketAddStat($infoStats, t('market.posted_at'), $offer['posted_readable']);
+	eclipseMarketAddStat($infoStats, t('market.bank'), number_format((int)$offer['balance'], 0, ',', '.') . ' gold');
 
 	$progressStats = [];
 	$achievementPoints = eclipseMarketAchievementPoints($db, (int)$offer['player_id']);
@@ -305,7 +305,7 @@ if ($offerIdParam > 0) {
 	foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $item) {
 		$itemId = (int)$item['itemtype'];
 		$equipment[] = [
-			'slot' => $equipmentSlots[(int)$item['pid']] ?? ('Slot ' . (int)$item['pid']),
+			'slot' => $equipmentSlots[(int)$item['pid']] ?? t('market.slot', ['slot' => (int)$item['pid']]),
 			'id' => $itemId,
 			'name' => eclipseMarketItemName($itemId),
 			'count' => (int)$item['count'],
@@ -337,7 +337,7 @@ if ($offerIdParam > 0) {
 $offers = $db->query($offerSql . ' ORDER BY o.created_at DESC')->fetchAll(PDO::FETCH_ASSOC);
 $vocationFilterOptions = [];
 foreach ($offers as &$offer) {
-	$offer['vocation_name'] = config('vocations')[(int)$offer['vocation']] ?? 'Sem vocação';
+	$offer['vocation_name'] = config('vocations')[(int)$offer['vocation']] ?? t('market.no_vocation');
 	$offer['outfit'] = eclipseMarketOutfit($offer);
 	$offer['detail_link'] = eclipseMarketOfferLink((int)$offer['id']);
 	$offer['status_name'] = !empty($offer['online_id']) ? 'Online' : 'Offline';
@@ -355,7 +355,7 @@ if ($logged) {
 	$stmt = $db->prepare('SELECT p.id, p.name, p.level, p.vocation FROM players p LEFT JOIN myaac_character_offers o ON o.player_id = p.id LEFT JOIN players_online po ON po.player_id = p.id WHERE p.account_id = ? AND p.deletion = 0 AND o.id IS NULL AND po.player_id IS NULL ORDER BY p.name');
 	$stmt->execute([$accountId]);
 	$accountPlayers = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	foreach ($accountPlayers as &$player) $player['vocation_name'] = config('vocations')[(int)$player['vocation']] ?? 'Sem vocação';
+	foreach ($accountPlayers as &$player) $player['vocation_name'] = config('vocations')[(int)$player['vocation']] ?? t('market.no_vocation');
 }
 
 $twig->display('character-sale/views/market.html.twig', [
@@ -364,3 +364,5 @@ $twig->display('character-sale/views/market.html.twig', [
 	'accountId' => $accountId,
 	'vocationFilterOptions' => $vocationFilterOptions,
 ]);
+
+

@@ -2,7 +2,7 @@
 
 <div class="highscores-hero">
 	<div class="highscores-hero-copy">
-		<span class="highscores-eyebrow">Ranking ativo</span>
+		<span class="highscores-eyebrow">{{ t('highscores.active_ranking') }}</span>
 		<h2>{{ skillName }}</h2>
 	</div>
 </div>
@@ -18,7 +18,7 @@
 		<small>
 			{% if pagesLimit > 0 %}
 			<div style="float: left;">
-				<b>» Pages:
+				<b>&raquo; {{ t('common.pages') }}:
 					{% for i in 1..pagesLimit %}
 					<span class="PageLink ">
 						{% if page == i %}
@@ -31,7 +31,7 @@
 				</b>
 			</div>
 			{% endif %}
-			<div style="float: right;"><b>» Results: {{ totalResults }}</b></div>
+			<div style="float: right;"><b>&raquo; {{ t('common.results') }}: {{ totalResults }}</b></div>
 		</small>
 	</td>
 </tr>
@@ -48,7 +48,7 @@
 				  style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
 			<span class="CaptionVerticalLeft"
 				  style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
-			<div class="Text">Filtro de Highscores</div>
+			<div class="Text">{{ t('highscores.filter_title') }}</div>
 			<span class="CaptionVerticalRight"
 				  style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
 			<span class="CaptionBorderBottom"
@@ -68,11 +68,11 @@
 						<tbody>
 						<tr>
 							<td style="width:150px">
-								<label for="vocationFilter">Vocação:</label>
+								<label for="vocationFilter">{{ t('common.vocation') }}:</label>
 							</td>
 							<td>
 								<select onchange="location = this.value;" id="vocationFilter">
-									<option value="{{ getLink('highscores') }}/{{ list|urlencode }}" class="size_xs">(todas)</option>
+									<option value="{{ getLink('highscores') }}/{{ list|urlencode }}" class="size_xs">{{ t('common.all_parentheses') }}</option>
 									{% for i in baseVocations  %}
 										<option value="{{ getLink('highscores') }}/{{ list|urlencode }}/{{ config.vocations[i]|lower|urlencode }}" class="size_xs" {% if vocationId is not null and vocationId == i %}selected{% endif %}>{{ config.vocations[i]}}</option>
 									{% endfor %}
@@ -83,7 +83,7 @@
 						</tr>
 						<tr>
 							<td>
-								<label for="skillFilter">Categoria:</label>
+								<label for="skillFilter">{{ t('common.category') }}:</label>
 							</td>
 							<td>
 								<select onchange="location = this.value;" id="skillFilter">
@@ -102,7 +102,7 @@
 	</table>
 </div>
 
-<p class="highscores-note"><i>As habilidades exibidas nos Highscores não incluem bônus de lealdade, equipamentos ou outros modificadores.</i></p>
+<p class="highscores-note"><i>{{ t('highscores.note') }}</i></p>
 
 <div class="TableContainer">
 	<div class="CaptionContainer">
@@ -115,7 +115,7 @@
 				  style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span>
 			<span class="CaptionVerticalLeft"
 				  style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
-			<div class="Text">Highscores <span class="RightArea">Ultima atualizacao: {{ (date().timestamp - updatedAt == 0) ? 'agora' : updatedAt|timeago }} </span></div>
+			<div class="Text">{{ t('box.highscores.title') }} <span class="RightArea">{{ t('common.last_update') }}: {{ (date().timestamp - updatedAt == 0) ? t('common.now') : updatedAt|timeago }} </span></div>
 			<span class="CaptionVerticalRight"
 				  style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
 			<span class="CaptionBorderBottom"
@@ -140,20 +140,20 @@
 									<table class="TableContent myaac-table" width="100%" style="border:1px solid #faf0d7;">
 										<tbody>
 										<tr class="LabelH">
-											<td>Rank</td>
+											<td>{{ t('common.rank') }}</td>
 
-											<td style="width: 90%">Nome</td>
-											<td style="text-align:right">Vocação</td>
+											<td style="width: 90%">{{ t('common.name') }}</td>
+											<td style="text-align:right">{{ t('common.vocation') }}</td>
 											<td style="text-align: right">
 												{{ levelName }}
 											</td>
 											{% if skill == constant('POT::SKILL__LEVEL') %}
-											<td style="text-align: right">Pontos</td>
+											<td style="text-align: right">{{ t('common.points') }}</td>
 											{% endif %}
 										</tr>
 
 										{% if highscores|length < 1 %}
-											<tr bgcolor="{{ config('darkborder') }}"><td colspan="100%" class="highscores-empty">Nenhum registro encontrado.</td></tr>
+											<tr bgcolor="{{ config('darkborder') }}"><td colspan="100%" class="highscores-empty">{{ t('common.no_records') }}</td></tr>
 										{% else %}
 
 											{% set row = 0 %}

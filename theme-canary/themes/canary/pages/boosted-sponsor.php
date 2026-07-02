@@ -5,7 +5,7 @@ use MyAAC\Models\Account;
 
 require_once __DIR__ . '/boosted-sponsor-common.php';
 
-$title = 'Patrocinar Boosted';
+$title = eclipseBoostedSponsorText('boosted_sponsor.title', [], 'Sponsor Boosted');
 
 function eclipseBoostedSponsorStep(): string
 {
@@ -23,9 +23,9 @@ function eclipseBoostedSponsorRenderProgress(string $step): void
 {
 	$activeStep = $step === 'confirm' ? 'checkout' : $step;
 	$steps = [
-		'intro' => 'Explica&ccedil;&atilde;o',
-		'select' => 'Escolha',
-		'checkout' => 'Confirma&ccedil;&atilde;o',
+		'intro' => eclipseBoostedSponsorText('boosted_sponsor.step_intro', [], 'Explanation'),
+		'select' => eclipseBoostedSponsorText('boosted_sponsor.step_select', [], 'Choice'),
+		'checkout' => eclipseBoostedSponsorText('boosted_sponsor.step_confirm', [], 'Confirmation'),
 	];
 
 	echo '<div class="boosted-sponsor-progress">';
@@ -41,8 +41,8 @@ function eclipseBoostedSponsorRenderShellStart(string $step): void
 	echo '<div class="eclipse-boosted-sponsor-page">';
 	echo '<div class="boosted-sponsor-shell">';
 	echo '<div class="boosted-sponsor-title">';
-	echo '<strong>Patrocine o pr&oacute;ximo boosted</strong>';
-	echo '<span>Escolha um boss por 250 Tibia Coins ou uma criatura por 300 Tibia Coins para a pr&oacute;xima rota&ccedil;&atilde;o di&aacute;ria do servidor.</span>';
+	echo '<strong>' . eclipseBoostedSponsorText('boosted_sponsor.hero_title', [], 'Sponsor the next boosted') . '</strong>';
+	echo '<span>' . eclipseBoostedSponsorText('boosted_sponsor.hero_subtitle', [], 'Choose a boss for 250 Tibia Coins or a creature for 300 Tibia Coins for the next daily server rotation.') . '</span>';
 	echo '</div>';
 	eclipseBoostedSponsorRenderProgress($step);
 }
@@ -56,12 +56,12 @@ function eclipseBoostedSponsorRenderLoginRequired(): void
 {
 ?>
 	<div class="boosted-sponsor-panel boosted-sponsor-error">
-		<h2>Acesso restrito</h2>
-		<p>Para escolher o pr&oacute;ximo boss ou a pr&oacute;xima creature boosted, voc&ecirc; precisa entrar na sua conta primeiro.</p>
-		<p>Depois do login, o sistema vai mostrar os alvos dispon&iacute;veis, o custo em Tibia Coins e o status atual de cada slot.</p>
+		<h2><?= eclipseBoostedSponsorText('boosted_sponsor.restricted_access', [], 'Restricted access') ?></h2>
+		<p><?= eclipseBoostedSponsorText('boosted_sponsor.login_required_1', [], 'To choose the next boosted boss or creature, you need to log in first.') ?></p>
+		<p><?= eclipseBoostedSponsorText('boosted_sponsor.login_required_2', [], 'After login, the system shows available targets, the Tibia Coins cost and the current status of each slot.') ?></p>
 		<div class="boosted-sponsor-actions">
-			<a class="eclipse-btn" href="<?= getLink('account/manage') ?>">Entrar na conta</a>
-			<a class="eclipse-btn eclipse-btn-secondary" href="<?= getLink('account/create') ?>">Criar conta</a>
+			<a class="eclipse-btn" href="<?= getLink('account/manage') ?>"><?= eclipseBoostedSponsorText('boosted_sponsor.login_account', [], 'Log in to your account') ?></a>
+			<a class="eclipse-btn eclipse-btn-secondary" href="<?= getLink('account/create') ?>"><?= eclipseBoostedSponsorText('boosted_sponsor.create_account', [], 'Create account') ?></a>
 		</div>
 	</div>
 <?php
@@ -71,29 +71,29 @@ function eclipseBoostedSponsorRenderIntro(DateTimeImmutable $nextServerSave, ?ar
 {
 ?>
 	<div class="boosted-sponsor-panel">
-		<h2>Como funciona</h2>
-		<p>Este apoio permite definir o boss boosted ou a creature boosted da pr&oacute;xima rota&ccedil;&atilde;o di&aacute;ria usando Tibia Coins da pr&oacute;pria conta.</p>
-		<p>O custo &eacute; fixo: <strong>250 Tibia Coins para boss</strong> e <strong>300 Tibia Coins para creature</strong>. Depois de confirmado, o alvo fica agendado para a pr&oacute;xima rota&ccedil;&atilde;o e entra em cooldown de 10 dias ap&oacute;s ser aplicado.</p>
-		<p>O pr&oacute;ximo fechamento desta rodada acontece em <strong><?= eclipseBoostedSponsorFormatDate($nextServerSave) ?></strong>.</p>
+		<h2><?= eclipseBoostedSponsorText('boosted_sponsor.how_it_works', [], 'How it works') ?></h2>
+		<p><?= eclipseBoostedSponsorText('boosted_sponsor.intro_1', [], 'This support lets you define the boosted boss or boosted creature for the next daily rotation using Tibia Coins from your own account.') ?></p>
+		<p><?= eclipseBoostedSponsorText('boosted_sponsor.intro_2', [], 'The cost is fixed: 250 Tibia Coins for boss and 300 Tibia Coins for creature. After confirmation, the target is scheduled for the next rotation and enters a 10-day cooldown after being applied.') ?></p>
+		<p><?= eclipseBoostedSponsorText('boosted_sponsor.intro_3', ['date' => '<strong>' . eclipseBoostedSponsorFormatDate($nextServerSave) . '</strong>'], 'The next cutoff for this round happens at {date}.') ?></p>
 
 		<div class="boosted-sponsor-slot-grid">
 			<div class="boosted-sponsor-slot-card<?= $bossSlot ? ' is-locked' : '' ?>">
-				<small>Slot de Boss</small>
-				<strong><?= $bossSlot ? htmlspecialchars($bossSlot['target_name']) : 'Dispon&iacute;vel' ?></strong>
-				<span><?= $bossSlot ? 'Este boss foi garantido por ' . number_format((int)$bossSlot['amount_coins'], 0, ',', '.') . ' Tibia Coins.' : 'Livre para patroc&iacute;nio.' ?></span>
+				<small><?= eclipseBoostedSponsorText('boosted_sponsor.boss_slot', [], 'Boss slot') ?></small>
+				<strong><?= $bossSlot ? htmlspecialchars($bossSlot['target_name']) : eclipseBoostedSponsorText('boosted_sponsor.available', [], 'Available') ?></strong>
+				<span><?= $bossSlot ? eclipseBoostedSponsorText('boosted_sponsor.boss_slot_reserved', ['coins' => number_format((int)$bossSlot['amount_coins'], 0, ',', '.')], 'This boss was secured for {coins} Tibia Coins.') : eclipseBoostedSponsorText('boosted_sponsor.free_for_sponsor', [], 'Free for sponsorship.') ?></span>
 			</div>
 			<div class="boosted-sponsor-slot-card<?= $creatureSlot ? ' is-locked' : '' ?>">
-				<small>Slot de Creature</small>
-				<strong><?= $creatureSlot ? htmlspecialchars($creatureSlot['target_name']) : 'Dispon&iacute;vel' ?></strong>
-				<span><?= $creatureSlot ? 'Esta creature foi garantida por ' . number_format((int)$creatureSlot['amount_coins'], 0, ',', '.') . ' Tibia Coins.' : 'Livre para patroc&iacute;nio.' ?></span>
+				<small><?= eclipseBoostedSponsorText('boosted_sponsor.creature_slot', [], 'Creature slot') ?></small>
+				<strong><?= $creatureSlot ? htmlspecialchars($creatureSlot['target_name']) : eclipseBoostedSponsorText('boosted_sponsor.available', [], 'Available') ?></strong>
+				<span><?= $creatureSlot ? eclipseBoostedSponsorText('boosted_sponsor.creature_slot_reserved', ['coins' => number_format((int)$creatureSlot['amount_coins'], 0, ',', '.')], 'This creature was secured for {coins} Tibia Coins.') : eclipseBoostedSponsorText('boosted_sponsor.free_for_sponsor', [], 'Free for sponsorship.') ?></span>
 			</div>
 		</div>
 
 		<div class="boosted-sponsor-actions">
 			<?php if($logged): ?>
-				<a class="eclipse-btn" href="<?= getLink('boosted-sponsor') ?>?step=select&type=boss">Escolher boosted</a>
+				<a class="eclipse-btn" href="<?= getLink('boosted-sponsor') ?>?step=select&type=boss"><?= eclipseBoostedSponsorText('boosted_sponsor.choose_boosted', [], 'Choose boosted') ?></a>
 			<?php else: ?>
-				<a class="eclipse-btn" href="<?= getLink('account/manage') ?>">Entrar para continuar</a>
+				<a class="eclipse-btn" href="<?= getLink('account/manage') ?>"><?= eclipseBoostedSponsorText('boosted_sponsor.login_to_continue', [], 'Log in to continue') ?></a>
 			<?php endif; ?>
 		</div>
 	</div>
@@ -115,42 +115,42 @@ function eclipseBoostedSponsorRenderSelection(
 ?>
 	<div class="boosted-sponsor-panel">
 		<div class="boosted-sponsor-tabs">
-			<a class="<?= $type === 'boss' ? 'is-active' : '' ?>" href="<?= getLink('boosted-sponsor') ?>?step=select&type=boss">Boss</a>
-			<a class="<?= $type === 'creature' ? 'is-active' : '' ?>" href="<?= getLink('boosted-sponsor') ?>?step=select&type=creature">Creature</a>
+			<a class="<?= $type === 'boss' ? 'is-active' : '' ?>" href="<?= getLink('boosted-sponsor') ?>?step=select&type=boss"><?= eclipseBoostedSponsorText('boosted_sponsor.type_boss', [], 'Boss') ?></a>
+			<a class="<?= $type === 'creature' ? 'is-active' : '' ?>" href="<?= getLink('boosted-sponsor') ?>?step=select&type=creature"><?= eclipseBoostedSponsorText('boosted_sponsor.type_creature', [], 'Creature') ?></a>
 		</div>
 
 		<div class="boosted-sponsor-summary-grid">
 			<div class="boosted-sponsor-summary-card">
-				<small>Pr&oacute;xima rota&ccedil;&atilde;o</small>
+				<small><?= eclipseBoostedSponsorText('boosted_sponsor.next_rotation', [], 'Next rotation') ?></small>
 				<strong><?= eclipseBoostedSponsorFormatDate($nextServerSave) ?></strong>
-				<span>S&oacute; existe um slot de <?= strtolower($typeLabel) ?> por rodada.</span>
+				<span><?= eclipseBoostedSponsorText('boosted_sponsor.one_slot_per_round', ['type' => strtolower($typeLabel)], 'There is only one {type} slot per round.') ?></span>
 			</div>
 			<div class="boosted-sponsor-summary-card">
-				<small>Seu saldo atual</small>
+				<small><?= eclipseBoostedSponsorText('boosted_sponsor.current_balance', [], 'Current balance') ?></small>
 				<strong><?= number_format($balance, 0, ',', '.') ?> Tibia Coins</strong>
-				<span>Custo deste patroc&iacute;nio: <?= number_format($priceCoins, 0, ',', '.') ?> Tibia Coins.</span>
+				<span><?= eclipseBoostedSponsorText('boosted_sponsor.sponsorship_cost', ['coins' => number_format($priceCoins, 0, ',', '.')], 'This sponsorship costs {coins} Tibia Coins.') ?></span>
 			</div>
 			<div class="boosted-sponsor-summary-card<?= $slot ? ' is-locked' : '' ?>">
-				<small>Slot atual de <?= strtolower($typeLabel) ?></small>
-				<strong><?= $slot ? htmlspecialchars($slot['target_name']) : 'Dispon&iacute;vel' ?></strong>
-				<span><?= $slot ? 'Esta vaga j&aacute; foi garantida por ' . number_format((int)$slot['amount_coins'], 0, ',', '.') . ' Tibia Coins.' : 'Ainda d&aacute; tempo de escolher.' ?></span>
+				<small><?= eclipseBoostedSponsorText('boosted_sponsor.current_slot', ['type' => strtolower($typeLabel)], 'Current {type} slot') ?></small>
+				<strong><?= $slot ? htmlspecialchars($slot['target_name']) : eclipseBoostedSponsorText('boosted_sponsor.available', [], 'Available') ?></strong>
+				<span><?= $slot ? eclipseBoostedSponsorText('boosted_sponsor.slot_reserved', ['coins' => number_format((int)$slot['amount_coins'], 0, ',', '.')], 'This slot was secured for {coins} Tibia Coins.') : eclipseBoostedSponsorText('boosted_sponsor.still_time', [], 'There is still time to choose.') ?></span>
 			</div>
 		</div>
 
 		<?php if($slot): ?>
 			<div class="boosted-sponsor-warning">
-				<strong>Slot temporariamente indispon&iacute;vel</strong>
-				<span>Este slot recebeu uma doa&ccedil;&atilde;o de <strong><?= number_format((int)$slot['amount_coins'], 0, ',', '.') ?> Tibia Coins</strong> para boostar <strong><?= htmlspecialchars($slot['target_name']) ?></strong>. Voc&ecirc; ainda pode verificar o slot de <?= $otherType === 'boss' ? 'boss' : 'creature' ?>.</span>
+				<strong><?= eclipseBoostedSponsorText('boosted_sponsor.slot_unavailable', [], 'Slot temporarily unavailable') ?></strong>
+				<span><?= eclipseBoostedSponsorText('boosted_sponsor.slot_unavailable_text', ['coins' => '<strong>' . number_format((int)$slot['amount_coins'], 0, ',', '.') . ' Tibia Coins</strong>', 'name' => '<strong>' . htmlspecialchars($slot['target_name']) . '</strong>', 'type' => $otherType === 'boss' ? eclipseBoostedSponsorText('boosted_sponsor.type_boss', [], 'Boss') : eclipseBoostedSponsorText('boosted_sponsor.type_creature', [], 'Creature')], 'This slot received a donation of {coins} to boost {name}. You can still check the {type} slot.') ?></span>
 			</div>
 		<?php else: ?>
 			<div class="boosted-sponsor-results-header">
 				<div>
-					<span>Categoria</span>
+					<span><?= eclipseBoostedSponsorText('boosted_sponsor.category', [], 'Category') ?></span>
 					<h3><?= $typeLabel ?> boosted</h3>
-					<p><strong data-boosted-visible-count><?= count($targets) ?></strong> alvos eleg&iacute;veis</p>
+					<p><strong data-boosted-visible-count><?= count($targets) ?></strong> <?= eclipseBoostedSponsorText('boosted_sponsor.eligible_targets', [], 'eligible targets') ?></p>
 				</div>
 				<div class="boosted-sponsor-actions-inline">
-					<input class="eclipse-plugin-search" type="search" placeholder="Buscar nome" data-boosted-search>
+					<input class="eclipse-plugin-search" type="search" placeholder="<?= htmlspecialchars(eclipseBoostedSponsorText('boosted_sponsor.search_name', [], 'Search name')) ?>" data-boosted-search>
 				</div>
 			</div>
 
@@ -165,36 +165,36 @@ function eclipseBoostedSponsorRenderSelection(
 						<div class="boosted-sponsor-card-body">
 							<small><?= htmlspecialchars($target['category']) ?></small>
 							<strong><?= htmlspecialchars($target['name']) ?></strong>
-							<span>Vida <?= number_format((int)$target['health'], 0, ',', '.') ?> • EXP <?= number_format((int)$target['exp'], 0, ',', '.') ?></span>
+							<span><?= eclipseBoostedSponsorText('boosted_sponsor.health_exp', ['health' => number_format((int)$target['health'], 0, ',', '.'), 'exp' => number_format((int)$target['exp'], 0, ',', '.')], 'Health {health} &bull; EXP {exp}') ?></span>
 						</div>
-						<button class="eclipse-btn" type="submit">Patrocinar por <?= number_format($priceCoins, 0, ',', '.') ?> Tibia Coins</button>
+						<button class="eclipse-btn" type="submit"><?= eclipseBoostedSponsorText('boosted_sponsor.sponsor_for', ['coins' => number_format($priceCoins, 0, ',', '.')], 'Sponsor for {coins} Tibia Coins') ?></button>
 					</form>
 				<?php endforeach; ?>
 			</div>
-			<div class="eclipse-plugin-empty boosted-sponsor-empty" data-boosted-empty hidden>Nenhum alvo encontrado com esse nome.</div>
+			<div class="eclipse-plugin-empty boosted-sponsor-empty" data-boosted-empty hidden><?= eclipseBoostedSponsorText('boosted_sponsor.no_target_search', [], 'No target found with that name.') ?></div>
 
 			<?php if(empty($targets)): ?>
-				<div class="eclipse-plugin-empty">N&atilde;o h&aacute; alvos dispon&iacute;veis para este slot no momento.</div>
+				<div class="eclipse-plugin-empty"><?= eclipseBoostedSponsorText('boosted_sponsor.no_targets_available', [], 'There are no available targets for this slot right now.') ?></div>
 			<?php endif; ?>
 		<?php endif; ?>
 
 		<div class="boosted-sponsor-history">
 			<div>
-				<h4>&Uacute;ltimos bosses aplicados</h4>
+				<h4><?= eclipseBoostedSponsorText('boosted_sponsor.recent_bosses', [], 'Latest applied bosses') ?></h4>
 				<ul>
 					<?php foreach($recentBosses as $entry): ?>
 						<li><strong><?= htmlspecialchars($entry['target_name']) ?></strong><span><?= date('d/m/Y', strtotime((string)$entry['scheduled_for_date'])) ?></span></li>
 					<?php endforeach; ?>
-					<?php if(empty($recentBosses)): ?><li><span>Nenhum boss patrocinado ainda.</span></li><?php endif; ?>
+					<?php if(empty($recentBosses)): ?><li><span><?= eclipseBoostedSponsorText('boosted_sponsor.no_boss_history', [], 'No sponsored boss yet.') ?></span></li><?php endif; ?>
 				</ul>
 			</div>
 			<div>
-				<h4>&Uacute;ltimas creatures aplicadas</h4>
+				<h4><?= eclipseBoostedSponsorText('boosted_sponsor.recent_creatures', [], 'Latest applied creatures') ?></h4>
 				<ul>
 					<?php foreach($recentCreatures as $entry): ?>
 						<li><strong><?= htmlspecialchars($entry['target_name']) ?></strong><span><?= date('d/m/Y', strtotime((string)$entry['scheduled_for_date'])) ?></span></li>
 					<?php endforeach; ?>
-					<?php if(empty($recentCreatures)): ?><li><span>Nenhuma creature patrocinada ainda.</span></li><?php endif; ?>
+					<?php if(empty($recentCreatures)): ?><li><span><?= eclipseBoostedSponsorText('boosted_sponsor.no_creature_history', [], 'No sponsored creature yet.') ?></span></li><?php endif; ?>
 				</ul>
 			</div>
 		</div>
@@ -206,30 +206,30 @@ function eclipseBoostedSponsorRenderCheckout(array $target, DateTimeImmutable $n
 {
 ?>
 	<div class="boosted-sponsor-panel boosted-sponsor-checkout">
-		<h2>Patrocinio confirmado</h2>
+		<h2><?= eclipseBoostedSponsorText('boosted_sponsor.confirmed_title', [], 'Sponsorship confirmed') ?></h2>
 		<div class="boosted-sponsor-target-summary">
 			<div class="boosted-sponsor-target-portrait"><img src="<?= htmlspecialchars($target['img_link']) ?>" alt="<?= htmlspecialchars($target['name']) ?>"></div>
 			<div>
 				<small><?= eclipseBoostedSponsorTypeLabel((string)($_POST['target_type'] ?? 'boss')) ?></small>
 				<strong><?= htmlspecialchars($target['name']) ?></strong>
-				<span><?= htmlspecialchars($target['category']) ?> • entra no server save de <?= $nextServerSave->format('d/m/Y') ?></span>
+				<span><?= eclipseBoostedSponsorText('boosted_sponsor.enters_server_save', ['category' => htmlspecialchars($target['category']), 'date' => $nextServerSave->format('d/m/Y')], '{category} &bull; enters on the {date} server save') ?></span>
 			</div>
 		</div>
 
 		<div class="boosted-sponsor-donation-summary">
-			<div><span>Custo</span><strong><?= number_format($priceCoins, 0, ',', '.') ?> Tibia Coins</strong></div>
-			<div><span>Cooldown depois da entrada</span><strong>10 dias</strong></div>
-			<div><span>Saldo restante</span><strong><?= number_format($balanceAfter, 0, ',', '.') ?> Tibia Coins</strong></div>
+			<div><span><?= eclipseBoostedSponsorText('boosted_sponsor.cost', [], 'Cost') ?></span><strong><?= number_format($priceCoins, 0, ',', '.') ?> Tibia Coins</strong></div>
+			<div><span><?= eclipseBoostedSponsorText('boosted_sponsor.cooldown_after_entry', [], 'Cooldown after entry') ?></span><strong><?= eclipseBoostedSponsorText('boosted_sponsor.ten_days', [], '10 days') ?></strong></div>
+			<div><span><?= eclipseBoostedSponsorText('boosted_sponsor.remaining_balance', [], 'Remaining balance') ?></span><strong><?= number_format($balanceAfter, 0, ',', '.') ?> Tibia Coins</strong></div>
 		</div>
 
 		<?php if($orderSaved): ?>
-			<p class="boosted-sponsor-status">Pedido #<?= (int)$orderId ?> confirmado com sucesso. O alvo <?= htmlspecialchars($target['name']) ?> foi garantido para o proximo server save e o slot ficou bloqueado para os demais jogadores.</p>
+			<p class="boosted-sponsor-status"><?= eclipseBoostedSponsorText('boosted_sponsor.status_confirmed_save', ['id' => (int)$orderId, 'name' => htmlspecialchars($target['name'])], 'Order #{id} confirmed successfully. Target {name} was secured for the next server save and the slot was locked for other players.') ?></p>
 		<?php else: ?>
-			<p class="boosted-sponsor-status warning">Nao foi possivel registrar o patrocinio. Verifique se a migracao SQL ja foi aplicada.</p>
+			<p class="boosted-sponsor-status warning"><?= eclipseBoostedSponsorText('boosted_sponsor.status_not_saved', [], 'Could not register the sponsorship. Check if the SQL migration has already been applied.') ?></p>
 		<?php endif; ?>
 
 		<div class="boosted-sponsor-actions">
-			<a class="eclipse-btn" href="<?= getLink('boosted-sponsor') ?>?step=select&type=<?= htmlspecialchars((string)($_POST['target_type'] ?? 'boss')) ?>">Escolher outro alvo</a>
+			<a class="eclipse-btn" href="<?= getLink('boosted-sponsor') ?>?step=select&type=<?= htmlspecialchars((string)($_POST['target_type'] ?? 'boss')) ?>"><?= eclipseBoostedSponsorText('boosted_sponsor.choose_another_target', [], 'Choose another target') ?></a>
 		</div>
 	</div>
 <?php
@@ -239,29 +239,29 @@ function eclipseBoostedSponsorRenderCheckoutPreview(array $target, DateTimeImmut
 {
 ?>
 	<div class="boosted-sponsor-panel boosted-sponsor-checkout">
-		<h2>Confirmar patroc&iacute;nio</h2>
+		<h2><?= eclipseBoostedSponsorText('boosted_sponsor.confirm_title', [], 'Confirm sponsorship') ?></h2>
 		<div class="boosted-sponsor-target-summary">
 			<div class="boosted-sponsor-target-portrait"><img src="<?= htmlspecialchars($target['img_link']) ?>" alt="<?= htmlspecialchars($target['name']) ?>"></div>
 			<div>
 				<small><?= eclipseBoostedSponsorTypeLabel((string)($_POST['target_type'] ?? 'boss')) ?></small>
 				<strong><?= htmlspecialchars($target['name']) ?></strong>
-				<span><?= htmlspecialchars($target['category']) ?> &bull; entra na rota&ccedil;&atilde;o de <?= $nextServerSave->format('d/m/Y') ?></span>
+				<span><?= eclipseBoostedSponsorText('boosted_sponsor.enters_rotation', ['category' => htmlspecialchars($target['category']), 'date' => $nextServerSave->format('d/m/Y')], '{category} &bull; enters the rotation on {date}') ?></span>
 			</div>
 		</div>
 		<div class="boosted-sponsor-donation-summary">
-			<div><span>Custo</span><strong><?= number_format($priceCoins, 0, ',', '.') ?> Tibia Coins</strong></div>
-			<div><span>Cooldown depois da entrada</span><strong>10 dias</strong></div>
-			<div><span>Seu saldo atual</span><strong><?= number_format($balance, 0, ',', '.') ?> Tibia Coins</strong></div>
+			<div><span><?= eclipseBoostedSponsorText('boosted_sponsor.cost', [], 'Cost') ?></span><strong><?= number_format($priceCoins, 0, ',', '.') ?> Tibia Coins</strong></div>
+			<div><span><?= eclipseBoostedSponsorText('boosted_sponsor.cooldown_after_entry', [], 'Cooldown after entry') ?></span><strong><?= eclipseBoostedSponsorText('boosted_sponsor.ten_days', [], '10 days') ?></strong></div>
+			<div><span><?= eclipseBoostedSponsorText('boosted_sponsor.current_balance', [], 'Current balance') ?></span><strong><?= number_format($balance, 0, ',', '.') ?> Tibia Coins</strong></div>
 		</div>
 		<div class="boosted-sponsor-actions">
-			<p class="boosted-sponsor-confirm-copy">Ao confirmar, os Tibia Coins ser&atilde;o debitados imediatamente e este alvo ficar&aacute; agendado para a pr&oacute;xima rota&ccedil;&atilde;o di&aacute;ria do servidor.</p>
+			<p class="boosted-sponsor-confirm-copy"><?= eclipseBoostedSponsorText('boosted_sponsor.confirm_copy', [], 'When confirmed, Tibia Coins will be charged immediately and this target will be scheduled for the next daily server rotation.') ?></p>
 			<form method="post" action="<?= getLink('boosted-sponsor') ?>">
 				<?= csrf(true) ?>
 				<input type="hidden" name="step" value="confirm">
 				<input type="hidden" name="target_type" value="<?= htmlspecialchars((string)($_POST['target_type'] ?? 'boss')) ?>">
 				<input type="hidden" name="target_id" value="<?= (int)($_POST['target_id'] ?? 0) ?>">
-				<button class="eclipse-btn" type="submit">Confirmar patroc&iacute;nio</button>
-				<a class="eclipse-btn eclipse-btn-secondary" href="<?= getLink('boosted-sponsor') ?>?step=select&type=<?= htmlspecialchars((string)($_POST['target_type'] ?? 'boss')) ?>">Voltar</a>
+				<button class="eclipse-btn" type="submit"><?= eclipseBoostedSponsorText('boosted_sponsor.confirm_sponsorship', [], 'Confirm sponsorship') ?></button>
+				<a class="eclipse-btn eclipse-btn-secondary" href="<?= getLink('boosted-sponsor') ?>?step=select&type=<?= htmlspecialchars((string)($_POST['target_type'] ?? 'boss')) ?>"><?= eclipseBoostedSponsorText('common.back', [], 'Back') ?></a>
 			</form>
 		</div>
 	</div>
@@ -272,23 +272,23 @@ function eclipseBoostedSponsorRenderCheckoutSuccess(array $target, DateTimeImmut
 {
 ?>
 	<div class="boosted-sponsor-panel boosted-sponsor-checkout">
-		<h2>Patroc&iacute;nio confirmado</h2>
+		<h2><?= eclipseBoostedSponsorText('boosted_sponsor.confirmed_title', [], 'Sponsorship confirmed') ?></h2>
 		<div class="boosted-sponsor-target-summary">
 			<div class="boosted-sponsor-target-portrait"><img src="<?= htmlspecialchars($target['img_link']) ?>" alt="<?= htmlspecialchars($target['name']) ?>"></div>
 			<div>
 				<small><?= eclipseBoostedSponsorTypeLabel((string)($_POST['target_type'] ?? 'boss')) ?></small>
 				<strong><?= htmlspecialchars($target['name']) ?></strong>
-				<span><?= htmlspecialchars($target['category']) ?> &bull; entra na rota&ccedil;&atilde;o de <?= $nextServerSave->format('d/m/Y') ?></span>
+				<span><?= eclipseBoostedSponsorText('boosted_sponsor.enters_rotation', ['category' => htmlspecialchars($target['category']), 'date' => $nextServerSave->format('d/m/Y')], '{category} &bull; enters the rotation on {date}') ?></span>
 			</div>
 		</div>
 		<div class="boosted-sponsor-donation-summary">
-			<div><span>Custo</span><strong><?= number_format($priceCoins, 0, ',', '.') ?> Tibia Coins</strong></div>
-			<div><span>Cooldown depois da entrada</span><strong>10 dias</strong></div>
-			<div><span>Saldo restante</span><strong><?= number_format($balanceAfter, 0, ',', '.') ?> Tibia Coins</strong></div>
+			<div><span><?= eclipseBoostedSponsorText('boosted_sponsor.cost', [], 'Cost') ?></span><strong><?= number_format($priceCoins, 0, ',', '.') ?> Tibia Coins</strong></div>
+			<div><span><?= eclipseBoostedSponsorText('boosted_sponsor.cooldown_after_entry', [], 'Cooldown after entry') ?></span><strong><?= eclipseBoostedSponsorText('boosted_sponsor.ten_days', [], '10 days') ?></strong></div>
+			<div><span><?= eclipseBoostedSponsorText('boosted_sponsor.remaining_balance', [], 'Remaining balance') ?></span><strong><?= number_format($balanceAfter, 0, ',', '.') ?> Tibia Coins</strong></div>
 		</div>
-		<p class="boosted-sponsor-status">Pedido #<?= (int)$orderId ?> confirmado com sucesso. O alvo <?= htmlspecialchars($target['name']) ?> foi agendado para a pr&oacute;xima rota&ccedil;&atilde;o di&aacute;ria e o slot ficou bloqueado para os demais jogadores.</p>
+		<p class="boosted-sponsor-status"><?= eclipseBoostedSponsorText('boosted_sponsor.status_confirmed_rotation', ['id' => (int)$orderId, 'name' => htmlspecialchars($target['name'])], 'Order #{id} confirmed successfully. Target {name} was scheduled for the next daily rotation and the slot was locked for other players.') ?></p>
 		<div class="boosted-sponsor-actions">
-			<a class="eclipse-btn" href="<?= getLink('boosted-sponsor') ?>?step=select&type=<?= htmlspecialchars((string)($_POST['target_type'] ?? 'boss')) ?>">Escolher outro alvo</a>
+			<a class="eclipse-btn" href="<?= getLink('boosted-sponsor') ?>?step=select&type=<?= htmlspecialchars((string)($_POST['target_type'] ?? 'boss')) ?>"><?= eclipseBoostedSponsorText('boosted_sponsor.choose_another_target', [], 'Choose another target') ?></a>
 		</div>
 	</div>
 <?php
@@ -331,7 +331,7 @@ if(!$logged) {
 }
 
 if(!$db->hasTable('eclipse_boosted_sponsorships') || !$db->hasTable('scheduled_boosted')) {
-	echo '<div class="boosted-sponsor-panel boosted-sponsor-error"><h2>Migra&ccedil;&atilde;o pendente</h2><p>As tabelas de patroc&iacute;nio boosted ainda n&atilde;o est&atilde;o completas. Aplique <code>sql/012-add-boosted-sponsorships.sql</code> e <code>sql/016-add-scheduled-boosted.sql</code> antes de ativar este fluxo.</p></div>';
+	echo '<div class="boosted-sponsor-panel boosted-sponsor-error"><h2>' . eclipseBoostedSponsorText('boosted_sponsor.migration_pending', [], 'Pending migration') . '</h2><p>' . eclipseBoostedSponsorText('boosted_sponsor.migration_pending_text', [], 'Boosted sponsorship tables are not complete yet. Apply <code>sql/012-add-boosted-sponsorships.sql</code> and <code>sql/016-add-scheduled-boosted.sql</code> before enabling this flow.') . '</p></div>';
 	eclipseBoostedSponsorRenderShellEnd();
 	eclipseBoostedSponsorRenderAssets();
 	return;
@@ -344,15 +344,15 @@ if($step === 'checkout' || $step === 'confirm') {
 	$priceCoins = eclipseBoostedSponsorPriceCoins($type);
 
 	if(!$target) {
-		error('O alvo selecionado nao foi encontrado.');
+		error(eclipseBoostedSponsorText('boosted_sponsor.error_target_not_found', [], 'The selected target was not found.'));
 		$step = 'select';
 	}
 	else if($currentSlot) {
-		error('Este slot ja foi reservado para a proxima rotacao.');
+		error(eclipseBoostedSponsorText('boosted_sponsor.error_slot_reserved', [], 'This slot has already been reserved for the next rotation.'));
 		$step = 'select';
 	}
 	else if(eclipseBoostedSponsorCooldownConflict($db, $type, $target['name'], $scheduledForDate)) {
-		error('Este alvo ainda esta em cooldown e nao pode voltar agora.');
+		error(eclipseBoostedSponsorText('boosted_sponsor.error_target_cooldown', [], 'This target is still on cooldown and cannot return now.'));
 		$step = 'select';
 	}
 	else if($step === 'checkout') {
@@ -370,7 +370,7 @@ if($step === 'checkout' || $step === 'confirm') {
 
 			$slotConflict = eclipseBoostedSponsorActiveSlot($db, $type, $scheduledForDate);
 			if($slotConflict) {
-				throw new RuntimeException('Este slot acabou de ser reservado por outro apoio. Escolha outro tipo ou volte em alguns minutos.');
+				throw new RuntimeException(eclipseBoostedSponsorText('boosted_sponsor.error_slot_just_reserved', [], 'This slot was just reserved by another support. Choose another type or come back in a few minutes.'));
 			}
 
 			$scheduledLock = $db->prepare(
@@ -381,12 +381,12 @@ if($step === 'checkout' || $step === 'confirm') {
 			$scheduledLock->execute([$type, $scheduledForDate]);
 			$scheduledConflict = $scheduledLock->fetch(PDO::FETCH_ASSOC);
 			if($scheduledConflict) {
-				throw new RuntimeException('Este slot acabou de ser agendado para ' . $scheduledConflict['boostname'] . '.');
+				throw new RuntimeException(eclipseBoostedSponsorText('boosted_sponsor.error_slot_just_scheduled', ['name' => $scheduledConflict['boostname']], 'This slot was just scheduled for {name}.'));
 			}
 
 			$cooldownConflict = eclipseBoostedSponsorCooldownConflict($db, $type, $target['name'], $scheduledForDate);
 			if($cooldownConflict) {
-				throw new RuntimeException('Este alvo entrou em cooldown enquanto voce navegava pela pagina.');
+				throw new RuntimeException(eclipseBoostedSponsorText('boosted_sponsor.error_cooldown_during_navigation', [], 'This target entered cooldown while you were browsing the page.'));
 			}
 
 			$coinsStmt = $db->prepare('SELECT coins FROM accounts WHERE id = ? FOR UPDATE');
@@ -394,7 +394,7 @@ if($step === 'checkout' || $step === 'confirm') {
 			$accountCoins = $coinsStmt->fetch(PDO::FETCH_ASSOC);
 			$currentCoins = (int)($accountCoins['coins'] ?? 0);
 			if($currentCoins < $priceCoins) {
-				throw new RuntimeException('Saldo insuficiente. Voce precisa de ' . number_format($priceCoins, 0, ',', '.') . ' Tibia Coins para este patrocinio.');
+				throw new RuntimeException(eclipseBoostedSponsorText('boosted_sponsor.error_not_enough_balance', ['coins' => number_format($priceCoins, 0, ',', '.')], 'Not enough balance. You need {coins} Tibia Coins for this sponsorship.'));
 			}
 
 			$balanceAfter = $currentCoins - $priceCoins;
@@ -419,7 +419,7 @@ if($step === 'checkout' || $step === 'confirm') {
 			]);
 
 			if(!$orderSaved) {
-				throw new RuntimeException('Nao foi possivel criar o pedido de patrocinio.');
+				throw new RuntimeException(eclipseBoostedSponsorText('boosted_sponsor.error_create_order', [], 'Could not create the sponsorship order.'));
 			}
 
 			$orderId = (int)$db->lastInsertId();
@@ -435,7 +435,7 @@ if($step === 'checkout' || $step === 'confirm') {
 			]);
 
 			if(!$scheduledSaved) {
-				throw new RuntimeException('Nao foi possivel agendar o boosted para a proxima rotacao.');
+				throw new RuntimeException(eclipseBoostedSponsorText('boosted_sponsor.error_schedule_boosted', [], 'Could not schedule the boosted for the next rotation.'));
 			}
 
 			$db->prepare('UPDATE accounts SET coins = coins - ? WHERE id = ?')->execute([$priceCoins, (int)$account->id]);
@@ -445,7 +445,7 @@ if($step === 'checkout' || $step === 'confirm') {
 					'type' => 2,
 					'coin_type' => 1,
 					'amount' => $priceCoins,
-					'description' => 'Patrocinio de boosted ' . eclipseBoostedSponsorTypeLabel($type) . ': ' . $target['name'],
+					'description' => eclipseBoostedSponsorText('boosted_sponsor.transaction_description', ['type' => eclipseBoostedSponsorTypeLabel($type), 'name' => $target['name']], 'Boosted sponsorship {type}: {name}'),
 				]);
 			}
 

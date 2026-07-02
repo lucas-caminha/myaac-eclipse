@@ -1,6 +1,6 @@
 {{ hook('HOOK_ACCOUNT_LOGIN_BEFORE_PAGE') }}
 <div class="eclipse-login-page">
-{% set account_login_label = account_login_by == 'Account Name' ? 'Nome da conta' : (account_login_by == 'Email Address' ? 'Email' : account_login_by) %}
+{% set account_login_label = account_login_by == 'Account Name' ? t('account.account_name') : (account_login_by == 'Email Address' ? 'Email' : account_login_by) %}
 <form action="{{ getLink('account/manage') }}" method="post" style="margin: 0; padding: 0;">
 	{{ csrf() }}
 
@@ -15,7 +15,7 @@
 				<span class="CaptionEdgeRightTop" style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);" ></span>
 				<span class="CaptionBorderTop" style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);" ></span>
 				<span class="CaptionVerticalLeft" style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);" ></span>
-				<div class="Text" >Entrar na Conta</div>
+				<div class="Text" >{{ t('account.login_title') }}</div>
 				<span class="CaptionVerticalRight" style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);" ></span>
 				<span class="CaptionBorderBottom" style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);" ></span>
 				<span class="CaptionEdgeLeftBottom" style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);" ></span>
@@ -49,11 +49,11 @@
 															</tr>
 															{{ hook('HOOK_ACCOUNT_LOGIN_AFTER_ACCOUNT') }}
 															<tr>
-																<td class="LabelV" ><span class="eclipse-login-field-label{% if error is not null %} red{% endif %}" style="color:#000 !important;font-weight:800 !important;text-shadow:none !important;">Senha:</span></td>
+																<td class="LabelV" ><span class="eclipse-login-field-label{% if error is not null %} red{% endif %}" style="color:#000 !important;font-weight:800 !important;text-shadow:none !important;">{{ t('account.password') }}:</span></td>
 																<td>
 																	<div class="eclipse-password-field">
 																		<input id="password_login" class="eclipse-login-input eclipse-password-input" style="width: 100%; color:#000 !important; -webkit-text-fill-color:#000 !important; font-weight:800 !important; text-shadow:none !important;" type="password" name="password_login" size="35" maxlength="29" autocomplete="current-password" />
-																		<button type="button" class="eclipse-password-toggle" style="color:#000 !important;-webkit-text-fill-color:#000 !important;text-shadow:none !important;" aria-label="Mostrar senha" aria-pressed="false">&#128065;</button>
+																		<button type="button" class="eclipse-password-toggle" style="color:#000 !important;-webkit-text-fill-color:#000 !important;text-shadow:none !important;" aria-label="{{ t('account.show_password') }}" aria-pressed="false">&#128065;</button>
 																	</div>
 																</td>
 															</tr>
@@ -61,7 +61,7 @@
 															<tr>
 																<td class="LabelV" ></td>
 																<td><input type="checkbox" id="remember_me" name="remember_me" value="true" />
-																	<label for="remember_me" style="color:#000 !important;font-weight:800 !important;text-shadow:none !important;"> Lembrar acesso</label></td>
+																	<label for="remember_me" style="color:#000 !important;font-weight:800 !important;text-shadow:none !important;"> {{ t('account.remember_access') }}</label></td>
 															</tr>
 															{{ hook('HOOK_ACCOUNT_LOGIN_AFTER_REMEMBER_ME') }}
 														</table>
@@ -100,7 +100,7 @@
 <br/>
 
 <div class="eclipse-login-divider">
-	<h1>Novo no {{ config.lua.serverName }}?</h1>
+	<h1>{{ t('account.new_on_server', {'server': config.lua.serverName}) }}</h1>
 </div>
 <div class="TableContainer eclipse-login-card eclipse-login-card-new" >
 	<div class="CaptionContainer" >
@@ -109,7 +109,7 @@
 			<span class="CaptionEdgeRightTop" style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
 			<span class="CaptionBorderTop" style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);" ></span>
 			<span class="CaptionVerticalLeft" style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-			<div class="Text" >Novo Jogador</div>
+			<div class="Text" >{{ t('account.new_player') }}</div>
 			<span class="CaptionVerticalRight" style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
 			<span class="CaptionBorderBottom" style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);" ></span>
 			<span class="CaptionEdgeLeftBottom" style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
@@ -140,7 +140,7 @@
 															{{ csrf() }}
 															<div class="MediumButtonBackground" style="background-image:url({{ template_path }}/images/global/buttons/mediumbutton.gif)" onMouseOver="MouseOverBigButton(this);" onMouseOut="MouseOutBigButton(this);">
 																<div class="MediumButtonOver" style="background-image:url({{ template_path }}/images/global/buttons/mediumbutton-over.gif)" onMouseOver="MouseOverBigButton(this);" onMouseOut="MouseOutBigButton(this);"></div>
-																<button class="MediumButtonText eclipse-login-create-button" type="submit" name="Create Account">Criar Conta</button>
+																<button class="MediumButtonText eclipse-login-create-button" type="submit" name="Create Account">{{ t('account.create_account') }}</button>
 															</div>
 														</form>
 														{% endapply %}
@@ -148,9 +148,9 @@
 													<div id="LoginCreateAccountBox" >
 														<p><b>{{ config.lua.serverName }}...</b></p>
 														<div style="margin-left: 10px;" >
-															<p>... onde o PvP hardcore encontra a fantasia.</p>
-															<p>... onde rivalidades e amizades duram uma vida.</p>
-															<p>... reúne aventureiros em busca de glória.</p>
+															<p>{{ t('account.login_pitch_1') }}</p>
+															<p>{{ t('account.login_pitch_2') }}</p>
+															<p>{{ t('account.login_pitch_3') }}</p>
 														</div>
 													</div>
 												</td>
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		var showPassword = password.type === 'password';
 		password.type = showPassword ? 'text' : 'password';
 		toggle.setAttribute('aria-pressed', showPassword ? 'true' : 'false');
-		toggle.setAttribute('aria-label', showPassword ? 'Esconder senha' : 'Mostrar senha');
+		toggle.setAttribute('aria-label', showPassword ? '{{ t('account.hide_password')|e('js') }}' : '{{ t('account.show_password')|e('js') }}');
 	});
 });
 </script>

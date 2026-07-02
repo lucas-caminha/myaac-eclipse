@@ -1,14 +1,16 @@
 <div class="eclipse-success-page eclipse-account-feedback">
 	<div class="eclipse-success-panel">
-		<div class="eclipse-success-title">Logout realizado</div>
+		<div class="eclipse-success-title">{{ t('account.logout_title') }}</div>
 		<div class="eclipse-success-body">
-			Voc&ecirc; saiu da sua conta do <strong>{{ config.lua.serverName }}</strong>.
-			Para acessar novamente sua &aacute;rea da conta, fa&ccedil;a <a href="{{ getLink('account/manage') }}">login</a>.
+			{{ t('account.logout_body', {
+				'server': '<strong>' ~ config.lua.serverName ~ '</strong>',
+				'login': '<a href="' ~ getLink('account/manage') ~ '">' ~ t('account.login_link') ~ '</a>'
+			})|raw }}
 		</div>
 	</div>
 
 	<div class="eclipse-success-actions">
-		<a class="eclipse-btn" style="color:#fff8dc !important;-webkit-text-fill-color:#fff8dc !important;text-shadow:0 1px 1px #000 !important;" href="{{ getLink('account/manage') }}">Entrar novamente</a>
-		<a class="eclipse-btn eclipse-btn-secondary" style="color:#fff8dc !important;-webkit-text-fill-color:#fff8dc !important;text-shadow:0 1px 1px #000 !important;" href="{{ getLink('news') }}">Voltar ao in&iacute;cio</a>
+		<a class="eclipse-btn" style="color:#fff8dc !important;-webkit-text-fill-color:#fff8dc !important;text-shadow:0 1px 1px #000 !important;" href="{{ getLink('account/manage') }}">{{ t('account.login_again') }}</a>
+		<a class="eclipse-btn eclipse-btn-secondary" style="color:#fff8dc !important;-webkit-text-fill-color:#fff8dc !important;text-shadow:0 1px 1px #000 !important;" href="{{ getLink('news') }}">{{ t('account.back_home') }}</a>
 	</div>
 </div>

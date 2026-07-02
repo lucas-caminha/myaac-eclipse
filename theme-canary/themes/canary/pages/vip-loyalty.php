@@ -56,12 +56,12 @@ $loyaltyUsingLuaSource = $loyaltySource['from_lua'];
 
 function eclipseStatusText(bool $enabled): string
 {
-	return $enabled ? 'Ativo' : 'Desativado';
+	return $enabled ? t('common.active') : t('common.disabled');
 }
 
 function eclipseYesNo(bool $enabled): string
 {
-	return $enabled ? 'Sim' : 'N&atilde;o';
+	return $enabled ? t('common.yes') : t('common.no');
 }
 
 function eclipseFormatPercent(float $value): string
@@ -143,7 +143,7 @@ function eclipseLoadLoyaltyFromLua(string $file, array $fallbackTitles, array $f
 	}
 
 	#News:has(.eclipse-vip-page) > .BorderTitleText::after {
-		content: "VIP & Loyalty";
+		content: "<?= addslashes(t('vip.page_title')) ?>";
 		display: flex;
 		align-items: center;
 		height: 100%;
@@ -425,8 +425,7 @@ function eclipseLoadLoyaltyFromLua(string $file, array $fallbackTitles, array $f
 			</div>
 			<div>
 				<p class="vip-lead">
-					Entenda como a conta VIP e o sistema de Loyalty melhoram sua jornada no Eclipse OT.
-					O VIP usa dias premium ativos na conta, enquanto o Loyalty recompensa o tempo de conta e, se configurado, os dias premium comprados ou utilizados.
+					<?= htmlspecialchars(t('vip.lead')) ?>
 				</p>
 			</div>
 			<div class="vip-status">
@@ -435,11 +434,11 @@ function eclipseLoadLoyaltyFromLua(string $file, array $fallbackTitles, array $f
 			</div>
 		</section>
 
-		<div class="vip-section-title">Benef&iacute;cios VIP</div>
+		<div class="vip-section-title"><?= htmlspecialchars(t('vip.benefits_title')) ?></div>
 		<div class="vip-benefits">
 			<div class="vip-benefit">
 				<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-Stamina.png" alt="">
-				<div><span>Experi&ecirc;ncia</span><strong>+<?php echo $vipBonusExp; ?>%</strong></div>
+				<div><span><?= htmlspecialchars(t('vip.benefit.exp')) ?></span><strong>+<?php echo $vipBonusExp; ?>%</strong></div>
 			</div>
 			<div class="vip-benefit">
 				<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-TrackLoot.png" alt="">
@@ -451,15 +450,15 @@ function eclipseLoadLoyaltyFromLua(string $file, array $fallbackTitles, array $f
 			</div>
 			<div class="vip-benefit">
 				<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-QuickLoot.png" alt="">
-				<div><span>Auto Loot VIP</span><strong><?php echo eclipseYesNo($vipAutoLootOnly); ?></strong></div>
+				<div><span><?= htmlspecialchars(t('vip.benefit.autoloot')) ?></span><strong><?php echo eclipseYesNo($vipAutoLootOnly); ?></strong></div>
 			</div>
 			<div class="vip-benefit">
 				<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-Login.png" alt="">
-				<div><span>Idle protegido</span><strong><?php echo eclipseYesNo($vipStayOnline); ?></strong></div>
+				<div><span><?= htmlspecialchars(t('vip.benefit.idle')) ?></span><strong><?php echo eclipseYesNo($vipStayOnline); ?></strong></div>
 			</div>
 			<div class="vip-benefit">
 				<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-House.png" alt="">
-				<div><span>Manter house</span><strong><?php echo eclipseYesNo($vipKeepHouse); ?></strong></div>
+				<div><span><?= htmlspecialchars(t('vip.benefit.house')) ?></span><strong><?php echo eclipseYesNo($vipKeepHouse); ?></strong></div>
 			</div>
 		</div>
 
@@ -469,11 +468,8 @@ function eclipseLoadLoyaltyFromLua(string $file, array $fallbackTitles, array $f
 					<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-VIP.png" alt="">
 				</div>
 				<div>
-					<h3>Como ativar VIP</h3>
-					<p>
-						Quando o sistema VIP estiver habilitado, qualquer conta com dias premium ativos ser&aacute; reconhecida como VIP pelo servidor.
-						Os b&ocirc;nus s&atilde;o aplicados automaticamente ao entrar no jogo.
-					</p>
+					<h3><?= htmlspecialchars(t('vip.activate_title')) ?></h3>
+					<p><?= htmlspecialchars(t('vip.activate_text')) ?></p>
 				</div>
 			</section>
 			<section class="vip-card">
@@ -481,28 +477,28 @@ function eclipseLoadLoyaltyFromLua(string $file, array $fallbackTitles, array $f
 					<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-Summons.png" alt="">
 				</div>
 				<div>
-					<h3>Recursos adicionais</h3>
+					<h3><?= htmlspecialchars(t('vip.extra_title')) ?></h3>
 					<ul>
-						<li>Redu&ccedil;&atilde;o de cooldown de familiar: <?php echo $vipFamiliarReduction; ?> minuto(s).</li>
-						<li>Recompensas online podem dar mais coins ou tokens para contas VIP quando os eventos estiverem ativos.</li>
-						<li>Alguns recursos dependem da configura&ccedil;&atilde;o atual do servidor.</li>
+						<li><?= htmlspecialchars(t('vip.extra.cooldown', ['minutes' => $vipFamiliarReduction])) ?></li>
+						<li><?= htmlspecialchars(t('vip.extra.rewards')) ?></li>
+						<li><?= htmlspecialchars(t('vip.extra.config')) ?></li>
 					</ul>
 				</div>
 			</section>
 		</div>
 
-		<div class="vip-section-title">Informa&ccedil;&otilde;es de Loyalty</div>
+		<div class="vip-section-title"><?= htmlspecialchars(t('vip.loyalty_title')) ?></div>
 		<div class="vip-grid">
 			<section class="vip-card">
 				<div class="vip-card-icon">
 					<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-Loyalty.png" alt="">
 				</div>
 				<div>
-					<h3>Como ganhar pontos</h3>
+					<h3><?= htmlspecialchars(t('vip.points_title')) ?></h3>
 					<ul>
-						<li><?php echo $loyaltyCreationDay; ?> ponto(s) por dia desde a cria&ccedil;&atilde;o da conta.</li>
-						<li><?php echo $loyaltyPremiumPurchased; ?> ponto(s) por dia premium comprado.</li>
-						<li><?php echo $loyaltyPremiumSpent; ?> ponto(s) por dia premium utilizado.</li>
+						<li><?= htmlspecialchars(t('vip.points.creation', ['points' => $loyaltyCreationDay])) ?></li>
+						<li><?= htmlspecialchars(t('vip.points.purchased', ['points' => $loyaltyPremiumPurchased])) ?></li>
+						<li><?= htmlspecialchars(t('vip.points.spent', ['points' => $loyaltyPremiumSpent])) ?></li>
 					</ul>
 				</div>
 			</section>
@@ -511,11 +507,8 @@ function eclipseLoadLoyaltyFromLua(string $file, array $fallbackTitles, array $f
 					<img src="<?php echo $template_path; ?>/images/premiumfeatures/PremiumIcon-Analytics.png" alt="">
 				</div>
 				<div>
-					<h3>O que o b&ocirc;nus afeta</h3>
-					<p>
-						O b&ocirc;nus de Loyalty afeta skills e magic level. Ele n&atilde;o altera diretamente experi&ecirc;ncia, loot ou dano final.
-						O multiplicador atual do b&ocirc;nus &eacute; <?php echo eclipseFormatPercent($loyaltyMultiplier); ?>x.
-					</p>
+					<h3><?= htmlspecialchars(t('vip.bonus_affects_title')) ?></h3>
+					<p><?= htmlspecialchars(t('vip.bonus_affects_text', ['multiplier' => eclipseFormatPercent($loyaltyMultiplier)])) ?></p>
 				</div>
 			</section>
 		</div>
@@ -523,18 +516,18 @@ function eclipseLoadLoyaltyFromLua(string $file, array $fallbackTitles, array $f
 		<div class="vip-source-note">
 			<img src="<?php echo $template_path; ?>/images/content/info.gif" alt="">
 			<span>
-				As configura&ccedil;&otilde;es de VIP s&atilde;o lidas do config do servidor.
-				Os t&iacute;tulos e b&ocirc;nus de Loyalty <?php echo $loyaltyUsingLuaSource ? 'foram carregados diretamente do script Lua do jogo.' : 'est&atilde;o usando valores padr&atilde;o porque o script Lua do jogo n&atilde;o foi encontrado pelo site.'; ?>
+				<?= htmlspecialchars(t('vip.source_prefix')) ?>
+				<?= htmlspecialchars($loyaltyUsingLuaSource ? t('vip.source_lua') : t('vip.source_default')) ?>
 			</span>
 		</div>
 
-		<div class="vip-section-title">T&iacute;tulos de Loyalty</div>
+		<div class="vip-section-title"><?= htmlspecialchars(t('vip.titles_title')) ?></div>
 		<div class="vip-table-wrap">
 			<table class="vip-table">
 				<thead>
 				<tr>
-					<th>T&iacute;tulo</th>
-					<th>Pontos necess&aacute;rios</th>
+					<th><?= htmlspecialchars(t('common.title')) ?></th>
+					<th><?= htmlspecialchars(t('vip.required_points')) ?></th>
 				</tr>
 				</thead>
 				<tbody>
@@ -548,14 +541,14 @@ function eclipseLoadLoyaltyFromLua(string $file, array $fallbackTitles, array $f
 			</table>
 		</div>
 
-		<div class="vip-section-title">B&ocirc;nus de Skills por Loyalty</div>
+		<div class="vip-section-title"><?= htmlspecialchars(t('vip.skills_bonus_title')) ?></div>
 		<div class="vip-table-wrap">
 			<table class="vip-table">
 				<thead>
 				<tr>
-					<th>Pontos necess&aacute;rios</th>
-					<th>B&ocirc;nus base</th>
-					<th>B&ocirc;nus atual</th>
+					<th><?= htmlspecialchars(t('vip.required_points')) ?></th>
+					<th><?= htmlspecialchars(t('vip.base_bonus')) ?></th>
+					<th><?= htmlspecialchars(t('vip.current_bonus')) ?></th>
 				</tr>
 				</thead>
 				<tbody>
@@ -573,8 +566,8 @@ function eclipseLoadLoyaltyFromLua(string $file, array $fallbackTitles, array $f
 		</div>
 
 		<div class="vip-note">
-			<strong>Observa&ccedil;&atilde;o:</strong>
-			os valores exibidos usam a configura&ccedil;&atilde;o atual do servidor. Caso o VIP esteja desativado, dias premium continuam existindo na conta, mas os benef&iacute;cios especiais de VIP n&atilde;o s&atilde;o aplicados pelo jogo.
+			<strong><?= htmlspecialchars(t('common.note')) ?>:</strong>
+			<?= htmlspecialchars(t('vip.note')) ?>
 		</div>
 	</div>
 </div>

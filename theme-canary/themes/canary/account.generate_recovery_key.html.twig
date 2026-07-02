@@ -1,30 +1,30 @@
 <div class="eclipse-register-account-page">
 	<div class="register-account-hero">
-		<div class="register-account-kicker">Seguranca da conta</div>
-		<p>Confirme sua senha para registrar a conta e receber uma chave de recuperacao. Guarde essa chave fora do computador.</p>
+		<div class="register-account-kicker">{{ t('account.register_security_title') }}</div>
+		<p>{{ t('account.register_security_intro') }}</p>
 	</div>
 
 	<div class="register-account-grid">
 		<section class="register-account-card register-account-form-card">
-			<div class="register-account-card-title">Confirmacao</div>
+			<div class="register-account-card-title">{{ t('account.confirmation') }}</div>
 			<div class="register-account-card-body">
 				<form id="form" action="{{ getLink('account/register') }}" method="post">
 					{{ csrf() }}
 					<input type="hidden" name="registeraccountsave" value="1"/>
 
-					<label class="register-account-label" for="reg_password">Senha da conta</label>
+					<label class="register-account-label" for="reg_password">{{ t('account.account_password') }}</label>
 					<input class="register-account-input" type="password" id="reg_password" name="reg_password" maxlength="29" autofocus autocomplete="current-password"/>
-					<p class="register-account-field-note">Digite a senha atual da sua conta para gerar a Recovery Key.</p>
+					<p class="register-account-field-note">{{ t('account.register_password_hint') }}</p>
 
 					<div class="register-account-actions">
-						{% set button_name = 'Gerar Key' %}
+						{% set button_name = t('account.generate_key') %}
 						{{ include('buttons.submit.html.twig') }}
 					</div>
 				</form>
 
 				<form class="register-account-back-form" action="{{ getLink('account/manage') }}" method="post">
 					{{ csrf() }}
-					{% set button_name = 'Voltar' %}
+					{% set button_name = t('common.back') %}
 					{% set button_image = '_sbutton_back' %}
 					{{ include('buttons.base.html.twig') }}
 				</form>
@@ -32,12 +32,12 @@
 		</section>
 
 		<aside class="register-account-card register-account-info-card">
-			<div class="register-account-card-title">Antes de continuar</div>
+			<div class="register-account-card-title">{{ t('account.before_continue') }}</div>
 			<div class="register-account-card-body">
 				<ul class="register-account-checklist">
-					<li>Ela permite recuperar sua conta se você perder acesso ao email.</li>
-					<li>Nunca envie sua Recovery Key para jogadores, suporte falso ou terceiros.</li>
-					<li>Anote exatamente como aparecer na tela de sucesso.</li>
+					<li>{{ t('account.recovery_key_info_1') }}</li>
+					<li>{{ t('account.recovery_key_info_2') }}</li>
+					<li>{{ t('account.recovery_key_info_3') }}</li>
 				</ul>
 			</div>
 		</aside>

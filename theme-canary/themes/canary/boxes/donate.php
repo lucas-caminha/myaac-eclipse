@@ -58,13 +58,13 @@
     }
 </style>
 <div class="donate">
-    <div class="donate_header">WEBSHOP</div>
+    <div class="donate_header"><?= htmlspecialchars(t('box.webshop.title')) ?></div>
     <div class="donate_content">
-        <div>
-            <img src="<?php echo $template_path ?>/images/themeboxes/donate/donate.png">
+        <div data-exclusive-label="<?= htmlspecialchars(t('box.webshop.exclusive')) ?>">
+            <img src="<?php echo $template_path ?>/images/themeboxes/donate/donate.png" alt="<?= htmlspecialchars(t('box.webshop.exclusive')) ?>">
         </div>
         <a href="<?= getLink('points'); ?>">
-            <button type="button" class="donate_button">OBTER ECLIPSE COINS</button>
+            <button type="button" class="donate_button"><?= htmlspecialchars(t('box.webshop.button')) ?></button>
         </a>
     </div>
     <div class="donate_bottom"></div>

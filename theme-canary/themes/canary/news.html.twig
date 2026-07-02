@@ -4,7 +4,7 @@
 		<div class="NewsHeadlineDate">{{ date|date(setting('core.news_date_format')) }} - </div>
 		<div class="NewsHeadlineText">{{ title }}</div>
 		{% if setting('core.news_author') and author is not empty %}
-		<div class="NewsHeadlineAuthor"><b>Author: </b><i>{{ author }}</i></div>
+		<div class="NewsHeadlineAuthor"><b>{{ t('news.author') }}: </b><i>{{ author }}</i></div>
 		{% endif %}
 	</div>
 </div>

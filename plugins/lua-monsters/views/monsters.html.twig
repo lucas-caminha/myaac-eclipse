@@ -1,29 +1,29 @@
 <div class="eclipse-plugin-page eclipse-monsters-page">
 	<header class="eclipse-plugin-hero">
-		<span class="eclipse-plugin-kicker">{{ isBossPage ? 'Bosstiary do Eclipse' : 'Bestiário do Eclipse' }}</span>
-		<p>{{ isBossPage ? 'Escolha uma classe do Bosstiary para consultar seus bosses, atributos e recompensas.' : 'Escolha uma classe do Bestiary para consultar suas criaturas, atributos e recompensas.' }}</p>
+		<span class="eclipse-plugin-kicker">{{ t(isBossPage ? 'monsters.bosstiary_kicker' : 'monsters.bestiary_kicker') }}</span>
+		<p>{{ t(isBossPage ? 'monsters.bosstiary_intro' : 'monsters.bestiary_intro') }}</p>
 	</header>
 
-	<nav class="eclipse-monster-page-switch" aria-label="Biblioteca de criaturas">
-		<a{% if not isBossPage %} class="is-active"{% endif %} href="{{ getLink('monsters') }}">Monstros</a>
-		<a{% if isBossPage %} class="is-active"{% endif %} href="{{ getLink('bosses') }}">Bosses</a>
+	<nav class="eclipse-monster-page-switch" aria-label="{{ t('monsters.library_aria') }}">
+		<a{% if not isBossPage %} class="is-active"{% endif %} href="{{ getLink('monsters') }}">{{ t('monsters.monsters') }}</a>
+		<a{% if isBossPage %} class="is-active"{% endif %} href="{{ getLink('bosses') }}">{{ t('monsters.bosses') }}</a>
 	</nav>
 
-	<div class="eclipse-bestiary-category-grid{% if isBossPage %} is-bosstiary{% endif %}" aria-label="Classes do {{ isBossPage ? 'Bosstiary' : 'Bestiary' }}">
+	<div class="eclipse-bestiary-category-grid{% if isBossPage %} is-bosstiary{% endif %}" aria-label="{{ t('monsters.category_aria', {'type': isBossPage ? 'Bosstiary' : 'Bestiary'}) }}">
 	{% for category in categories %}
 		<a class="eclipse-bestiary-category{% if category.name == selectedCategory %} is-active{% endif %}" href="{{ category.link }}">
 			<strong>{{ category.name }}</strong>
 			<span class="eclipse-bestiary-category-image">{% if category.image %}<img src="{{ category.image }}" alt="">{% endif %}</span>
-			<small>{{ category.total }} {% if isBossPage %}{{ category.total == 1 ? 'boss' : 'bosses' }}{% else %}{{ category.total == 1 ? 'criatura' : 'criaturas' }}{% endif %}</small>
+			<small>{{ category.total }} {% if isBossPage %}{{ category.total == 1 ? 'boss' : 'bosses' }}{% else %}{{ t(category.total == 1 ? 'monsters.creature_singular' : 'monsters.creature_plural') }}{% endif %}</small>
 		</a>
 	{% endfor %}
 	</div>
 
 	<div class="eclipse-bestiary-results-header">
-		<div><span>Classe selecionada</span><h3>{{ selectedCategory }}</h3><p><strong data-visible-monster-count>{{ monsters|length }}</strong> {{ isBossPage ? 'bosses exibidos' : 'criaturas exibidas' }}</p></div>
+		<div><span>{{ t('monsters.selected_class') }}</span><h3>{{ selectedCategory }}</h3><p><strong data-visible-monster-count>{{ monsters|length }}</strong> {{ t(isBossPage ? 'monsters.bosses_displayed' : 'monsters.creatures_displayed') }}</p></div>
 		<div class="eclipse-bestiary-actions">
-			<input class="eclipse-plugin-search" type="search" placeholder="Buscar nesta classe" data-monster-search>
-			{% if isAdmin %}<form action="{{ getLink('monsters') }}" method="post">{{ csrf() }}<input type="hidden" name="reload" value="1"><button class="eclipse-plugin-button eclipse-plugin-button-secondary" type="submit">Atualizar bestiário</button></form>{% endif %}
+			<input class="eclipse-plugin-search" type="search" placeholder="{{ t('monsters.search_placeholder') }}" data-monster-search>
+			{% if isAdmin %}<form action="{{ getLink('monsters') }}" method="post">{{ csrf() }}<input type="hidden" name="reload" value="1"><button class="eclipse-plugin-button eclipse-plugin-button-secondary" type="submit">{{ t('monsters.reload_bestiary') }}</button></form>{% endif %}
 		</div>
 	</div>
 
@@ -32,11 +32,11 @@
 		<a class="eclipse-monster-card{% if isBossPage %} is-boss{% endif %}" href="{{ monster.link }}" data-name="{{ monster.name|lower }}">
 			<div class="eclipse-monster-portrait"><img src="{{ monster.img_link }}" alt="{{ monster.name }}"></div>
 			<div><strong>{{ monster.name }}</strong><span>{{ selectedCategory }}</span></div>
-			<dl><div><dt>Vida</dt><dd>{{ monster.health|number_format(0, ',', '.') }}</dd></div><div><dt>EXP</dt><dd>{{ monster.exp|number_format(0, ',', '.') }}</dd></div></dl>
+			<dl><div><dt>{{ t('monsters.health') }}</dt><dd>{{ monster.health|number_format(0, ',', '.') }}</dd></div><div><dt>EXP</dt><dd>{{ monster.exp|number_format(0, ',', '.') }}</dd></div></dl>
 		</a>
-	{% else %}<div class="eclipse-plugin-empty">Nenhum {{ isBossPage ? 'boss' : 'monstro' }} encontrado nesta classe.</div>{% endfor %}
+	{% else %}<div class="eclipse-plugin-empty">{{ t('monsters.empty_class', {'type': isBossPage ? 'boss' : t('monsters.monster_word')}) }}</div>{% endfor %}
 	</div>
-	<div class="eclipse-plugin-empty eclipse-monster-search-empty" data-monster-empty hidden>Nenhum {{ isBossPage ? 'boss' : 'monstro' }} encontrado com esse nome.</div>
+	<div class="eclipse-plugin-empty eclipse-monster-search-empty" data-monster-empty hidden>{{ t('monsters.empty_search', {'type': isBossPage ? 'boss' : t('monsters.monster_word')}) }}</div>
 </div>
 <script>
 var monsterSearch = document.querySelector('[data-monster-search]');

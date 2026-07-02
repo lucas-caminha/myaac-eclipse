@@ -3,34 +3,34 @@
 	<header class="eclipse-plugin-hero eclipse-market-detail-hero">
 		<div class="eclipse-market-detail-outfit"><img src="{{ offer.outfit }}" alt="{{ offer.name }}"></div>
 		<div>
-			<span class="eclipse-plugin-kicker">Personagem à venda</span>
+			<span class="eclipse-plugin-kicker">{{ t('market.for_sale') }}</span>
 			<h2>{{ offer.name }}</h2>
-			<p>Nível {{ offer.level }} • {{ offer.vocation_name }} • {{ offer.status_name }}</p>
+			<p>{{ t('market.hero_line', {'level': offer.level, 'vocation': offer.vocation_name, 'status': offer.status_name}) }}</p>
 			<strong class="eclipse-market-price">{{ offer.price|number_format(0, ',', '.') }} coins</strong>
 		</div>
 	</header>
 
 	<div class="eclipse-market-detail-actions">
-		<a class="eclipse-plugin-button eclipse-plugin-button-secondary" href="{{ getLink('character-sale') }}">Voltar ao mercado</a>
+		<a class="eclipse-plugin-button eclipse-plugin-button-secondary" href="{{ getLink('character-sale') }}">{{ t('market.back_to_market') }}</a>
 		{% if logged %}
 			<form action="{{ getLink('character-sale') }}" method="post">
 				{{ csrf() }}
 				<input type="hidden" name="offer_id" value="{{ offer.id }}">
 				{% if offer.seller_account_id == accountId %}
 					<input type="hidden" name="market_action" value="cancel">
-					<button class="eclipse-plugin-button eclipse-plugin-button-danger" type="submit">Cancelar oferta</button>
+					<button class="eclipse-plugin-button eclipse-plugin-button-danger" type="submit">{{ t('market.cancel_offer') }}</button>
 				{% else %}
 					<input type="hidden" name="market_action" value="buy">
-					<button class="eclipse-plugin-button" type="submit" onclick="return confirm('Confirmar a compra de {{ offer.name|e('js') }}?')">Comprar personagem</button>
+					<button class="eclipse-plugin-button" type="submit" onclick="return confirm('{{ t('market.confirm_buy', {'name': offer.name})|e('js') }}')">{{ t('market.buy_character') }}</button>
 				{% endif %}
 			</form>
 		{% else %}
-			<a class="eclipse-plugin-button" href="{{ getLink('account/manage') }}">Entrar para comprar</a>
+			<a class="eclipse-plugin-button" href="{{ getLink('account/manage') }}">{{ t('market.login_to_buy') }}</a>
 		{% endif %}
 	</div>
 
 	<section class="eclipse-plugin-section">
-		<h3>Resumo</h3>
+		<h3>{{ t('market.summary') }}</h3>
 		<div class="eclipse-market-detail-stats">
 			{% for stat in summaryStats %}
 				<div><span>{{ stat.label }}</span><strong>{{ stat.value }}</strong></div>
@@ -39,7 +39,7 @@
 	</section>
 
 	<section class="eclipse-plugin-section">
-		<h3>Informações</h3>
+		<h3>{{ t('market.info') }}</h3>
 		<div class="eclipse-market-info-list">
 			{% for stat in infoStats %}
 				<div><span>{{ stat.label }}</span><strong>{{ stat.value }}</strong></div>
@@ -48,7 +48,7 @@
 	</section>
 
 	<section class="eclipse-plugin-section">
-		<h3>Progressão</h3>
+		<h3>{{ t('market.progress') }}</h3>
 		<div class="eclipse-market-detail-stats">
 			{% for stat in progressStats %}
 				<div><span>{{ stat.label }}</span><strong>{{ stat.value }}</strong></div>
@@ -58,7 +58,7 @@
 
 	{% if combatStats is not empty %}
 	<section class="eclipse-plugin-section">
-		<h3>Combate</h3>
+		<h3>{{ t('market.combat') }}</h3>
 		<div class="eclipse-market-detail-stats">
 			{% for stat in combatStats %}
 				<div><span>{{ stat.label }}</span><strong>{{ stat.value }}</strong></div>
@@ -77,7 +77,7 @@
 	</section>
 
 	<section class="eclipse-plugin-section">
-		<h3>Equipamentos</h3>
+		<h3>{{ t('market.equipment') }}</h3>
 		{% if equipment is not empty %}
 			<div class="eclipse-market-equipment-grid">
 				{% for item in equipment %}
@@ -85,16 +85,16 @@
 				{% endfor %}
 			</div>
 		{% else %}
-			<p class="eclipse-plugin-note">Nenhum equipamento visível encontrado.</p>
+			<p class="eclipse-plugin-note">{{ t('market.no_equipment') }}</p>
 		{% endif %}
 	</section>
 
 	{% if deaths is not empty %}
 	<section class="eclipse-plugin-section">
-		<h3>Mortes recentes</h3>
+		<h3>{{ t('market.recent_deaths') }}</h3>
 		<div class="eclipse-market-death-list">
 			{% for death in deaths %}
-				<div><span>{{ death.date }} • nível {{ death.level }}</span><strong>{{ death.killed_by }}</strong>{% if death.mostdamage_by %}<small>Maior dano: {{ death.mostdamage_by }}</small>{% endif %}</div>
+				<div><span>{{ t('market.death_line', {'date': death.date, 'level': death.level}) }}</span><strong>{{ death.killed_by }}</strong>{% if death.mostdamage_by %}<small>{{ t('market.most_damage', {'name': death.mostdamage_by}) }}</small>{% endif %}</div>
 			{% endfor %}
 		</div>
 	</section>
@@ -102,12 +102,12 @@
 
 	{% if offer.comment %}
 	<section class="eclipse-plugin-section">
-		<h3>Comentário público</h3>
+		<h3>{{ t('market.public_comment') }}</h3>
 		<p class="eclipse-market-comment">{{ offer.comment }}</p>
 	</section>
 	{% endif %}
 {% else %}
-	<div class="eclipse-plugin-empty">Oferta não encontrada.</div>
-	<a class="eclipse-plugin-button eclipse-plugin-button-secondary" href="{{ getLink('character-sale') }}">Voltar ao mercado</a>
+	<div class="eclipse-plugin-empty">{{ t('market.offer_not_found') }}</div>
+	<a class="eclipse-plugin-button eclipse-plugin-button-secondary" href="{{ getLink('character-sale') }}">{{ t('market.back_to_market') }}</a>
 {% endif %}
 </div>

@@ -2,7 +2,7 @@
 defined('MYAAC') or die('Direct access not allowed!');
 $pageMode = $monsterPageMode ?? 'monsters';
 $isBossPage = $pageMode === 'bosses';
-$title = $isBossPage ? 'Bosses' : 'Monstros';
+$title = $isBossPage ? t('monsters.bosses_title') : t('monsters.page_title');
 
 require_once PLUGINS . 'lua-monsters/src/Models/LuaMonster.php';
 require_once PLUGINS . 'lua-monsters/src/Monsters.php';
@@ -33,7 +33,7 @@ if($reload && admin()) {
 
 	$timeTotal = round($timer->elapsed(), 2);
 
-	success("Monstros atualizados em $timeTotal segundos.");
+	success(t('monsters.reload_success', ['seconds' => $timeTotal]));
 }
 
 if(admin()) {
@@ -110,7 +110,7 @@ if ($monsterModel && isset($monsterModel->name)) {
 		return ($a['chance'] > $b['chance']) ? -1 : 1;
 	}
 
-	$title = $monster['name'] . ($isBossPage ? ' - Bosses' : ' - Monstros');
+	$title = $monster['name'] . ($isBossPage ? ' - ' . t('monsters.bosses_title') : ' - ' . t('monsters.page_title'));
 
 	$outfit = json_decode($monster['outfit'], true);
 
@@ -140,7 +140,7 @@ if ($monsterModel && isset($monsterModel->name)) {
 
 		$item['rarity_chance'] = round($item['chance'] / 1000, 2);
 		$item['rarity'] = getItemRarity($item['chance']);
-		$item['tooltip'] = ucfirst($item['name']) . '<br/>Chance: ' . $item['rarity'] . (setting('core.monsters_loot_percentage') ? ' ('. $item['rarity_chance'] .'%)' : '') . '<br/>Max count: ' . ($item['maxCount'] ?? 1);
+		$item['tooltip'] = ucfirst($item['name']) . '<br/>' . t('monsters.chance') . ': ' . $item['rarity'] . (setting('core.monsters_loot_percentage') ? ' ('. $item['rarity_chance'] .'%)' : '') . '<br/>' . t('monsters.max_count') . ': ' . ($item['maxCount'] ?? 1);
 	}
 
 	$monster['loot'] = $loot ?? null;
@@ -155,7 +155,7 @@ if ($monsterModel && isset($monsterModel->name)) {
 	));
 
 } else {
-	error("O monstro <b>" . htmlspecialchars($monster_name) . "</b> não foi encontrado.");
+	error(t('monsters.not_found', ['name' => '<b>' . htmlspecialchars($monster_name) . '</b>']));
 }
 
 // back button

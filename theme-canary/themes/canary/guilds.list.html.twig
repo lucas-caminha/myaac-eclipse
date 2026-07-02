@@ -1,15 +1,15 @@
-{% set title = 'Guildas Ativas - ' ~ config.lua.serverName %}
+{% set title = t('guilds.active_title', {'server': config.lua.serverName}) %}
 {% set content %}
 
 <div class="eclipse-directory-page eclipse-guilds-page">
 	<div class="directory-card">
-		<div class="directory-card-title">Lista de Guildas</div>
+		<div class="directory-card-title">{{ t('guilds.list_title') }}</div>
 		<table class="directory-table guilds-table">
 			<tbody>
 			{% if guilds|length > 0 %}
 				<tr class="LabelH">
 					<td class="guild-logo-cell">Logo</td>
-					<td>Descri&ccedil;&atilde;o</td>
+					<td>{{ t('common.description') }}</td>
 					<td></td>
 				</tr>
 
@@ -21,12 +21,12 @@
 						<td class="guild-description-cell">
 							<strong>{{ guild.name }}</strong>
 							{% if isAdmin %}
-								<a href="{{ getLink('guilds') }}?action=delete_by_admin&guild={{ guild.name }}"> - deletar</a>
+								<a href="{{ getLink('guilds') }}?action=delete_by_admin&guild={{ guild.name }}"> - {{ t('common.delete') }}</a>
 							{% endif %}
 							{% if guild.description is not empty %}
 								<p>{{ guild.description }}</p>
 							{% else %}
-								<p>Esta guilda ainda n&atilde;o possui descri&ccedil;&atilde;o p&uacute;blica.</p>
+								<p>{{ t('guilds.no_description') }}</p>
 							{% endif %}
 						</td>
 						<td class="directory-action">
@@ -40,8 +40,8 @@
 			{% else %}
 				<tr>
 					<td class="directory-empty">
-						Nenhuma guilda ativa encontrada.
-						{% if logged %}Voc&ecirc; pode criar a primeira guilda do servidor.{% endif %}
+						{{ t('guilds.empty') }}
+						{% if logged %}{{ t('guilds.create_first') }}{% endif %}
 					</td>
 				</tr>
 			{% endif %}
@@ -51,15 +51,15 @@
 
 	<div class="directory-note guilds-action-note">
 		{% if logged %}
-			<span>N&atilde;o encontrou uma guilda para chamar de sua?</span>
+			<span>{{ t('guilds.action_logged') }}</span>
 			<form action="{{ getLink('guilds') }}?action=create" method="post">
 				{{ csrf() }}
-				{% set button_name = 'Criar Guilda' %}
+				{% set button_name = t('guilds.create') %}
 				{% set button_image = '_sbutton_foundguild' %}
 				{% include('buttons.base.html.twig') %}
 			</form>
 		{% else %}
-			<span>Entre na sua conta para criar uma guilda.</span>
+			<span>{{ t('guilds.action_guest') }}</span>
 			<form action="{{ getLink('account/manage') }}?redirect={{ getLink('guilds') }}" method="post">
 				{{ csrf() }}
 				{% include('buttons.login.html.twig') %}

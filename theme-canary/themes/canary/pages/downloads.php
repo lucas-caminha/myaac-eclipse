@@ -3,7 +3,7 @@
  * Custom downloads page for Eclipse OT.
  */
 defined('MYAAC') or die('Direct access not allowed!');
-$title = 'Baixar Cliente';
+$title = t('downloads.page_title');
 
 $clientVersion = '15.11.c9d1cf-r1';
 $launcherVersion = '1.0.1';
@@ -40,7 +40,7 @@ $clientUrl = '/downloads/eclipse-client-15.11.c9d1cf.zip';
 	}
 
 	#News:has(.eclipse-download-page) > .BorderTitleText::after {
-		content: "Baixar Cliente";
+		content: "<?php echo addslashes(t('downloads.page_title')); ?>";
 		display: flex;
 		align-items: center;
 		height: 100%;
@@ -177,46 +177,45 @@ $clientUrl = '/downloads/eclipse-client-15.11.c9d1cf.zip';
 	<div class="download-shell">
 		<div class="download-hero">
 			<div class="download-hero-copy">
-				<span class="download-eyebrow">Launcher oficial</span>
+				<span class="download-eyebrow"><?php echo htmlspecialchars(t('downloads.eyebrow')); ?></span>
 				<p class="download-lead">
-					Use o cliente oficial Tibia <?php echo htmlspecialchars($clientVersion); ?> para jogar no Eclipse OT.
-					Baixe o launcher para instalar e atualizar o cliente automaticamente.
+					<?php echo htmlspecialchars(t('downloads.lead', ['client_version' => $clientVersion])); ?>
 				</p>
 				<div class="download-version-row">
-					<span>Client <?php echo htmlspecialchars($clientVersion); ?></span>
-					<span>Launcher <?php echo htmlspecialchars($launcherVersion); ?></span>
+					<span><?php echo htmlspecialchars(t('downloads.client_version', ['version' => $clientVersion])); ?></span>
+					<span><?php echo htmlspecialchars(t('downloads.launcher_version', ['version' => $launcherVersion])); ?></span>
 				</div>
 			</div>
 			<div class="download-primary-panel">
 				<div class="download-file-meta">
-					<strong>EclipseLauncher.exe</strong>
-					<span>Op&ccedil;&atilde;o recomendada. Baixe, extraia o .zip e abra o launcher para instalar o jogo.</span>
+					<strong><?php echo htmlspecialchars(t('downloads.file_name')); ?></strong>
+					<span><?php echo htmlspecialchars(t('downloads.file_meta')); ?></span>
 				</div>
 				<div class="download-actions">
-					<a class="download-button" href="<?php echo htmlspecialchars($launcherUrl); ?>">Baixar Launcher</a>
-					<a class="download-button secondary" href="<?php echo htmlspecialchars($clientUrl); ?>">Baixar Cliente Completo</a>
+					<a class="download-button" href="<?php echo htmlspecialchars($launcherUrl); ?>"><?php echo htmlspecialchars(t('downloads.button_launcher')); ?></a>
+					<a class="download-button secondary" href="<?php echo htmlspecialchars($clientUrl); ?>"><?php echo htmlspecialchars(t('downloads.button_client')); ?></a>
 				</div>
 			</div>
 		</div>
 
 		<div class="download-grid">
 			<div class="download-card">
-				<strong><span class="download-step">1</span>Baixe o launcher</strong>
-				<span>Extraia o arquivo em uma pasta nova e abra o EclipseLauncher.exe.</span>
+				<strong><span class="download-step">1</span><?php echo htmlspecialchars(t('downloads.step_1_title')); ?></strong>
+				<span><?php echo htmlspecialchars(t('downloads.step_1_text')); ?></span>
 			</div>
 			<div class="download-card">
-				<strong><span class="download-step">2</span>Atualize o cliente</strong>
-				<span>O launcher baixa o cliente corrigido e salva a vers&atilde;o local automaticamente.</span>
+				<strong><span class="download-step">2</span><?php echo htmlspecialchars(t('downloads.step_2_title')); ?></strong>
+				<span><?php echo htmlspecialchars(t('downloads.step_2_text')); ?></span>
 			</div>
 			<div class="download-card">
-				<strong><span class="download-step">3</span>Entre no jogo</strong>
-				<span>Crie sua conta, escolha sua voca&ccedil;&atilde;o e comece sua jornada no Eclipse OT.</span>
+				<strong><span class="download-step">3</span><?php echo htmlspecialchars(t('downloads.step_3_title')); ?></strong>
+				<span><?php echo htmlspecialchars(t('downloads.step_3_text')); ?></span>
 			</div>
 		</div>
 
 		<div class="download-note">
-			<strong>Aviso do Windows:</strong>
-			<span>O Windows pode exibir alerta porque o launcher ainda n&atilde;o possui assinatura digital com reputa&ccedil;&atilde;o SmartScreen. Baixe sempre por esta p&aacute;gina oficial.</span>
+			<strong><?php echo htmlspecialchars(t('downloads.warning_title')); ?></strong>
+			<span><?php echo htmlspecialchars(t('downloads.warning_text')); ?></span>
 		</div>
 	</div>
 </div>

@@ -3,60 +3,60 @@
 {% set eclipse_vocation_guides = {
 	'knight': {
 		'image': 'knightbanner.png',
-		'name': 'Cavaleiro',
-		'role': 'Defensor de linha de frente',
-		'description': 'Feito para combate corpo a corpo, armaduras pesadas, escudos e pressão constante no centro da batalha.'
+		'name': t('account.vocation.knight.name'),
+		'role': t('account.vocation.knight.role'),
+		'description': t('account.vocation.knight.description')
 	},
 	'paladin': {
 		'image': 'paladinbanner.png',
-		'name': 'Paladino',
-		'role': 'Híbrido de distância',
-		'description': 'Um atirador flexível que mistura dano à distância, sobrevivência e magia útil.'
+		'name': t('account.vocation.paladin.name'),
+		'role': t('account.vocation.paladin.role'),
+		'description': t('account.vocation.paladin.description')
 	},
 	'monk': {
 		'image': 'monkbanner.png',
-		'name': 'Monge',
-		'role': 'Espírito marcial',
-		'description': 'Um lutador disciplinado que combina força física com técnicas espirituais.'
+		'name': t('account.vocation.monk.name'),
+		'role': t('account.vocation.monk.role'),
+		'description': t('account.vocation.monk.description')
 	},
 	'sorcerer': {
 		'image': 'sorcererbanner.png',
-		'name': 'Feiticeiro',
-		'role': 'Dano elemental',
-		'description': 'Focado em magias destrutivas, dano explosivo e poder ofensivo.'
+		'name': t('account.vocation.sorcerer.name'),
+		'role': t('account.vocation.sorcerer.role'),
+		'description': t('account.vocation.sorcerer.description')
 	},
 	'druid': {
 		'image': 'druidbanner.png',
-		'name': 'Druida',
-		'role': 'Suporte e cura',
-		'description': 'Um conjurador ligado à natureza, com cura, suporte e utilidade confiável para o grupo.'
+		'name': t('account.vocation.druid.name'),
+		'role': t('account.vocation.druid.role'),
+		'description': t('account.vocation.druid.description')
 	}
 } %}
 {% set eclipse_gender_labels = {
-	'male': 'masculino',
-	'female': 'feminino'
+	'male': t('account.male')|lower,
+	'female': t('account.female')|lower
 } %}
 <form action="{{ getLink('account/create') }}" method="post" id="createaccount">
 	{{ csrf() }}
 
-	<div class="eclipse-registration-steps" aria-label="Etapas do cadastro">
+	<div class="eclipse-registration-steps" aria-label="{{ t('account.registration_steps') }}">
 		<button type="button" class="eclipse-registration-step is-active" data-registration-step="account">
 			<span class="eclipse-registration-step-number">1</span>
-			<span class="eclipse-registration-step-text">Dados de acesso</span>
+			<span class="eclipse-registration-step-text">{{ t('account.access_data') }}</span>
 		</button>
 		{% if setting('core.account_create_character_create') %}
 		<button type="button" class="eclipse-registration-step is-locked" data-registration-step="character" disabled>
 			<span class="eclipse-registration-step-number">2</span>
-			<span class="eclipse-registration-step-text">Personagem inicial</span>
+			<span class="eclipse-registration-step-text">{{ t('account.initial_character') }}</span>
 		</button>
 		{% endif %}
 		<button type="button" class="eclipse-registration-step is-locked" data-registration-step="rules" disabled>
 			<span class="eclipse-registration-step-number">{% if setting('core.account_create_character_create') %}3{% else %}2{% endif %}</span>
-			<span class="eclipse-registration-step-text">Regras</span>
+			<span class="eclipse-registration-step-text">{{ t('account.rules') }}</span>
 		</button>
 	</div>
 
-	{% set title = 'Criar conta no ' ~ config.lua.serverName %}
+	{% set title = t('account.create_account_title', {'server': config.lua.serverName}) %}
 	{% set background = config('darkborder') %}
 	{% set tableClass = 'Table5' %}
 	{% set content %}
@@ -71,8 +71,8 @@
 								<tbody>
 								<tr class="eclipse-registration-panel-intro">
 									<td colspan="2">
-										<strong>Crie seus dados de acesso</strong>
-										<span>Use um email real e uma senha forte. Esses dados serão usados para recuperar sua conta e acessar o painel.</span>
+										<strong>{{ t('account.create_access_data') }}</strong>
+										<span>{{ t('account.create_access_hint') }}</span>
 									</td>
 								</tr>
 
@@ -81,9 +81,9 @@
 								{% if not config.account_login_by_email %}
 								<tr>
 									<td class="LabelV" style="width: 150px">
-										<span{% if errors.account is defined %} class="red"{% endif %}>{% if constant('USE_ACCOUNT_NAME') %}Nome da conta{% else %}Número da conta{% endif %}:</span>
+										<span{% if errors.account is defined %} class="red"{% endif %}>{% if constant('USE_ACCOUNT_NAME') %}{{ t('account.account_name') }}{% else %}{{ t('account.account_number') }}{% endif %}:</span>
 										{% if not constant('USE_ACCOUNT_NAME') %}
-										<div id="SuggestAccountNumber">[<a href="#">sugerir número</a>]</div>
+										<div id="SuggestAccountNumber">[<a href="#">{{ t('account.suggest_number') }}</a>]</div>
 										{% endif %}
 									</td>
 									<td>
@@ -94,7 +94,7 @@
 								{% endif %}
 								<tr><td></td><td><span id="account_error" class="FormFieldError">{% if errors.account is defined %}{{ errors.account }}{% endif %}</span></td></tr>
 								{% if not config.account_login_by_email %}
-								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">Escolha um nome fácil de lembrar e que você ainda não use em outros jogos.</span></td></tr>
+								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">{{ t('account.account_name_hint') }}</span></td></tr>
 								{% endif %}
 								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_ACCOUNT') }}
 								<tr>
@@ -109,10 +109,10 @@
 								<tr>
 									<td></td><td><span id="email_error" class="FormFieldError">{% if errors.email is defined %}{{ errors.email }}{% endif %}</span></td>
 								</tr>
-								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">Confira bem o email antes de continuar. Ele pode ser necessário para confirmar ou recuperar sua conta.</span></td></tr>
+								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">{{ t('account.email_check_hint') }}</span></td></tr>
 
 								{% if setting('core.mail_enabled') and setting('core.account_mail_verify') %}
-									<tr><td></td><td><span><strong>Use um email valido.<br/>Vamos enviar um link para confirmar seu cadastro.</strong></span></td></tr>
+									<tr><td></td><td><span><strong>{{ t('account.valid_email_notice') }}</strong></span></td></tr>
 								{% endif %}
 
 								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_EMAIL') }}
@@ -127,7 +127,7 @@
 
 								<tr>
 									<td class="LabelV" style="width: 150px">
-										<span{% if errors.password is defined %} class="red"{% endif %}>Senha:</span>
+										<span{% if errors.password is defined %} class="red"{% endif %}>{{ t('account.password') }}:</span>
 									</td>
 									<td>
 										<input type="password" name="password" id="password" value="" size="30" maxlength="29" />
@@ -135,13 +135,13 @@
 									</td>
 								</tr>
 								<tr><td></td><td><span id="password_error" class="FormFieldError">{% if errors.password is defined %}{{ errors.password }}{% endif %}</span></td></tr>
-								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">Use letras, números e símbolos. Evite repetir senha de outros serviços.</span></td></tr>
+								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">{{ t('account.password_hint') }}</span></td></tr>
 
 								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_PASSWORD') }}
 
 								<tr>
 									<td class="LabelV" style="width: 150px">
-										<span{% if errors.password is defined %} class="red"{% endif %}>Repetir senha:</span>
+										<span{% if errors.password is defined %} class="red"{% endif %}>{{ t('account.repeat_password') }}:</span>
 									</td>
 									<td>
 										<input type="password" name="password_confirm" id="password_confirm" value="" size="30" maxlength="29" />
@@ -174,132 +174,118 @@
 								<tbody>
 								<tr class="eclipse-registration-panel-intro">
 									<td colspan="2">
-										<strong>Monte seu primeiro personagem</strong>
-										<span>Essa etapa libera depois que os dados de acesso estiverem completos.</span>
+										<strong>{{ t('account.build_first_character') }}</strong>
+										<span>{{ t('account.character_step_locked_hint') }}</span>
 									</td>
 								</tr>
 
 								{{ hook('HOOK_ACCOUNT_CREATE_BEFORE_CHARACTER_NAME') }}
 
-								<tr class="eclipse-character-name-row">
-									<td class="LabelV" style="width: 150px">
-										<span{% if errors.name is defined %} class="red"{% endif %}>Nome do personagem:</span>
-									</td>
-									<td>
-										<input id="character_name" name="name" size="{{ setting('core.create_character_name_max_length') }}" maxlength="{{ setting('core.create_character_name_max_length') }}" value="{{ name }}"/>
-										<img id="character_indicator" src="images/global/general/{% if not save or errors.name is defined %}n{% endif %}ok.gif" style="display: none;" />
-										<br>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td>
-										<span id="character_error" class="FormFieldError">{% if errors.name is defined %}{{ errors.name }}{% endif %}</span>
-									</td>
-								</tr>
-								<tr class="eclipse-registration-hint-row"><td></td><td><span class="eclipse-registration-hint">O nome aparece publicamente no site e dentro do jogo.</span></td></tr>
+								<tr class="eclipse-character-stage-row">
+									<td colspan="2">
+										<div class="eclipse-character-stage-layout">
+											<section class="privacy-section eclipse-character-create-section">
+												<div class="eclipse-character-create-section-title">
+													<span>1</span>
+													<div>
+														<h3>{{ t('account.identity') }}</h3>
+														<p>{{ t('account.identity_hint') }}</p>
+													</div>
+												</div>
 
-								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_CHARACTER_NAME') }}
+												<div class="eclipse-character-create-grid">
+													<label class="eclipse-character-field" for="character_name">
+														<span{% if errors.name is defined %} class="red"{% endif %}>{{ t('account.character_name') }}</span>
+														<div class="eclipse-character-name-row">
+															<input id="character_name" name="name" maxlength="{{ setting('core.create_character_name_max_length') }}" value="{{ name }}" autocomplete="off"/>
+															<img id="character_indicator" src="images/global/general/{% if not save or errors.name is defined %}n{% endif %}ok.gif" alt="" style="display: none;" />
+														</div>
+														<small>{{ t('account.character_public_name_hint') }}</small>
+														<span id="character_error" class="FormFieldError">{% if errors.name is defined %}{{ errors.name }}{% endif %}</span>
+													</label>
 
-								<tr class="eclipse-character-sex-row">
-									<td class="LabelV" style="width: 150px">
-										<span{% if errors.sex is defined %} class="red"{% endif %}>Sexo:</span>
-									</td>
-									<td>
-										<table width="100%">
-											<tbody>
-											<tr>
-												<td>
-													{% set i = 0 %}
-													{% for id, gender in config.genders|reverse(true) %}
-														{% set i = i + 1 %}
-														<span style="margin-right:15px;" class="OptionContainer">
-															<input type="radio" name="sex" id="sex{{ i }}" value="{{ id }}"{% if sex is not null and sex == id %} checked="checked"{% endif %}>
-															{% set gender_key = gender|lower %}
-															<label for="sex{{ i }}">{{ eclipse_gender_labels[gender_key]|default(gender_key) }}</label>
-														</span>
+													<div class="eclipse-character-field">
+														<span{% if errors.sex is defined %} class="red"{% endif %}>{{ t('account.sex') }}</span>
+														<div class="eclipse-character-choice-row">
+															{% set i = 0 %}
+															{% for id, gender in config.genders|reverse(true) %}
+																{% set i = i + 1 %}
+																{% set gender_key = gender|lower %}
+																<label class="eclipse-character-choice" for="sex{{ i }}">
+																	<input type="radio" name="sex" id="sex{{ i }}" value="{{ id }}"{% if sex is not null and sex == id %} checked="checked"{% endif %}>
+																	<span>{{ eclipse_gender_labels[gender_key]|default(gender_key) }}</span>
+																</label>
+															{% endfor %}
+														</div>
+														<span id="sex_error" class="FormFieldError">{% if errors.sex is defined %}{{ errors.sex }}{% endif %}</span>
+													</div>
+												</div>
+											</section>
+
+											{{ hook('HOOK_ACCOUNT_CREATE_AFTER_CHARACTER_NAME') }}
+											{{ hook('HOOK_ACCOUNT_CREATE_AFTER_SEX') }}
+
+											{% if config.character_samples|length > 1 %}
+											<section class="privacy-section eclipse-character-create-section">
+												<div class="eclipse-character-create-section-title">
+													<span>2</span>
+													<div>
+														<h3>{{ t('common.vocation') }}</h3>
+														<p>{{ t('account.vocation_hint') }}</p>
+													</div>
+												</div>
+
+												<div class="eclipse-vocation-grid eclipse-character-vocation-grid">
+													{% for key, sample_char in config.character_samples %}
+														{% set vocation_name = config['vocations'][key] %}
+														{% set vocation_slug = vocation_name|lower|replace({' ': ''}) %}
+														{% set guide = eclipse_vocation_guides[vocation_slug]|default(null) %}
+														{% set vocation_display_name = guide ? guide.name : vocation_name %}
+														<label class="eclipse-vocation-card{% if vocation is not null and vocation == key %} is-selected{% endif %}" for="vocation{{ key }}">
+															<input type="radio" name="vocation" id="vocation{{ key }}" value="{{ key }}"
+																	{% if vocation is not null and vocation == key %} checked="checked"{% endif %}>
+															{% if guide %}
+																<img src="{{ template_path }}/images/vocations/{{ guide.image }}" alt="{{ t('account.vocation_alt', {'name': vocation_display_name}) }}" loading="lazy">
+															{% endif %}
+															<span class="eclipse-vocation-name">{{ vocation_display_name }}</span>
+															{% if guide %}
+																<span class="eclipse-vocation-role">{{ guide.role }}</span>
+																<span class="eclipse-vocation-description">{{ guide.description }}</span>
+															{% endif %}
+														</label>
 													{% endfor %}
-												</td>
-												<td>
-												</td>
-											</tr>
-											</tbody>
-										</table>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td>
-										<span id="sex_error" class="FormFieldError">{% if errors.sex is defined %}{{ errors.sex }}{% endif %}</span>
-									</td>
-								</tr>
+												</div>
+												<span id="vocation_error" class="FormFieldError">{% if errors.vocation is defined %}{{ errors.vocation }}{% endif %}</span>
+											</section>
+											{% endif %}
 
-								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_SEX') }}
+											{{ hook('HOOK_ACCOUNT_CREATE_AFTER_VOCATION') }}
 
-								{% if config.character_samples|length > 1 %}
-								<tr class="eclipse-character-vocation-row">
-									<td class="LabelV" style="width: 150px">
-										<span{% if errors.vocation is defined %} class="red"{% endif %}>Vocação:</span>
-									</td>
-									<td>
-										<div class="eclipse-vocation-grid">
-											{% for key, sample_char in config.character_samples %}
-												{% set vocation_name = config['vocations'][key] %}
-												{% set vocation_slug = vocation_name|lower|replace({' ': ''}) %}
-												{% set guide = eclipse_vocation_guides[vocation_slug]|default(null) %}
-												{% set vocation_display_name = guide ? guide.name : vocation_name %}
-												<label class="eclipse-vocation-card{% if vocation is not null and vocation == key %} is-selected{% endif %}" for="vocation{{ key }}">
-													<input type="radio" name="vocation" id="vocation{{ key }}" value="{{ key }}"
-															{% if vocation is not null and vocation == key %} checked="checked"{% endif %}>
-													{% if guide %}
-														<img src="{{ template_path }}/images/vocations/{{ guide.image }}" alt="Vocação {{ vocation_display_name }}" loading="lazy">
-													{% endif %}
-													<span class="eclipse-vocation-name">{{ vocation_display_name }}</span>
-													{% if guide %}
-														<span class="eclipse-vocation-role">{{ guide.role }}</span>
-														<span class="eclipse-vocation-description">{{ guide.description }}</span>
-													{% endif %}
-												</label>
-											{% endfor %}
+											{% if config.character_towns|length > 1 %}
+											<section class="privacy-section eclipse-character-create-section">
+												<div class="eclipse-character-create-section-title">
+													<span>{% if config.character_samples|length > 1 %}3{% else %}2{% endif %}</span>
+													<div>
+														<h3>{{ t('account.start_city') }}</h3>
+														<p>{{ t('account.start_city_hint') }}</p>
+													</div>
+												</div>
+												<div class="eclipse-character-choice-row">
+													{% for town_id in config.character_towns %}
+														<label class="eclipse-character-choice" for="town{{ town_id }}">
+															<input type="radio" name="town" id="town{{ town_id }}" value="{{ town_id }}"
+																	{% if town is not null and town == town_id %} checked="checked"{% endif %}>
+															<span>{{ config.towns[town_id] }}</span>
+														</label>
+													{% endfor %}
+												</div>
+											</section>
+											{% endif %}
+
+											{{ hook('HOOK_ACCOUNT_CREATE_AFTER_TOWNS') }}
 										</div>
 									</td>
 								</tr>
-								<tr>
-									<td></td>
-									<td>
-										<span id="vocation_error" class="FormFieldError">{% if errors.vocation is defined %}{{ errors.vocation }}{% endif %}</span>
-									</td>
-								</tr>
-								{% endif %}
-
-								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_VOCATION') }}
-
-								{% if config.character_towns|length > 1 %}
-								<tr>
-									<td class="LabelV" style="width: 150px">
-										<span{% if errors.town is defined %} class="red"{% endif %}>Cidade inicial:</span>
-									</td>
-									<td>
-										<table width="100%" >
-											<tbody>
-											<tr>
-												<td>
-													{% for town_id in config.character_towns %}
-														<span style="margin-right:15px;" class="OptionContainer">
-															<input type="radio" name="town" id="town{{ town_id }}" value="{{ town_id }}"
-																	{% if town is not null and town == town_id %} checked="checked"{% endif %}>
-															<label for="town{{ town_id }}">{{ config.towns[town_id] }}</label>
-														</span>
-													{% endfor %}
-												</td>
-											</tr>
-											</tbody>
-										</table>
-									</td>
-								</tr>
-								{% endif %}
-
-								{{ hook('HOOK_ACCOUNT_CREATE_AFTER_TOWNS') }}
 
 								</tbody>
 							</table>
@@ -328,31 +314,31 @@
 								<tbody>
 								<tr class="eclipse-registration-panel-intro">
 									<td colspan="2">
-										<strong>Finalize com as regras do servidor</strong>
-										<span>Essa etapa libera quando as informações anteriores estiverem preenchidas.</span>
+										<strong>{{ t('account.rules_step_title') }}</strong>
+										<span>{{ t('account.step_locked_hint') }}</span>
 									</td>
 								</tr>
 								<tr>
 									<td colspan="2" class="eclipse-rules-summary">
-										<strong>Antes de criar a conta</strong>
-										<p>Leia as regras em uma nova aba e confirme que entendeu os pontos principais do servidor.</p>
+										<strong>{{ t('account.before_create_account') }}</strong>
+										<p>{{ t('account.before_create_account_hint') }}</p>
 										<div class="eclipse-rules-links">
-											<a href="{{ getLink('rules') }}" target="_blank" rel="noopener">Abrir regras do servidor</a>
-											<a href="{{ getLink('privacy') }}" target="_blank" rel="noopener">Abrir privacidade e LGPD</a>
+											<a href="{{ getLink('rules') }}" target="_blank" rel="noopener">{{ t('account.open_rules') }}</a>
+											<a href="{{ getLink('privacy') }}" target="_blank" rel="noopener">{{ t('account.open_privacy') }}</a>
 										</div>
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2" ><b>Confirme a leitura das regras:</b></td>
+									<td colspan="2" ><b>{{ t('account.confirm_rules_reading') }}:</b></td>
 								</tr>
 								<tr class="eclipse-registration-checkbox-row">
 									<td colspan="2" >
-										<span><input type="checkbox" id="accept_rules" name="accept_rules" value="true"{% if accept_rules %}checked{% endif %}/> <label for="accept_rules">Eu li e aceito as <a href="{{ getLink('rules') }}" target="_blank" rel="noopener">regras do {{ config.lua.serverName }}</a>.</label></span>
+										<span><input type="checkbox" id="accept_rules" name="accept_rules" value="true"{% if accept_rules %}checked{% endif %}/> <label for="accept_rules">{{ t('account.accept_rules', {'rules': '<a href="' ~ getLink('rules') ~ '" target="_blank" rel="noopener">' ~ t('account.rules') ~ ' ' ~ config.lua.serverName ~ '</a>'})|raw }}</label></span>
 									</td>
 								</tr>
 								<tr class="eclipse-registration-checkbox-row">
 									<td colspan="2" >
-										<span><input type="checkbox" id="accept_privacy" name="accept_privacy" value="true" required/> <label for="accept_privacy">Eu li e aceito a <a href="{{ getLink('privacy') }}" target="_blank" rel="noopener">Política de Privacidade</a> e entendo como meus dados serão usados no Eclipse OT.</label></span>
+										<span><input type="checkbox" id="accept_privacy" name="accept_privacy" value="true" required/> <label for="accept_privacy">{{ t('account.accept_privacy', {'privacy': '<a href="' ~ getLink('privacy') ~ '" target="_blank" rel="noopener">' ~ t('account.privacy_policy') ~ '</a>'})|raw }}</label></span>
 									</td>
 								</tr>
 								{% if errors.accept_rules is defined %}
@@ -388,7 +374,7 @@
 					<tr>
 						<td style="border:0px;" >
 							<input type="hidden" name="save" value="1" >
-							{% set button_name = 'Criar conta' %}
+							{% set button_name = t('account.create_account') %}
 							{{ include('buttons.submit.html.twig') }}
 						</td>
 					</tr>
@@ -505,7 +491,7 @@
 			}
 
 			var isFinalStep = activeStep === 'rules';
-			var label = isFinalStep ? 'Criar conta' : 'Pr\u00f3xima etapa';
+			var label = isFinalStep ? '{{ t('account.create_account')|e('js') }}' : '{{ t('account.next_step')|e('js') }}';
 			submitButton.type = isFinalStep ? 'submit' : 'button';
 			submitButton.value = label;
 			submitButton.setAttribute('aria-label', label);

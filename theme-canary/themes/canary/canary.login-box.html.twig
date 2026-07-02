@@ -7,7 +7,9 @@
 	<div id="LoginButtonContainer"
 		 style="background-image:url({{ template_path }}/images/loginbox/loginbox-textfield-background.gif)">
 		<div id="LoginButton" style="background-image:url({{ template_path }}/images/global/buttons/mediumbutton.gif)"><div onClick="LoginButtonAction();" onMouseOver="MouseOverBigButton(this);" onMouseOut="MouseOutBigButton(this);"><div class="Button" style="background-image:url({{ template_path }}/images/global/buttons/mediumbutton-over.gif)"></div>
-				<div id="ButtonText"></div>
+				<div id="ButtonText"
+					 data-login-label="{{ t('layout.login') }}"
+					 data-account-label="{{ t('layout.my_account') }}"></div>
 			</div>
 		</div>
 	</div>
@@ -19,6 +21,8 @@
 	<div class="Loginstatus"
 		 style="background-image:url({{ template_path }}/images/loginbox/loginbox-textfield-background.gif)">
 		<div id="LoginstatusText_2" onClick="LoginstatusTextAction(this);"
+			 data-create-label="{{ t('layout.create_account') }}"
+			 data-logout-label="{{ t('layout.logout') }}"
 			 onMouseOver="MouseOverLoginBoxText(this);" onMouseOut="MouseOutLoginBoxText(this);">
 			<div id="LoginstatusText_2_1" class="LoginstatusText"
 				 style="background-image:url({{ template_path }}/images/loginbox/loginbox-font-create-account.gif)"></div>

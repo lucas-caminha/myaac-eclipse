@@ -12,7 +12,7 @@ use MyAAC\Server\XML\Vocations;
 
 defined('MYAAC') or die('Direct access not allowed!');
 
-$title = 'Quem esta online?';
+$title = function_exists('t') ? t('online.title') : 'Quem esta online?';
 
 if (setting('core.account_country')) {
 	require SYSTEM . 'countries.conf.php';
@@ -22,7 +22,7 @@ if (!function_exists('eclipseOnlineFormatName')) {
 	function eclipseOnlineFormatName(?string $name): string
 	{
 		$name = trim((string) $name);
-		return $name === '' ? 'Indisponivel' : ucwords(strtolower($name));
+		return $name === '' ? (function_exists('t') ? t('common.unavailable') : 'Unavailable') : ucwords(strtolower($name));
 	}
 }
 
@@ -148,7 +148,7 @@ if (!function_exists('eclipseOnlineGetLatestUpdate')) {
 		}
 
 		return [
-			'title' => 'Nenhuma atualizacao publicada ainda.',
+			'title' => function_exists('t') ? t('online.no_update') : 'No update published yet.',
 			'date' => null,
 			'link' => getLink('changelog'),
 		];

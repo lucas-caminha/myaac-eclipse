@@ -1,4 +1,4 @@
-{% set title = 'Casas' %}
+{% set title = t('houses.title') %}
 {% set content %}
 
 <div class="eclipse-directory-page eclipse-houses-page">
@@ -11,20 +11,20 @@
 	{% else %}
 		{% if cleanOldHouse is not empty or rentType != 'never' %}
 			<div class="directory-hint">
-				A limpeza automatica acontece durante o server save. Casas de donos inativos por {{ cleanOldHouse }} dias{% if rentType != 'never' %} ou com aluguel {{ rentType }} em atraso{% endif %} podem ser liberadas.
+				{{ t('houses.clean_hint', {'days': cleanOldHouse, 'rent': rentType}) }}
 			</div>
 		{% endif %}
 
 		{% if houses is not empty or housesSearch %}
 			<div class="directory-card">
-				<div class="directory-card-title">Disponibilidade{% if townName is not empty %} em {{ townName }}{% endif %}</div>
+				<div class="directory-card-title">{{ townName is not empty ? t('houses.availability_town', {'town': townName}) : t('houses.availability') }}</div>
 				<table class="directory-table">
 					<tbody>
 					{% if houses is not empty %}
 						<tr class="LabelH">
-							<td>Nome</td>
-							<td>Tamanho</td>
-							<td>Aluguel</td>
+							<td>{{ t('common.name') }}</td>
+							<td>{{ t('houses.size') }}</td>
+							<td>{{ t('houses.rent') }}</td>
 							<td>Status</td>
 							<td></td>
 						</tr>
@@ -32,8 +32,8 @@
 						{% for house in houses %}
 							<tr>
 								<td><strong class="directory-primary-name">{{ house.name }}</strong></td>
-								<td><span class="directory-pill">{{ house.size }} sqm</span></td>
-								<td><span class="directory-pill">{{ house.rent }} gold</span></td>
+								<td><span class="directory-pill">{{ t('houses.sqm', {'size': house.size}) }}</span></td>
+								<td><span class="directory-pill">{{ t('houses.gold', {'rent': house.rent}) }}</span></td>
 								<td><span class="directory-status-text">{{ house.rentedBy|raw }}</span></td>
 								<td class="directory-action">
 									<a href="{{ house.link }}">{{ include('buttons.view.html.twig') }}</a>
@@ -42,7 +42,7 @@
 						{% endfor %}
 					{% else %}
 						<tr>
-							<td class="directory-empty">Nenhuma casa encontrada com esses filtros.</td>
+							<td class="directory-empty">{{ t('houses.empty') }}</td>
 						</tr>
 					{% endif %}
 					</tbody>
@@ -51,10 +51,10 @@
 		{% endif %}
 
 		<form action="{{ getLink('houses') }}" method="post" class="directory-card directory-form">
-			<div class="directory-card-title">Buscar Casas</div>
+			<div class="directory-card-title">{{ t('houses.search_title') }}</div>
 			<div class="houses-filter-grid">
 				<div>
-					<strong>Cidade</strong>
+					<strong>{{ t('houses.city') }}</strong>
 					{% set checked = false %}
 					{% for id, name in config.towns %}
 						{% if id > 0 %}
@@ -71,22 +71,22 @@
 
 				<div>
 					<strong>Status</strong>
-					<label><input type="radio" name="state" value=""{% if state is empty %} checked{% endif %}> todos</label>
-					<label><input type="radio" name="state" value="free"{% if state == 'free' %} checked{% endif %}> livres</label>
-					<label><input type="radio" name="state" value="rented"{% if state == 'rented' %} checked{% endif %}> alugadas</label>
+					<label><input type="radio" name="state" value=""{% if state is empty %} checked{% endif %}> {{ t('common.all') }}</label>
+					<label><input type="radio" name="state" value="free"{% if state == 'free' %} checked{% endif %}> {{ t('houses.free') }}</label>
+					<label><input type="radio" name="state" value="rented"{% if state == 'rented' %} checked{% endif %}> {{ t('houses.rented') }}</label>
 				</div>
 
 				<div>
-					<strong>Ordenar por</strong>
-					<label><input type="radio" name="order" value=""{% if order is empty %} checked{% endif %}> nome</label>
-					<label><input type="radio" name="order" value="size"{% if order == 'size' %} checked{% endif %}> tamanho</label>
-					<label><input type="radio" name="order" value="rent"{% if order == 'rent' %} checked{% endif %}> aluguel</label>
+					<strong>{{ t('common.sort_by') }}</strong>
+					<label><input type="radio" name="order" value=""{% if order is empty %} checked{% endif %}> {{ t('common.name') }}</label>
+					<label><input type="radio" name="order" value="size"{% if order == 'size' %} checked{% endif %}> {{ t('houses.size') }}</label>
+					<label><input type="radio" name="order" value="rent"{% if order == 'rent' %} checked{% endif %}> {{ t('houses.rent') }}</label>
 				</div>
 
 				<div>
-					<strong>Tipo</strong>
-					<label><input type="radio" name="type" value=""{% if type is empty %} checked{% endif %}> todos</label>
-					<label><input type="radio" name="type" value="houses"{% if type == 'houses' %} checked{% endif %}> casas e flats</label>
+					<strong>{{ t('common.type') }}</strong>
+					<label><input type="radio" name="type" value=""{% if type is empty %} checked{% endif %}> {{ t('common.all') }}</label>
+					<label><input type="radio" name="type" value="houses"{% if type == 'houses' %} checked{% endif %}> {{ t('houses.houses_flats') }}</label>
 					<label><input type="radio" name="type" value="guildhalls"{% if type == 'guildhalls' %} checked{% endif %}> guildhalls</label>
 				</div>
 			</div>

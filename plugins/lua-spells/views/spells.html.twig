@@ -1,34 +1,34 @@
 <div class="eclipse-plugin-page eclipse-spells-page">
 	<header class="eclipse-plugin-hero">
-		<span class="eclipse-plugin-kicker">Conhecimento arcano</span>
-		<p>Consulte requisitos, palavras mágicas e vocações de cada magia do servidor.</p>
+		<span class="eclipse-plugin-kicker">{{ t('spells.kicker') }}</span>
+		<p>{{ t('spells.intro') }}</p>
 	</header>
 
 	<div class="eclipse-plugin-toolbar eclipse-plugin-toolbar-split">
 		<form action="{{ getLink('spells') }}" method="get">
-			<label for="spell-vocation">Vocação</label>
+			<label for="spell-vocation">{{ t('common.vocation') }}</label>
 			<select id="spell-vocation" name="vocation_id">
-				<option value="all"{% if post_vocation_id == 'all' %} selected{% endif %}>Todas</option>
+				<option value="all"{% if post_vocation_id == 'all' %} selected{% endif %}>{{ t('market.all') }}</option>
 				{% for id, vocation in filter_vocations %}<option value="{{ id }}"{% if id == post_vocation_id %} selected{% endif %}>{{ vocation.name }}</option>{% endfor %}
 			</select>
-			<button class="eclipse-plugin-button" type="submit">Filtrar</button>
+			<button class="eclipse-plugin-button" type="submit">{{ t('spells.filter') }}</button>
 		</form>
 		{% if isAdmin %}
-		<form action="{{ getLink('spells') }}" method="post">{{ csrf() }}<input type="hidden" name="reload" value="1"><button class="eclipse-plugin-button eclipse-plugin-button-secondary" type="submit">Atualizar magias</button></form>
+		<form action="{{ getLink('spells') }}" method="post">{{ csrf() }}<input type="hidden" name="reload" value="1"><button class="eclipse-plugin-button eclipse-plugin-button-secondary" type="submit">{{ t('spells.reload') }}</button></form>
 		{% endif %}
 	</div>
 
 	<div class="eclipse-plugin-tabs" data-eclipse-tabs>
 		<div class="eclipse-plugin-tab-list" role="tablist">
-			<button type="button" class="is-active" data-tab="instant">Instantâneas</button>
-			<button type="button" data-tab="conjure">Conjurações</button>
-			<button type="button" data-tab="rune">Runas</button>
+			<button type="button" class="is-active" data-tab="instant">{{ t('spells.instant') }}</button>
+			<button type="button" data-tab="conjure">{{ t('spells.conjure') }}</button>
+			<button type="button" data-tab="rune">{{ t('spells.rune') }}</button>
 		</div>
 		{% for kind, label in {1: 'instant', 2: 'conjure', 3: 'rune'} %}
 		<section class="eclipse-plugin-tab-panel{% if kind == 1 %} is-active{% endif %}" data-panel="{{ label }}">
-			<div class="eclipse-plugin-table-wrap"><table class="eclipse-plugin-table"><thead><tr><th>Magia</th><th>Palavras</th><th>Nível</th><th>Mana</th><th>Premium</th><th>Vocações</th></tr></thead><tbody>
+			<div class="eclipse-plugin-table-wrap"><table class="eclipse-plugin-table"><thead><tr><th>{{ t('spells.spell') }}</th><th>{{ t('spells.words') }}</th><th>{{ t('common.level')|default('Level') }}</th><th>{{ t('spells.mana') }}</th><th>{{ t('spells.premium') }}</th><th>{{ t('common.vocation') }}</th></tr></thead><tbody>
 			{% for spell in spells %}{% if spell.type == kind %}
-				<tr><td><strong>{{ spell.name }}</strong></td><td>{{ spell.words ?: '-' }}</td><td>{{ spell.level }}</td><td>{{ spell.mana }}</td><td>{{ spell.premium == 1 ? 'Sim' : 'Não' }}</td><td>{{ spell.vocations|length > 0 ? spell.vocations|raw : 'Todas' }}</td></tr>
+				<tr><td><strong>{{ spell.name }}</strong></td><td>{{ spell.words ?: '-' }}</td><td>{{ spell.level }}</td><td>{{ spell.mana }}</td><td>{{ spell.premium == 1 ? t('common.yes') : t('common.no') }}</td><td>{{ spell.vocations|length > 0 ? spell.vocations|raw : t('market.all') }}</td></tr>
 			{% endif %}{% endfor %}
 			</tbody></table></div>
 		</section>

@@ -1,78 +1,78 @@
 <div class="eclipse-plugin-page eclipse-character-market eclipse-character-auctions">
 	{% if logged %}
 	<section class="eclipse-plugin-section eclipse-auction-sell-section">
-		<h3>Anunciar personagem</h3>
+		<h3>{{ t('market.sell_character') }}</h3>
 		<form class="eclipse-market-sell-form" action="{{ getLink('character-sale') }}" method="post">
 			{{ csrf() }}
 			<input type="hidden" name="market_action" value="sell">
-			<label>Personagem
+			<label>{{ t('market.character') }}
 				<select name="player_id" required>
-					<option value="">Selecione</option>
+					<option value="">{{ t('market.select') }}</option>
 					{% for player in accountPlayers %}
-						<option value="{{ player.id }}">{{ player.name }} - n&iacute;vel {{ player.level }}, {{ player.vocation_name }}</option>
+						<option value="{{ player.id }}">{{ t('market.character_option', {'name': player.name, 'level': player.level, 'vocation': player.vocation_name}) }}</option>
 					{% endfor %}
 				</select>
 			</label>
-			<label>Pre&ccedil;o em coins
+			<label>{{ t('market.price_coins') }}
 				<input type="number" name="price" min="25" max="100000" step="1" required>
 			</label>
-			<button class="eclipse-plugin-button" type="submit"{% if accountPlayers is empty %} disabled{% endif %}>Criar an&uacute;ncio</button>
+			<button class="eclipse-plugin-button" type="submit"{% if accountPlayers is empty %} disabled{% endif %}>{{ t('market.create_offer') }}</button>
 		</form>
 		{% if accountPlayers is empty %}
-			<p class="eclipse-plugin-note">Seus personagens offline e ainda n&atilde;o anunciados aparecer&atilde;o aqui.</p>
+			<p class="eclipse-plugin-note">{{ t('market.sell_empty') }}</p>
 		{% endif %}
 	</section>
 	{% else %}
 	<div class="eclipse-plugin-notice eclipse-auction-login-notice">
-		<strong>Entre na sua conta para comprar ou vender personagens.</strong>
-		<span>Voc&ecirc; ainda pode consultar todas as ofertas p&uacute;blicas.</span>
-		<a class="eclipse-plugin-button" href="{{ getLink('account/manage') }}">Entrar</a>
+		<strong>{{ t('market.login_title') }}</strong>
+		<span>{{ t('market.login_hint') }}</span>
+		<a class="eclipse-plugin-button" href="{{ getLink('account/manage') }}">{{ t('market.login') }}</a>
 	</div>
 	{% endif %}
 
 	<section class="eclipse-auction-filter" data-auction-filter>
-		<div class="eclipse-auction-filter-title">Filtrar ofertas</div>
+		<div class="eclipse-auction-filter-title">{{ t('market.filter_offers') }}</div>
 		<div class="eclipse-auction-filter-grid">
-			<label>Busca
-				<input type="search" class="eclipse-plugin-search" data-auction-search placeholder="Nome do personagem">
+			<label>{{ t('market.search') }}
+				<input type="search" class="eclipse-plugin-search" data-auction-search placeholder="{{ t('market.character_name_placeholder') }}">
 			</label>
-			<label>Voca&ccedil;&atilde;o
+			<label>{{ t('common.vocation') }}
 				<select data-auction-vocation>
-					<option value="">Todas</option>
+					<option value="">{{ t('market.all') }}</option>
 					{% for vocationId, vocationName in vocationFilterOptions %}
 						<option value="{{ vocationId }}">{{ vocationName }}</option>
 					{% endfor %}
 				</select>
 			</label>
-			<label>Level m&iacute;n.
+			<label>{{ t('market.min_level') }}
 				<input type="number" min="1" step="1" data-auction-min-level placeholder="Ex: 250">
 			</label>
-			<label>Charm m&iacute;n.
+			<label>{{ t('market.min_charm') }}
 				<input type="number" min="0" step="1" data-auction-min-charm placeholder="Ex: 500">
 			</label>
-			<label>Pre&ccedil;o m&aacute;x.
+			<label>{{ t('market.max_price') }}
 				<input type="number" min="0" step="1" data-auction-max-price placeholder="Coins">
 			</label>
-			<label>Ordenar por
+			<label>{{ t('common.sort_by') }}
 				<select data-auction-sort>
-					<option value="recent">Mais recentes</option>
-					<option value="main">Skill principal</option>
+					<option value="recent">{{ t('market.sort_recent') }}</option>
+					<option value="main">{{ t('market.sort_main') }}</option>
 					<option value="charm">Charm Points</option>
-					<option value="price">Menor pre&ccedil;o</option>
-					<option value="level">Maior n&iacute;vel</option>
+					<option value="price">{{ t('market.sort_price') }}</option>
+					<option value="level">{{ t('market.sort_level') }}</option>
 					<option value="magic">Magic Level</option>
 					<option value="distance">Distance</option>
 					<option value="shield">Shielding</option>
 				</select>
 			</label>
-			<button class="eclipse-plugin-button eclipse-plugin-button-secondary" type="button" data-auction-apply>Aplicar</button>
+			<button class="eclipse-plugin-button eclipse-plugin-button-secondary" type="button" data-auction-apply>{{ t('market.apply') }}</button>
 		</div>
 	</section>
 
 	<section class="eclipse-auction-list">
 		<div class="eclipse-auction-list-title">
-			<strong>Ofertas atuais</strong>
-			<span>{{ offers|length }} resultado{{ offers|length == 1 ? '' : 's' }}</span>
+			<strong>{{ t('market.current_offers') }}</strong>
+			<span>{{ t(offers|length == 1 ? 'market.result_singular' : 'market.result_plural', {'count': offers|length}) }}</span>
 		</div>
 
 		{% for offer in offers %}
@@ -80,9 +80,9 @@
 				<div class="eclipse-auction-card-heading">
 					<div>
 						<a class="eclipse-auction-name" href="{{ offer.detail_link }}">{{ offer.name }}</a>
-						<span>Level {{ offer.level }} | Voca&ccedil;&atilde;o: {{ offer.vocation_name }} | {{ offer.status_name }}</span>
+						<span>{{ t('market.level_vocation_status', {'level': offer.level, 'vocation': offer.vocation_name, 'status': offer.status_name}) }}</span>
 					</div>
-					<a class="eclipse-market-details-link" href="{{ offer.detail_link }}">Ver detalhes</a>
+					<a class="eclipse-market-details-link" href="{{ offer.detail_link }}">{{ t('market.view_details') }}</a>
 				</div>
 
 				<a class="eclipse-market-outfit eclipse-auction-outfit" href="{{ offer.detail_link }}">
@@ -91,7 +91,7 @@
 
 				<div class="eclipse-auction-summary">
 					<div class="eclipse-auction-data">
-						<div><span>Skill principal</span><strong>{{ offer.main_skill.label }} {{ offer.main_skill.value }}</strong></div>
+						<div><span>{{ t('market.main_skill') }}</span><strong>{{ offer.main_skill.label }} {{ offer.main_skill.value }}</strong></div>
 						<div><span>Level</span><strong>{{ offer.level }}</strong></div>
 						<div><span>Charm Points</span><strong>{{ offer.charm_points|number_format(0, ',', '.') }}</strong></div>
 					</div>
@@ -103,7 +103,7 @@
 				</div>
 
 				<aside class="eclipse-auction-bidbox">
-					<span>Pre&ccedil;o atual</span>
+					<span>{{ t('market.current_price') }}</span>
 					<strong class="eclipse-market-price">{{ offer.price|number_format(0, ',', '.') }} coins</strong>
 					{% if logged %}
 						<form action="{{ getLink('character-sale') }}" method="post">
@@ -111,19 +111,19 @@
 							<input type="hidden" name="offer_id" value="{{ offer.id }}">
 							{% if offer.seller_account_id == accountId %}
 								<input type="hidden" name="market_action" value="cancel">
-								<button class="eclipse-plugin-button eclipse-plugin-button-danger" type="submit">Cancelar oferta</button>
+								<button class="eclipse-plugin-button eclipse-plugin-button-danger" type="submit">{{ t('market.cancel_offer') }}</button>
 							{% else %}
 								<input type="hidden" name="market_action" value="buy">
-								<button class="eclipse-plugin-button" type="submit" onclick="return confirm('Confirmar a compra de {{ offer.name|e('js') }}?')">Comprar personagem</button>
+								<button class="eclipse-plugin-button" type="submit" onclick="return confirm('{{ t('market.confirm_buy', {'name': offer.name})|e('js') }}')">{{ t('market.buy_character') }}</button>
 							{% endif %}
 						</form>
 					{% else %}
-						<a class="eclipse-plugin-button" href="{{ getLink('account/manage') }}">Entrar para comprar</a>
+						<a class="eclipse-plugin-button" href="{{ getLink('account/manage') }}">{{ t('market.login_to_buy') }}</a>
 					{% endif %}
 				</aside>
 			</article>
 		{% else %}
-			<div class="eclipse-plugin-empty">Ainda n&atilde;o h&aacute; personagens anunciados.</div>
+			<div class="eclipse-plugin-empty">{{ t('market.empty') }}</div>
 		{% endfor %}
 	</section>
 </div>

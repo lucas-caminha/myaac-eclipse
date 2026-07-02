@@ -16,16 +16,16 @@
 
 			<div class="house-details">
 				<h2>{{ houseName }}</h2>
-				<p>{{ bedsMessage }} e possui <strong>{{ houseSize }} metros quadrados</strong>.</p>
+				<p>{{ bedsMessage }} {{ t('houses.view_size', {'size': houseSize})|raw }}</p>
 
 				{% if rentType != 'never' %}
-					<p>O aluguel {{ rentType }} e de <strong>{{ houseRent }} gold</strong> e sera debitado no banco do personagem.</p>
+					<p>{{ t('houses.view_rent', {'type': rentType, 'rent': houseRent})|raw }}</p>
 				{% endif %}
 
 				{% if owner is not empty %}
-					<p>Esta casa esta alugada por <strong>{{ owner|raw }}</strong>.</p>
+					<p>{{ t('houses.view_owner', {'owner': owner|raw})|raw }}</p>
 				{% else %}
-					<p>Esta casa ainda esta disponivel.</p>
+					<p>{{ t('houses.view_available') }}</p>
 				{% endif %}
 			</div>
 		</div>

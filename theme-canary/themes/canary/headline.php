@@ -1,5 +1,6 @@
 <?php
-$text = $_GET['t'];
+$text = isset($_GET['t']) ? (string)$_GET['t'] : '';
+$text = trim(strip_tags($text));
 if(strlen($text) > 100) // max limit
 	$text = '';
 

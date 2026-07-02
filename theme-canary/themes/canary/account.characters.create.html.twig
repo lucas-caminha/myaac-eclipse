@@ -1,42 +1,42 @@
-{% set title = 'Criar Personagem' %}
+{% set title = t('account.create_character_title') %}
 <div class="eclipse-privacy-page eclipse-create-character-page">
 {% set eclipse_vocation_guides = {
 	'knight': {
 		'image': 'knightbanner.png',
-		'role': 'Defensor de linha de frente',
-		'description': 'Ideal para combate corpo a corpo, armaduras pesadas, escudos e pressão constante no centro da luta.'
+		'role': t('account.vocation.knight.role'),
+		'description': t('account.vocation.knight.description')
 	},
 	'paladin': {
 		'image': 'paladinbanner.png',
-		'role': 'Híbrido de longa distância',
-		'description': 'Um atirador flexível que mistura dano à distância, sobrevivência e magia útil.'
+		'role': t('account.vocation.paladin.role'),
+		'description': t('account.vocation.paladin.description')
 	},
 	'monk': {
 		'image': 'monkbanner.png',
-		'role': 'Espírito marcial',
-		'description': 'Um lutador disciplinado que combina força física com técnicas espirituais.'
+		'role': t('account.vocation.monk.role'),
+		'description': t('account.vocation.monk.description')
 	},
 	'sorcerer': {
 		'image': 'sorcererbanner.png',
-		'role': 'Dano elemental',
-		'description': 'Focado em magias destrutivas, dano explosivo e grande poder ofensivo.'
+		'role': t('account.vocation.sorcerer.role'),
+		'description': t('account.vocation.sorcerer.description')
 	},
 	'druid': {
 		'image': 'druidbanner.png',
-		'role': 'Suporte e cura',
-		'description': 'Um conjurador da natureza com cura, suporte e utilidade confiável em grupo.'
+		'role': t('account.vocation.druid.role'),
+		'description': t('account.vocation.druid.description')
 	}
 } %}
 
 <section class="privacy-hero">
-	<span>Novo personagem</span>
-	<h2>Escolha sua vocação e comece sua jornada</h2>
-	<p>Defina um nome, selecione o sexo e escolha a vocação que combina com seu estilo de jogo. O nome precisa respeitar as <a href="?subtopic=rules" target="_blank" rel="noopener">regras do Eclipse OT</a>.</p>
+	<span>{{ t('account.new_character') }}</span>
+	<h2>{{ t('account.create_character_hero') }}</h2>
+	<p>{{ t('account.create_character_intro', {'rules': '<a href="?subtopic=rules" target="_blank" rel="noopener">' ~ t('account.rules_link') ~ '</a>'})|raw }}</p>
 </section>
 
 {% if account_logged.getPlayersList(true)|length >= setting('core.characters_per_account') %}
 	<div class="eclipse-character-create-alert">
-		Você atingiu o limite de personagens por conta. Apague um personagem antes de criar outro.
+		{{ t('account.character_limit') }}
 	</div>
 {% endif %}
 
@@ -50,23 +50,23 @@
 		<div class="eclipse-character-create-section-title">
 			<span>1</span>
 			<div>
-				<h3>Identidade</h3>
-				<p>Escolha como seu personagem vai aparecer no jogo.</p>
+				<h3>{{ t('account.identity') }}</h3>
+				<p>{{ t('account.identity_hint') }}</p>
 			</div>
 		</div>
 
 		<div class="eclipse-character-create-grid">
 			<label class="eclipse-character-field" for="character_name">
-				<span>Nome do personagem</span>
+				<span>{{ t('account.character_name') }}</span>
 				<div class="eclipse-character-name-row">
 					<input name="name" id="character_name" value="{{ name }}" maxlength="{{ setting('core.create_character_name_max_length') }}" autocomplete="off">
 					<img id="character_indicator" src="images/global/general/{% if not save or errors.name is defined %}n{% endif %}ok.gif" alt="">
 				</div>
-				<small id="character_error">{% if not save or errors.name is defined %}Digite um nome válido para o personagem.{% endif %}</small>
+				<small id="character_error">{% if not save or errors.name is defined %}{{ t('account.character_name_invalid') }}{% endif %}</small>
 			</label>
 
 			<div class="eclipse-character-field">
-				<span>Sexo</span>
+				<span>{{ t('account.sex') }}</span>
 				<div class="eclipse-character-choice-row">
 					{% set i = 0 %}
 					{% for id, gender in config.genders|reverse(true) %}
@@ -74,7 +74,7 @@
 						{% set gender_slug = gender|lower %}
 						<label class="eclipse-character-choice" for="sex{{ i }}">
 							<input type="radio" name="sex" id="sex{{ i }}" value="{{ id }}"{% if sex is not null and sex == id %} checked="checked"{% endif %}>
-							<span>{% if gender_slug == 'male' %}Masculino{% elseif gender_slug == 'female' %}Feminino{% else %}{{ gender }}{% endif %}</span>
+							<span>{% if gender_slug == 'male' %}{{ t('account.male') }}{% elseif gender_slug == 'female' %}{{ t('account.female') }}{% else %}{{ gender }}{% endif %}</span>
 						</label>
 					{% endfor %}
 				</div>
@@ -89,8 +89,8 @@
 		<div class="eclipse-character-create-section-title">
 			<span>2</span>
 			<div>
-				<h3>Vocação</h3>
-				<p>Cada vocação tem uma proposta diferente para hunts, bosses e guerras.</p>
+				<h3>{{ t('common.vocation') }}</h3>
+				<p>{{ t('account.vocation_hint') }}</p>
 			</div>
 		</div>
 
@@ -123,8 +123,8 @@
 		<div class="eclipse-character-create-section-title">
 			<span>3</span>
 			<div>
-				<h3>Cidade inicial</h3>
-				<p>Escolha onde seu personagem vai começar.</p>
+				<h3>{{ t('account.start_city') }}</h3>
+				<p>{{ t('account.start_city_hint') }}</p>
 			</div>
 		</div>
 		<div class="eclipse-character-choice-row">
@@ -143,8 +143,8 @@
 	{{ hook('HOOK_ACCOUNT_CREATE_CHARACTER_AFTER_SECOND_TABLE') }}
 
 	<div class="privacy-actions">
-		<button type="submit" class="eclipse-btn">Criar personagem</button>
-		<a class="eclipse-btn eclipse-btn-secondary" href="{{ getLink('account/manage') }}">Voltar para minha conta</a>
+		<button type="submit" class="eclipse-btn">{{ t('account.create_character') }}</button>
+		<a class="eclipse-btn eclipse-btn-secondary" href="{{ getLink('account/manage') }}">{{ t('account.back_to_my_account') }}</a>
 	</div>
 </form>
 

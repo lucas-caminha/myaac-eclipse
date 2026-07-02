@@ -9,7 +9,7 @@
 	{{ hook('HOOK_GUILDS_AFTER_GUILD_HEADER') }}
 
 	<div class="directory-card">
-		<div class="directory-card-title">Informações da Guilda</div>
+		<div class="directory-card-title">{{ t('guilds.info_title') }}</div>
 		<div class="guild-info-box">
 			{% if description is not empty %}
 				<div class="guild-description">{{ description|raw }}</div>
@@ -17,14 +17,14 @@
 
 			{% if guild_owner is not empty %}
 				{% set guildOwnerName = guild_owner.getName() %}
-				<p><a href="{{ getPlayerLink(guildOwnerName, false) }}"><strong>{{ guildOwnerName }}</strong></a> lidera a guilda <strong>{{ guild_name }}</strong>.</p>
+				<p>{{ t('guilds.owner_line', {'owner': '<a href="' ~ getPlayerLink(guildOwnerName, false) ~ '"><strong>' ~ guildOwnerName ~ '</strong></a>', 'guild': '<strong>' ~ guild_name ~ '</strong>'})|raw }}</p>
 			{% endif %}
 
-			<p>A guilda foi fundada em {{ config.lua.serverName }} no dia {{ guild_creation_date|date("d/m/Y") }}.</p>
+			<p>{{ t('guilds.founded_line', {'server': config.lua.serverName, 'date': guild_creation_date|date("d/m/Y")}) }}</p>
 
 			{% if isLeader %}
 				<a href="{{ getLink('guilds') }}?action=manager&guild={{ guild_name }}" class="guild-manage-link">
-					{% set button_name = 'Manage Guild' %}
+					{% set button_name = t('guilds.manage') %}
 					{% include('buttons.base.html.twig') %}
 				</a>
 			{% endif %}
@@ -35,13 +35,13 @@
 	{{ hook('HOOK_GUILDS_AFTER_GUILD_INFORMATION') }}
 
 	<div class="directory-card">
-		<div class="directory-card-title">Membros</div>
+		<div class="directory-card-title">{{ t('guilds.members') }}</div>
 		<table class="directory-table guild-members-table">
 			<tbody>
 			<tr class="LabelH">
 				<td>Rank</td>
-				<td>Nome{% if useGuildNick %} e titulo{% endif %}</td>
-				<td>Vocação</td>
+				<td>{{ t('common.name') }}{% if useGuildNick %} {{ t('guilds.and_title') }}{% endif %}</td>
+				<td>{{ t('common.vocation') }}</td>
 				<td>Level</td>
 				<td>Status</td>
 			</tr>
@@ -68,7 +68,7 @@
 									{% if logged %}
 										{% if player.getId() in players_from_account_ids %}
 											<input type="text" name="nick" value="{{ guildNickRaw }}">
-											<input type="submit" value="Alterar">
+											<input type="submit" value="{{ t('common.change') }}">
 										{% elseif showGuildNick %}
 											<span>({{ guildNickRaw }})</span>
 										{% endif %}
@@ -97,7 +97,7 @@
 					{% set showedRank = false %}
 				{% endif %}
 			{% else %}
-				<tr><td colspan="5" class="directory-empty">Nenhum membro encontrado.</td></tr>
+				<tr><td colspan="5" class="directory-empty">{{ t('guilds.no_members') }}</td></tr>
 			{% endfor %}
 			</tbody>
 		</table>
@@ -106,23 +106,23 @@
 	{{ hook('HOOK_GUILDS_AFTER_GUILD_MEMBERS') }}
 
 	<div class="directory-card">
-		<div class="directory-card-title">Personagens Convidados</div>
+		<div class="directory-card-title">{{ t('guilds.invited_characters') }}</div>
 		<table class="directory-table">
 			<tbody>
-			<tr class="LabelH"><td>Nome</td></tr>
+			<tr class="LabelH"><td>{{ t('common.name') }}</td></tr>
 			{% for invited_player in invited_list %}
 				{% if invited_player.isLoaded() %}
 					<tr>
 						<td>
 							{{ getPlayerLink(invited_player.getName(), true)|raw }}
 							{% if isVice %}
-								<a class="guild-kick-link" href="{{ getLink('guilds') }}?action=delete_invite&guild={{ guild_name|url_encode }}&name={{ invited_player.getName()|url_encode }}">Cancelar convite</a>
+								<a class="guild-kick-link" href="{{ getLink('guilds') }}?action=delete_invite&guild={{ guild_name|url_encode }}&name={{ invited_player.getName()|url_encode }}">{{ t('guilds.cancel_invite') }}</a>
 							{% endif %}
 						</td>
 					</tr>
 				{% endif %}
 			{% else %}
-				<tr><td class="directory-empty">Nenhum personagem convidado.</td></tr>
+				<tr><td class="directory-empty">{{ t('guilds.no_invited') }}</td></tr>
 			{% endfor %}
 			</tbody>
 		</table>
@@ -148,14 +148,14 @@
 				{% if db.hasTableAndColumns('guild_invites', ['player_id']) %}
 					<form action="{{ getLink('guilds') }}?action=invite&guild={{ guild_name|url_encode }}" method="post">
 						{{ csrf() }}
-						{% set button_name = 'Invite Character' %}
+						{% set button_name = t('guilds.invite_character') %}
 						{% set button_image = '_sbutton_invitecharacter' %}
 						{% include('buttons.base.html.twig') %}
 					</form>
 				{% endif %}
 				<form action="{{ getLink('guilds') }}?action=change_rank&guild={{ guild_name|url_encode }}" method="post">
 					{{ csrf() }}
-					{% set button_name = 'Edit Ranks' %}
+					{% set button_name = t('guilds.edit_ranks') %}
 					{% set button_image = '_sbutton_editranks' %}
 					{% include('buttons.base.html.twig') %}
 				</form>
@@ -164,7 +164,7 @@
 			{% if players_from_account_in_guild|length > 0 %}
 				<form action="{{ getLink('guilds') }}?action=leave&guild={{ guild_name|url_encode }}" method="post">
 					{{ csrf() }}
-					{% set button_name = 'Leave Guild' %}
+					{% set button_name = t('guilds.leave') %}
 					{% set button_image = '_sbutton_leaveguild' %}
 					{% include('buttons.base.html.twig') %}
 				</form>

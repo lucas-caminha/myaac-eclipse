@@ -5,7 +5,7 @@
 
 defined('MYAAC') or die('Direct access not allowed!');
 
-$title = 'Recuperar Conta';
+$title = function_exists('t') ? t('account.recover_account') : 'Recuperar Conta';
 
 if (!setting('core.mail_enabled')) {
 	$twig->display('account/lost/unavailable.html.twig');

@@ -4,7 +4,7 @@
  */
 defined('MYAAC') or die('Direct access not allowed!');
 
-$title = 'Minha Conta';
+$title = function_exists('t') ? t('layout.my_account') : 'My Account';
 require SYSTEM . 'pages/account/login.php';
 require SYSTEM . 'pages/account/base.php';
 
@@ -61,7 +61,11 @@ csrfProtect();
 
 function eclipseManageYesNo(bool $enabled): string
 {
-	return $enabled ? 'Sim' : 'Não';
+	if (function_exists('t')) {
+		return $enabled ? t('common.yes') : t('common.no');
+	}
+
+	return $enabled ? 'Yes' : 'No';
 }
 
 function eclipseManagePercent(float $value): string
@@ -69,7 +73,7 @@ function eclipseManagePercent(float $value): string
 	return rtrim(rtrim(number_format($value, 2, ',', '.'), '0'), ',');
 }
 
-function eclipseManageDisplayValue($value, string $fallback = 'Não informado'): string
+function eclipseManageDisplayValue($value, string $fallback = 'Not informed'): string
 {
 	$value = trim((string)$value);
 	return $value !== '' ? $value : $fallback;
@@ -79,7 +83,7 @@ function eclipseManageMaskCpf($cpf): string
 {
 	$digits = preg_replace('/\D+/', '', (string)$cpf);
 	if(strlen($digits) !== 11) {
-		return 'Não informado';
+		return function_exists('t') ? t('account.not_informed') : 'Not informed';
 	}
 
 	return '***.***.***-' . substr($digits, -2);
@@ -93,28 +97,28 @@ $groups = new OTS_Groups_List();
 $premDays = $account_logged->getPremDays();
 
 $freePremium = isset($config['lua']['freePremium']) && getBoolean($config['lua']['freePremium']) || $premDays == OTS_Account::GRATIS_PREMIUM_DAYS;
-$dayOrDays = ($premDays == 1 ? 'dia' : 'dias');
+$dayOrDays = function_exists('t') ? ($premDays == 1 ? t('account.day') : t('account.days')) : ($premDays == 1 ? 'day' : 'days');
 
 $vipSystemEnabled = isset($config['lua']['vipSystemEnabled']) && getBoolean($config['lua']['vipSystemEnabled']);
-$premiumLabel = $vipSystemEnabled ? 'VIP' : 'Conta Premium';
+$premiumLabel = $vipSystemEnabled ? 'VIP' : (function_exists('t') ? t('account.premium_account') : 'Premium Account');
 
 if ($freePremium && !$vipSystemEnabled) {
-	$account_status = '<b><span style="color: green">Conta Premium grátis</span></b>';
+	$account_status = '<b><span style="color: green">' . (function_exists('t') ? t('account.free_premium_account') : 'Free Premium Account') . '</span></b>';
 } else if(!$account_logged->isPremium()) {
-	$account_status = '<b><span style="color: red">Conta gratuita</span></b>';
+	$account_status = '<b><span style="color: red">' . (function_exists('t') ? t('account.free_account_alt') : 'Free account') . '</span></b>';
 } else {
-	$account_status = '<b><span style="color: green">' . $premiumLabel . ', restam ' . $premDays . ' '.$dayOrDays.'</span></b>';
+	$account_status = '<b><span style="color: green">' . (function_exists('t') ? t('account.premium_remaining', ['label' => $premiumLabel, 'days' => $premDays, 'day_label' => $dayOrDays]) : $premiumLabel . ', ' . $premDays . ' ' . $dayOrDays . ' remaining') . '</span></b>';
 }
 
 $recovery_key = $account_logged->getCustomField('key');
 if(empty($recovery_key))
-	$account_registered = '<b><span style="color: red">Não</span></b>';
+	$account_registered = '<b><span style="color: red">' . (function_exists('t') ? t('common.no') : 'No') . '</span></b>';
 else
 {
 	if(setting('core.account_generate_new_reckey') && setting('core.mail_enabled'))
-		$account_registered = '<b><span style="color: green">Sim ( <a href="' . getLink('account/register-new') . '"> Comprar nova Recovery Key </a> )</span></b>';
+		$account_registered = '<b><span style="color: green">' . (function_exists('t') ? t('common.yes') : 'Yes') . ' ( <a href="' . getLink('account/register-new') . '"> ' . (function_exists('t') ? t('account.buy_new_recovery_key') : 'Buy new Recovery Key') . ' </a> )</span></b>';
 	else
-		$account_registered = '<b><span style="color: green">Sim</span></b>';
+		$account_registered = '<b><span style="color: green">' . (function_exists('t') ? t('common.yes') : 'Yes') . '</span></b>';
 }
 
 $account_created = $account_logged->getCreated();
@@ -129,21 +133,21 @@ $account_cpf = $account_logged->getCustomField('cpf');
 $account_lastlogin = (int)$account_logged->getCustomField('web_lastlogin');
 if($account_logged->isBanned())
 	if($account_logged->getBanTime() > 0)
-		$welcome_message = '<span style="color: red">Sua conta está banida até '.date("j F Y, G:i:s", $account_logged->getBanTime()).'.</span>';
+		$welcome_message = '<span style="color: red">' . (function_exists('t') ? t('account.banned_until', ['date' => date("j F Y, G:i:s", $account_logged->getBanTime())]) : 'Your account is banned until ' . date("j F Y, G:i:s", $account_logged->getBanTime()) . '.') . '</span>';
 	else
-		$welcome_message = '<span style="color: red">Sua conta está banida permanentemente.</span>';
+		$welcome_message = '<span style="color: red">' . (function_exists('t') ? t('account.banned_permanently') : 'Your account is permanently banned.') . '</span>';
 else
-	$welcome_message = 'Bem-vindo à sua conta!';
+	$welcome_message = function_exists('t') ? t('account.welcome_message') : 'Welcome to your account!';
 
 $email_change = '';
 $email_request = false;
 if($email_new_time > 1)
 {
 	if($email_new_time < time())
-		$email_change = '<br>(Você pode aceitar <b>'.$email_new.'</b> como novo email.)';
+		$email_change = '<br>(' . (function_exists('t') ? t('account.email_change_ready', ['email' => '<b>' . $email_new . '</b>']) : 'You can accept ' . '<b>' . $email_new . '</b>' . ' as the new email.') . ')';
 	else
 	{
-		$email_change = ' <br>Você poderá aceitar o <b>novo email após '.date("j F Y", $email_new_time).".</b>";
+		$email_change = ' <br>' . (function_exists('t') ? t('account.email_change_pending', ['date' => date("j F Y", $email_new_time)]) : 'You will be able to accept the new email after ' . date("j F Y", $email_new_time) . '.');
 		$email_request = true;
 	}
 }
@@ -214,90 +218,90 @@ if($db->hasTableAndColumns('accounts', ['creation', 'premdays', 'premdays_purcha
 $vip_benefits = [
 	[
 		'icon' => 'PremiumIcon-Stamina.png',
-		'label' => 'Experiência',
+		'label' => function_exists('t') ? t('account.experience') : 'Experience',
 		'value' => '+' . $vipBonusExp . '%',
-		'description' => 'Bônus aplicado automaticamente para contas VIP.'
+		'description' => function_exists('t') ? t('account.vip_exp_description') : 'Bonus applied automatically to VIP accounts.'
 	],
 	[
 		'icon' => 'PremiumIcon-TrackLoot.png',
 		'label' => 'Loot',
 		'value' => '+' . $vipBonusLoot . '%',
-		'description' => 'Melhora a recompensa de criaturas conforme a configuração atual.'
+		'description' => function_exists('t') ? t('account.vip_loot_description') : 'Improves creature rewards according to the current configuration.'
 	],
 	[
 		'icon' => 'PremiumIcon-Trainingstatues.png',
 		'label' => 'Skills',
 		'value' => '+' . $vipBonusSkill . '%',
-		'description' => 'Acelera treino de skills e magic level quando ativo.'
+		'description' => function_exists('t') ? t('account.vip_skills_description') : 'Speeds up skill and magic level training while active.'
 	],
 	[
 		'icon' => 'PremiumIcon-QuickLoot.png',
-		'label' => 'Auto Loot VIP',
+		'label' => function_exists('t') ? t('account.vip_autoloot') : 'VIP Auto Loot',
 		'value' => eclipseManageYesNo($vipAutoLootOnly),
-		'description' => 'Indica se o Auto Loot está reservado para contas VIP.'
+		'description' => function_exists('t') ? t('account.vip_autoloot_description') : 'Shows whether Auto Loot is reserved for VIP accounts.'
 	],
 	[
 		'icon' => 'PremiumIcon-Login.png',
-		'label' => 'Idle protegido',
+		'label' => function_exists('t') ? t('account.protected_idle') : 'Protected idle',
 		'value' => eclipseManageYesNo($vipStayOnline),
-		'description' => 'Permite maior tolerância ao ficar parado online.'
+		'description' => function_exists('t') ? t('account.vip_idle_description') : 'Allows higher tolerance while standing idle online.'
 	],
 	[
 		'icon' => 'PremiumIcon-House.png',
-		'label' => 'Manter house',
+		'label' => function_exists('t') ? t('account.keep_house') : 'Keep house',
 		'value' => eclipseManageYesNo($vipKeepHouse),
-		'description' => 'Protege a casa enquanto a conta mantém VIP ativo.'
+		'description' => function_exists('t') ? t('account.vip_house_description') : 'Protects the house while the account keeps active VIP.'
 	],
 	[
 		'icon' => 'PremiumIcon-Summons.png',
-		'label' => 'Familiar',
+		'label' => function_exists('t') ? t('account.familiar') : 'Familiar',
 		'value' => '-' . $vipFamiliarReduction . ' min',
-		'description' => 'Redução de cooldown de familiar configurada no servidor.'
+		'description' => function_exists('t') ? t('account.vip_familiar_description') : 'Familiar cooldown reduction configured on the server.'
 	],
 	[
 		'icon' => 'PremiumIcon-Loyalty.png',
 		'label' => 'Loyalty',
-		'value' => $loyaltyEnabled ? ($loyaltyPoints === null ? 'Ativo' : number_format($loyaltyPoints, 0, ',', '.') . ' pts') : 'Desativado',
-		'description' => $loyaltyEnabled ? 'Ganha ' . $loyaltyCreationDay . ' ponto(s)/dia de conta e bônus por dias premium.' : 'Sistema de Loyalty desativado no servidor.'
+		'value' => $loyaltyEnabled ? ($loyaltyPoints === null ? (function_exists('t') ? t('common.active') : 'Active') : number_format($loyaltyPoints, 0, ',', '.') . ' pts') : (function_exists('t') ? t('common.disabled') : 'Disabled'),
+		'description' => $loyaltyEnabled ? (function_exists('t') ? t('account.loyalty_earning_hint', ['points' => $loyaltyCreationDay]) : 'Earns ' . $loyaltyCreationDay . ' point(s)/account day and bonuses for premium days.') : (function_exists('t') ? t('account.loyalty_disabled_hint') : 'Loyalty system disabled on the server.')
 	],
 	[
 		'icon' => 'PremiumIcon-Analytics.png',
-		'label' => 'Multiplicador',
+		'label' => function_exists('t') ? t('account.multiplier') : 'Multiplier',
 		'value' => eclipseManagePercent($loyaltyMultiplier) . 'x',
-		'description' => 'Multiplicador aplicado ao bônus de skills por Loyalty.'
+		'description' => function_exists('t') ? t('account.loyalty_multiplier_hint') : 'Multiplier applied to the skill bonus from Loyalty.'
 	],
 ];
 
 $public_info_cards = [
 	[
-		'label' => 'Nome real',
+		'label' => function_exists('t') ? t('account.real_name') : 'Real name',
 		'value' => eclipseManageDisplayValue($account_rlname),
-		'hint' => 'Usado em atendimento e validações da conta.'
+		'hint' => function_exists('t') ? t('account.real_name_hint') : 'Used for support and account validation.'
 	],
 	[
-		'label' => 'Localização',
+		'label' => function_exists('t') ? t('account.location') : 'Location',
 		'value' => eclipseManageDisplayValue($account_location),
-		'hint' => 'Informação pública exibida no perfil da conta.'
+		'hint' => function_exists('t') ? t('account.location_hint') : 'Public information shown on the account profile.'
 	],
 	[
-		'label' => 'Personagens',
-		'value' => $players_count . ' criado(s)',
-		'hint' => $online_players_count . ' online agora.'
+		'label' => function_exists('t') ? t('account.characters') : 'Characters',
+		'value' => function_exists('t') ? t('account.characters_created_count', ['count' => $players_count]) : $players_count . ' created',
+		'hint' => function_exists('t') ? t('account.characters_online_now', ['count' => $online_players_count]) : $online_players_count . ' online now.'
 	],
 	[
-		'label' => 'Maior personagem',
-		'value' => $highest_player === null ? 'Nenhum personagem' : $highest_player->getName() . ' - level ' . $highest_player->getLevel(),
-		'hint' => 'Baseado nos personagens desta conta.'
+		'label' => function_exists('t') ? t('account.highest_character') : 'Highest character',
+		'value' => $highest_player === null ? (function_exists('t') ? t('account.no_character') : 'No character') : $highest_player->getName() . ' - level ' . $highest_player->getLevel(),
+		'hint' => function_exists('t') ? t('account.highest_character_hint') : 'Based on this account characters.'
 	],
 	[
-		'label' => 'Conta criada',
+		'label' => function_exists('t') ? t('account.account_created_date') : 'Account created',
 		'value' => date('d/m/Y', $account_created),
-		'hint' => 'Tempo de conta também alimenta o Loyalty.'
+		'hint' => function_exists('t') ? t('account.account_age_loyalty_hint') : 'Account age also feeds Loyalty.'
 	],
 	[
 		'label' => 'Recovery Key',
-		'value' => empty($recovery_key) ? 'Pendente' : 'Registrada',
-		'hint' => empty($recovery_key) ? 'Cadastre para proteger a conta.' : 'Sua conta possui chave de recuperação.'
+		'value' => empty($recovery_key) ? (function_exists('t') ? t('account.pending') : 'Pending') : (function_exists('t') ? t('account.registered') : 'Registered'),
+		'hint' => empty($recovery_key) ? (function_exists('t') ? t('account.recovery_key_missing_hint') : 'Register to protect the account.') : (function_exists('t') ? t('account.recovery_key_registered_hint') : 'Your account has a recovery key.')
 	],
 ];
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Create account
  *
@@ -14,14 +14,14 @@ use MyAAC\Models\AccountAction;
 use MyAAC\Models\AccountEmailVerify;
 
 defined('MYAAC') or die('Direct access not allowed!');
-$title = 'Criar conta';
+$title = function_exists('t') ? t('account.create_account') : 'Create account';
 
 if (setting('core.account_country'))
 	require SYSTEM . 'countries.conf.php';
 
 if($logged)
 {
-	echo 'Saia da conta atual antes de tentar criar uma nova conta.';
+	echo function_exists('t') ? t('account.logout_before_create') : 'Log out of the current account before creating a new one.';
 	return;
 }
 
@@ -103,35 +103,51 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 {
 	global $template_path;
 
-	$accountTypeLabel = $accountType === 'nome' ? 'Nome da conta' : ucfirst($accountType) . ' da conta';
-	$accountTypeText = $accountType === 'nome' ? 'nome da conta' : eclipseCreateAccountEscape($accountType);
+	$translate = function ($key, array $params = [], $fallback = '') {
+		if (function_exists('t')) {
+			$value = t($key, $params);
+			if ($value !== $key) {
+				return $value;
+			}
+		}
+
+		foreach ($params as $name => $value) {
+			$fallback = str_replace('{' . $name . '}', (string)$value, $fallback);
+		}
+
+		return $fallback;
+	};
+
+	$accountTypeLabel = $accountType === 'nome'
+		? $translate('account.account_name', [], 'Account name')
+		: $translate('account.account_type_label', ['type' => ucfirst($accountType)], ucfirst($accountType) . ' da conta');
+	$accountTypeText = $accountType === 'nome'
+		? $translate('account.account_name_short', [], 'account name')
+		: eclipseCreateAccountEscape($accountType);
 	$accountValueText = eclipseCreateAccountEscape($accountValue);
-	$characterNameText = eclipseCreateAccountEscape($characterName ?: 'Personagem inicial');
+	$characterNameText = eclipseCreateAccountEscape($characterName ?: $translate('account.initial_character', [], 'Initial character'));
 	$serverName = eclipseCreateAccountEscape(configLua('serverName'));
 	$characterCard = '';
 	$serverHeroUrl = eclipseCreateAccountEscape($template_path . '/images/header/bgs/arise-red-fortress.png');
 	$heroImage = '<img class="eclipse-create-success-art eclipse-create-success-server-art" src="' . $serverHeroUrl . '" alt="">';
 	$intro = $characterEnabled
-		? 'Sua conta e seu personagem foram criados. Agora é só entrar no jogo e escolher o outfit inicial.'
-		: 'Sua conta foi criada. Entre no painel para criar seu primeiro personagem quando quiser.';
-
-	$intro = $characterEnabled
-		? 'Sua conta e seu personagem foram criados. Agora &eacute; s&oacute; entrar no jogo e escolher o outfit inicial.'
-		: 'Sua conta foi criada. Entre no painel para criar seu primeiro personagem quando quiser.';
+		? $translate('account.success_intro_with_character', [], 'Your account and character were created. Now log in to the game and choose your starting outfit.')
+		: $translate('account.success_intro_account_only', [], 'Your account was created. Open the account panel whenever you want to create your first character.');
 
 	if ($characterEnabled) {
 		$guide = eclipseCreateAccountVocationGuide($characterVocation);
-		$guideHtml = [
-			'knightbanner.png' => ['Cavaleiro', 'Defensor de linha de frente', 'Feito para combate corpo a corpo, armaduras pesadas e press&atilde;o constante no centro da batalha.'],
-			'paladinbanner.png' => ['Paladino', 'H&iacute;brido de dist&acirc;ncia', 'Um atirador flex&iacute;vel que mistura dano &agrave; dist&acirc;ncia, sobreviv&ecirc;ncia e magia &uacute;til.'],
-			'monkbanner.png' => ['Monge', 'Esp&iacute;rito marcial', 'Um lutador disciplinado que combina for&ccedil;a f&iacute;sica com t&eacute;cnicas espirituais.'],
-			'sorcererbanner.png' => ['Feiticeiro', 'Dano elemental', 'Focado em magias destrutivas, dano explosivo e poder ofensivo.'],
-			'druidbanner.png' => ['Druida', 'Suporte e cura', 'Um conjurador ligado &agrave; natureza, com cura, suporte e utilidade confi&aacute;vel para o grupo.'],
+		$vocationKeyByImage = [
+			'knightbanner.png' => 'knight',
+			'paladinbanner.png' => 'paladin',
+			'monkbanner.png' => 'monk',
+			'sorcererbanner.png' => 'sorcerer',
+			'druidbanner.png' => 'druid',
 		];
-		if (isset($guideHtml[$guide['image']])) {
-			$guide['name'] = $guideHtml[$guide['image']][0];
-			$guide['role'] = $guideHtml[$guide['image']][1];
-			$guide['description'] = $guideHtml[$guide['image']][2];
+		if (isset($vocationKeyByImage[$guide['image']])) {
+			$vocationKey = $vocationKeyByImage[$guide['image']];
+			$guide['name'] = $translate('account.vocation.' . $vocationKey . '.name', [], $guide['name']);
+			$guide['role'] = $translate('account.vocation.' . $vocationKey . '.role', [], $guide['role']);
+			$guide['description'] = $translate('account.vocation.' . $vocationKey . '.description', [], $guide['description']);
 		}
 		$bannerStyle = '';
 		$vocationImage = '';
@@ -144,17 +160,17 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 
 		$characterCard = '
 			<section class="eclipse-create-success-card eclipse-create-success-character">
-				<h3 class="eclipse-create-success-card-title">Personagem criado</h3>
+				<h3 class="eclipse-create-success-card-title">' . eclipseCreateAccountEscape($translate('account.character_created', [], 'Character created')) . '</h3>
 				<div class="eclipse-create-success-banner"' . $bannerStyle . '>
 					' . $vocationImage . '
 					<div>
-						<span>Voca&ccedil;&atilde;o escolhida</span>
+						<span>' . eclipseCreateAccountEscape($translate('account.chosen_vocation', [], 'Chosen vocation')) . '</span>
 						<strong>' . $characterNameText . '</strong>
-						<small>' . $guide['name'] . ' - ' . $guide['role'] . '</small>
+						<small>' . eclipseCreateAccountEscape($guide['name']) . ' - ' . eclipseCreateAccountEscape($guide['role']) . '</small>
 					</div>
 				</div>
-				<p>O personagem <strong>' . $characterNameText . '</strong> foi criado. Escolha o outfit ao entrar no jogo pela primeira vez.</p>
-				<p class="eclipse-create-success-vocation-desc">' . $guide['description'] . '</p>
+				<p>' . $translate('account.character_created_text', ['name' => '<strong>' . $characterNameText . '</strong>'], 'The character {name} was created. Choose the outfit when you enter the game for the first time.') . '</p>
+				<p class="eclipse-create-success-vocation-desc">' . eclipseCreateAccountEscape($guide['description']) . '</p>
 			</section>';
 	}
 
@@ -162,50 +178,28 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 		<div class="eclipse-create-success">
 			<section class="eclipse-create-success-hero">
 				' . $heroImage . '
-				<span>Cadastro concluído</span>
-				<h2>Bem-vindo ao ' . $serverName . '</h2>
+				<span>' . eclipseCreateAccountEscape($translate('account.server_banner', [], 'Server banner')) . '</span>
+				<h2>' . eclipseCreateAccountEscape($translate('account.welcome_to_server', ['server' => $serverName], 'Welcome to {server}')) . '</h2>
 				<p>' . eclipseCreateAccountEscape($intro) . '</p>
 			</section>
 			<div class="eclipse-create-success-grid">
 				<section class="eclipse-create-success-card eclipse-create-success-account">
+					<h3 class="eclipse-create-success-card-title">' . eclipseCreateAccountEscape($translate('account.account_created', [], 'Account created')) . '</h3>
 					<span>' . eclipseCreateAccountEscape($accountTypeLabel) . '</span>
 					<strong>' . $accountValueText . '</strong>
-					<p>Guarde seu ' . $accountTypeText . ' e sua senha em um lugar seguro. Esses dados são necessários para jogar e acessar sua conta.</p>
+					<p>' . eclipseCreateAccountEscape($translate('account.success_credentials_needed', ['account_type' => $accountTypeText], 'You will need your {account_type} and password to play Eclipse OT.')) . '</p>
+					<p>' . eclipseCreateAccountEscape($translate('account.success_keep_safe', [], 'Keep this information in a safe place and never share it with anyone.')) . '</p>
 				</section>
 				' . $characterCard . '
 			</div>
 			<div class="eclipse-create-success-next">
-				<strong>Próximo passo</strong>
-				<span>Abra o client, entre com sua conta e comece sua jornada em Eclipse OT.</span>
-			</div>
-		</div>';
-
-	$description = '
-		<div class="eclipse-create-success">
-			<section class="eclipse-create-success-hero">
-				' . $heroImage . '
-				<span>Banner do servidor</span>
-				<h2>Bem-vindo ao ' . $serverName . '</h2>
-				<p>' . $intro . '</p>
-			</section>
-			<div class="eclipse-create-success-grid">
-				<section class="eclipse-create-success-card eclipse-create-success-account">
-					<h3 class="eclipse-create-success-card-title">Conta criada</h3>
-					<span>' . eclipseCreateAccountEscape($accountTypeLabel) . '</span>
-					<strong>' . $accountValueText . '</strong>
-					<p>Voc&ecirc; precisar&aacute; do ' . $accountTypeText . ' e da sua senha para jogar no Eclipse OT.</p>
-					<p>Guarde esses dados em um lugar seguro e nunca compartilhe com outras pessoas.</p>
-				</section>
-				' . $characterCard . '
-			</div>
-			<div class="eclipse-create-success-next">
-				<strong>Nos vemos no Eclipse OT!</strong>
-				<span>Abra o client, entre com sua conta e comece sua jornada.</span>
+				<strong>' . eclipseCreateAccountEscape($translate('account.see_you', [], 'See you in Eclipse OT!')) . '</strong>
+				<span>' . eclipseCreateAccountEscape($translate('account.next_step_play', [], 'Open the client, log in with your account and begin your journey.')) . '</span>
 			</div>
 		</div>';
 
 	$twig->display('success.html.twig', [
-		'title' => 'Conta criada',
+		'title' => $translate('account.account_created', [], 'Account created'),
 		'description' => $description,
 		'custom_buttons' => $characterEnabled ? '' : null,
 	]);
@@ -258,17 +252,17 @@ if($save)
 	{
 		$country = $_POST['country'];
 		if(!isset($country))
-			$errors['country'] = 'País não informado.';
+			$errors['country'] = function_exists('t') ? t('account.country_required') : 'Country was not provided.';
 		elseif(!isset($config['countries'][$country]))
-			$errors['country'] = 'País inválido.';
+			$errors['country'] = function_exists('t') ? t('account.country_invalid') : 'Invalid country.';
 	}
 
 	// password
 	if(empty($password)) {
-		$errors['password'] = 'Informe a senha da sua nova conta.';
+		$errors['password'] = function_exists('t') ? t('account.js_password_required') : 'Enter the password for your new account.';
 	}
 	elseif($password != $password_confirm) {
-		$errors['password'] = 'As senhas não são iguais.';
+		$errors['password'] = function_exists('t') ? t('account.passwords_do_not_match') : 'Passwords do not match.';
 	}
 	else if(!Validator::password($password)) {
 		$errors['password'] = Validator::getLastError();
@@ -276,7 +270,7 @@ if($save)
 
 	// check if account name is not equal to password
 	if(!config('account_login_by_email') && USE_ACCOUNT_NAME && strtoupper($account_name) == strtoupper($password)) {
-		$errors['password'] = 'A senha não pode ser igual ao nome da conta.';
+		$errors['password'] = function_exists('t') ? t('account.password_same_as_account') : 'Password cannot be the same as the account name.';
 	}
 
 	if(setting('core.account_mail_unique'))
@@ -438,13 +432,13 @@ if($save)
 				'verify_url' => generateLink($verify_url, $verify_url, true)
 			));
 
-			if(_mail($email, 'Nova conta no ' . $config['lua']['serverName'], $body_html))
+			if(_mail($email, (function_exists('t') ? t('account.verify_email_subject', ['server' => $config['lua']['serverName']]) : 'New account on ' . $config['lua']['serverName']), $body_html))
 			{
-				warning("Antes de entrar, você precisa confirmar seu email. O link de verificação foi enviado para $email. Se a mensagem não chegar, verifique também a caixa de spam.");
+				warning(function_exists('t') ? t('account.verify_email_warning', ['email' => $email]) : "Before logging in, confirm your email. The verification link was sent to $email. If it does not arrive, also check your spam folder.");
 			}
 			else
 			{
-				error('Ocorreu um erro ao enviar o email! A conta não foi criada. Tente novamente. Para o admin: mais informações estão em system/logs/mailer-error.log');
+				error(function_exists('t') ? t('account.email_create_error') : 'There was an error sending the email. The account was not created. Try again.');
 				$new_account->delete();
 
 				return;
@@ -472,10 +466,10 @@ if($save)
 					'account' => $tmp_account
 				));
 
-				if(_mail($email, 'Sua conta no ' . $config['lua']['serverName'], $mailBody))
-					echo '<br /><small>Essas informações foram enviadas para o email <b>' . $email . '</b>.';
+				if(_mail($email, (function_exists('t') ? t('account.welcome_email_subject', ['server' => $config['lua']['serverName']]) : 'Your account on ' . $config['lua']['serverName']), $mailBody))
+					echo '<br /><small>' . (function_exists('t') ? t('account.welcome_email_sent', ['email' => '<b>' . $email . '</b>']) : 'This information was sent to ' . '<b>' . $email . '</b>' . '.') . '</small>';
 				else {
-					error('Ocorreu um erro ao enviar o email. Para o admin: mais informações estão em system/logs/mailer-error.log');
+					error(function_exists('t') ? t('account.email_send_error') : 'There was an error sending the email.');
 				}
 			}
 		}
@@ -552,3 +546,4 @@ if($save && setting('core.account_create_character_create')) {
 }
 
 $twig->display('account.create.html.twig', $params);
+

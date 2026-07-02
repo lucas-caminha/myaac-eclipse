@@ -14,7 +14,7 @@ defined('MYAAC') or die('Direct access not allowed!');
 
 use MyAAC\Models\Pages;
 
-$title = 'Comandos e Informações';
+$title = t('ots_info.page_title');
 
 $rent = trim(strtolower(configLua('houseRentPeriod')));
 if ($rent != 'yearly' && $rent != 'monthly' && $rent != 'weekly' && $rent != 'daily')
@@ -48,7 +48,7 @@ $twig->display('server-info.html.twig', [
 	'serverIp' => str_replace(['http://', 'https://', '/'], '', configLua('url')),
 	'clientVersion' => $status['clientVersion'] ?? null,
 	'protectionLevel' => configLua('protectionLevel'),
-	'houseRent' => $rent == 'never' ? 'disabled' : $rent,
+	'houseRent' => $rent == 'never' ? t('common.disabled') : t('ots_info.rent_' . $rent),
 	'houseOld' => $cleanOld ?? null, // in progressing
 	'rateExp' => configLua('rateExp'),
 	'rateMagic' => configLua('rateMagic'),

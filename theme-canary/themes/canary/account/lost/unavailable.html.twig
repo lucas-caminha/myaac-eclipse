@@ -1,19 +1,19 @@
 <div class="eclipse-lost-account">
 	<section class="lost-account-hero">
-		<p class="lost-account-eyebrow">Segurança da conta</p>
-		<p>Use esta área quando não lembrar sua senha ou não conseguir acessar sua conta.</p>
+		<p class="lost-account-eyebrow">{{ t('account.security') }}</p>
+		<p>{{ t('account.lost_unavailable_intro') }}</p>
 	</section>
 
 	<section class="lost-account-panel lost-account-unavailable">
 		<div class="lost-account-status-icon" aria-hidden="true">!</div>
 		<div>
-			<h2>Recuperação automática indisponível</h2>
-			<p>O envio de e-mails ainda não está configurado. Nenhum dado da sua conta foi alterado.</p>
-			<p>Entre em contato com a equipe do servidor pelo canal oficial de suporte para receber orientação.</p>
+			<h2>{{ t('account.recovery_unavailable') }}</h2>
+			<p>{{ t('account.email_not_configured') }}</p>
+			<p>{{ t('account.contact_support_recovery') }}</p>
 		</div>
 	</section>
 
 	<div class="lost-account-actions">
-		<a class="lost-account-button" href="{{ getLink('account/login') }}">Voltar para o login</a>
+		<a class="lost-account-button" href="{{ getLink('account/login') }}">{{ t('account.back_to_login') }}</a>
 	</div>
 </div>

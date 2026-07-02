@@ -1,20 +1,20 @@
 <br/>
 <div class="eclipse-characters-page eclipse-characters-search">
 	<form action="{{ getLink('characters') }}" method="post">
-		{% set title = 'Search Character' %}
+		{% set title = t('characters.search_title') %}
 		{% set tableClass = 'Table1' %}
 		{% set background = config('darkborder') %}
 		{% set content %}
 			<table width="100%">
 				<tr>
 					<td style="vertical-align:middle" class="LabelV150">
-						Character Name:
+						{{ t('characters.character_name') }}:
 					</td>
 					<td style="width:170px">
 						<input style="width:165px" name="name" value="" size="29" maxlength="29"/>
 					</td>
 					<td>
-						{% set button_name = 'Pesquisar' %}
+						{% set button_name = t('common.search') %}
 						{{ include('buttons.base.html.twig') }}
 					</td>
 				</tr>

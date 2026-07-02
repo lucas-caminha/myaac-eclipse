@@ -3,6 +3,22 @@ defined('MYAAC') or die('Direct access not allowed!');
 
 use MyAAC\Models\Account;
 
+function eclipseBoostedSponsorText(string $key, array $params = [], string $fallback = ''): string
+{
+	if(function_exists('t')) {
+		$value = t($key, $params);
+		if($value !== $key) {
+			return $value;
+		}
+	}
+
+	foreach($params as $name => $value) {
+		$fallback = str_replace('{' . $name . '}', (string)$value, $fallback);
+	}
+
+	return $fallback;
+}
+
 function eclipseBoostedSponsorPriceCoins(string $type): int
 {
 	return $type === 'creature' ? 300 : 250;
@@ -149,7 +165,9 @@ function eclipseBoostedSponsorResolveMonsterSource(string $monsterName): ?array
 
 function eclipseBoostedSponsorTypeLabel(string $type): string
 {
-	return $type === 'boss' ? 'Boss' : 'Creature';
+	return $type === 'boss'
+		? eclipseBoostedSponsorText('boosted_sponsor.type_boss', [], 'Boss')
+		: eclipseBoostedSponsorText('boosted_sponsor.type_creature', [], 'Creature');
 }
 
 function eclipseBoostedSponsorActiveSlot($db, string $type, string $scheduledForDate): ?array
@@ -200,7 +218,7 @@ function eclipseBoostedSponsorActiveSlot($db, string $type, string $scheduledFor
 function eclipseBoostedSponsorPublicSponsorName(?array $slot): string
 {
 	if(!$slot) {
-		return 'Alguem';
+		return eclipseBoostedSponsorText('boosted_sponsor.someone', [], 'Someone');
 	}
 
 	$name = trim((string)($slot['sponsor_account_name'] ?? ''));
@@ -213,7 +231,7 @@ function eclipseBoostedSponsorPublicSponsorName(?array $slot): string
 		return $name;
 	}
 
-	return 'Alguem';
+	return eclipseBoostedSponsorText('boosted_sponsor.someone', [], 'Someone');
 }
 
 function eclipseBoostedSponsorRecentApplied($db, string $type, int $limit = 6): array
@@ -311,7 +329,7 @@ function eclipseBoostedSponsorResolveRaceId(array $target): int
 	}
 
 	if($raceId <= 0) {
-		throw new RuntimeException('Nao foi possivel resolver o raceid de ' . $target['name'] . '. Configure ECLIPSE_MONSTER_DATA_PATH apontando para a pasta monster do servidor.');
+		throw new RuntimeException(eclipseBoostedSponsorText('boosted_sponsor.error_raceid', ['name' => $target['name']], 'Could not resolve raceid for {name}. Configure ECLIPSE_MONSTER_DATA_PATH pointing to the server monster folder.'));
 	}
 
 	return $raceId;

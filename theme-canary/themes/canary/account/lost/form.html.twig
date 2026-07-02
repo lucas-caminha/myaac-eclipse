@@ -1,7 +1,7 @@
 <div class="eclipse-lost-account">
 	<section class="lost-account-hero">
-		<p class="lost-account-eyebrow">Segurança da conta</p>
-		<p>Informe um personagem da conta e escolha a forma de recuperação mais adequada.</p>
+		<p class="lost-account-eyebrow">{{ t('account.security') }}</p>
+		<p>{{ t('account.lost_intro') }}</p>
 	</section>
 
 	<form class="lost-account-panel lost-account-form" action="{{ getLink('account/lost/step-1') }}" method="post">
@@ -9,36 +9,36 @@
 		<input type="hidden" name="character" value="">
 
 		<div class="lost-account-field">
-			<label for="lost-account-character">Nome do personagem</label>
+			<label for="lost-account-character">{{ t('account.character_name') }}</label>
 			<input id="lost-account-character" type="text" name="nick" maxlength="30" autocomplete="off" autofocus required>
-			<small>Digite o nome exato de qualquer personagem vinculado à conta.</small>
+			<small>{{ t('account.character_exact_hint') }}</small>
 		</div>
 
 		<fieldset class="lost-account-methods">
-			<legend>Como deseja recuperar a conta?</legend>
+			<legend>{{ t('account.recovery_method') }}</legend>
 
 			<label class="lost-account-method" for="action_type_email">
 				<input type="radio" name="action" id="action_type_email" value="email" required>
 				<span>
-					<strong>Receber código por e-mail</strong>
-					<small>Enviaremos as instruções para o endereço já vinculado à conta.</small>
+					<strong>{{ t('account.receive_email_code') }}</strong>
+					<small>{{ t('account.receive_email_code_hint') }}</small>
 				</span>
 			</label>
 
 			<label class="lost-account-method" for="action_type_key">
 				<input type="radio" name="action" id="action_type_key" value="recovery-key" required>
 				<span>
-					<strong>Usar Recovery Key</strong>
-					<small>Escolha esta opção se você possui a chave de recuperação da conta.</small>
+					<strong>{{ t('account.use_recovery_key') }}</strong>
+					<small>{{ t('account.use_recovery_key_hint') }}</small>
 				</span>
 			</label>
 		</fieldset>
 
 		<div class="lost-account-actions">
-			<a class="lost-account-button lost-account-button-secondary" href="{{ getLink('account/login') }}">Cancelar</a>
-			<button class="lost-account-button" type="submit">Continuar</button>
+			<a class="lost-account-button lost-account-button-secondary" href="{{ getLink('account/login') }}">{{ t('account.cancel') }}</a>
+			<button class="lost-account-button" type="submit">{{ t('account.continue') }}</button>
 		</div>
 	</form>
 
-	<p class="lost-account-security-note">Nunca informe sua senha ou Recovery Key fora desta página.</p>
+	<p class="lost-account-security-note">{{ t('account.lost_security_note') }}</p>
 </div>

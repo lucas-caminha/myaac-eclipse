@@ -1,4 +1,4 @@
-{% set title = 'Equipe do Servidor' %}
+{% set title = t('team.title') %}
 {% set content %}
 {% set i = 0 %}
 
@@ -8,20 +8,20 @@
 			<div class="directory-card team-group-card">
 				<div class="directory-card-title team-group-title">
 					<span>{{ group.group_name|capitalize }}</span>
-					<small>{{ group.members|length }} membro{{ group.members|length == 1 ? '' : 's' }}</small>
+					<small>{{ t(group.members|length == 1 ? 'team.member_singular' : 'team.member_plural', {'count': group.members|length}) }}</small>
 				</div>
 				<table class="directory-table team-table">
 					<tbody>
 					<tr class="LabelH">
 						{% if setting('core.team_outfit') %}
-							<td class="team-outfit-cell">Outfit</td>
+							<td class="team-outfit-cell">{{ t('common.outfit') }}</td>
 						{% endif %}
-						<td>Nome</td>
+						<td>{{ t('common.name') }}</td>
 						{% if setting('core.team_status') %}
 							<td>Status</td>
 						{% endif %}
 						{% if (setting('core.multiworld') or setting('core.team_world')) %}
-							<td>Mundo</td>
+							<td>{{ t('common.world') }}</td>
 						{% endif %}
 					</tr>
 
@@ -59,7 +59,7 @@
 		{% endif %}
 	{% else %}
 		<div class="directory-card">
-			<div class="directory-empty">Nenhum membro da equipe foi encontrado.</div>
+			<div class="directory-empty">{{ t('team.empty') }}</div>
 		</div>
 	{% endfor %}
 </div>

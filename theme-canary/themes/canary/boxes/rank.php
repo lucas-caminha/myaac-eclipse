@@ -67,7 +67,7 @@
     }
 </style>
 <div class="rank">
-    <div class="rank_header">Highscores</div>
+    <div class="rank_header"><?= htmlspecialchars(t('box.highscores.title')) ?></div>
     <div class="rank_content">
         <?php
         $topPlayers = getTopPlayers(5);
@@ -111,12 +111,12 @@
             <div class="rank_outfit" style="background-image: url('<?php echo $player['outfit'] ?>')"></div>
             <div class="rank_text">
                 <a href="<?php echo getPlayerLink($player['name'], false) ?>"><b><?php echo $player['name'] ?></b></a><br>
-                <small>Level: <?php echo $player['level'] ?> / <?php echo $player_voc ?></small>
+                <small><?= htmlspecialchars(t('box.highscores.level')) ?>: <?php echo $player['level'] ?> / <?php echo $player_voc ?></small>
             </div>
         </div>
         <?php } ?>
         <a href="<?= getLink('highscores'); ?>">
-            <button type="button" class="rank_button">View Highscores</button>
+            <button type="button" class="rank_button"><?= htmlspecialchars(t('box.highscores.view')) ?></button>
         </a>
     </div>
     <div class="rank_bottom"></div>

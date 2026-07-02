@@ -4,7 +4,7 @@
   }
 
   #News:has(.eclipse-server-info) > .BorderTitleText::after {
-    content: "Comandos e Informações";
+    content: "{{ t('ots_info.page_title') }}";
     display: flex;
     align-items: center;
     height: 100%;
@@ -21,23 +21,23 @@
   </section>
 
   <section id="server-commands" class="serverinfo-card serverinfo-commands-card">
-    <div class="serverinfo-card-title">Comandos</div>
+    <div class="serverinfo-card-title">{{ t('ots_info.commands') }}</div>
     <div class="serverinfo-commands-body">
       {% if commandsPage %}
         {{ commandsPage.body|raw }}
       {% else %}
-        <p>Os comandos do servidor serão exibidos aqui quando estiverem cadastrados no painel.</p>
+        <p>{{ t('ots_info.commands_empty') }}</p>
       {% endif %}
     </div>
   </section>
 
   <section id="server-details" class="serverinfo-card">
-      <div class="serverinfo-card-title">Informações do Servidor</div>
+      <div class="serverinfo-card-title">{{ t('ots_info.server_info') }}</div>
       <div class="serverinfo-overview">
         <div class="serverinfo-feature-card is-primary">
-          <span>Conexão</span>
+          <span>{{ t('ots_info.connection') }}</span>
           <strong>{{ serverIp }}</strong>
-          <small>Porta {{ config.lua.loginPort ?? config.lua.loginProtocolPort }} • Cliente {{ clientVersion }}</small>
+          <small>{{ t('ots_info.port_client', {'port': config.lua.loginPort ?? config.lua.loginProtocolPort, 'client': clientVersion}) }}</small>
         </div>
         <div class="serverinfo-feature-card">
           <span>Server Save</span>
@@ -45,38 +45,38 @@
           <small>Uptime: {{ status.uptimeReadable }}</small>
         </div>
         <div class="serverinfo-feature-card">
-          <span>Mundo</span>
+          <span>{{ t('common.world') }}</span>
           <strong>{{ config.lua.worldType|upper }}</strong>
-          <small>Protection level {{ protectionLevel }}</small>
+          <small>{{ t('ots_info.protection_level', {'level': protectionLevel}) }}</small>
         </div>
       </div>
 
       <dl class="serverinfo-list serverinfo-compact-list">
         <div><dt>Loot</dt><dd>x{{ rateLoot }}</dd></div>
         <div><dt>Spawn</dt><dd>x{{ rateSpawn }}</dd></div>
-        <div><dt>Aluguel de casas</dt><dd>{{ houseRent }}</dd></div>
-        <div><dt>Nível para guild</dt><dd>{% if config.guild_need_level > 0 %}{{ config.guild_need_level }}{% else %}sem requisito{% endif %}</dd></div>
+        <div><dt>{{ t('ots_info.house_rent') }}</dt><dd>{{ houseRent }}</dd></div>
+        <div><dt>{{ t('ots_info.guild_level') }}</dt><dd>{% if config.guild_need_level > 0 %}{{ config.guild_need_level }}{% else %}{{ t('common.no_requirement') }}{% endif %}</dd></div>
         {% if houseLevel %}
-          <div><dt>Nível para comprar casa</dt><dd>{{ houseLevel }}</dd></div>
+          <div><dt>{{ t('ots_info.house_buy_level') }}</dt><dd>{{ houseLevel }}</dd></div>
         {% endif %}
       </dl>
       {% if houseOld %}
-        <p class="serverinfo-muted">Casas com donos inativos são limpas após 30 dias.</p>
+        <p class="serverinfo-muted">{{ t('ots_info.house_old') }}</p>
       {% endif %}
     </section>
 
   <section id="server-rates" class="serverinfo-card">
-      <div class="serverinfo-card-title">Rates</div>
+      <div class="serverinfo-card-title">{{ t('ots_info.rates') }}</div>
       {% if not rateUseStages %}
         <div class="serverinfo-rate-tiles">
-          <div><span>x{{ rateExp }}</span><small>Experiência</small></div>
-          <div><span>x{{ rateMagic }}</span><small>Magic Level</small></div>
-          <div><span>x{{ rateSkill }}</span><small>Skills</small></div>
+          <div><span>x{{ rateExp }}</span><small>{{ t('vip.benefit.exp') }}</small></div>
+          <div><span>x{{ rateMagic }}</span><small>{{ t('common.magic_level') }}</small></div>
+          <div><span>x{{ rateSkill }}</span><small>{{ t('common.skills') }}</small></div>
         </div>
       {% else %}
         <div class="serverinfo-stage-table-wrap">
-          <h3>Experiência</h3>
-          <div class="serverinfo-rate-chart" aria-label="Rates de experiência por nível">
+          <h3>{{ t('vip.benefit.exp') }}</h3>
+          <div class="serverinfo-rate-chart" aria-label="{{ t('ots_info.exp_rates_aria') }}">
             {% for result in rateStages.experienceStages %}
               <div class="serverinfo-rate-row">
                 <span class="serverinfo-rate-range">Lv. {{ result.minlevel }}{% if result.maxlevel is not empty %}–{{ result.maxlevel }}{% else %}+{% endif %}</span>
@@ -86,8 +86,8 @@
             {% endfor %}
           </div>
 
-          <h3>Skills</h3>
-          <div class="serverinfo-rate-chart" aria-label="Rates de skills por nível">
+          <h3>{{ t('common.skills') }}</h3>
+          <div class="serverinfo-rate-chart" aria-label="{{ t('ots_info.skill_rates_aria') }}">
             {% for result in rateStages.skillsStages %}
               <div class="serverinfo-rate-row">
                 <span class="serverinfo-rate-range">Lv. {{ result.minlevel }}{% if result.maxlevel is not empty %}–{{ result.maxlevel }}{% else %}+{% endif %}</span>
@@ -97,8 +97,8 @@
             {% endfor %}
           </div>
 
-          <h3>Magic Level</h3>
-          <div class="serverinfo-rate-chart" aria-label="Rates de magic level">
+          <h3>{{ t('common.magic_level') }}</h3>
+          <div class="serverinfo-rate-chart" aria-label="{{ t('ots_info.magic_rates_aria') }}">
             {% for result in rateStages.magicLevelStages %}
               <div class="serverinfo-rate-row">
                 <span class="serverinfo-rate-range">ML {{ result.minlevel }}{% if result.maxlevel is not empty %}–{{ result.maxlevel }}{% else %}+{% endif %}</span>
@@ -112,20 +112,20 @@
   </section>
 
   <section id="server-pvp" class="serverinfo-card">
-      <div class="serverinfo-card-title">Sistema PvP</div>
+      <div class="serverinfo-card-title">{{ t('ots_info.pvp_system') }}</div>
       <dl class="serverinfo-list">
         <div><dt>PZ Lock</dt><dd>{{ pzLocked / (60 * 1000) }} min</dd></div>
-        <div><dt>Duração do frag</dt><dd>7 horas</dd></div>
-        <div><dt>Red Skull</dt><dd>{{ redSkullDuration }} dias</dd></div>
+        <div><dt>{{ t('ots_info.frag_duration') }}</dt><dd>{{ t('ots_info.hours', {'count': 7}) }}</dd></div>
+        <div><dt>Red Skull</dt><dd>{{ t('ots_info.days', {'count': redSkullDuration}) }}</dd></div>
         {% if blackSkullDuration %}
-          <div><dt>Black Skull</dt><dd>{{ blackSkullDuration }} dias</dd></div>
+          <div><dt>Black Skull</dt><dd>{{ t('ots_info.days', {'count': blackSkullDuration}) }}</dd></div>
         {% endif %}
         {% if dailyFragsToRedSkull is defined %}
-          <div><dt>Red Skull</dt><dd>{{ dailyFragsToRedSkull }} diário / {{ weeklyFragsToRedSkull }} semanal / {{ monthlyFragsToRedSkull }} mensal</dd></div>
-          <div><dt>Black Skull</dt><dd>{{ dailyFragsToRedSkull * 2 }} diário / {{ weeklyFragsToRedSkull * 2 }} semanal / {{ monthlyFragsToRedSkull * 2 }} mensal</dd></div>
+          <div><dt>Red Skull</dt><dd>{{ t('ots_info.frags_periods', {'daily': dailyFragsToRedSkull, 'weekly': weeklyFragsToRedSkull, 'monthly': monthlyFragsToRedSkull}) }}</dd></div>
+          <div><dt>Black Skull</dt><dd>{{ t('ots_info.frags_periods', {'daily': dailyFragsToRedSkull * 2, 'weekly': weeklyFragsToRedSkull * 2, 'monthly': monthlyFragsToRedSkull * 2}) }}</dd></div>
         {% endif %}
       </dl>
   </section>
 
-  <p class="serverinfo-footer-note">Denuncie violações de regras dentro do jogo usando CTRL + R.</p>
+  <p class="serverinfo-footer-note">{{ t('ots_info.report_note') }}</p>
 </div>

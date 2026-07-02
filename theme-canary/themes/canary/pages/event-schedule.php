@@ -169,7 +169,7 @@
 </style>
 <?php
 defined('MYAAC') or die('Direct access not allowed!');
-$title = 'Agenda de Eventos';
+$title = t('event_schedule.page_title');
 
 $currentYear = date('Y');
 $currentMonth = date('n');
@@ -179,25 +179,25 @@ $getMonth	= $_GET['month'] ?? $currentMonth;
 
 $dateObj	= DateTime::createFromFormat('!m', $getMonth);
 $monthNames = [
-	1 => 'Janeiro',
-	2 => 'Fevereiro',
-	3 => 'Março',
-	4 => 'Abril',
-	5 => 'Maio',
-	6 => 'Junho',
-	7 => 'Julho',
-	8 => 'Agosto',
-	9 => 'Setembro',
-	10 => 'Outubro',
-	11 => 'Novembro',
-	12 => 'Dezembro',
+	1 => t('month.january'),
+	2 => t('month.february'),
+	3 => t('month.march'),
+	4 => t('month.april'),
+	5 => t('month.may'),
+	6 => t('month.june'),
+	7 => t('month.july'),
+	8 => t('month.august'),
+	9 => t('month.september'),
+	10 => t('month.october'),
+	11 => t('month.november'),
+	12 => t('month.december'),
 ];
 $monthName = $monthNames[(int)$getMonth] ?? $dateObj->format('F');
 
 function showWeeks(): string
 {
 	$out = "";
-	$weeks = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+	$weeks = [t('weekday.monday'), t('weekday.tuesday'), t('weekday.wednesday'), t('weekday.thursday'), t('weekday.friday'), t('weekday.saturday'), t('weekday.sunday')];
 	for ($i = 0; $i < 7; $i++) $out .= "<td>$weeks[$i]</td>";
 	return $out;
 }
@@ -394,6 +394,6 @@ function showCalendar($month, $year): string
 		</div>
 	</div>
 	<br>
-	<div class="eclipse-event-schedule-note">* O evento começa/termina no server save deste dia.</div>
+	<div class="eclipse-event-schedule-note"><?= htmlspecialchars(t('event_schedule.note')) ?></div>
 </div>
 </div>

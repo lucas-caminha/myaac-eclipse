@@ -65,9 +65,11 @@ if ($now > $serverSaveTime) {
 }
 
 $interval = $now->diff($serverSaveTime);
+$serverSaveNowLabel = t('box.server_save.now');
 ?>
 <script>
     var serverSaveTime = new Date(<?= $serverSaveTime->format('Y, n-1, j, G, i, s') ?>);
+    var serverSaveNowLabel = <?= json_encode($serverSaveNowLabel, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
 
     var x = setInterval(function() {
         var now = new Date().getTime();
@@ -86,15 +88,15 @@ $interval = $now->diff($serverSaveTime);
 
         if (distance < 0) {
             clearInterval(x);
-            document.getElementById("timerServerSave").innerHTML = "Server save now!";
+            document.getElementById("timerServerSave").innerHTML = serverSaveNowLabel;
         }
     }, 1000);
 </script>
 <div class="serversave">
-    <div class="serversave_header">Server Save</div>
-    <div class="serversave_content">
+    <div class="serversave_header"><?= htmlspecialchars(t('box.server_save.title')) ?></div>
+    <div class="serversave_content" data-server-save-label="<?= htmlspecialchars(t('box.server_save.title')) ?>">
         <div class="serversave_text">
-            <small>Countdown to server save</small>
+            <small><?= htmlspecialchars(t('box.server_save.countdown')) ?></small>
         </div>
         <div class="serversave_countdown" id="timerServerSave"></div>
     </div>

@@ -60,10 +60,10 @@
 </style>
 <form class="searchchar-form" method="post" action="<?= getLink('characters'); ?>" style="margin-bottom: 0;">
 <div class="searchchar">
-    <div class="searchchar_header">Search Char</div>
+    <div class="searchchar_header"><?= htmlspecialchars(t('box.search.title')) ?></div>
     <div class="searchchar_content">
-        <input type="text" class="searchchar_input" name="name" maxlength="29" placeholder="Character name">
-        <button type="submit" class="searchchar_button">Search</button>
+        <input type="text" class="searchchar_input" name="name" maxlength="29" placeholder="<?= htmlspecialchars(t('box.search.placeholder')) ?>">
+        <button type="submit" class="searchchar_button"><?= htmlspecialchars(t('box.search.button')) ?></button>
     </div>
     <div class="searchchar_bottom"></div>
 </div>

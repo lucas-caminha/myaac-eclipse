@@ -12,7 +12,7 @@
 					{% if article.read_more is not empty %}</a>{% endif %}
 				</div>
 				{% if article.read_more is not empty %}
-					<a id="Link" href="{{ article.read_more }}">&raquo; read more</a>
+					<a id="Link" href="{{ article.read_more }}">&raquo; {{ t('news.read_more') }}</a>
 				{% endif %}
 				<div id="TeaserText">
 					<div style="position: relative; top: -2px; margin-bottom: 2px;">

@@ -21,24 +21,24 @@ $bossLink = getLink('bosses') . '?name=' . rawurlencode($bossName);
 $boostedSponsorLink = getLink('boosted-sponsor');
 ?>
 <div class="eclipse-rightbox eclipse-boosted">
-    <div class="eclipse-rightbox-title">BOOSTED</div>
+    <div class="eclipse-rightbox-title"><?= htmlspecialchars(t('box.boosted.title')) ?></div>
     <div class="eclipse-rightbox-content eclipse-boosted-grid">
         <div class="eclipse-boosted-item eclipse-boosted-boss">
-            <a class="eclipse-boosted-card-link" href="<?= htmlspecialchars($bossLink) ?>" title="Abrir boss boosted: <?= htmlspecialchars($bossName) ?>">
-                <div class="eclipse-boosted-frame"><img src="<?= $bossImage ?>" alt="Boss boosted"></div>
-                <strong>BOSS</strong>
+            <a class="eclipse-boosted-card-link" href="<?= htmlspecialchars($bossLink) ?>" title="<?= htmlspecialchars(t('box.boosted.open_boss', ['name' => $bossName])) ?>">
+                <div class="eclipse-boosted-frame"><img src="<?= $bossImage ?>" alt="<?= htmlspecialchars(t('box.boosted.boss')) ?> boosted"></div>
+                <strong><?= htmlspecialchars(t('box.boosted.boss')) ?></strong>
                 <span><?= htmlspecialchars($bossName) ?></span>
             </a>
         </div>
         <div class="eclipse-boosted-item eclipse-boosted-creature">
-            <a class="eclipse-boosted-card-link" href="<?= htmlspecialchars($creatureLink) ?>" title="Abrir criatura boosted: <?= htmlspecialchars($creatureName) ?>">
-                <div class="eclipse-boosted-frame"><img src="<?= $creatureImage ?>" alt="Creature boosted"></div>
-                <strong>CREATURE</strong>
+            <a class="eclipse-boosted-card-link" href="<?= htmlspecialchars($creatureLink) ?>" title="<?= htmlspecialchars(t('box.boosted.open_creature', ['name' => $creatureName])) ?>">
+                <div class="eclipse-boosted-frame"><img src="<?= $creatureImage ?>" alt="<?= htmlspecialchars(t('box.boosted.creature')) ?> boosted"></div>
+                <strong><?= htmlspecialchars(t('box.boosted.creature')) ?></strong>
                 <span><?= htmlspecialchars($creatureName) ?></span>
             </a>
         </div>
         <div class="eclipse-boosted-footer">
-            <a class="eclipse-boosted-action" href="<?= htmlspecialchars($boostedSponsorLink) ?>">Boostar Pr&oacute;ximo</a>
+            <a class="eclipse-boosted-action" href="<?= htmlspecialchars($boostedSponsorLink) ?>"><?= htmlspecialchars(t('box.boosted.next')) ?></a>
         </div>
     </div>
 </div>

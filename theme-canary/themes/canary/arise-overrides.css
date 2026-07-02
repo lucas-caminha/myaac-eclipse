@@ -30,6 +30,30 @@ body {
   color: var(--arise-ivory);
 }
 
+html.eclipse-theme-light,
+html.eclipse-theme-light body {
+  background-color: #c9d9e7 !important;
+}
+
+html.eclipse-theme-light body {
+  background-image:
+    linear-gradient(180deg, rgba(246,250,255,.02), rgba(210,228,242,.10) 42%, rgba(160,184,204,.46) 100%),
+    linear-gradient(90deg, rgba(168,198,222,.24), transparent 22%, transparent 78%, rgba(168,198,222,.24)),
+    url("images/header/bgs/arise-light-citadel.png") !important;
+  color: #2c1a0d;
+}
+
+html.eclipse-theme-light #ArtworkHelper {
+  background:
+    linear-gradient(90deg, rgba(192,218,238,.22), rgba(255,255,255,.03) 30%, rgba(255,255,255,.03) 70%, rgba(192,218,238,.22)),
+    linear-gradient(180deg, rgba(255,255,255,0), rgba(190,213,231,.16) 620px, rgba(135,160,183,.50));
+}
+
+html.eclipse-theme-light #EclipseCenteredLogo,
+html.eclipse-theme-light #LeftArtwork #TibiaLogoArtworkTop {
+  filter: drop-shadow(0 12px 18px rgba(122,78,20,.38)) drop-shadow(0 0 18px rgba(255,244,188,.82)) !important;
+}
+
 
 #Bodycontainer {
   max-width: 1500px !important;
@@ -510,15 +534,15 @@ body {
     0 0 12px rgba(0, 0, 0, .85);
 }
 
-#news_Label::before { content: "Not?cias"; }
-#account_Label::before { content: "Conta"; }
-#community_Label::before { content: "Comunidade"; }
-#library_Label::before { content: "Biblioteca"; }
-#charactertrade_Label::before { content: "Bazaar"; }
-#shops_Label::before { content: "Loja"; }
-#support_Label::before { content: "Suporte"; }
-#events_Label::before { content: "Eventos"; }
-#wars_Label::before { content: "Guerras"; }
+#news_Label::before,
+#account_Label::before,
+#community_Label::before,
+#library_Label::before,
+#charactertrade_Label::before,
+#shops_Label::before,
+#support_Label::before,
+#events_Label::before,
+#wars_Label::before { content: none; }
 
 #Loginbox,
 #DownloadBox {
@@ -624,11 +648,11 @@ body {
 
 #Loginbox #ButtonText.login::before,
 #Loginbox #ButtonText::before {
-  content: "Entrar";
+  content: attr(data-login-label);
 }
 
 #Loginbox #ButtonText.account::before {
-  content: "Minha Conta";
+  content: attr(data-account-label);
 }
 
 #DownloadBox .MediumButtonBackground::after {
@@ -657,7 +681,7 @@ body {
 }
 
 #LoginstatusText_2::before {
-  content: "Criar Conta";
+  content: attr(data-create-label);
   color: #f7d9a0;
   font-family: Verdana, Arial, sans-serif;
   font-size: 11px;
@@ -667,7 +691,7 @@ body {
 }
 
 #LoginstatusText_2.logout::before {
-  content: "Sair";
+  content: attr(data-logout-label);
 }
 
 #LoginstatusText_2:hover::before {
@@ -680,8 +704,7 @@ body {
   margin-bottom: 14px !important;
 }
 
-/* Text cleanup pass: no accent on NOTICIAS and no duplicated legacy button images. */
-#news_Label::before { content: "Noticias"; }
+/* Text cleanup pass: no duplicated legacy button images. */
 
 #Loginbox #ButtonText,
 #DownloadBox .MediumButtonText {
@@ -706,7 +729,7 @@ body {
 }
 
 #Loginbox #ButtonText::before {
-  content: "Entrar";
+  content: attr(data-login-label);
   display: block;
   color: inherit;
   font: inherit;
@@ -715,7 +738,7 @@ body {
 }
 
 #Loginbox #ButtonText.account::before {
-  content: "Minha Conta";
+  content: attr(data-account-label);
 }
 
 #DownloadBox .MediumButtonBackground::after {
@@ -729,7 +752,7 @@ body {
 }
 
 #LoginstatusText_2::before {
-  content: "Criar Conta";
+  content: attr(data-create-label);
   font-size: 11px;
 }
 
@@ -786,15 +809,15 @@ body {
 }
 
 #Loginbox #LoginButton #ButtonText::before {
-  content: "ENTRAR";
+  content: attr(data-login-label);
 }
 
 #Loginbox #LoginButton #ButtonText.account::before {
-  content: "MINHA CONTA";
+  content: attr(data-account-label);
 }
 
 #DownloadBox .MediumButtonText::before {
-  content: "DOWNLOAD";
+  content: attr(data-download-label);
 }
 
 #LoginstatusText_2 {
@@ -1271,7 +1294,7 @@ body {
 }
 
 .donate_content > div::after {
-  content: 'CONTEUDO EXCLUSIVO';
+  content: attr(data-exclusive-label);
   position: absolute;
   left: 0;
   right: 0;
@@ -1367,7 +1390,7 @@ body {
 }
 
 #Themeboxes .donate_content > div::after {
-  content: 'CONTEUDO EXCLUSIVO' !important;
+  content: attr(data-exclusive-label) !important;
   bottom: 8px !important;
   color: #ffe681 !important;
   font-size: 13px !important;
@@ -1469,10 +1492,7 @@ body {
 }
 
 .discord_content::after {
-  content: 'Entre na nossa comunidade!';
-  color: #4d3520;
-  font-size: 10px;
-  margin-top: -3px;
+  content: none !important;
 }
 
 .discord_button {
@@ -2448,7 +2468,7 @@ body {
 }
 
 #EclipseFooterServerSave .serversave_content::before {
-  content: 'Server Save:';
+  content: attr(data-server-save-label) ':';
   color: #ffd494 !important;
   font-family: Georgia, 'Times New Roman', serif !important;
   font-size: 14px !important;
@@ -2470,7 +2490,7 @@ body {
 }
 
 #EclipseFooterServerSave .serversave_content::before {
-  content: 'Server Save:';
+  content: attr(data-server-save-label) ':';
   color: #ffd494 !important;
   font-family: Georgia, 'Times New Roman', serif !important;
   font-size: 14px !important;
@@ -2486,9 +2506,11 @@ body {
 
 .Content .BorderTitleText.eclipse-status-shell {
   height: 32px !important;
-  display: flex !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important;
   align-items: center !important;
-  justify-content: center !important;
+  justify-content: stretch !important;
+  position: relative !important;
   background-image:
     linear-gradient(90deg, rgba(15, 4, 4, .98), rgba(77, 13, 9, .96) 50%, rgba(15, 4, 4, .98)) !important;
   border-top: 1px solid rgba(255, 174, 73, .35) !important;
@@ -2501,7 +2523,8 @@ body {
 
 /* Status bar: compact centered server state. */
 .eclipse-onlinebar {
-  width: 100% !important;
+  grid-column: 2 !important;
+  width: auto !important;
   height: 32px !important;
   display: flex !important;
   align-items: center !important;
@@ -2640,6 +2663,55 @@ body {
   cursor: pointer !important;
   z-index: 999999 !important;
   filter: drop-shadow(0 16px 22px rgba(0,0,0,.96)) drop-shadow(0 0 20px rgba(255,54,24,.58));
+}
+
+.eclipse-language-switcher {
+  grid-column: 3 !important;
+  justify-self: end !important;
+  align-self: center !important;
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  z-index: 5;
+  display: inline-flex;
+  gap: 4px;
+  transform: none !important;
+  margin-right: 12px;
+  padding: 3px;
+  border: 1px solid rgba(255, 189, 91, .42);
+  border-radius: 4px;
+  background: rgba(18, 4, 3, .82);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .45), inset 0 0 0 1px rgba(255, 230, 158, .08);
+}
+
+.Content .BorderTitleText.eclipse-status-shell .eclipse-status-language-switcher {
+  grid-column: 3 !important;
+  justify-self: end !important;
+  align-self: center !important;
+  position: static !important;
+  transform: none !important;
+  margin: 0 12px 0 0 !important;
+}
+
+.eclipse-language-switcher a {
+  min-width: 32px;
+  padding: 3px 7px;
+  border: 1px solid rgba(255, 219, 137, .24);
+  border-radius: 3px;
+  color: #f6deb0 !important;
+  -webkit-text-fill-color: #f6deb0 !important;
+  font: 900 10px Verdana, Arial, sans-serif;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 1px #000 !important;
+}
+
+.eclipse-language-switcher a.is-active,
+.eclipse-language-switcher a:hover {
+  background: linear-gradient(180deg, #8d1d0d 0%, #3a0703 100%);
+  border-color: rgba(255, 210, 112, .58);
+  color: #fff8dc !important;
+  -webkit-text-fill-color: #fff8dc !important;
 }
 
 /* Central content: dark Eclipse panels over legacy Canary boxes. */
@@ -4981,30 +5053,6 @@ body {
   vertical-align: middle !important;
 }
 
-#ContentColumn .eclipse-create-account-page form#createaccount [data-registration-panel="character"].is-active td {
-  padding-top: 9px !important;
-  padding-bottom: 9px !important;
-}
-
-#ContentColumn .eclipse-create-account-page form#createaccount tr.eclipse-character-name-row {
-  display: table-row !important;
-}
-
-#ContentColumn .eclipse-create-account-page form#createaccount tr.eclipse-character-name-row td {
-  display: table-cell !important;
-}
-
-#ContentColumn .eclipse-create-account-page form#createaccount [data-registration-panel="character"].is-active .eclipse-character-name-row td,
-#ContentColumn .eclipse-create-account-page form#createaccount [data-registration-panel="character"].is-active .eclipse-character-sex-row td,
-#ContentColumn .eclipse-create-account-page form#createaccount [data-registration-panel="character"].is-active .eclipse-character-vocation-row td {
-  border-top: 1px solid rgba(126,70,22,.22) !important;
-}
-
-#ContentColumn .eclipse-create-account-page form#createaccount [data-registration-panel="character"].is-active .eclipse-character-vocation-row .LabelV {
-  padding-top: 18px !important;
-  vertical-align: top !important;
-}
-
 #ContentColumn .eclipse-create-account-page form#createaccount .TableContent tr:has(.FormFieldError:empty) td {
   height: 0 !important;
   padding-top: 0 !important;
@@ -5073,6 +5121,136 @@ body {
   min-height: 0 !important;
 }
 
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-row > td {
+  padding: 14px !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout {
+  display: grid !important;
+  gap: 14px !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout .eclipse-character-create-section {
+  margin: 0 !important;
+  padding: 14px !important;
+  border: 1px solid rgba(133, 82, 25, .70) !important;
+  border-radius: 4px !important;
+  background: rgba(255, 239, 191, .66) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35) !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout .eclipse-character-create-section-title {
+  display: flex !important;
+  gap: 12px !important;
+  align-items: flex-start !important;
+  margin-bottom: 14px !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout .eclipse-character-create-section-title > span {
+  display: grid !important;
+  place-items: center !important;
+  width: 30px !important;
+  height: 30px !important;
+  flex: 0 0 30px !important;
+  border: 1px solid #a65612 !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #541307, #210503) !important;
+  color: #ffe5a6 !important;
+  -webkit-text-fill-color: #ffe5a6 !important;
+  font: 900 14px Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout .eclipse-character-create-section-title h3 {
+  margin: 0 0 3px !important;
+  color: #3a0905 !important;
+  -webkit-text-fill-color: #3a0905 !important;
+  font: 900 18px Georgia, 'Times New Roman', serif !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout .eclipse-character-create-section-title p {
+  margin: 0 !important;
+  color: #503019 !important;
+  -webkit-text-fill-color: #503019 !important;
+  font: 700 11px/1.45 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout .eclipse-character-create-grid {
+  display: grid !important;
+  grid-template-columns: minmax(260px, 1fr) minmax(220px, .7fr) !important;
+  gap: 14px !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout .eclipse-character-field {
+  display: grid !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+  padding: 12px !important;
+  border: 1px solid rgba(127, 77, 20, .50) !important;
+  border-radius: 4px !important;
+  background: rgba(255, 247, 218, .65) !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout .eclipse-character-field > span:first-child {
+  margin: 0 !important;
+  color: #4b1308 !important;
+  -webkit-text-fill-color: #4b1308 !important;
+  font: 900 11px Verdana, Arial, sans-serif !important;
+  text-transform: uppercase !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout .eclipse-character-field small {
+  color: #6d3215 !important;
+  -webkit-text-fill-color: #6d3215 !important;
+  font: 800 11px/1.35 Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout .eclipse-character-name-row {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 18px !important;
+  gap: 8px !important;
+  align-items: center !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout .eclipse-character-choice-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout .eclipse-character-choice {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-height: 36px !important;
+  padding: 8px 12px !important;
+  border: 1px solid rgba(114, 65, 20, .62) !important;
+  border-radius: 4px !important;
+  background: #f7e4b0 !important;
+  color: #2a1007 !important;
+  -webkit-text-fill-color: #2a1007 !important;
+  cursor: pointer !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35) !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout .eclipse-character-choice:has(input:checked) {
+  border-color: #5f160c !important;
+  background: #fff0bd !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .42), 0 0 0 2px rgba(95, 22, 12, .18) !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout .eclipse-character-choice span {
+  color: #2a1007 !important;
+  -webkit-text-fill-color: #2a1007 !important;
+  font: 900 12px Verdana, Arial, sans-serif !important;
+}
+
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout #character_error,
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout #sex_error,
+#ContentColumn .eclipse-create-account-page form#createaccount .eclipse-character-stage-layout #vocation_error {
+  display: block !important;
+  margin-top: 0 !important;
+}
+
 #ContentColumn .eclipse-create-account-page form#createaccount .eclipse-vocation-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fit, minmax(168px, 1fr)) !important;
@@ -5091,7 +5269,7 @@ body {
 #ContentColumn .eclipse-create-account-page form#createaccount .eclipse-vocation-card img {
   width: 100% !important;
   height: 110px !important;
-  object-fit: cover !important;
+  object-fit: contain !important;
   object-position: center !important;
   border-radius: 4px !important;
   border: 1px solid rgba(77,37,14,.48) !important;
@@ -5488,7 +5666,7 @@ body {
 }
 
 #ContentColumn .eclipse-account-manage-page a[name="Public+Information"] + .TopButtonContainer + .TableContainer .CaptionContainer .Text::after {
-  content: "Informações Públicas" !important;
+  content: attr(data-public-info-label) !important;
   color: #f7e7bd !important;
   font: 900 16px Georgia, 'Times New Roman', serif !important;
   text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important;
@@ -9857,6 +10035,32 @@ html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-pa
   margin-top: 0 !important;
 }
 
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-password-page {
+  display: grid !important;
+  gap: 14px !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-password-page .eclipse-password-form {
+  display: grid !important;
+  gap: 12px !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-password-page .eclipse-password-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+}
+
+html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-password-page .eclipse-character-warning {
+  margin: 0 !important;
+}
+
+@media (max-width: 900px) {
+  html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-password-page .eclipse-password-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 @media (max-width: 760px) {
   html body #Bodycontainer #ContentColumn .Content .BoxContent .eclipse-privacy-page .eclipse-character-create-grid {
     grid-template-columns: 1fr !important;
@@ -10836,3 +11040,380 @@ html body #ContentColumn #News .BoxContent .serverinfo-compact-list {
   }
 }
 
+#Loginbox #LoginButton #ButtonText::before,
+#Loginbox #ButtonText::before {
+  content: attr(data-login-label) !important;
+}
+
+#Loginbox #LoginButton #ButtonText.account::before,
+#Loginbox #ButtonText.account::before {
+  content: attr(data-account-label) !important;
+}
+
+#LoginstatusText_2::before {
+  content: attr(data-create-label) !important;
+  color: #f6deb0 !important;
+  font-family: Verdana, Arial, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  line-height: 27px !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 1px 1px #000 !important;
+}
+
+#DownloadBox .MediumButtonText::before {
+  content: attr(data-download-label) !important;
+}
+
+#DownloadBox .MediumButtonBackground::after {
+  content: none !important;
+}
+
+.MenuButton .Label {
+  background-image: none !important;
+  background: none !important;
+  display: flex !important;
+  align-items: center !important;
+  height: 22px !important;
+  overflow: visible !important;
+}
+
+.MenuButton .Label::before,
+.MenuButton .Label::after {
+  content: none !important;
+}
+
+.MenuButton .eclipse-menu-category-label {
+  display: block;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 18px;
+  box-sizing: border-box;
+  color: #f8e4c0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 22px;
+  text-align: left;
+  text-transform: uppercase;
+  text-shadow: 0 2px 0 #1b0201, 0 0 7px rgba(255, 200, 108, 0.42);
+  white-space: nowrap;
+}
+
+#Themeboxes .donate_content > div::after {
+  content: attr(data-exclusive-label) !important;
+}
+
+#Themeboxes .discord_content::after {
+  content: none !important;
+}
+
+#Themeboxes .eclipse-discord-text {
+  display: block !important;
+  color: #4d3520 !important;
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+  margin-top: -3px !important;
+}
+
+html body #ContentColumn #News .NewsHeadlineDate {
+  color: #fff8dc !important;
+  -webkit-text-fill-color: #fff8dc !important;
+  text-shadow: 0 1px 1px #000 !important;
+}
+
+
+.eclipse-light-theme-sentinel {
+  display: none;
+}
+
+/* Light theme: keep the site readable and shift the heavy red chrome to a blue/gold variant. */
+html.eclipse-theme-light body {
+  background-color: #c9d9e7 !important;
+  background-image:
+    linear-gradient(180deg, rgba(246,250,255,.02), rgba(210,228,242,.10) 42%, rgba(160,184,204,.46) 100%),
+    linear-gradient(90deg, rgba(168,198,222,.24), transparent 22%, transparent 78%, rgba(168,198,222,.24)),
+    url("images/header/bgs/arise-light-citadel.png") !important;
+}
+
+html.eclipse-theme-light #ArtworkHelper {
+  background:
+    linear-gradient(90deg, rgba(192,218,238,.22), rgba(255,255,255,.03) 30%, rgba(255,255,255,.03) 70%, rgba(192,218,238,.22)),
+    linear-gradient(180deg, rgba(255,255,255,0), rgba(190,213,231,.16) 620px, rgba(135,160,183,.50)) !important;
+}
+
+html.eclipse-theme-light .Content .BorderTitleText.eclipse-status-shell,
+html.eclipse-theme-light .InfoBar {
+  background: linear-gradient(90deg, #071f31, #164b69 28%, #236d91 50%, #164b69 72%, #071f31) !important;
+  border-color: rgba(157, 214, 249, .48) !important;
+  box-shadow: inset 0 0 18px rgba(122, 199, 247, .16), 0 10px 24px rgba(40, 75, 104, .38) !important;
+}
+
+html.eclipse-theme-light .InfoBar a,
+html.eclipse-theme-light .InfoBar div,
+html.eclipse-theme-light .InfoBar span {
+  color: #f0fbff !important;
+  text-shadow: 0 0 8px rgba(121, 198, 247, .42) !important;
+}
+
+html.eclipse-theme-light .MenuButton {
+  background:
+    linear-gradient(90deg, rgba(8, 27, 42, .96), rgba(24, 88, 120, .98) 50%, rgba(8, 27, 42, .96)) !important;
+  border-color: rgba(153, 209, 243, .74) !important;
+  filter: none !important;
+  box-shadow:
+    inset 0 1px 0 rgba(225, 246, 255, .28),
+    inset 0 -2px 0 rgba(0, 0, 0, .42),
+    0 2px 0 rgba(0, 0, 0, .50),
+    0 0 15px rgba(82, 172, 229, .26) !important;
+}
+
+html.eclipse-theme-light .menuitem:hover .MenuButton {
+  background:
+    linear-gradient(90deg, rgba(11, 42, 63, .98), rgba(35, 123, 163, .98) 50%, rgba(11, 42, 63, .98)) !important;
+  border-color: rgba(222, 181, 91, .90) !important;
+  filter: none !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 239, 171, .28),
+    inset 0 -2px 0 rgba(0, 0, 0, .42),
+    0 2px 0 rgba(0, 0, 0, .54),
+    0 0 16px rgba(82, 172, 229, .34) !important;
+}
+
+html.eclipse-theme-light .MenuButton::before {
+  border-left-color: rgba(222, 181, 91, .72) !important;
+  border-top-color: rgba(222, 181, 91, .58) !important;
+}
+
+html.eclipse-theme-light .MenuButton::after {
+  border-right-color: rgba(222, 181, 91, .72) !important;
+  border-bottom-color: rgba(222, 181, 91, .58) !important;
+}
+
+html.eclipse-theme-light .MenuButton .Icon,
+html.eclipse-theme-light .Icon,
+html.eclipse-theme-light #ThemeboxesColumn img,
+html.eclipse-theme-light #Loginbox img,
+html.eclipse-theme-light #DownloadBox img {
+  filter: saturate(.96) brightness(1.02) contrast(1.04) hue-rotate(165deg) drop-shadow(0 0 5px rgba(73, 161, 220, .26)) !important;
+}
+
+html.eclipse-theme-light .MenuButton .Label,
+html.eclipse-theme-light .Label,
+html.eclipse-theme-light .MenuButton .eclipse-menu-category-label {
+  color: #f7e8bf !important;
+  text-shadow: 0 1px 0 #001421, 0 0 7px rgba(111, 196, 246, .45) !important;
+  filter: none !important;
+}
+
+html.eclipse-theme-light .Submenu {
+  background: linear-gradient(180deg, rgba(235,247,255,.96), rgba(199,223,239,.96)) !important;
+  border-left-color: rgba(69, 137, 185, .42) !important;
+  border-right-color: rgba(69, 137, 185, .32) !important;
+}
+
+html.eclipse-theme-light .Submenu a,
+html.eclipse-theme-light .Submenu a:link,
+html.eclipse-theme-light .Submenu a:visited {
+  color: #14364e !important;
+  text-shadow: none !important;
+}
+
+html.eclipse-theme-light .Submenu a:hover {
+  color: #061b2a !important;
+  text-shadow: 0 0 8px rgba(119, 184, 232, .50) !important;
+}
+
+html.eclipse-theme-light #ThemeboxesColumn .Themebox,
+html.eclipse-theme-light #ThemeboxesColumn .SmallBox,
+html.eclipse-theme-light #ThemeboxesColumn [class*="Box"],
+html.eclipse-theme-light #Loginbox,
+html.eclipse-theme-light #DownloadBox,
+html.eclipse-theme-light .NewsHeadlineBackground,
+html.eclipse-theme-light .TableHeadline,
+html.eclipse-theme-light .CaptionContainer,
+html.eclipse-theme-light .CaptionInnerContainer {
+  filter: hue-rotate(165deg) saturate(.84) brightness(1.04) contrast(1.02);
+}
+
+html.eclipse-theme-light .Content .Box {
+  background-color: rgba(19, 61, 88, .90) !important;
+  border-left-color: rgba(71, 139, 185, .72) !important;
+  border-right-color: rgba(71, 139, 185, .72) !important;
+  box-shadow: 0 14px 30px rgba(58, 83, 106, .38), 0 0 0 1px rgba(108, 184, 235, .16), inset 0 0 24px rgba(114, 185, 236, .08) !important;
+}
+
+/* Light theme final pass: blue only where intended, boosted box keeps its natural colors. */
+html.eclipse-theme-light .Content .BorderTitleText.eclipse-status-shell {
+  background:
+    linear-gradient(90deg, rgba(4, 18, 30, .98), rgba(16, 73, 104, .98) 50%, rgba(4, 18, 30, .98)) !important;
+  border-color: rgba(140, 205, 246, .62) !important;
+}
+
+html.eclipse-theme-light .eclipse-onlinebar-link,
+html.eclipse-theme-light .eclipse-onlinebar.is-offline .eclipse-onlinebar-link {
+  background:
+    linear-gradient(180deg, rgba(21, 92, 128, .98), rgba(5, 25, 42, .98)) !important;
+  border-color: rgba(154, 218, 255, .72) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(224, 246, 255, .22),
+    inset 0 -2px 0 rgba(0, 0, 0, .50),
+    0 0 12px rgba(65, 173, 232, .32) !important;
+}
+
+html.eclipse-theme-light .eclipse-language-switcher {
+  background:
+    linear-gradient(180deg, rgba(14, 59, 87, .96), rgba(4, 20, 34, .98)) !important;
+  border-color: rgba(154, 218, 255, .58) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(224, 246, 255, .18),
+    0 4px 12px rgba(20, 55, 82, .38) !important;
+}
+
+html.eclipse-theme-light .eclipse-language-switcher a {
+  border-color: rgba(178, 224, 250, .32) !important;
+  color: #eaf8ff !important;
+  -webkit-text-fill-color: #eaf8ff !important;
+}
+
+html.eclipse-theme-light .eclipse-language-switcher a.is-active,
+html.eclipse-theme-light .eclipse-language-switcher a:hover {
+  background: linear-gradient(180deg, #287fa9 0%, #0a314f 100%) !important;
+  border-color: rgba(255, 220, 142, .64) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+html.eclipse-theme-light #Loginbox #LoginButton > div,
+html.eclipse-theme-light #DownloadBox .MediumButtonBackground {
+  background:
+    linear-gradient(180deg, rgba(16, 76, 154, .98), rgba(4, 22, 68, .98)) !important;
+  border-color: rgba(154, 218, 255, .74) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(224, 246, 255, .28),
+    inset 0 -2px 0 rgba(0, 0, 0, .46),
+    0 2px 0 rgba(0, 0, 0, .45),
+    0 0 14px rgba(65, 173, 232, .30) !important;
+}
+
+html.eclipse-theme-light #Loginbox,
+html.eclipse-theme-light #DownloadBox,
+html.eclipse-theme-light #Loginbox #LoginButton,
+html.eclipse-theme-light #Loginbox #LoginButton > div,
+html.eclipse-theme-light #DownloadBox #PlayNowContainer,
+html.eclipse-theme-light #DownloadBox .MediumButtonBackground {
+  filter: none !important;
+}
+
+html.eclipse-theme-light #Loginbox #LoginButton > div:hover,
+html.eclipse-theme-light #DownloadBox .MediumButtonBackground:hover {
+  background:
+    linear-gradient(180deg, rgba(38, 111, 197, .98), rgba(7, 36, 94, .98)) !important;
+  border-color: rgba(255, 220, 142, .86) !important;
+}
+
+html.eclipse-theme-light #Loginbox .Loginstatus {
+  background:
+    linear-gradient(180deg, rgba(13, 56, 124, .96), rgba(3, 18, 57, .98)) !important;
+  border-color: rgba(126, 190, 232, .56) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(224, 246, 255, .16),
+    0 2px 0 rgba(0, 0, 0, .36) !important;
+}
+
+html.eclipse-theme-light #Loginbox #ButtonText,
+html.eclipse-theme-light #DownloadBox .MediumButtonText,
+html.eclipse-theme-light #LoginstatusText_2::before,
+html.eclipse-theme-light #Loginbox #LoginButton #ButtonText::before,
+html.eclipse-theme-light #DownloadBox .MediumButtonText::before {
+  color: #f2fbff !important;
+  -webkit-text-fill-color: #f2fbff !important;
+  text-shadow: 0 1px 1px #001a2b, 0 0 7px rgba(111, 196, 246, .34) !important;
+  filter: none !important;
+}
+
+html.eclipse-theme-light #Themeboxes .eclipse-boosted,
+html.eclipse-theme-light #Themeboxes .eclipse-boosted *,
+html.eclipse-theme-light #Themeboxes .eclipse-boosted img,
+html.eclipse-theme-light #Themeboxes .eclipse-boosted .eclipse-boosted-frame img {
+  filter: none !important;
+}
+
+html.eclipse-theme-light #Themeboxes .eclipse-boosted .Themebox,
+html.eclipse-theme-light #Themeboxes .eclipse-boosted .SmallBox,
+html.eclipse-theme-light #Themeboxes .eclipse-boosted [class*="Box"] {
+  filter: none !important;
+}
+
+html.eclipse-theme-light #Themeboxes .eclipse-boosted .eclipse-boosted-frame {
+  background: rgba(255, 238, 183, .42) !important;
+  border-color: #28516d !important;
+}
+
+html.eclipse-theme-light #Themeboxes .eclipse-boosted-item {
+  color: #274052 !important;
+  -webkit-text-fill-color: #274052 !important;
+}
+
+html.eclipse-theme-light #Themeboxes .eclipse-boosted-item strong {
+  color: #18384f !important;
+  -webkit-text-fill-color: #18384f !important;
+}
+
+html.eclipse-theme-light body #Themeboxes .eclipse-rightbox-title,
+html.eclipse-theme-light body #Themeboxes .donate_header,
+html.eclipse-theme-light body #Themeboxes .eclipse-boosted .eclipse-rightbox-title,
+html.eclipse-theme-light body #Themeboxes .rank_header,
+html.eclipse-theme-light body #Themeboxes .discord_header {
+  background:
+    linear-gradient(180deg, rgba(16, 76, 154, .98) 0%, rgba(4, 22, 68, .98) 58%, rgba(2, 10, 34, .98) 100%) !important;
+  border-color: rgba(154, 218, 255, .74) !important;
+  color: #f2fbff !important;
+  -webkit-text-fill-color: #f2fbff !important;
+  text-shadow: 0 2px 0 #00122e, 0 0 9px rgba(111, 196, 246, .52) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(224, 246, 255, .24),
+    inset 0 -3px 0 rgba(0, 0, 0, .44),
+    0 0 12px rgba(65, 173, 232, .26) !important;
+  filter: none !important;
+}
+
+html.eclipse-theme-light body #Themeboxes .eclipse-rightbox-title::before,
+html.eclipse-theme-light body #Themeboxes .eclipse-rightbox-title::after,
+html.eclipse-theme-light body #Themeboxes .donate_header::before,
+html.eclipse-theme-light body #Themeboxes .donate_header::after,
+html.eclipse-theme-light body #Themeboxes .rank_header::before,
+html.eclipse-theme-light body #Themeboxes .rank_header::after,
+html.eclipse-theme-light body #Themeboxes .discord_header::before,
+html.eclipse-theme-light body #Themeboxes .discord_header::after {
+  color: #d8f1ff !important;
+  text-shadow: 0 0 7px rgba(111, 196, 246, .80) !important;
+}
+
+html.eclipse-theme-light body #Themeboxes .donate_button {
+  background:
+    linear-gradient(180deg, rgba(16, 76, 154, .98) 0%, rgba(4, 22, 68, .98) 58%, rgba(2, 10, 34, .98) 100%) !important;
+  border-color: rgba(154, 218, 255, .78) !important;
+  color: #f2fbff !important;
+  -webkit-text-fill-color: #f2fbff !important;
+  text-shadow: 0 1px 1px #00122e, 0 0 7px rgba(111, 196, 246, .42) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(224, 246, 255, .28),
+    inset 0 -3px 0 rgba(0, 0, 0, .42),
+    0 3px 8px rgba(25, 65, 112, .46),
+    0 0 12px rgba(65, 173, 232, .28) !important;
+  filter: none !important;
+}
+
+html.eclipse-theme-light body #Themeboxes .donate_button:hover {
+  background:
+    linear-gradient(180deg, rgba(38, 111, 197, .98) 0%, rgba(7, 36, 94, .98) 60%, rgba(2, 13, 42, .98) 100%) !important;
+  border-color: rgba(255, 220, 142, .86) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 239, 171, .30),
+    inset 0 -3px 0 rgba(0, 0, 0, .42),
+    0 3px 9px rgba(25, 65, 112, .56),
+    0 0 15px rgba(65, 173, 232, .42) !important;
+}

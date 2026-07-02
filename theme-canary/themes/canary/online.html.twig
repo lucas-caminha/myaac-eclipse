@@ -1,11 +1,11 @@
 <div class="eclipse-online-page">
 	<section class="online-hero">
 		<div>
-			<p>Acompanhe os jogadores ativos no Eclipse OT.</p>
+			<p>{{ t('online.hero') }}</p>
 		</div>
 		<div class="online-total">
 			<strong>{{ players|length }}</strong>
-			<span>jogador{{ players|length == 1 ? '' : 'es' }} online</span>
+			<span>{{ t(players|length == 1 ? 'online.player_online_singular' : 'online.player_online_plural', {'count': players|length}) }}</span>
 		</div>
 	</section>
 
@@ -14,44 +14,44 @@
 			<div class="online-overview-item online-status-item {{ status.online ? 'is-online' : 'is-offline' }}">
 				<span>Status</span>
 				<strong>{{ status.online ? 'Online' : 'Offline' }}</strong>
-				<small>{{ players|length }} jogador{{ players|length == 1 ? '' : 'es' }} online</small>
+				<small>{{ t(players|length == 1 ? 'online.player_online_singular' : 'online.player_online_plural', {'count': players|length}) }}</small>
 			</div>
 			<div class="online-overview-item">
-				<span>Server Save</span>
+				<span>{{ t('online.server_save') }}</span>
 				<strong>{{ serverOverview.serverSave.time }}</strong>
-				<small>Pr&oacute;ximo: {{ serverOverview.serverSave.next }}</small>
+				<small>{{ t('online.next') }}: {{ serverOverview.serverSave.next }}</small>
 			</div>
 			<div class="online-overview-item">
-				<span>Evento ativo</span>
+				<span>{{ t('online.active_event') }}</span>
 				{% if serverOverview.activeEvent %}
 					<strong>{{ serverOverview.activeEvent.name }}</strong>
-					<small>{{ serverOverview.activeEvent.description ?: 'Evento em andamento' }}</small>
+					<small>{{ serverOverview.activeEvent.description ?: t('online.event_running') }}</small>
 				{% else %}
-					<strong>Nenhum</strong>
-					<small>Veja a agenda de eventos</small>
+					<strong>{{ t('common.none') }}</strong>
+					<small>{{ t('online.see_event_schedule') }}</small>
 				{% endif %}
 			</div>
 		</div>
 	</section>
 
 	<section class="online-card online-world-card">
-		<div class="online-card-title">Informa&ccedil;&otilde;es do Mundo</div>
+		<div class="online-card-title">{{ t('online.world_info') }}</div>
 		<div class="online-info-list">
 			{% if not status.online %}
 				<div class="online-offline">
-					<strong>{{ config.lua.serverName }} est&aacute; offline.</strong>
-					<span>Tente novamente em alguns minutos.</span>
+					<strong>{{ t('online.server_offline', {'server': config.lua.serverName}) }}</strong>
+					<span>{{ t('online.try_again') }}</span>
 				</div>
 			{% else %}
 				<div><span>Status</span><strong class="online-status">Online</strong></div>
-				<div><span>Jogadores Online</span><strong>{{ players|length }}</strong></div>
-				<div><span>Recorde Online</span><strong>{{ record|raw }}</strong></div>
+				<div><span>{{ t('online.players_online') }}</span><strong>{{ players|length }}</strong></div>
+				<div><span>{{ t('online.online_record') }}</span><strong>{{ record|raw }}</strong></div>
 				<div>
 					<span>Datacenter</span>
 					<strong>{{ setting('core.online_datacenter')|raw }}</strong>
 				</div>
 				<div>
-					<span>Data do servidor</span>
+					<span>{{ t('online.server_date') }}</span>
 					<strong>{{ "now"|date("d/m/Y H:i:s") }}</strong>
 				</div>
 			{% endif %}
@@ -59,7 +59,7 @@
 	</section>
 
 	<section class="online-card online-vocations-card">
-		<div class="online-card-title">Voca&ccedil;&otilde;es Online</div>
+		<div class="online-card-title">{{ t('online.vocations_online') }}</div>
 		<div class="online-vocation-grid">
 			{% for vocationId in baseVocations %}
 				<div class="online-vocation">
@@ -71,11 +71,11 @@
 	</section>
 
 	<section class="online-card online-players-card">
-		<div class="online-card-title">Jogadores Online</div>
+		<div class="online-card-title">{{ t('online.players_online') }}</div>
 		{% if players|length == 0 %}
 			<div class="online-empty">
-				<strong>Nenhum jogador online no momento.</strong>
-				<span>O pr&oacute;ximo aventureiro pode ser voc&ecirc;.</span>
+				<strong>{{ t('online.empty_title') }}</strong>
+				<span>{{ t('online.empty_text') }}</span>
 			</div>
 		{% else %}
 			<div class="online-table-wrap">
@@ -86,16 +86,16 @@
 							<th class="online-country">#</th>
 						{% endif %}
 						{% if config.online_outfit %}
-							<th class="online-outfit">Outfit</th>
+							<th class="online-outfit">{{ t('common.outfit') }}</th>
 						{% endif %}
 						<th>
-							<a href="{{ getLink('online')}}?order=name_{{ order == 'name_asc' ? 'desc' : 'asc' }}">Nome</a>
+							<a href="{{ getLink('online')}}?order=name_{{ order == 'name_asc' ? 'desc' : 'asc' }}">{{ t('common.name') }}</a>
 						</th>
 						<th>
 							<a href="{{ getLink('online')}}?order=level_{{ order == 'level_asc' ? 'desc' : 'asc' }}">Level</a>
 						</th>
 						<th>
-							<a href="{{ getLink('online')}}?order=vocation_{{ order == 'vocation_asc' ? 'desc' : 'asc' }}">Voca&ccedil;&atilde;o</a>
+							<a href="{{ getLink('online')}}?order=vocation_{{ order == 'vocation_asc' ? 'desc' : 'asc' }}">{{ t('common.vocation') }}</a>
 						</th>
 					</tr>
 					</thead>
@@ -107,7 +107,7 @@
 							{% endif %}
 							{% if config.online_outfit %}
 								<td class="online-outfit">
-									<img src="{{ player.outfit }}" alt="outfit de {{ player.name|striptags }}">
+									<img src="{{ player.outfit }}" alt="{{ t('online.outfit_alt', {'name': player.name|striptags}) }}">
 								</td>
 							{% endif %}
 							<td class="online-player-name">{{ player.name|raw }}{{ player.skull }}</td>
@@ -122,19 +122,19 @@
 	</section>
 
 	<section class="online-card online-boosted-card">
-		<div class="online-card-title">Boosted de Hoje</div>
+		<div class="online-card-title">{{ t('online.boosted_today') }}</div>
 		<div class="online-boosted-list">
 			{% if serverOverview.boosted.boss %}
 				<a href="{{ serverOverview.boosted.boss.link }}" class="online-boosted-entry">
 					<img src="{{ serverOverview.boosted.boss.image }}" alt="Boss boosted">
-					<span>Boss</span>
+					<span>{{ t('box.boosted.boss') }}</span>
 					<strong>{{ serverOverview.boosted.boss.name }}</strong>
 				</a>
 			{% endif %}
 			{% if serverOverview.boosted.creature %}
 				<a href="{{ serverOverview.boosted.creature.link }}" class="online-boosted-entry">
 					<img src="{{ serverOverview.boosted.creature.image }}" alt="Creature boosted">
-					<span>Creature</span>
+					<span>{{ t('box.boosted.creature') }}</span>
 					<strong>{{ serverOverview.boosted.creature.name }}</strong>
 				</a>
 			{% endif %}

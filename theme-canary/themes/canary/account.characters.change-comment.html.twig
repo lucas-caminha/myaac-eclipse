@@ -1,8 +1,8 @@
-{% set title = 'Editar Comentário' %}
+{% set title = t('account.edit_comment_title') %}
 <div class="eclipse-privacy-page eclipse-character-action-page eclipse-character-comment-page">
 	<section class="privacy-hero">
-		<span>Personagem</span>
-		<p>Atualize as informações exibidas no perfil do personagem. Deixe o campo em branco se não quiser mostrar nenhum comentário.</p>
+		<span>{{ t('account.character') }}</span>
+		<p>{{ t('account.edit_comment_intro') }}</p>
 	</section>
 
 	<form class="eclipse-character-action-form" action="{{ getLink('account/characters/change-comment') }}" method="post">
@@ -11,11 +11,11 @@
 		<input type="hidden" name="changecommentsave" value="1">
 
 		<section class="privacy-section eclipse-character-action-card">
-			<h3>Informações do personagem</h3>
-			<p>Escolha o que ficará visível no perfil público.</p>
+			<h3>{{ t('account.character_info') }}</h3>
+			<p>{{ t('account.public_visibility_hint') }}</p>
 
 			<div class="eclipse-character-readonly">
-				<span>Personagem</span>
+				<span>{{ t('account.character') }}</span>
 				<strong>{{ player.name }}</strong>
 			</div>
 
@@ -24,26 +24,26 @@
 			<label class="eclipse-character-toggle" for="accountvisible">
 				<input type="hidden" value="0" name="accountvisible">
 				<input type="checkbox" name="accountvisible" id="accountvisible" value="1" {% if player.hide %}checked="checked"{% endif %}>
-				<span>Ocultar as informações da conta no perfil público</span>
+				<span>{{ t('account.hide_account_info') }}</span>
 			</label>
 			{% if player.group_id > 1 %}
-				<div class="eclipse-character-warning">Ao ocultar a conta, o personagem também será ocultado da página da equipe.</div>
+				<div class="eclipse-character-warning">{{ t('account.hide_team_warning') }}</div>
 			{% endif %}
 
 			{{ hook('HOOK_ACCOUNT_CHARACTERS_CHANGE_COMMENT_AFTER_HIDE_ACCOUNT') }}
 		</section>
 
 		<label class="privacy-section eclipse-character-field eclipse-character-comment-field" for="comment">
-			<span>Comentário</span>
+			<span>{{ t('account.comment') }}</span>
 			<textarea id="comment" name="comment" rows="12" maxlength="2000">{{ player.comment|raw }}</textarea>
-			<small>Máximo de 2000 caracteres. Evite dados pessoais ou informações sensíveis.</small>
+			<small>{{ t('account.comment_hint') }}</small>
 		</label>
 
 		{{ hook('HOOK_ACCOUNT_CHARACTERS_CHANGE_COMMENT_AFTER_COMMENT') }}
 
 		<div class="privacy-actions">
-			<button type="submit" class="eclipse-btn">Salvar comentário</button>
-			<a class="eclipse-btn eclipse-btn-secondary" href="{{ getLink('account/manage') }}">Voltar para minha conta</a>
+			<button type="submit" class="eclipse-btn">{{ t('account.save_comment') }}</button>
+			<a class="eclipse-btn eclipse-btn-secondary" href="{{ getLink('account/manage') }}">{{ t('account.back_to_my_account') }}</a>
 		</div>
 	</form>
 </div>

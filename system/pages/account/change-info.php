@@ -10,7 +10,7 @@ use MyAAC\Models\Account;
 
 defined('MYAAC') or die('Direct access not allowed!');
 
-$title = 'Change Info';
+$title = function_exists('t') ? t('account.change_info') : 'Change Info';
 require __DIR__ . '/base.php';
 
 if(!$logged) {
@@ -66,6 +66,18 @@ function eclipseMaskCpf($cpf)
 	return '***.***.***-' . substr($cpf, -2);
 }
 
+function eclipseChangeInfoText($key, $fallback)
+{
+	if(function_exists('t')) {
+		$value = t($key);
+		if($value !== $key) {
+			return $value;
+		}
+	}
+
+	return $fallback;
+}
+
 $account = Account::find($account_logged->getId());
 
 $show_form = true;
@@ -83,19 +95,19 @@ if(isset($_POST['changeinfosave']) && $_POST['changeinfosave'] == 1) {
 	}
 
 	if(strlen($new_rlname) < 3) {
-		$errors[] = 'Informe seu nome completo.';
+		$errors[] = eclipseChangeInfoText('account.full_name_required', 'Inform your full name.');
 	}
 
 	if(!eclipseIsValidBirthDate($new_birth_date)) {
-		$errors[] = 'Informe uma data de nascimento valida.';
+		$errors[] = eclipseChangeInfoText('account.birth_date_invalid', 'Inform a valid birth date.');
 	}
 
 	if(!eclipseIsValidCpf($new_cpf)) {
-		$errors[] = 'Informe um CPF valido.';
+		$errors[] = eclipseChangeInfoText('account.cpf_invalid', 'Inform a valid CPF.');
 	}
 
 	if(setting('core.account_country') && !isset($config['countries'][$new_country])) {
-		$errors[] = 'Country is not correct.';
+		$errors[] = eclipseChangeInfoText('account.country_invalid', 'Country is not correct.');
 	}
 
 	if(empty($errors)) {
@@ -113,8 +125,8 @@ if(isset($_POST['changeinfosave']) && $_POST['changeinfosave'] == 1) {
 
 		$account_logged->logAction($log);
 		$twig->display('success.html.twig', array(
-			'title' => 'Informações Atualizadas',
-			'description' => 'Suas informações cadastrais foram atualizadas.'
+			'title' => eclipseChangeInfoText('account.info_updated_title', 'Information Updated'),
+			'description' => eclipseChangeInfoText('account.info_updated_description', 'Your account information has been updated.')
 		));
 		$show_form = false;
 	}

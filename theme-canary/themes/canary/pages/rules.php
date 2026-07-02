@@ -3,7 +3,7 @@
  * Custom server rules page for Eclipse OT.
  */
 defined('MYAAC') or die('Direct access not allowed!');
-$title = 'Regras do Servidor';
+$title = t('rules.page_title');
 ?>
 
 <style>
@@ -21,7 +21,7 @@ $title = 'Regras do Servidor';
 	}
 
 	#News:has(.eclipse-rules-page) > .BorderTitleText::after {
-		content: "Regras do Servidor";
+		content: "<?= addslashes(t('rules.page_title')) ?>";
 		display: flex;
 		align-items: center;
 		height: 100%;
@@ -264,73 +264,69 @@ $title = 'Regras do Servidor';
 	<div class="rules-shell">
 		<section class="rules-hero">
 			<div>
-				<span class="rules-kicker">Conduta no Eclipse OT</span>
-				<h2 class="rules-title">Jogue forte, jogue limpo</h2>
-				<p class="rules-lead">
-					As regras existem para manter o servidor competitivo, justo e saud&aacute;vel para todos.
-					Ao jogar no Eclipse OT, voc&ecirc; concorda em respeitar outros jogadores, a equipe e a integridade do jogo.
-				</p>
+				<span class="rules-kicker"><?= htmlspecialchars(t('rules.kicker')) ?></span>
+				<h2 class="rules-title"><?= htmlspecialchars(t('rules.hero_title')) ?></h2>
+				<p class="rules-lead"><?= htmlspecialchars(t('rules.lead')) ?></p>
 			</div>
 		</section>
 
 		<div class="rules-summary-grid">
 			<div class="rules-summary-card">
-				<span>Base</span>
-				<strong>Respeito e seguran&ccedil;a</strong>
+				<span><?= htmlspecialchars(t('rules.summary.base_label')) ?></span>
+				<strong><?= htmlspecialchars(t('rules.summary.base')) ?></strong>
 			</div>
 			<div class="rules-summary-card">
-				<span>Proibido</span>
-				<strong>Bots, bugs e golpes</strong>
+				<span><?= htmlspecialchars(t('rules.summary.forbidden_label')) ?></span>
+				<strong><?= htmlspecialchars(t('rules.summary.forbidden')) ?></strong>
 			</div>
 			<div class="rules-summary-card">
-				<span>Suporte</span>
-				<strong>Provas e informa&ccedil;&otilde;es reais</strong>
+				<span><?= htmlspecialchars(t('rules.summary.support_label')) ?></span>
+				<strong><?= htmlspecialchars(t('rules.summary.support')) ?></strong>
 			</div>
 		</div>
 
 		<div class="rules-grid">
 			<section class="rules-card">
-				<h3><span class="rules-index">1</span>Conta e identidade</h3>
+				<h3><span class="rules-index">1</span><?= htmlspecialchars(t('rules.card.account.title')) ?></h3>
 				<ul>
-					<li>Use nomes adequados, sem ofensas, imita&ccedil;&atilde;o de staff ou tentativa de enganar outros jogadores.</li>
-					<li>N&atilde;o compartilhe, venda, empreste ou negocie contas, personagens, senhas ou recovery keys.</li>
-					<li>Cada jogador &eacute; respons&aacute;vel pela seguran&ccedil;a da pr&oacute;pria conta.</li>
+					<li><?= htmlspecialchars(t('rules.card.account.1')) ?></li>
+					<li><?= htmlspecialchars(t('rules.card.account.2')) ?></li>
+					<li><?= htmlspecialchars(t('rules.card.account.3')) ?></li>
 				</ul>
 			</section>
 
 			<section class="rules-card">
-				<h3><span class="rules-index">2</span>Jogo justo</h3>
+				<h3><span class="rules-index">2</span><?= htmlspecialchars(t('rules.card.fair.title')) ?></h3>
 				<ul>
-					<li>Macros, bots, automa&ccedil;&otilde;es e softwares que jogam por voc&ecirc; n&atilde;o s&atilde;o permitidos.</li>
-					<li>Explorar bugs, duplicar itens ou abusar de falhas deve ser reportado imediatamente.</li>
-					<li>Manipula&ccedil;&atilde;o do cliente ou do tr&aacute;fego do jogo pode resultar em puni&ccedil;&atilde;o permanente.</li>
+					<li><?= htmlspecialchars(t('rules.card.fair.1')) ?></li>
+					<li><?= htmlspecialchars(t('rules.card.fair.2')) ?></li>
+					<li><?= htmlspecialchars(t('rules.card.fair.3')) ?></li>
 				</ul>
 			</section>
 
 			<section class="rules-card">
-				<h3><span class="rules-index">3</span>Comunidade</h3>
+				<h3><span class="rules-index">3</span><?= htmlspecialchars(t('rules.card.community.title')) ?></h3>
 				<ul>
-					<li>Evite ass&eacute;dio, discurso de &oacute;dio, amea&ccedil;as reais ou ataques pessoais.</li>
-					<li>Spam, golpes, phishing e links maliciosos n&atilde;o s&atilde;o tolerados.</li>
-					<li>Conflitos de PvP fazem parte do jogo; abuso fora do jogo n&atilde;o faz.</li>
+					<li><?= htmlspecialchars(t('rules.card.community.1')) ?></li>
+					<li><?= htmlspecialchars(t('rules.card.community.2')) ?></li>
+					<li><?= htmlspecialchars(t('rules.card.community.3')) ?></li>
 				</ul>
 			</section>
 
 			<section class="rules-card">
-				<h3><span class="rules-index">4</span>Staff e suporte</h3>
+				<h3><span class="rules-index">4</span><?= htmlspecialchars(t('rules.card.staff.title')) ?></h3>
 				<ul>
-					<li>N&atilde;o finja ser membro da equipe nem prometa influ&ecirc;ncia em decis&otilde;es administrativas.</li>
-					<li>Ao abrir um ticket ou report, envie informa&ccedil;&otilde;es reais, completas e verific&aacute;veis.</li>
-					<li>Desrespeitar ou amea&ccedil;ar a equipe pode gerar san&ccedil;&otilde;es na conta.</li>
+					<li><?= htmlspecialchars(t('rules.card.staff.1')) ?></li>
+					<li><?= htmlspecialchars(t('rules.card.staff.2')) ?></li>
+					<li><?= htmlspecialchars(t('rules.card.staff.3')) ?></li>
 				</ul>
 			</section>
 		</div>
 
 		<div class="rules-note">
-			<span class="rules-note-badge">Penalidades</span>
+			<span class="rules-note-badge"><?= htmlspecialchars(t('rules.penalties')) ?></span>
 			<p>
-				Viola&ccedil;&otilde;es podem resultar em <strong>aviso, mute, jail, perda de itens, banimento tempor&aacute;rio ou permanente</strong>.
-				A equipe pode alterar estas regras quando necess&aacute;rio para proteger o servidor.
+				<?= t('rules.penalties_text') ?>
 			</p>
 		</div>
 	</div>

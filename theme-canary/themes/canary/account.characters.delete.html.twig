@@ -1,36 +1,36 @@
-{% set title = 'Excluir Personagem' %}
+{% set title = t('account.delete_character_title') %}
 <div class="eclipse-privacy-page eclipse-character-action-page eclipse-character-delete-page">
 	<section class="privacy-hero">
-		<span>Conta</span>
-		<p>Digite o nome exato do personagem e confirme com a senha da conta. Esta ação remove o personagem da sua conta e não deve ser feita por impulso.</p>
+		<span>{{ t('account.account') }}</span>
+		<p>{{ t('account.delete_character_intro') }}</p>
 	</section>
 
 	<form id="form" class="privacy-section eclipse-character-action-form" action="{{ getLink('account/characters/delete') }}" method="post">
 		{{ csrf() }}
 		<input type="hidden" name="deletecharactersave" value="1">
 
-		<h3>Confirmação</h3>
-		<p>Para proteger sua conta, confirme os dados abaixo antes de excluir o personagem.</p>
+		<h3>{{ t('account.confirmation') }}</h3>
+		<p>{{ t('account.delete_confirm_hint') }}</p>
 
 		<div class="privacy-data-grid eclipse-character-action-card">
 			<label class="eclipse-character-field" for="delete_name">
-				<span>Nome do personagem</span>
+				<span>{{ t('account.character_name') }}</span>
 				<input id="delete_name" name="delete_name" value="" maxlength="29" autocomplete="off">
 			</label>
 
 			<label class="eclipse-character-field" for="delete_password">
-				<span>Senha da conta</span>
+				<span>{{ t('account.account_password') }}</span>
 				<input type="password" id="delete_password" name="delete_password" maxlength="29" autocomplete="current-password">
 			</label>
 		</div>
 
 		<div class="eclipse-character-warning">
-			<strong>Atenção:</strong> personagens online, donos de casa ou líderes de guilda não podem ser excluídos.
+			<strong>{{ t('account.attention') }}:</strong> {{ t('account.delete_warning') }}
 		</div>
 
 		<div class="privacy-actions">
-			<button type="submit" class="eclipse-btn">Excluir personagem</button>
-			<a class="eclipse-btn eclipse-btn-secondary" href="{{ getLink('account/manage') }}">Voltar para minha conta</a>
+			<button type="submit" class="eclipse-btn">{{ t('account.delete_character') }}</button>
+			<a class="eclipse-btn eclipse-btn-secondary" href="{{ getLink('account/manage') }}">{{ t('account.back_to_my_account') }}</a>
 		</div>
 	</form>
 </div>

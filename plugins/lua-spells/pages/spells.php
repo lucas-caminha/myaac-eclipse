@@ -1,6 +1,6 @@
 <?php
 defined('MYAAC') or die('Direct access not allowed!');
-$title = 'Magias';
+$title = t('spells.page_title');
 
 require_once PLUGINS . 'lua-spells/src/LuaSpell.php';
 require_once PLUGINS . 'lua-spells/src/Models/LuaSpell.php';
@@ -17,7 +17,11 @@ if($reload && admin()) {
 
 	$totals = Spells::$totalsAdded;
 
-	success("Magias atualizadas. Instantâneas: {$totals[Spells::TYPE_INSTANT]}, conjurações: {$totals[Spells::TYPE_CONJURE]}, runas: {$totals[Spells::TYPE_RUNE]}.");
+	success(t('spells.reload_success', [
+		'instant' => $totals[Spells::TYPE_INSTANT],
+		'conjure' => $totals[Spells::TYPE_CONJURE],
+		'rune' => $totals[Spells::TYPE_RUNE],
+	]));
 }
 
 if(admin()) {
@@ -42,7 +46,13 @@ else {
 	}
 	else {
 		$vocation_ids = array_flip(config('vocations'));
-		$vocation_id = $vocation_ids[$vocation];
+		if(!isset($vocation_ids[$vocation])) {
+			$vocation = 'all';
+			$vocation_id = 'all';
+		}
+		else {
+			$vocation_id = $vocation_ids[$vocation];
+		}
 	}
 }
 
@@ -75,7 +85,7 @@ else {
 			if(isset($config['vocations'][$tmp_vocation]))
 				$tmp_vocation = $config['vocations'][$tmp_vocation];
 			else
-				$tmp_vocation = 'Unknown';
+				$tmp_vocation = t('spells.unknown');
 		}
 
 		$spell['vocations'] = implode('<br/>', $vocations);
