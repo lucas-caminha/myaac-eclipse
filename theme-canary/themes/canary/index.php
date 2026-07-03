@@ -11,7 +11,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=120" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=124" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -321,6 +321,13 @@ if (isset($config['boxes']))
 			height: 100%;
 		 ">
 <?= template_place_holder('body_start'); ?>
+<div id="EclipsePageLoader" class="eclipse-page-loader" aria-live="polite" aria-hidden="true">
+	<div class="eclipse-page-loader-card">
+		<button type="button" class="eclipse-page-loader-close" data-eclipse-loader-close aria-label="<?= htmlspecialchars(t('loading.cancel')); ?>">×</button>
+		<div class="eclipse-page-loader-ring" aria-hidden="true"></div>
+		<div class="eclipse-page-loader-title"><?= htmlspecialchars(t('loading.page')); ?></div>
+	</div>
+</div>
 <?php if (!empty($config['facebook_link'])) { ?>
 	<script type="text/javascript">
 		window.fbAsyncInit = function () {
@@ -482,6 +489,9 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 					<script type="text/javascript">
 						InitializePage();
 					</script>
+			</div>
+			<div id="LeftDiscordBox">
+				<?php include __DIR__ . '/boxes/discord.php'; ?>
 			</div>
 			</div>
 
@@ -735,6 +745,10 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 					$twig_loader->prependPath(__DIR__ . '/boxes/templates');
 
 					foreach ($config['boxes'] as $box) {
+						if ($box === 'discord') {
+							continue;
+						}
+
 						/** @var string $template_name */
 						$file = __DIR__ . '/boxes/' . $box . '.php';
 						if (file_exists($file)) {
@@ -807,6 +821,20 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 	#Themeboxes .rank_text { margin-left: 46px !important; color: #fff1c7 !important; text-shadow: 0 1px 2px #000 !important; }
 	#Themeboxes .rank_text a { color: #fff3c4 !important; }
 	#Themeboxes .rank_text small { color: #f4dca9 !important; }
+
+	#LeftDiscordBox { width: 188px !important; margin: 14px auto 0 !important; }
+	#LeftDiscordBox .discord { width: 188px !important; min-width: 188px !important; max-width: 188px !important; height: auto !important; margin: 0 auto !important; box-sizing: border-box !important; text-align: center !important; position: relative !important; }
+	#LeftDiscordBox .discord_header,
+	#LeftDiscordBox .eclipse-rightbox-title { width: 188px !important; height: 32px !important; line-height: 31px !important; box-sizing: border-box !important; background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important; border: 2px solid #a86b23 !important; border-radius: 4px 4px 0 0 !important; color: #f7e7bd !important; font-family: Georgia, 'Times New Roman', serif !important; font-size: 15px !important; font-weight: 800 !important; text-transform: uppercase !important; text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important; margin: 0 !important; padding: 0 !important; background-image: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important; }
+	#LeftDiscordBox .discord_header::before, #LeftDiscordBox .discord_header::after { content: '*'; color: #ffcb66; font-size: 12px; padding: 0 5px; }
+	#LeftDiscordBox .discord_content { width: 188px !important; min-width: 188px !important; max-width: 188px !important; height: auto !important; min-height: 116px !important; padding: 12px 10px !important; box-sizing: border-box !important; background-color: #d9b36d !important; background-image: linear-gradient(180deg, rgba(239,212,158,.97), rgba(202,156,86,.97)) !important; border: 2px solid #a86b23 !important; border-top: 0 !important; border-radius: 0 0 5px 5px !important; color: #432816 !important; box-shadow: inset 0 0 0 1px rgba(255,244,198,.55), 0 4px 12px rgba(0,0,0,.55) !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 9px !important; }
+	#LeftDiscordBox .discord_content::before, #LeftDiscordBox .discord_content::after, #LeftDiscordBox .discord_bottom { display: none !important; }
+	#LeftDiscordBox .eclipse-discord-icon { display: block !important; width: 58px !important; height: 58px !important; object-fit: contain !important; filter: drop-shadow(0 0 12px rgba(88,101,242,.58)) !important; }
+	#LeftDiscordBox .eclipse-discord-text { color: #4d3520; font-size: 10px; line-height: 1.2; margin-top: -3px; }
+	#LeftDiscordBox .discord_button { width: 154px !important; height: 34px !important; line-height: 32px !important; display: inline-block !important; border: 1px solid #cfd5ff !important; border-radius: 4px !important; background: linear-gradient(180deg, #6777ff 0%, #3344cb 100%) !important; color: #fff8dc !important; font-family: Verdana, Arial, sans-serif !important; font-size: 11px !important; font-weight: 800 !important; text-transform: uppercase !important; text-decoration: none !important; text-shadow: 0 1px 1px #172061 !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.32), 0 2px 7px rgba(0,0,0,.45) !important; cursor: pointer !important; padding: 0 !important; }
+	#LeftDiscordBox .discord_button:hover { background: linear-gradient(180deg, #7c89ff 0%, #3f50e4 100%) !important; color: #fff !important; }
+	html.eclipse-theme-dark #LeftDiscordBox .discord_header,
+	html.eclipse-theme-dark #LeftDiscordBox .eclipse-rightbox-title { background: none !important; background-image: none !important; }
 
 
 
@@ -4448,6 +4476,122 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		}
 		</style>
 <style>
+	.eclipse-page-loader {
+		position: fixed;
+		inset: 0;
+		z-index: 999999;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(7, 4, 3, .66);
+		backdrop-filter: blur(2px) saturate(.85);
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition: opacity .16s ease, visibility .16s ease;
+	}
+
+	.eclipse-page-loader.is-active {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+
+	.eclipse-page-loader-card {
+		position: relative;
+		min-width: 184px;
+		padding: 22px 26px 20px;
+		text-align: center;
+		border: 2px solid #d99a35;
+		border-radius: 6px;
+		background:
+			linear-gradient(180deg, rgba(37, 10, 6, .97), rgba(9, 23, 34, .97));
+		box-shadow:
+			inset 0 0 0 1px rgba(255, 222, 143, .24),
+			0 14px 38px rgba(0, 0, 0, .58),
+			0 0 22px rgba(218, 125, 28, .28);
+	}
+
+	.eclipse-page-loader-ring {
+		width: 54px;
+		height: 54px;
+		margin: 0 auto 13px;
+		border-radius: 50%;
+		border: 4px solid rgba(255, 226, 157, .22);
+		border-top-color: #ffe29a;
+		border-right-color: #dd8f28;
+		box-shadow: 0 0 18px rgba(255, 191, 79, .45);
+		animation: eclipsePageLoaderSpin .72s linear infinite;
+	}
+
+	.eclipse-page-loader-title {
+		color: #fff3cf;
+		font-family: Georgia, 'Times New Roman', serif;
+		font-size: 17px;
+		font-weight: 800;
+		text-shadow: 0 2px 1px #210704, 0 0 8px rgba(255, 198, 83, .42);
+	}
+
+	.eclipse-page-loader-close {
+		position: absolute;
+		top: 7px;
+		right: 8px;
+		width: 24px;
+		height: 24px;
+		line-height: 21px;
+		padding: 0;
+		border: 1px solid rgba(255, 226, 157, .7);
+		border-radius: 50%;
+		background: linear-gradient(180deg, #7b3212 0%, #3f0d05 100%);
+		color: #fff3cf;
+		font-family: Verdana, Arial, sans-serif;
+		font-size: 17px;
+		font-weight: 800;
+		text-align: center;
+		text-shadow: 0 1px 1px #210704;
+		box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 2px 7px rgba(0,0,0,.35);
+		cursor: pointer;
+	}
+
+	.eclipse-page-loader-close:hover {
+		background: linear-gradient(180deg, #a94519 0%, #5f1608 100%);
+		color: #fff;
+	}
+
+	html.eclipse-theme-light .eclipse-page-loader {
+		background: rgba(201, 222, 238, .62);
+		backdrop-filter: blur(2px) saturate(.92);
+	}
+
+	html.eclipse-theme-light .eclipse-page-loader-card {
+		border-color: #b48a38;
+		background: linear-gradient(180deg, rgba(19, 62, 88, .96), rgba(9, 31, 48, .97));
+		box-shadow:
+			inset 0 0 0 1px rgba(255, 237, 181, .28),
+			0 14px 34px rgba(14, 44, 70, .28),
+			0 0 22px rgba(48, 137, 196, .25);
+	}
+
+	html.eclipse-theme-light .eclipse-page-loader-ring {
+		border-color: rgba(219, 235, 255, .25);
+		border-top-color: #f8d875;
+		border-right-color: #5fb0e7;
+		box-shadow: 0 0 18px rgba(62, 153, 217, .42);
+	}
+
+	html.eclipse-theme-light .eclipse-page-loader-close {
+		border-color: rgba(247, 216, 117, .82);
+		background: linear-gradient(180deg, #276d98 0%, #113650 100%);
+		color: #fff7d5;
+		text-shadow: 0 1px 1px #092034;
+	}
+
+	@keyframes eclipsePageLoaderSpin {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
 	.scrollToTop {
 		padding: 10px;
 		text-align: center;
@@ -4502,7 +4646,7 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 <div class="scrollToTop" title="To the top">
 	<img alt style="border:0;" src="<?= $template_path . '/images/global/content/back-to-top.gif' ?>">
 </div>
-<script src="<?= $template_path; ?>/js/generic.js"></script>
+<script src="<?= $template_path; ?>/js/generic.js?v=loading-cancel-1"></script>
 <div id="HelperDivContainer" style="background-image: url(<?= $template_path; ?>/images/global/content/scroll.gif);">
 	<div class="HelperDivArrow"
 		 style="background-image: url(<?= $template_path; ?>/images/global/content/helper-div-arrow.png);"></div>

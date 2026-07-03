@@ -9,6 +9,8 @@ return [
 	'theme.toggle' => 'Toggle light/dark theme',
 	'theme.light' => 'Light',
 	'theme.dark' => 'Dark',
+	'loading.page' => 'Loading...',
+	'loading.cancel' => 'Cancel loading',
 
 	'menu.category.news' => 'News',
 	'menu.category.account' => 'Account',

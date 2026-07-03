@@ -9,6 +9,8 @@ return [
 	'theme.toggle' => 'Alternar tema claro/escuro',
 	'theme.light' => 'Claro',
 	'theme.dark' => 'Escuro',
+	'loading.page' => 'Carregando...',
+	'loading.cancel' => 'Cancelar carregamento',
 
 	'menu.category.news' => 'Notícias',
 	'menu.category.account' => 'Conta',

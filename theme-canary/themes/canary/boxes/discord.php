@@ -43,10 +43,10 @@
         color: #fff;
     }
 </style>
-<div class="discord">
-    <div class="discord_header"><?= htmlspecialchars(t('box.discord.title')) ?></div>
-    <div class="discord_content">
-        <img class="eclipse-discord-icon" src="<?php echo $template_path ?>/images/global/header/icon-discord.png" alt="<?= htmlspecialchars(t('box.discord.title')) ?>">
+<div class="eclipse-rightbox eclipse-discord-box discord">
+    <div class="eclipse-rightbox-title discord_header"><?= htmlspecialchars(t('box.discord.title')) ?></div>
+    <div class="eclipse-rightbox-content discord_content">
+        <img class="eclipse-discord-icon" src="<?php echo $template_path ?>/images/global/header/icon-discord.svg" alt="<?= htmlspecialchars(t('box.discord.title')) ?>">
         <div class="eclipse-discord-text"><?= htmlspecialchars(t('box.discord.text')) ?></div>
         <a href="<?php echo $config['discord_link']; ?>" target="new">
             <button type="button" class="discord_button"><?= htmlspecialchars(t('box.discord.button')) ?></button>

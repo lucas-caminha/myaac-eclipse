@@ -32,14 +32,19 @@ body {
 
 html.eclipse-theme-light,
 html.eclipse-theme-light body {
-  background-color: #c9d9e7 !important;
+  background-color: #7fa6c1 !important;
 }
 
 html.eclipse-theme-light body {
   background-image:
-    linear-gradient(180deg, rgba(246,250,255,.02), rgba(210,228,242,.10) 42%, rgba(160,184,204,.46) 100%),
-    linear-gradient(90deg, rgba(168,198,222,.24), transparent 22%, transparent 78%, rgba(168,198,222,.24)),
-    url("images/header/bgs/arise-light-citadel.png") !important;
+    url("images/header/bgs/arise-light-citadel.png"),
+    linear-gradient(180deg, rgba(255,255,255,.22) 0%, rgba(255,255,255,0) 24%, rgba(141,185,213,.18) 42%, rgba(79,125,158,.58) 68%, rgba(36,74,106,.88) 100%),
+    linear-gradient(90deg, rgba(255,255,255,.24), transparent 24%, transparent 76%, rgba(75,125,162,.30)),
+    linear-gradient(180deg, #edf8ff 0%, #c5e1f2 38%, #83aec9 66%, #315f83 100%) !important;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat !important;
+  background-size: 100% auto, 100% 100%, 100% 100%, 100% 100% !important;
+  background-position: center top, center top, center top, center top !important;
+  background-attachment: scroll, fixed, fixed, fixed !important;
   color: #2c1a0d;
 }
 
@@ -11069,6 +11074,60 @@ html body #ContentColumn #News .BoxContent .serverinfo-compact-list {
   content: none !important;
 }
 
+#DownloadBox {
+  margin-top: 8px !important;
+  margin-bottom: 10px !important;
+  filter: drop-shadow(0 0 10px rgba(255, 199, 83, .30)) drop-shadow(0 8px 14px rgba(0,0,0,.55)) !important;
+}
+
+#DownloadBox #PlayNowContainer,
+#DownloadBox .MediumButtonBackground {
+  height: 38px !important;
+}
+
+#DownloadBox .MediumButtonBackground {
+  background:
+    linear-gradient(180deg, #8b1d10 0%, #4e0905 54%, #1d0302 100%) !important;
+  border: 1px solid rgba(255, 214, 116, .92) !important;
+  border-radius: 4px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 235, 161, .46),
+    inset 0 -4px 0 rgba(31, 3, 1, .62),
+    0 0 0 1px rgba(111, 52, 10, .82),
+    0 0 14px rgba(255, 176, 45, .35) !important;
+}
+
+#DownloadBox .MediumButtonBackground:hover {
+  background:
+    linear-gradient(180deg, #bb3a18 0%, #761106 54%, #310402 100%) !important;
+  border-color: #ffe39b !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 244, 195, .62),
+    inset 0 -4px 0 rgba(31, 3, 1, .62),
+    0 0 0 1px rgba(160, 82, 18, .9),
+    0 0 20px rgba(255, 199, 83, .58) !important;
+}
+
+#DownloadBox .MediumButtonText,
+#DownloadBox .MediumButtonText::before {
+  color: #fff8dc !important;
+  -webkit-text-fill-color: #fff8dc !important;
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-size: 17px !important;
+  font-weight: 900 !important;
+  letter-spacing: .2px !important;
+  line-height: 38px !important;
+  text-transform: uppercase !important;
+  text-shadow:
+    -1px -1px 0 #8a4d0a,
+    1px -1px 0 #8a4d0a,
+    -1px 1px 0 #8a4d0a,
+    1px 1px 0 #8a4d0a,
+    0 2px 0 #1b0201,
+    0 0 8px rgba(255, 211, 101, .85),
+    0 0 14px rgba(255, 143, 36, .48) !important;
+}
+
 .MenuButton .Label {
   background-image: none !important;
   background: none !important;
@@ -11128,18 +11187,28 @@ html body #ContentColumn #News .NewsHeadlineDate {
 }
 
 /* Light theme: keep the site readable and shift the heavy red chrome to a blue/gold variant. */
+html.eclipse-theme-light {
+  background:
+    linear-gradient(180deg, #d9ecfb 0%, #bcd8ee 34%, #8db6d0 64%, #5f87a5 100%) fixed !important;
+}
+
 html.eclipse-theme-light body {
-  background-color: #c9d9e7 !important;
+  background-color: #7fa6c1 !important;
   background-image:
-    linear-gradient(180deg, rgba(246,250,255,.02), rgba(210,228,242,.10) 42%, rgba(160,184,204,.46) 100%),
-    linear-gradient(90deg, rgba(168,198,222,.24), transparent 22%, transparent 78%, rgba(168,198,222,.24)),
-    url("images/header/bgs/arise-light-citadel.png") !important;
+    url("images/header/bgs/arise-light-citadel.png"),
+    linear-gradient(180deg, rgba(255,255,255,.22) 0%, rgba(255,255,255,0) 24%, rgba(141,185,213,.18) 42%, rgba(79,125,158,.58) 68%, rgba(36,74,106,.88) 100%),
+    linear-gradient(90deg, rgba(255,255,255,.24), transparent 24%, transparent 76%, rgba(75,125,162,.30)),
+    linear-gradient(180deg, #edf8ff 0%, #c5e1f2 38%, #83aec9 66%, #315f83 100%) !important;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat !important;
+  background-size: 100% auto, 100% 100%, 100% 100%, 100% 100% !important;
+  background-position: center top, center top, center top, center top !important;
+  background-attachment: scroll, fixed, fixed, fixed !important;
 }
 
 html.eclipse-theme-light #ArtworkHelper {
   background:
     linear-gradient(90deg, rgba(192,218,238,.22), rgba(255,255,255,.03) 30%, rgba(255,255,255,.03) 70%, rgba(192,218,238,.22)),
-    linear-gradient(180deg, rgba(255,255,255,0), rgba(190,213,231,.16) 620px, rgba(135,160,183,.50)) !important;
+    linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(190,213,231,.08) 36%, rgba(124,170,201,.24) 62%, rgba(42,80,112,.46) 100%) !important;
 }
 
 html.eclipse-theme-light .Content .BorderTitleText.eclipse-status-shell,
@@ -11288,16 +11357,33 @@ html.eclipse-theme-light #Loginbox #LoginButton > div,
 html.eclipse-theme-light #DownloadBox .MediumButtonBackground {
   background:
     linear-gradient(180deg, rgba(16, 76, 154, .98), rgba(4, 22, 68, .98)) !important;
-  border-color: rgba(154, 218, 255, .74) !important;
+  border-color: rgba(255, 220, 128, .94) !important;
   box-shadow:
-    inset 0 1px 0 rgba(224, 246, 255, .28),
+    inset 0 1px 0 rgba(255, 247, 204, .34),
     inset 0 -2px 0 rgba(0, 0, 0, .46),
     0 2px 0 rgba(0, 0, 0, .45),
     0 0 14px rgba(65, 173, 232, .30) !important;
 }
 
+html.eclipse-theme-light #DownloadBox {
+  filter:
+    drop-shadow(0 0 10px rgba(255, 218, 111, .48))
+    drop-shadow(0 8px 14px rgba(0, 28, 54, .34)) !important;
+}
+
+html.eclipse-theme-light #DownloadBox .MediumButtonBackground {
+  background:
+    linear-gradient(180deg, #2f9bd0 0%, #0c4f84 48%, #031f49 100%) !important;
+  border: 1px solid rgba(255, 224, 137, .98) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 226, .46),
+    inset 0 -2px 0 rgba(0, 17, 50, .58),
+    0 2px 0 rgba(0, 0, 0, .42),
+    0 0 16px rgba(255, 210, 94, .36),
+    0 0 22px rgba(64, 175, 241, .28) !important;
+}
+
 html.eclipse-theme-light #Loginbox,
-html.eclipse-theme-light #DownloadBox,
 html.eclipse-theme-light #Loginbox #LoginButton,
 html.eclipse-theme-light #Loginbox #LoginButton > div,
 html.eclipse-theme-light #DownloadBox #PlayNowContainer,
@@ -11310,6 +11396,18 @@ html.eclipse-theme-light #DownloadBox .MediumButtonBackground:hover {
   background:
     linear-gradient(180deg, rgba(38, 111, 197, .98), rgba(7, 36, 94, .98)) !important;
   border-color: rgba(255, 220, 142, .86) !important;
+}
+
+html.eclipse-theme-light #DownloadBox .MediumButtonBackground:hover {
+  background:
+    linear-gradient(180deg, #4bb8ec 0%, #12679f 46%, #06285a 100%) !important;
+  border-color: rgba(255, 236, 165, 1) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 235, .55),
+    inset 0 -2px 0 rgba(0, 17, 50, .60),
+    0 2px 0 rgba(0, 0, 0, .42),
+    0 0 20px rgba(255, 218, 111, .48),
+    0 0 24px rgba(82, 190, 248, .36) !important;
 }
 
 html.eclipse-theme-light #Loginbox .Loginstatus {
@@ -11330,6 +11428,20 @@ html.eclipse-theme-light #DownloadBox .MediumButtonText::before {
   -webkit-text-fill-color: #f2fbff !important;
   text-shadow: 0 1px 1px #001a2b, 0 0 7px rgba(111, 196, 246, .34) !important;
   filter: none !important;
+}
+
+html.eclipse-theme-light #DownloadBox .MediumButtonText,
+html.eclipse-theme-light #DownloadBox .MediumButtonText::before {
+  color: #fff8dc !important;
+  -webkit-text-fill-color: #fff8dc !important;
+  text-shadow:
+    -1px -1px 0 #8d5b08,
+    1px -1px 0 #8d5b08,
+    -1px 1px 0 #2a1600,
+    1px 1px 0 #2a1600,
+    0 2px 0 #041f42,
+    0 0 8px rgba(255, 226, 127, .58),
+    0 0 12px rgba(66, 187, 255, .42) !important;
 }
 
 html.eclipse-theme-light #Themeboxes .eclipse-boosted,
@@ -11364,7 +11476,8 @@ html.eclipse-theme-light body #Themeboxes .eclipse-rightbox-title,
 html.eclipse-theme-light body #Themeboxes .donate_header,
 html.eclipse-theme-light body #Themeboxes .eclipse-boosted .eclipse-rightbox-title,
 html.eclipse-theme-light body #Themeboxes .rank_header,
-html.eclipse-theme-light body #Themeboxes .discord_header {
+html.eclipse-theme-light body #Themeboxes .discord_header,
+html.eclipse-theme-light body #LeftDiscordBox .discord_header {
   background:
     linear-gradient(180deg, rgba(16, 76, 154, .98) 0%, rgba(4, 22, 68, .98) 58%, rgba(2, 10, 34, .98) 100%) !important;
   border-color: rgba(154, 218, 255, .74) !important;
@@ -11385,7 +11498,9 @@ html.eclipse-theme-light body #Themeboxes .donate_header::after,
 html.eclipse-theme-light body #Themeboxes .rank_header::before,
 html.eclipse-theme-light body #Themeboxes .rank_header::after,
 html.eclipse-theme-light body #Themeboxes .discord_header::before,
-html.eclipse-theme-light body #Themeboxes .discord_header::after {
+html.eclipse-theme-light body #Themeboxes .discord_header::after,
+html.eclipse-theme-light body #LeftDiscordBox .discord_header::before,
+html.eclipse-theme-light body #LeftDiscordBox .discord_header::after {
   color: #d8f1ff !important;
   text-shadow: 0 0 7px rgba(111, 196, 246, .80) !important;
 }

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Discord">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="36%" r="68%">
+      <stop offset="0" stop-color="#8d9bff"/>
+      <stop offset=".48" stop-color="#5865f2"/>
+      <stop offset="1" stop-color="#3340b8"/>
+    </radialGradient>
+    <filter id="s" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#24309c" flood-opacity=".38"/>
+    </filter>
+  </defs>
+  <circle cx="64" cy="64" r="57" fill="url(#g)" filter="url(#s)"/>
+  <path fill="#fff" d="M91.5 40.4A70 70 0 0 0 74 35l-2.1 4.2a64 64 0 0 0-15.8 0L54 35a70 70 0 0 0-17.5 5.4c-11 16.2-14 32-12.5 47.4A70 70 0 0 0 45.4 98l4.8-6.5a46 46 0 0 1-7.5-3.6l1.8-1.4a50 50 0 0 0 39 0l1.8 1.4a46 46 0 0 1-7.5 3.6l4.8 6.5A70 70 0 0 0 104 87.8c1.8-18-3-33.7-12.5-47.4ZM51.9 78.2c-4.2 0-7.6-3.8-7.6-8.5s3.4-8.5 7.6-8.5c4.3 0 7.7 3.8 7.6 8.5 0 4.7-3.4 8.5-7.6 8.5Zm24.2 0c-4.2 0-7.6-3.8-7.6-8.5s3.4-8.5 7.6-8.5c4.3 0 7.7 3.8 7.6 8.5 0 4.7-3.3 8.5-7.6 8.5Z"/>
+</svg>

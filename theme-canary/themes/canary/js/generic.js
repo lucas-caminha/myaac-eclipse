@@ -64,3 +64,109 @@ function ToggleMaskedText(a_TextFieldID) {
         document.getElementById('Button' + a_TextFieldID).src = JS_DIR_IMAGES + 'global/general/show.gif';
     }
 }
+
+(function () {
+    var loaderId = 'EclipsePageLoader';
+    var activeClass = 'is-active';
+    var showTimer = null;
+
+    function getLoader() {
+        return document.getElementById(loaderId);
+    }
+
+    function showLoader() {
+        window.clearTimeout(showTimer);
+        showTimer = window.setTimeout(function () {
+            var loader = getLoader();
+            if (!loader) {
+                return;
+            }
+
+            loader.classList.add(activeClass);
+            loader.setAttribute('aria-hidden', 'false');
+        }, 80);
+    }
+
+    function hideLoader() {
+        window.clearTimeout(showTimer);
+        var loader = getLoader();
+        if (!loader) {
+            return;
+        }
+
+        loader.classList.remove(activeClass);
+        loader.setAttribute('aria-hidden', 'true');
+    }
+
+    function cancelLoader() {
+        hideLoader();
+        if (typeof window.stop === 'function') {
+            window.stop();
+        }
+    }
+
+    function isModifiedClick(event) {
+        return event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+    }
+
+    function shouldHandleLink(link) {
+        if (!link || link.hasAttribute('download')) {
+            return false;
+        }
+
+        var target = (link.getAttribute('target') || '').toLowerCase();
+        if (target && target !== '_self') {
+            return false;
+        }
+
+        var href = link.getAttribute('href') || '';
+        if (!href || href.charAt(0) === '#') {
+            return false;
+        }
+
+        var normalized = href.trim().toLowerCase();
+        return normalized.indexOf('javascript:') !== 0 &&
+            normalized.indexOf('mailto:') !== 0 &&
+            normalized.indexOf('tel:') !== 0;
+    }
+
+    document.addEventListener('click', function (event) {
+        var closeButton = event.target && event.target.closest ? event.target.closest('[data-eclipse-loader-close]') : null;
+        if (closeButton) {
+            event.preventDefault();
+            event.stopPropagation();
+            cancelLoader();
+            return;
+        }
+
+        if (isModifiedClick(event)) {
+            return;
+        }
+
+        var target = event.target;
+        var link = target && target.closest ? target.closest('a') : null;
+        if (!link && target && target.parentElement && target.parentElement.closest) {
+            link = target.parentElement.closest('a');
+        }
+
+        if (shouldHandleLink(link)) {
+            showLoader();
+        }
+    }, true);
+
+    document.addEventListener('submit', function (event) {
+        if (event.defaultPrevented) {
+            return;
+        }
+
+        var form = event.target;
+        var target = form && (form.getAttribute('target') || '').toLowerCase();
+        if (!target || target === '_self') {
+            showLoader();
+        }
+    }, true);
+
+    window.addEventListener('beforeunload', showLoader);
+    window.addEventListener('pageshow', hideLoader);
+    document.addEventListener('DOMContentLoaded', hideLoader);
+})();
