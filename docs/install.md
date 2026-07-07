@@ -101,6 +101,12 @@ done
 
 A migration `021-normalize-canary-menu-and-settings.sql` registra o estado esperado do menu esquerdo, fixa o template `canary` e habilita o sistema de gifts/shop para exibir `Comprar Points` e `Patrocinar Boosted`.
 
+A migration `023-set-canary-status-endpoint.sql` fixa o status do MyAAC para consultar o Canary localmente em `127.0.0.1:7173`. Em MyAAC develop, aplique tambem o patch do parser de porta numerica:
+
+```bash
+sh scripts/patch-myaac-status-port.sh.example /var/www/html
+```
+
 ## 7. Configuracao Local do MyAAC
 
 Crie `/var/www/html/config.local.php` com dados reais do ambiente:
@@ -254,6 +260,10 @@ Configure pelo menos:
 - `serverName = "Eclipse OT"`
 - `url`
 - `statusProtocolPort`
+
+No deploy Eclipse OT, mantenha `statusProtocolPort = 7173`. O MyAAC deve consultar
+o status em `127.0.0.1:7173`; aplique a migration
+`sql/023-set-canary-status-endpoint.sql` depois das migrations principais do site.
 
 Baixe o mapa compatível do Canary quando ele nao estiver no repo:
 

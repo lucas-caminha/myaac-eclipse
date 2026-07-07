@@ -1,0 +1,54 @@
+#!/usr/bin/env sh
+set -eu
+
+MYAAC_ROOT="${1:-/var/www/html}"
+STATUS_FILE="$MYAAC_ROOT/system/status.php"
+
+if [ ! -f "$STATUS_FILE" ]; then
+  echo "MyAAC status file not found: $STATUS_FILE" >&2
+  exit 1
+fi
+
+cp "$STATUS_FILE" "$STATUS_FILE.bak.$(date +%Y%m%d%H%M%S)"
+
+STATUS_FILE="$STATUS_FILE" php <<'PHP'
+<?php
+$file = getenv('STATUS_FILE');
+$old = <<<'OLD'
+$settingPort = setting('core.status_port');
+if(isset($settingPort[0])) {
+	$status_port = $settingPort;
+}
+elseif(!isset($status_port[0])) // try 7171 if no port specified
+{
+	$status_port = 7171;
+}
+OLD;
+$new = <<<'NEW'
+$settingPort = setting('core.status_port');
+if($settingPort !== null && $settingPort !== false && $settingPort !== '') {
+	$status_port = (int)$settingPort;
+}
+elseif(empty($status_port)) // try 7171 if no port specified
+{
+	$status_port = 7171;
+}
+else {
+	$status_port = (int)$status_port;
+}
+NEW;
+$contents = file_get_contents($file);
+if (strpos($contents, $new) !== false) {
+    echo "MyAAC status port patch already applied.\n";
+    exit(0);
+}
+if (strpos($contents, $old) === false) {
+    fwrite(STDERR, "Target status port block not found in $file\n");
+    exit(1);
+}
+file_put_contents($file, str_replace($old, $new, $contents));
+echo "Patched $file\n";
+PHP
+
+php -l "$STATUS_FILE"
+find "$MYAAC_ROOT/system/cache" -maxdepth 1 -type f ! -name index.html -delete 2>/dev/null || true
