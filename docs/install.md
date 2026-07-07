@@ -186,6 +186,56 @@ systemctl reload nginx
 systemctl enable --now nginx php8.3-fpm mariadb
 ```
 
+### HTTPS com Let's Encrypt
+
+Depois que o DNS do dominio apontar para a VPS, instale o Certbot e emita o certificado:
+
+```bash
+apt install -y certbot python3-certbot-nginx
+certbot --nginx --non-interactive --agree-tos --register-unsafely-without-email \
+  --redirect -d eclipseot.com.br -d www.eclipseot.com.br
+```
+
+O Certbot cria o timer de renovacao automaticamente. Confira:
+
+```bash
+systemctl status certbot.timer --no-pager
+certbot certificates
+```
+
+Atualize as URLs publicas do MyAAC e do servidor para evitar links com HTTP/IP antigo:
+
+```bash
+mysql -ucanary -p"$(cat /root/.canary_db_password)" canary <<'SQL'
+UPDATE myaac_settings
+SET value = 'https://eclipseot.com.br/'
+WHERE name = 'core' AND `key` = 'site_url';
+
+INSERT INTO myaac_settings (name, `key`, value)
+SELECT 'core', 'site_url', 'https://eclipseot.com.br/'
+WHERE NOT EXISTS (
+  SELECT 1 FROM myaac_settings WHERE name = 'core' AND `key` = 'site_url'
+);
+
+INSERT INTO myaac_config (name, value)
+VALUES ('core.site_url', 'https://eclipseot.com.br/')
+ON DUPLICATE KEY UPDATE value = VALUES(value);
+SQL
+```
+
+Tambem ajuste:
+
+- `/var/www/html/config.local.php`: `$config['site_url'] = 'https://eclipseot.com.br/';`
+- `/opt/otserver/canary/config.lua`: `url = "https://eclipseot.com.br/"`
+
+Depois limpe cache e recarregue os servicos:
+
+```bash
+find /var/www/html/system/cache -type f ! -name index.html -delete
+systemctl reload php8.3-fpm nginx
+systemctl restart canary
+```
+
 ## 10. Configurar e Compilar o Servidor
 
 ```bash
