@@ -24,6 +24,7 @@ Este guia documenta os scripts SQL incluidos no projeto e como gerenciar migraco
 | `sql/019-use-theme-downloads-page.sql` | Faz Downloads carregar a pagina PHP do tema |
 | `sql/020-use-theme-rules-page.sql` | Faz Regras carregar a pagina PHP do tema |
 | `sql/021-normalize-canary-menu-and-settings.sql` | Normaliza menu Canary, template padrao e gifts/shop |
+| `sql/022-add-monk-character-sample.sql` | Adiciona Monk nas vocacoes disponiveis para criacao |
 
 ## Aplicando Migracoes
 
@@ -307,6 +308,20 @@ WHERE `template` = 'canary';
 - Comunidade: Personagens, Mercado de Personagens, Quem Esta Online?, Highscores, Ultimas Mortes, Casas, Guildas, Equipe de Suporte
 - Biblioteca: VIP & Loyalty, Monstros, Bosses, Magias, Comandos e Informacoes
 - Shop: Comprar Points, Patrocinar Boosted
+
+### 022-add-monk-character-sample.sql
+
+Adiciona o Monk ao mapa `core.character_samples`, usado pelo MyAAC para renderizar e validar as vocacoes na criacao de personagem:
+
+```text
+9=Monk Sample
+```
+
+**O que faz:**
+- Mantem Sorcerer, Druid, Paladin e Knight nos samples existentes
+- Adiciona a vocacao base `9` apontando para `Monk Sample`
+- Mantem tambem `myaac_config.core.character_samples` sincronizado para instalacoes antigas
+- Depende do servidor ter o player sample `Monk Sample` no banco
 
 ### 013-add-lgpd-consents-and-requests.sql
 
