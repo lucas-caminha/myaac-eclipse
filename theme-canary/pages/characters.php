@@ -468,7 +468,8 @@ WHERE killers.death_id = '" . $death['id'] . "' ORDER BY killers.final_hit DESC,
 	$listAchievement = [];
 
 	if ($db->hasTable('player_storage')) {
-		$achievements = require PLUGINS . 'theme-canary/achievements.php';
+		$achievementsFile = PLUGINS . 'theme-canary/achievements.php';
+		$achievements = is_file($achievementsFile) ? require $achievementsFile : [];
 		foreach ($achievements as $achievement => $value) {
 			$achievementStorage = $config['achievements_base'] + $achievement;
 			$achievementsPlayer = $db->query("SELECT `key`, `value` FROM `player_storage` WHERE `key` = {$achievementStorage} AND `player_id` = {$player->getId()}")->fetch();

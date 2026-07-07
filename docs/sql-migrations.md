@@ -20,6 +20,12 @@ Este guia documenta os scripts SQL incluidos no projeto e como gerenciar migraco
 | `sql/015-add-duo-donations.sql` | Adiciona pedidos e recompensas de donate em dupla |
 | `sql/016-add-scheduled-boosted.sql` | Adiciona agendamentos consumidos pelo servidor para o proximo boosted |
 | `sql/017-update-otbr-item-images-url.sql` | Atualiza sprites de itens para a base OTBR/Canary |
+| `sql/018-polish-rules-page.sql` | Atualiza o conteudo da pagina Regras |
+| `sql/019-use-theme-downloads-page.sql` | Faz Downloads carregar a pagina PHP do tema |
+| `sql/020-use-theme-rules-page.sql` | Faz Regras carregar a pagina PHP do tema |
+| `sql/021-normalize-canary-menu-and-settings.sql` | Normaliza menu Canary, template padrao e gifts/shop |
+| `sql/022-add-monk-character-sample.sql` | Adiciona Monk nas vocacoes disponiveis para criacao |
+| `sql/023-set-canary-status-endpoint.sql` | Configura o MyAAC para consultar o status local do Canary em `127.0.0.1:7173` |
 
 ## Aplicando Migracoes
 
@@ -281,6 +287,58 @@ WHERE name = 'core'
 **O que faz:**
 - Corrige imagens quebradas ou incorretas para itens modernos, como equipamentos de Monk com IDs acima da base 10.92
 - Mantem a migration idempotente e nao altera configuracoes customizadas que ja usam outra URL
+
+### 021-normalize-canary-menu-and-settings.sql
+
+Normaliza o estado esperado do tema Canary apos a instalacao em VPS:
+
+```sql
+DELETE FROM `myaac_menu`
+WHERE `template` = 'canary';
+```
+
+**O que faz:**
+- Recria o menu esquerdo completo para o template `canary`
+- Define `canary` como template padrao e impede troca pelo usuario
+- Habilita `core.gifts_system`, necessario para renderizar a categoria Shop
+- Mantem as configuracoes em `myaac_config` e `myaac_settings` para cobrir instalacoes MyAAC que usam uma das duas tabelas
+
+**Itens principais do menu:**
+- News: Ultimas Noticias, Agenda de Eventos
+- Conta: Gerenciar Conta, Criar Conta, Recuperar Conta, Privacidade e LGPD, Regras do Servidor, Downloads
+- Comunidade: Personagens, Mercado de Personagens, Quem Esta Online?, Highscores, Ultimas Mortes, Casas, Guildas, Equipe de Suporte
+- Biblioteca: VIP & Loyalty, Monstros, Bosses, Magias, Comandos e Informacoes
+- Shop: Comprar Points, Patrocinar Boosted
+
+### 022-add-monk-character-sample.sql
+
+Adiciona o Monk ao mapa `core.character_samples`, usado pelo MyAAC para renderizar e validar as vocacoes na criacao de personagem:
+
+```text
+9=Monk Sample
+```
+
+**O que faz:**
+- Mantem Sorcerer, Druid, Paladin e Knight nos samples existentes
+- Adiciona a vocacao base `9` apontando para `Monk Sample`
+- Mantem tambem `myaac_config.core.character_samples` sincronizado para instalacoes antigas
+- Depende do servidor ter o player sample `Monk Sample` no banco
+
+### 023-set-canary-status-endpoint.sql
+
+Configura o endpoint de status usado pelo MyAAC no deploy local do Canary:
+
+```text
+core.status_ip=127.0.0.1
+core.status_port=7173
+```
+
+**O que faz:**
+- Habilita o status do servidor no MyAAC
+- Faz o site consultar o Canary pela interface local da VPS, sem depender do IP publico
+- Usa a porta `7173`, que corresponde ao `statusProtocolPort` do servidor
+- Remove o cache `status_%` de `myaac_config` para forcar novo calculo do status
+- Deve ser usada junto de `scripts/patch-myaac-status-port.sh.example` quando o MyAAC trata `core.status_port` como numero
 
 ### 013-add-lgpd-consents-and-requests.sql
 
