@@ -105,6 +105,8 @@ return [
 	'server_guide.next' => 'Próximo',
 	'server_guide.reward_vocation' => 'Vocação',
 	'server_guide.reward_level_items' => 'Recompensas por level',
+	'server_guide.exercise_reward_title' => 'Bônus inicial: use !reward uma vez',
+	'server_guide.exercise_reward_text' => 'Cada personagem pode usar !reward uma única vez para escolher uma exercise weapon lasting com 14.400 cargas.',
 	'server_guide.step_1_kicker' => 'Passo 1',
 	'server_guide.step_1_title' => 'Comece pelo básico',
 	'server_guide.step_1_alt' => 'Knight em destaque',

@@ -105,6 +105,8 @@ return [
 	'server_guide.next' => 'Next',
 	'server_guide.reward_vocation' => 'Vocation',
 	'server_guide.reward_level_items' => 'Level rewards',
+	'server_guide.exercise_reward_title' => 'Starter bonus: use !reward once',
+	'server_guide.exercise_reward_text' => 'Each character can use !reward once to choose one lasting exercise weapon with 14,400 charges.',
 	'server_guide.step_1_kicker' => 'Step 1',
 	'server_guide.step_1_title' => 'Start with the basics',
 	'server_guide.step_1_alt' => 'Featured knight',

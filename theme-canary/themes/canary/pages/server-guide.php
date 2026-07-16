@@ -114,6 +114,17 @@ $rewardItemIds = [
 	'Zaoan robe' => 10439,
 ];
 
+$exerciseRewardItems = [
+	['name' => 'lasting exercise sword', 'id' => 35285],
+	['name' => 'lasting exercise axe', 'id' => 35286],
+	['name' => 'lasting exercise club', 'id' => 35287],
+	['name' => 'lasting exercise bow', 'id' => 35288],
+	['name' => 'lasting exercise rod', 'id' => 35289],
+	['name' => 'lasting exercise wand', 'id' => 35290],
+	['name' => 'lasting exercise shield', 'id' => 44067],
+	['name' => 'lasting exercise wraps', 'id' => 50295],
+];
+
 $rewardGroups = [
 	[
 		'name' => 'Sorcerer',
@@ -226,7 +237,7 @@ $guideSteps = [
 	[
 		'kicker' => 'step_3_kicker',
 		'title' => 'step_3_title',
-		'image' => $imageBase . 'themeboxes/premium/coins_consumables.png',
+		'image' => $imageBase . 'premiumfeatures/PremiumIcon-QuickLoot.png',
 		'image_alt' => 'step_3_alt',
 		'text' => 'step_3_text',
 		'bullets' => ['step_3_bullet_1', 'step_3_bullet_2', 'step_3_bullet_3'],
@@ -242,7 +253,7 @@ $guideSteps = [
 	[
 		'kicker' => 'step_5_kicker',
 		'title' => 'step_5_title',
-		'image' => $imageBase . 'account/icon-tibiacoin.png',
+		'image' => $imageBase . 'themeboxes/premium/coins_trade.png',
 		'image_alt' => 'step_5_alt',
 		'text' => 'step_5_text',
 		'bullets' => ['step_5_bullet_1', 'step_5_bullet_2', 'step_5_bullet_3'],
@@ -250,7 +261,7 @@ $guideSteps = [
 	[
 		'kicker' => 'step_6_kicker',
 		'title' => 'step_6_title',
-		'image' => $imageBase . 'premiumfeatures/PremiumIcon-Quests.png',
+		'image' => $imageBase . 'premiumfeatures/PremiumIcon-Imbuing.png',
 		'image_alt' => 'step_6_alt',
 		'text' => 'step_6_text',
 		'bullets' => ['step_6_bullet_1', 'step_6_bullet_2', 'step_6_bullet_3'],
@@ -440,6 +451,50 @@ $guideSteps = [
 		margin-top: 14px;
 	}
 
+	.eclipse-guide .guide-exercise-reward {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 12px;
+		align-items: center;
+		margin: 12px 0 2px;
+		padding: 10px;
+		border: 1px solid rgba(118, 70, 26, .36);
+		border-radius: 5px;
+		background: rgba(255, 247, 215, .62);
+	}
+
+	.eclipse-guide .guide-exercise-reward strong {
+		display: block;
+		margin-bottom: 4px;
+		color: #000 !important;
+		-webkit-text-fill-color: #000 !important;
+		font-size: 13px;
+	}
+
+	.eclipse-guide .guide-exercise-reward span {
+		display: block;
+		font-size: 12px;
+		line-height: 1.35;
+	}
+
+	.eclipse-guide .guide-exercise-items {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		gap: 4px;
+		max-width: 260px;
+	}
+
+	.eclipse-guide .guide-exercise-items img {
+		width: 30px;
+		height: 30px;
+		padding: 2px;
+		border: 1px solid rgba(118, 70, 26, .3);
+		border-radius: 4px;
+		background: rgba(255, 252, 232, .82);
+		object-fit: contain;
+	}
+
 	.eclipse-guide .guide-vocation-card {
 		overflow: hidden;
 		border: 1px solid rgba(118, 70, 26, .55);
@@ -609,6 +664,15 @@ $guideSteps = [
 			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 
+		.eclipse-guide .guide-exercise-reward {
+			grid-template-columns: 1fr;
+		}
+
+		.eclipse-guide .guide-exercise-items {
+			justify-content: flex-start;
+			max-width: none;
+		}
+
 		.eclipse-guide .guide-actions {
 			flex-direction: column;
 		}
@@ -640,6 +704,18 @@ $guideSteps = [
 								<span class="guide-kicker"><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['kicker'])); ?></span>
 								<h2><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['title'])); ?></h2>
 								<p><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['text'])); ?></p>
+
+								<div class="guide-exercise-reward">
+									<div>
+										<strong><?php echo eclipseGuideEscape(eclipseGuideTranslate('exercise_reward_title')); ?></strong>
+										<span><?php echo eclipseGuideEscape(eclipseGuideTranslate('exercise_reward_text')); ?></span>
+									</div>
+									<div class="guide-exercise-items">
+										<?php foreach ($exerciseRewardItems as $item): ?>
+											<img src="<?php echo eclipseGuideEscape($itemImageBase . $item['id'] . $itemImageExtension); ?>" alt="<?php echo eclipseGuideEscape($item['name']); ?>" title="<?php echo eclipseGuideEscape($item['name']); ?>" loading="lazy">
+										<?php endforeach; ?>
+									</div>
+								</div>
 
 								<div class="guide-vocation-grid">
 									<?php foreach ($rewardGroups as $groupIndex => $group): ?>
