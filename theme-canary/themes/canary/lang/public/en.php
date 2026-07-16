@@ -64,6 +64,9 @@ return [
 
 	'event_schedule.page_title' => 'Event Schedule',
 	'event_schedule.note' => '* The event starts/ends at this day\'s server save.',
+	'layout.active_events_kicker' => 'Active event',
+	'layout.active_events_open_schedule' => 'Open event schedule',
+	'layout.active_event_default' => 'Active event',
 
 	'rules.page_title' => 'Server Rules',
 	'rules.kicker' => 'Eclipse OT conduct',

@@ -64,6 +64,9 @@ return [
 
 	'event_schedule.page_title' => 'Agenda de Eventos',
 	'event_schedule.note' => '* O evento começa/termina no server save deste dia.',
+	'layout.active_events_kicker' => 'Evento ativo',
+	'layout.active_events_open_schedule' => 'Abrir agenda de eventos',
+	'layout.active_event_default' => 'Evento ativo',
 
 	'rules.page_title' => 'Regras do Servidor',
 	'rules.kicker' => 'Conduta no Eclipse OT',

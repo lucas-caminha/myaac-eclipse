@@ -3,6 +3,64 @@ defined('MYAAC') or die('Direct access not allowed!');
 
 if (isset($config['boxes']))
 	$config['boxes'] = explode(",", $config['boxes']);
+
+if (!function_exists('eclipseLayoutEventInRange')) {
+	function eclipseLayoutEventInRange(array $event, int $today): bool
+	{
+		$start = strtotime((string)($event['startdate'] ?? ''));
+		$end = strtotime((string)($event['enddate'] ?? ''));
+
+		return $start !== false && $end !== false && $today >= $start && $today <= $end;
+	}
+}
+
+if (!function_exists('eclipseLayoutActiveEvents')) {
+	function eclipseLayoutActiveEvents(): array
+	{
+		$eventsJson = config('data_path') . 'json/eventscheduler/events.json';
+		$eventsXml = config('data_path') . 'XML/events.xml';
+		$today = strtotime(date('m/d/Y'));
+		$activeEvents = [];
+
+		if (is_file($eventsJson)) {
+			$decoded = json_decode(file_get_contents($eventsJson), true);
+			foreach (($decoded['events'] ?? []) as $event) {
+				if (!eclipseLayoutEventInRange($event, $today)) {
+					continue;
+				}
+
+				$activeEvents[] = [
+					'name' => trim((string)($event['name'] ?? t('layout.active_event_default'))),
+					'description' => trim((string)($event['description'] ?? '')),
+					'color' => (string)($event['colors']['colordark'] ?? '#6b180c'),
+					'priority' => (int)($event['details']['displaypriority'] ?? 99),
+				];
+			}
+		} elseif (is_file($eventsXml)) {
+			$xml = simplexml_load_file($eventsXml);
+			foreach (($xml->event ?? []) as $event) {
+				$row = [
+					'name' => (string)($event['name'] ?? t('layout.active_event_default')),
+					'description' => (string)($event->description['description'] ?? ''),
+					'startdate' => (string)($event['startdate'] ?? ''),
+					'enddate' => (string)($event['enddate'] ?? ''),
+					'color' => (string)($event->colors['colordark'] ?? '#6b180c'),
+					'priority' => (int)($event->details['displaypriority'] ?? 99),
+				];
+
+				if (eclipseLayoutEventInRange($row, $today)) {
+					$activeEvents[] = $row;
+				}
+			}
+		}
+
+		usort($activeEvents, static function (array $first, array $second): int {
+			return ($first['priority'] <=> $second['priority']) ?: strcmp($first['name'], $second['name']);
+		});
+
+		return $activeEvents;
+	}
+}
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,7 +69,7 @@ if (isset($config['boxes']))
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=124" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=128" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -401,6 +459,22 @@ if (isset($config['boxes']))
 				<?php
 					$twig->display('canary.login-box.html.twig');
 					$twig->display('canary.download-box.html.twig');
+					$activeLayoutEvents = eclipseLayoutActiveEvents();
+					if (!empty($activeLayoutEvents)) {
+						$visibleEvents = array_slice($activeLayoutEvents, 0, 3);
+						?>
+						<a class="eclipse-left-active-events" href="<?= getLink('event-schedule'); ?>" aria-label="<?= htmlspecialchars(t('layout.active_events_open_schedule')); ?>">
+							<div class="eclipse-left-active-events-kicker"><?= htmlspecialchars(t('layout.active_events_kicker')); ?></div>
+							<div class="eclipse-left-active-events-list">
+								<?php foreach ($visibleEvents as $activeEvent) { ?>
+									<span style="--event-color: <?= htmlspecialchars($activeEvent['color']); ?>;">
+										<?= htmlspecialchars($activeEvent['name']); ?>
+									</span>
+								<?php } ?>
+							</div>
+						</a>
+						<?php
+					}
 				?>
 
 				<div id='Menu'>

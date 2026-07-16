@@ -218,12 +218,16 @@ html.eclipse-theme-light #LeftArtwork #TibiaLogoArtworkTop {
 .arise-news-intro {
   position: relative;
   overflow: hidden;
-  padding: 20px 18px 14px;
-  border: 1px solid rgba(110, 28, 14, .34);
+  padding: 22px 18px 16px;
+  border: 1px solid rgba(110, 28, 14, .42);
+  border-radius: 3px;
   background:
-    linear-gradient(135deg, rgba(255,247,229,.78), rgba(240,213,164,.91)),
-    radial-gradient(circle at top right, rgba(255,85,30,.18), transparent 34%);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.42);
+    radial-gradient(circle at 14% 0%, rgba(255, 163, 56, .20), transparent 28%),
+    radial-gradient(circle at 90% 6%, rgba(92, 18, 7, .20), transparent 34%),
+    linear-gradient(135deg, rgba(255,247,229,.84), rgba(232,194,127,.94));
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.44),
+    0 8px 18px rgba(61, 27, 7, .16);
 }
 
 .arise-news-intro::before {
@@ -237,20 +241,136 @@ html.eclipse-theme-light #LeftArtwork #TibiaLogoArtworkTop {
 .arise-news-intro h1 {
   margin: 0 0 8px;
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 32px;
+  font-size: 34px;
   line-height: 1.06;
   color: #2b0b07;
   text-align: center;
-  text-shadow: 0 1px 0 rgba(255,255,255,.82);
+  text-shadow: 0 1px 0 rgba(255,255,255,.82), 0 0 12px rgba(198, 84, 23, .18);
 }
 
 .arise-news-intro .lead {
-  max-width: 700px;
+  max-width: 790px;
   margin: 0 auto 16px;
   text-align: center;
   color: #4b2817;
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: 13.5px;
+  line-height: 1.55;
+  font-weight: 700;
+}
+
+.arise-news-kicker {
+  display: table;
+  margin: 0 auto 9px;
+  padding: 4px 12px;
+  border: 1px solid rgba(107, 30, 8, .45);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #5f0f06, #260302);
+  color: #ffffff !important;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 #180301;
+  box-shadow: inset 0 1px 0 rgba(255, 232, 166, .22), 0 2px 8px rgba(0, 0, 0, .22);
+}
+
+.arise-news-pillbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  margin: 0 auto 16px;
+}
+
+.arise-news-pillbar span {
+  padding: 5px 10px;
+  border: 1px solid rgba(94, 31, 9, .34);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 244, 213, .96), rgba(224, 176, 91, .96));
+  color: #3a0905;
+  font-size: 10.5px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .65);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .50);
+}
+
+.arise-news-bulletlist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 12px;
+  margin: 0 0 16px;
+  padding: 14px 16px;
+  border: 1px solid rgba(83, 24, 9, .34);
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg, rgba(255, 245, 222, .82), rgba(218, 174, 95, .78));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .38),
+    0 3px 8px rgba(82, 38, 9, .10);
+  list-style: none;
+}
+
+.arise-news-bulletlist li {
+  position: relative;
+  padding-left: 18px;
+  color: #3e1e10;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.38;
+}
+
+.arise-news-bulletlist li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .46em;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgba(69, 13, 5, .45);
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffd778 0 35%, #a72b0d 36% 100%);
+  box-shadow: 0 0 8px rgba(180, 54, 18, .28);
+}
+
+.arise-news-rate-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.arise-news-rate-strip div {
+  min-height: 58px;
+  padding: 9px 8px;
+  border: 1px solid rgba(85, 19, 7, .42);
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg, rgba(92, 15, 5, .96), rgba(38, 4, 2, .96));
+  text-align: center;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 226, 154, .20),
+    0 3px 9px rgba(0, 0, 0, .18);
+}
+
+.arise-news-rate-strip strong,
+.arise-news-rate-strip span {
+  display: block;
+}
+
+.arise-news-rate-strip strong {
+  margin-bottom: 4px;
+  color: #ffffff !important;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 15px;
+  text-shadow: 0 1px 0 #1b0301, 0 0 8px rgba(255, 183, 76, .30);
+}
+
+.arise-news-rate-strip span {
+  color: #ffffff !important;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .arise-feature-grid {
@@ -259,31 +379,187 @@ html.eclipse-theme-light #LeftArtwork #TibiaLogoArtworkTop {
   gap: 10px;
 }
 
+.arise-feature-grid-wide {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .arise-feature-grid div {
-  min-height: 78px;
+  min-height: 92px;
   padding: 12px;
-  border: 1px solid rgba(92, 28, 12, .34);
-  background: linear-gradient(180deg, #fff5df, #e6c58f);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.44);
+  border: 1px solid rgba(92, 28, 12, .38);
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, rgba(255,245,223,.98), rgba(226,190,124,.98));
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.44),
+    0 3px 8px rgba(82, 38, 9, .10);
 }
 
 .arise-feature-grid strong {
   display: block;
   margin-bottom: 5px;
   color: #3a0905;
-  font-size: 13px;
+  font-size: 13.5px;
+  text-shadow: 0 1px 0 rgba(255,255,255,.56);
 }
 
 .arise-feature-grid span {
   display: block;
   color: #4b2817;
+  font-size: 11.2px;
+  line-height: 1.42;
+}
+
+.arise-news-callout {
+  margin: 14px auto 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(82, 16, 7, .40);
+  border-left: 4px solid #8f210c;
+  background: linear-gradient(180deg, rgba(84, 14, 5, .94), rgba(41, 5, 2, .94));
+  color: #ffe8bd;
+  box-shadow: inset 0 1px 0 rgba(255, 221, 152, .18), 0 4px 10px rgba(0,0,0,.18);
+}
+
+.arise-news-callout strong,
+.arise-news-callout span {
+  display: block;
+}
+
+.arise-news-callout strong {
+  margin-bottom: 4px;
+  color: #ffffff !important;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 15px;
+  text-shadow: 0 1px 0 #1b0301;
+}
+
+.arise-news-callout span {
+  color: #ffffff !important;
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+.arise-news-linkbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 14px auto 0;
+}
+
+.arise-news-linkbar a,
+.arise-news-linkbar a:link,
+.arise-news-linkbar a:visited {
+  min-width: 132px;
+  padding: 8px 12px;
+  border: 1px solid #ffe5a2;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #ff9d26 0%, #c45608 100%);
+  color: #fff8dc !important;
   font-size: 11px;
-  line-height: 1.35;
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-shadow: 0 1px 1px #4c1200;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .32),
+    0 2px 7px rgba(0, 0, 0, .28);
+}
+
+.arise-news-linkbar a:hover {
+  background: linear-gradient(180deg, #ffc04f 0%, #d86108 100%);
+  color: #ffffff !important;
+}
+
+#ContentColumn #News .BoxContent .arise-news-kicker,
+#ContentColumn #News .BoxContent .arise-news-rate-strip strong,
+#ContentColumn #News .BoxContent .arise-news-rate-strip span,
+#ContentColumn #News .BoxContent .arise-news-callout strong,
+#ContentColumn #News .BoxContent .arise-news-callout span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+html.eclipse-theme-light .arise-news-intro {
+  border-color: rgba(36, 89, 124, .42);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255, 218, 104, .26), transparent 30%),
+    radial-gradient(circle at 88% 2%, rgba(54, 156, 220, .20), transparent 34%),
+    linear-gradient(135deg, rgba(255,251,231,.90), rgba(213,232,241,.94));
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.58),
+    0 8px 18px rgba(26, 71, 101, .16);
+}
+
+html.eclipse-theme-light .arise-news-kicker {
+  border-color: rgba(255, 223, 137, .82);
+  background: linear-gradient(180deg, #2f9bd0, #0b3d66);
+  color: #fff6d0;
+}
+
+html.eclipse-theme-light .arise-news-pillbar span {
+  border-color: rgba(42, 99, 135, .30);
+  background: linear-gradient(180deg, rgba(255, 249, 221, .98), rgba(187, 219, 238, .98));
+  color: #12344c;
+}
+
+html.eclipse-theme-light .arise-news-bulletlist {
+  border-color: rgba(38, 95, 132, .30);
+  background: linear-gradient(180deg, rgba(255, 249, 226, .86), rgba(199, 225, 240, .82));
+}
+
+html.eclipse-theme-light .arise-news-bulletlist li {
+  color: #213f54;
+}
+
+html.eclipse-theme-light .arise-news-bulletlist li::before {
+  border-color: rgba(31, 83, 117, .44);
+  background: radial-gradient(circle, #fff1ac 0 35%, #2679a8 36% 100%);
+  box-shadow: 0 0 8px rgba(38, 121, 168, .28);
+}
+
+html.eclipse-theme-light .arise-news-rate-strip div {
+  border-color: rgba(255, 223, 137, .72);
+  background: linear-gradient(180deg, rgba(47, 155, 208, .98), rgba(6, 42, 83, .98));
+}
+
+html.eclipse-theme-light .arise-feature-grid div {
+  border-color: rgba(38, 95, 132, .34);
+  background: linear-gradient(180deg, rgba(255,248,226,.98), rgba(199,225,240,.98));
+}
+
+html.eclipse-theme-light .arise-feature-grid strong {
+  color: #14344a;
+}
+
+html.eclipse-theme-light .arise-feature-grid span,
+html.eclipse-theme-light .arise-news-intro .lead {
+  color: #28465b;
+}
+
+html.eclipse-theme-light .arise-news-callout {
+  border-color: rgba(26, 79, 118, .36);
+  border-left-color: #2679a8;
+  background: linear-gradient(180deg, rgba(20, 85, 122, .96), rgba(8, 42, 69, .96));
+  color: #fff6d0;
+}
+
+html.eclipse-theme-light .arise-news-linkbar a,
+html.eclipse-theme-light .arise-news-linkbar a:link,
+html.eclipse-theme-light .arise-news-linkbar a:visited {
+  border-color: rgba(255, 224, 137, .98);
+  background: linear-gradient(180deg, #2f9bd0 0%, #0c4f84 48%, #031f49 100%);
+  color: #fff8dc !important;
+  text-shadow: 0 1px 1px #041f42, 0 0 8px rgba(255, 226, 127, .30);
 }
 
 @media (max-width: 980px) {
   #ContentRow { top: 190px; }
-  .arise-feature-grid { grid-template-columns: 1fr; }
+  .arise-feature-grid,
+  .arise-feature-grid-wide { grid-template-columns: 1fr; }
+  .arise-news-bulletlist,
+  .arise-news-rate-strip { grid-template-columns: 1fr; }
   .arise-news-intro h1 { font-size: 26px; }
 }
 
@@ -553,6 +829,78 @@ html.eclipse-theme-light #LeftArtwork #TibiaLogoArtworkTop {
 #DownloadBox {
   width: 206px !important;
   filter: drop-shadow(0 10px 16px rgba(0,0,0,.72)) !important;
+}
+
+.eclipse-left-active-events {
+  display: block;
+  width: 206px;
+  box-sizing: border-box;
+  margin: 0 0 14px;
+  padding: 8px 9px 10px;
+  border: 1px solid rgba(255, 184, 67, .86);
+  border-radius: 5px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255, 221, 128, .22), transparent 30%),
+    linear-gradient(180deg, rgba(103, 23, 11, .98), rgba(35, 7, 5, .98));
+  color: #fff2cf !important;
+  text-align: center;
+  text-decoration: none !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 232, 166, .34),
+    inset 0 -2px 0 rgba(0, 0, 0, .48),
+    0 2px 0 rgba(0, 0, 0, .70),
+    0 0 14px rgba(255, 78, 22, .28);
+}
+
+.eclipse-left-active-events:hover {
+  border-color: rgba(255, 219, 120, .98);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255, 230, 154, .30), transparent 32%),
+    linear-gradient(180deg, rgba(139, 34, 14, .98), rgba(49, 9, 6, .98));
+  color: #fff !important;
+  text-decoration: none !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 241, 193, .46),
+    inset 0 -2px 0 rgba(0, 0, 0, .52),
+    0 2px 0 rgba(0, 0, 0, .72),
+    0 0 18px rgba(255, 122, 38, .42);
+}
+
+.eclipse-left-active-events-kicker {
+  color: #ffcd65;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 #000;
+}
+
+.eclipse-left-active-events-list {
+  display: grid;
+  gap: 4px;
+  margin-top: 7px;
+}
+
+.eclipse-left-active-events-list span {
+  display: block;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 4px 6px;
+  border: 1px solid rgba(255, 231, 164, .42);
+  border-left: 4px solid var(--event-color, #ff9d26);
+  border-radius: 3px;
+  background: rgba(12, 4, 3, .38);
+  color: #fff2cf;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.18;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 1px #000;
+  white-space: nowrap;
 }
 
 #Loginbox #LoginTop,
@@ -11363,6 +11711,50 @@ html.eclipse-theme-light #DownloadBox .MediumButtonBackground {
     inset 0 -2px 0 rgba(0, 0, 0, .46),
     0 2px 0 rgba(0, 0, 0, .45),
     0 0 14px rgba(65, 173, 232, .30) !important;
+}
+
+html.eclipse-theme-light .eclipse-left-active-events {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255, 238, 170, .30), transparent 32%),
+    linear-gradient(180deg, rgba(16, 76, 154, .98), rgba(4, 22, 68, .98)) !important;
+  border-color: rgba(255, 220, 128, .94) !important;
+  color: #f2fbff !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 247, 204, .34),
+    inset 0 -2px 0 rgba(0, 0, 0, .46),
+    0 2px 0 rgba(0, 0, 0, .45),
+    0 0 14px rgba(65, 173, 232, .30) !important;
+}
+
+html.eclipse-theme-light .eclipse-left-active-events:hover {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255, 241, 188, .36), transparent 34%),
+    linear-gradient(180deg, rgba(38, 111, 197, .98), rgba(7, 36, 94, .98)) !important;
+  border-color: rgba(255, 236, 165, 1) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 235, .55),
+    inset 0 -2px 0 rgba(0, 17, 50, .60),
+    0 2px 0 rgba(0, 0, 0, .42),
+    0 0 20px rgba(255, 218, 111, .42),
+    0 0 24px rgba(82, 190, 248, .30) !important;
+}
+
+html.eclipse-theme-light .eclipse-left-active-events-list span,
+html.eclipse-theme-light .eclipse-left-active-events {
+  color: #f2fbff !important;
+  -webkit-text-fill-color: #f2fbff !important;
+  text-shadow: 0 1px 1px #001a2b, 0 0 7px rgba(111, 196, 246, .34) !important;
+}
+
+html.eclipse-theme-light .eclipse-left-active-events-kicker {
+  color: #ffe39a !important;
+  -webkit-text-fill-color: #ffe39a !important;
+  text-shadow: 0 1px 1px #001a2b, 0 0 8px rgba(255, 226, 127, .48) !important;
+}
+
+html.eclipse-theme-light .eclipse-left-active-events-list span {
+  background: rgba(0, 24, 58, .36) !important;
+  border-color: rgba(231, 246, 255, .38) !important;
 }
 
 html.eclipse-theme-light #DownloadBox {
