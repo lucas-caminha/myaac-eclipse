@@ -11,7 +11,7 @@ function eclipseGuideEscape(string $value): string
 	return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
 
-$imageBase = $template_path . '/images/';
+$imageBase = '/plugins/theme-canary/themes/canary/images/';
 
 $guideSteps = [
 	[
@@ -106,6 +106,7 @@ $guideSteps = [
 	.eclipse-guide * {
 		box-sizing: border-box;
 		color: #1f0804 !important;
+		-webkit-text-fill-color: #1f0804 !important;
 		font-family: Arial, Helvetica, sans-serif;
 		font-weight: 800;
 		text-shadow: none !important;
@@ -133,6 +134,7 @@ $guideSteps = [
 		border-radius: 4px;
 		background: linear-gradient(180deg, #6d1a0e 0%, #2b0604 100%);
 		color: #fff8dc !important;
+		-webkit-text-fill-color: #fff8dc !important;
 		font: 900 11px Verdana, Arial, sans-serif;
 		letter-spacing: .08em;
 		text-transform: uppercase;
@@ -178,6 +180,7 @@ $guideSteps = [
 		border-color: #ffe0a0;
 		background: linear-gradient(180deg, #ff9b1f 0%, #df6505 100%);
 		color: #fff7d4 !important;
+		-webkit-text-fill-color: #fff7d4 !important;
 		text-shadow: 0 1px 1px #4c1600 !important;
 	}
 
@@ -270,6 +273,7 @@ $guideSteps = [
 		border-radius: 4px;
 		background: linear-gradient(180deg, #173f54 0%, #08202d 100%);
 		color: #fff1bd !important;
+		-webkit-text-fill-color: #fff1bd !important;
 		cursor: pointer;
 		font: 900 12px Arial, sans-serif;
 		text-transform: uppercase;
@@ -279,11 +283,24 @@ $guideSteps = [
 	.eclipse-guide .guide-nav.next {
 		background: linear-gradient(180deg, #ff9b1f 0%, #df6505 100%);
 		color: #fff7d4 !important;
+		-webkit-text-fill-color: #fff7d4 !important;
 	}
 
 	.eclipse-guide .guide-nav:disabled {
 		opacity: .45;
 		cursor: default;
+	}
+
+	#News .BoxContent .eclipse-guide .guide-hero h1,
+	#News .BoxContent .eclipse-guide .guide-lead,
+	#News .BoxContent .eclipse-guide .guide-copy,
+	#News .BoxContent .eclipse-guide .guide-copy h2,
+	#News .BoxContent .eclipse-guide .guide-copy p,
+	#News .BoxContent .eclipse-guide .guide-copy li,
+	#News .BoxContent .eclipse-guide .guide-kicker {
+		color: #000 !important;
+		-webkit-text-fill-color: #000 !important;
+		text-shadow: none !important;
 	}
 
 	@media (max-width: 760px) {
