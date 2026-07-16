@@ -893,6 +893,8 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 	#Themeboxes .rank_content { padding: 8px 8px 11px !important; }
 	#Themeboxes .rank_player { color: #fff1c7 !important; min-height: 42px !important; padding: 6px 2px 6px 4px !important; border-bottom: 1px solid rgba(255,219,135,.30) !important; }
 	#Themeboxes .rank_text { margin-left: 46px !important; color: #fff1c7 !important; text-shadow: 0 1px 2px #000 !important; }
+	#submenu_server-guide .SubmenuitemLabel { color: #ffe681 !important; -webkit-text-fill-color: #ffe681 !important; font-weight: 900 !important; text-shadow: 0 1px 2px #210100, 0 0 6px rgba(255,190,42,.85) !important; }
+	#submenu_server-guide { background: linear-gradient(90deg, rgba(255,198,64,.18), rgba(255,198,64,0)) !important; }
 	#Themeboxes .rank_text a { color: #fff3c4 !important; }
 	#Themeboxes .rank_text small { color: #f4dca9 !important; }
 
