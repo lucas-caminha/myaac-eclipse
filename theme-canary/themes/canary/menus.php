@@ -24,6 +24,7 @@ return [
 		'Equipe de Suporte' => 'team',
 	],
 	MENU_CATEGORY_LIBRARY => [
+		'Guia Inicial' => 'server-guide',
 		'VIP & Loyalty' => 'vip-loyalty',
 		'Monstros' => 'monsters',
 		'Bosses' => 'bosses',
