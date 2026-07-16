@@ -24,6 +24,20 @@ if ($itemImageExtension === '') {
 	$itemImageExtension = '.gif';
 }
 
+$wikiImages = [
+	'druidBanner' => 'https://static.wikia.nocookie.net/tibia/images/8/8f/Druid_Banner.png/revision/latest?cb=20241121000008&path-prefix=en',
+	'goldPouch' => 'https://static.wikia.nocookie.net/tibia/images/8/87/Gold_Pouch.gif/revision/latest?cb=20220214051441&path-prefix=en',
+	'imbuements' => 'https://static.wikia.nocookie.net/tibia/images/a/a0/Imbuements_Widget.png/revision/latest?cb=20230320183944&path-prefix=en',
+	'knightArtwork' => 'https://static.wikia.nocookie.net/tibia/images/7/71/Knight_Artwork.png/revision/latest?cb=20241120235803&path-prefix=en',
+	'knightBanner' => 'https://static.wikia.nocookie.net/tibia/images/d/d1/Knight_Banner.png/revision/latest?cb=20241120235951&path-prefix=en',
+	'monkBanner' => 'https://static.wikia.nocookie.net/tibia/images/5/5c/Monk_Banner.png/revision/latest?cb=20250225155633&path-prefix=en',
+	'oberon' => 'https://static.wikia.nocookie.net/tibia/images/4/49/Grand_Master_Oberon.gif/revision/latest?cb=20180615195759&path-prefix=en',
+	'paladinBanner' => 'https://static.wikia.nocookie.net/tibia/images/2/22/Paladin_Banner.png/revision/latest?cb=20241120235931&path-prefix=en',
+	'sorcererBanner' => 'https://static.wikia.nocookie.net/tibia/images/e/e5/Sorcerer_Banner.png/revision/latest?cb=20241120235908&path-prefix=en',
+	'storeChest' => 'https://static.wikia.nocookie.net/tibia/images/d/d1/Store_Chest.gif/revision/latest?cb=20230822174443&path-prefix=en',
+	'tibiaCoins' => 'https://static.wikia.nocookie.net/tibia/images/1/1a/Tibia_Coins.gif/revision/latest?cb=20180710225321&path-prefix=en',
+];
+
 $rewardItemIds = [
 	'amazon armor' => 3394,
 	'avenger' => 6527,
@@ -128,7 +142,7 @@ $exerciseRewardItems = [
 $rewardGroups = [
 	[
 		'name' => 'Sorcerer',
-		'image' => $imageBase . 'vocations/sorcererbanner.png',
+		'image' => $wikiImages['sorcererBanner'],
 		'levels' => [
 			40 => ['wand of starstorm', 'spellbook of warding'],
 			50 => ['spellbook of mind control', 'batwing hat'],
@@ -147,7 +161,7 @@ $rewardGroups = [
 	],
 	[
 		'name' => 'Druid',
-		'image' => $imageBase . 'vocations/druidbanner.png',
+		'image' => $wikiImages['druidBanner'],
 		'levels' => [
 			40 => ['underworld rod', 'spellbook of warding'],
 			50 => ['spellbook of mind control', 'batwing hat'],
@@ -166,7 +180,7 @@ $rewardGroups = [
 	],
 	[
 		'name' => 'Paladin',
-		'image' => $imageBase . 'vocations/paladinbanner.png',
+		'image' => $wikiImages['paladinBanner'],
 		'levels' => [
 			50 => ['composite hornbow', 'Zaoan armor'],
 			60 => ['chain bolter', 'amazon armor'],
@@ -183,7 +197,7 @@ $rewardGroups = [
 	],
 	[
 		'name' => 'Knight',
-		'image' => $imageBase . 'vocations/knightbanner.png',
+		'image' => $wikiImages['knightBanner'],
 		'levels' => [
 			40 => ['mercenary sword', 'titan axe'],
 			50 => ['thaian sword', 'twin axe', 'war hammer', 'Zaoan armor'],
@@ -201,7 +215,7 @@ $rewardGroups = [
 	],
 	[
 		'name' => 'Monk',
-		'image' => $imageBase . 'vocations/monkbanner.png',
+		'image' => $wikiImages['monkBanner'],
 		'levels' => [
 			40 => ['nunchaku', 'legs of enlightenment'],
 			50 => ['nunchaku of enlightenment', 'Zaoan monk robe'],
@@ -223,7 +237,7 @@ $guideSteps = [
 	[
 		'kicker' => 'step_1_kicker',
 		'title' => 'step_1_title',
-		'image' => $imageBase . 'vocations/knightbanner.png',
+		'image' => $wikiImages['knightArtwork'],
 		'image_alt' => 'step_1_alt',
 		'text' => 'step_1_text',
 		'bullets' => ['step_1_bullet_1', 'step_1_bullet_2', 'step_1_bullet_3'],
@@ -237,7 +251,7 @@ $guideSteps = [
 	[
 		'kicker' => 'step_3_kicker',
 		'title' => 'step_3_title',
-		'image' => $imageBase . 'premiumfeatures/PremiumIcon-QuickLoot.png',
+		'image' => $wikiImages['goldPouch'],
 		'image_alt' => 'step_3_alt',
 		'text' => 'step_3_text',
 		'bullets' => ['step_3_bullet_1', 'step_3_bullet_2', 'step_3_bullet_3'],
@@ -253,7 +267,7 @@ $guideSteps = [
 	[
 		'kicker' => 'step_5_kicker',
 		'title' => 'step_5_title',
-		'image' => $imageBase . 'themeboxes/premium/coins_trade.png',
+		'image' => $wikiImages['storeChest'],
 		'image_alt' => 'step_5_alt',
 		'text' => 'step_5_text',
 		'bullets' => ['step_5_bullet_1', 'step_5_bullet_2', 'step_5_bullet_3'],
@@ -261,7 +275,7 @@ $guideSteps = [
 	[
 		'kicker' => 'step_6_kicker',
 		'title' => 'step_6_title',
-		'image' => $imageBase . 'premiumfeatures/PremiumIcon-Imbuing.png',
+		'image' => $wikiImages['imbuements'],
 		'image_alt' => 'step_6_alt',
 		'text' => 'step_6_text',
 		'bullets' => ['step_6_bullet_1', 'step_6_bullet_2', 'step_6_bullet_3'],
@@ -269,7 +283,7 @@ $guideSteps = [
 	[
 		'kicker' => 'step_7_kicker',
 		'title' => 'step_7_title',
-		'image' => $imageBase . 'premiumfeatures/PremiumIcon-Prey.png',
+		'image' => $wikiImages['oberon'],
 		'image_alt' => 'step_7_alt',
 		'text' => 'step_7_text',
 		'bullets' => ['step_7_bullet_1', 'step_7_bullet_2', 'step_7_bullet_3'],
@@ -399,6 +413,14 @@ $guideSteps = [
 		max-width: 100%;
 		max-height: 230px;
 		object-fit: contain;
+	}
+
+	.eclipse-guide .guide-image-card img[src*="static.wikia.nocookie.net"][src*=".gif"] {
+		width: 112px;
+		height: 112px;
+		max-height: 112px;
+		image-rendering: pixelated;
+		filter: drop-shadow(0 10px 14px rgba(56, 24, 6, .36));
 	}
 
 	.eclipse-guide .guide-copy,
