@@ -17,6 +17,102 @@ function eclipseGuideTranslate(string $key): string
 }
 
 $imageBase = '/plugins/theme-canary/themes/canary/images/';
+$itemImageBase = setting('core.item_images_url');
+$itemImageExtension = setting('core.item_images_extension');
+
+if ($itemImageExtension === '') {
+	$itemImageExtension = '.gif';
+}
+
+$rewardItemIds = [
+	'amazon armor' => 3394,
+	'avenger' => 6527,
+	'axe of destruction' => 27451,
+	'bambus jo' => 50270,
+	'batwing hat' => 9103,
+	'blade of destruction' => 27449,
+	'bow of destruction' => 27455,
+	'chain bolter' => 8022,
+	'composite hornbow' => 8027,
+	'coned hat of enlightenment' => 50274,
+	'crude umbral axe' => 20070,
+	'crude umbral blade' => 20064,
+	'crude umbral mace' => 20076,
+	'dark vision bandana' => 50190,
+	'dark whispers' => 29427,
+	'depth claws' => 50176,
+	'depth lorica' => 13994,
+	'dragon robe' => 8039,
+	'dream shroud' => 29423,
+	'ectoplasmic shield' => 29430,
+	'eldritch crescent moon spade' => 50170,
+	'elite draken helmet' => 11689,
+	'enchanted theurgic amulet' => 30402,
+	'fabulous legs' => 32617,
+	'fireborn giant armor' => 8053,
+	'furious frock' => 19391,
+	'gnomish footwraps' => 50290,
+	'iks footwraps' => 50291,
+	'jungle bow' => 35518,
+	'jungle quiver' => 35524,
+	'jungle rod' => 35521,
+	'jungle survivor legs' => 50186,
+	'jungle wand' => 35522,
+	'legs of enlightenment' => 50269,
+	'legs of wisdom' => 50187,
+	'mace of destruction' => 27453,
+	"master archer's armor" => 8060,
+	'mercenary sword' => 7386,
+	'merudri nanbando' => 50261,
+	'merudri scale mail' => 50263,
+	'nunchaku' => 50182,
+	'nunchaku of destruction' => 50168,
+	'nunchaku of enlightenment' => 50273,
+	'ornate chestplate' => 13993,
+	'ornate legs' => 13999,
+	'ornate shield' => 14000,
+	'prismatic armor' => 16110,
+	'prismatic helmet' => 16109,
+	'prismatic legs' => 16111,
+	'rift bow' => 22866,
+	'rift crossbow' => 22867,
+	'robe of enlightenment' => 50268,
+	'robe of the ice queen' => 8038,
+	'rod of destruction' => 27458,
+	'royal scale robe' => 11687,
+	'sai of enlightenment' => 50272,
+	"snake god's wristguard" => 11691,
+	'soulful legs' => 32618,
+	'spellbook of ancient arcana' => 14769,
+	'spellbook of lost souls' => 8075,
+	'spellbook of mind control' => 8074,
+	'spellbook of vigilance' => 16107,
+	'spellbook of warding' => 8073,
+	'spirit guide' => 29431,
+	'thaian sword' => 7391,
+	'titan axe' => 7413,
+	'twin axe' => 3335,
+	'umbral master axe' => 20072,
+	'umbral master bow' => 20084,
+	'umbral master crossbow' => 20087,
+	'umbral master katar' => 50165,
+	'umbral master mace' => 20078,
+	'umbral master spellbook' => 20090,
+	'umbral masterblade' => 20066,
+	'underworld rod' => 8082,
+	'wand of destruction' => 27457,
+	'wand of starstorm' => 8092,
+	'war hammer' => 3279,
+	'warsinger bow' => 8026,
+	'winged boots' => 31617,
+	'yalahari armor' => 8862,
+	'yalahari footwraps' => 50289,
+	'yalahari leg piece' => 8863,
+	'yalahari mask' => 8864,
+	'Zaoan armor' => 10384,
+	'Zaoan monk robe' => 50259,
+	'Zaoan robe' => 10439,
+];
 
 $rewardGroups = [
 	[
@@ -350,14 +446,22 @@ $guideSteps = [
 		border-radius: 5px;
 		background: rgba(255, 244, 198, .55);
 		box-shadow: 0 3px 8px rgba(64, 36, 9, .18);
+		cursor: pointer;
+		padding: 0;
 	}
 
 	.eclipse-guide .guide-vocation-card img {
 		display: block;
 		width: 100%;
-		height: 86px;
+		height: 58px;
 		object-fit: cover;
 		object-position: center top;
+	}
+
+	.eclipse-guide .guide-vocation-card.active {
+		border-color: #ffe1a0;
+		background: linear-gradient(180deg, #ffdf8c 0%, #d99d42 100%);
+		box-shadow: 0 0 0 2px rgba(94, 23, 13, .2), 0 4px 10px rgba(64, 36, 9, .28);
 	}
 
 	.eclipse-guide .guide-vocation-card strong {
@@ -376,10 +480,22 @@ $guideSteps = [
 		background: rgba(255, 246, 210, .64);
 	}
 
+	.eclipse-guide .guide-reward-panel {
+		display: none;
+	}
+
+	.eclipse-guide .guide-reward-panel.active {
+		display: block;
+	}
+
 	.eclipse-guide .guide-reward-table {
 		width: 100%;
 		border-collapse: collapse;
 		min-width: 680px;
+	}
+
+	.eclipse-guide .guide-panel.rewards .guide-reward-table {
+		min-width: 0;
 	}
 
 	.eclipse-guide .guide-reward-table th,
@@ -402,6 +518,43 @@ $guideSteps = [
 		white-space: nowrap;
 		color: #5f1a0c !important;
 		-webkit-text-fill-color: #5f1a0c !important;
+	}
+
+	.eclipse-guide .guide-reward-row {
+		display: flex;
+		gap: 8px;
+		align-items: center;
+		padding: 5px 0;
+		border-bottom: 1px solid rgba(118, 70, 26, .2);
+	}
+
+	.eclipse-guide .guide-reward-row:last-child {
+		border-bottom: 0;
+	}
+
+	.eclipse-guide .guide-reward-items {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 5px;
+	}
+
+	.eclipse-guide .guide-reward-pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		padding: 2px 6px 2px 3px;
+		border: 1px solid rgba(118, 70, 26, .32);
+		border-radius: 4px;
+		background: rgba(255, 248, 220, .6);
+		font-size: 11px;
+		line-height: 1.2;
+	}
+
+	.eclipse-guide .guide-reward-pill img {
+		width: 24px;
+		height: 24px;
+		object-fit: contain;
+		image-rendering: auto;
 	}
 
 	.eclipse-guide .guide-actions {
@@ -489,36 +642,47 @@ $guideSteps = [
 								<p><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['text'])); ?></p>
 
 								<div class="guide-vocation-grid">
-									<?php foreach ($rewardGroups as $group): ?>
-										<div class="guide-vocation-card">
+									<?php foreach ($rewardGroups as $groupIndex => $group): ?>
+										<button class="guide-vocation-card<?php echo $groupIndex === 0 ? ' active' : ''; ?>" type="button" data-guide-reward-tab="<?php echo $groupIndex; ?>">
 											<img src="<?php echo eclipseGuideEscape($group['image']); ?>" alt="<?php echo eclipseGuideEscape($group['name']); ?>">
 											<strong><?php echo eclipseGuideEscape($group['name']); ?></strong>
-										</div>
+										</button>
 									<?php endforeach; ?>
 								</div>
 
-								<div class="guide-reward-table-wrap">
-									<table class="guide-reward-table">
-										<thead>
-											<tr>
-												<th><?php echo eclipseGuideEscape(eclipseGuideTranslate('reward_vocation')); ?></th>
-												<th><?php echo eclipseGuideEscape(eclipseGuideTranslate('reward_level_items')); ?></th>
-											</tr>
-										</thead>
-										<tbody>
-											<?php foreach ($rewardGroups as $group): ?>
+								<?php foreach ($rewardGroups as $groupIndex => $group): ?>
+									<div class="guide-reward-table-wrap guide-reward-panel<?php echo $groupIndex === 0 ? ' active' : ''; ?>" data-guide-reward-panel="<?php echo $groupIndex; ?>">
+										<table class="guide-reward-table">
+											<thead>
 												<tr>
-													<td><strong><?php echo eclipseGuideEscape($group['name']); ?></strong></td>
+													<th><?php echo eclipseGuideEscape($group['name']); ?></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
 													<td>
 														<?php foreach ($group['levels'] as $level => $items): ?>
-															<div><span class="guide-reward-level">Lv. <?php echo (int) $level; ?>:</span> <?php echo eclipseGuideEscape(implode(', ', $items)); ?></div>
+															<div class="guide-reward-row">
+																<span class="guide-reward-level">Lv. <?php echo (int) $level; ?>:</span>
+																<span class="guide-reward-items">
+																	<?php foreach ($items as $itemName): ?>
+																		<?php $itemId = $rewardItemIds[$itemName] ?? null; ?>
+																		<span class="guide-reward-pill">
+																			<?php if ($itemId !== null): ?>
+																				<img src="<?php echo eclipseGuideEscape($itemImageBase . $itemId . $itemImageExtension); ?>" alt="<?php echo eclipseGuideEscape($itemName); ?>" loading="lazy">
+																			<?php endif; ?>
+																			<?php echo eclipseGuideEscape($itemName); ?>
+																		</span>
+																	<?php endforeach; ?>
+																</span>
+															</div>
 														<?php endforeach; ?>
 													</td>
 												</tr>
-											<?php endforeach; ?>
-										</tbody>
-									</table>
-								</div>
+											</tbody>
+										</table>
+									</div>
+								<?php endforeach; ?>
 							</div>
 						</section>
 					<?php else: ?>
@@ -558,6 +722,8 @@ $guideSteps = [
 
 		var track = guide.querySelector('.guide-track');
 		var stepButtons = Array.prototype.slice.call(guide.querySelectorAll('[data-guide-step]'));
+		var rewardButtons = Array.prototype.slice.call(guide.querySelectorAll('[data-guide-reward-tab]'));
+		var rewardPanels = Array.prototype.slice.call(guide.querySelectorAll('[data-guide-reward-panel]'));
 		var prevButton = guide.querySelector('[data-guide-prev]');
 		var nextButton = guide.querySelector('[data-guide-next]');
 		var activeStep = 0;
@@ -577,6 +743,20 @@ $guideSteps = [
 		stepButtons.forEach(function (button) {
 			button.addEventListener('click', function () {
 				showStep(parseInt(button.getAttribute('data-guide-step'), 10));
+			});
+		});
+
+		rewardButtons.forEach(function (button) {
+			button.addEventListener('click', function () {
+				var tab = button.getAttribute('data-guide-reward-tab');
+
+				rewardButtons.forEach(function (item) {
+					item.classList.toggle('active', item.getAttribute('data-guide-reward-tab') === tab);
+				});
+
+				rewardPanels.forEach(function (panel) {
+					panel.classList.toggle('active', panel.getAttribute('data-guide-reward-panel') === tab);
+				});
 			});
 		});
 
