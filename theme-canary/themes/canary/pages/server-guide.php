@@ -25,17 +25,11 @@ if ($itemImageExtension === '') {
 }
 
 $wikiImages = [
-	'druidBanner' => 'https://static.wikia.nocookie.net/tibia/images/8/8f/Druid_Banner.png/revision/latest?cb=20241121000008&path-prefix=en',
+	'evonary' => 'https://tibiawiki.com.br/images/1/13/Evonary_art.png',
 	'goldPouch' => 'https://static.wikia.nocookie.net/tibia/images/8/87/Gold_Pouch.gif/revision/latest?cb=20220214051441&path-prefix=en',
-	'imbuements' => 'https://static.wikia.nocookie.net/tibia/images/a/a0/Imbuements_Widget.png/revision/latest?cb=20230320183944&path-prefix=en',
 	'knightArtwork' => 'https://static.wikia.nocookie.net/tibia/images/7/71/Knight_Artwork.png/revision/latest?cb=20241120235803&path-prefix=en',
-	'knightBanner' => 'https://static.wikia.nocookie.net/tibia/images/d/d1/Knight_Banner.png/revision/latest?cb=20241120235951&path-prefix=en',
-	'monkBanner' => 'https://static.wikia.nocookie.net/tibia/images/5/5c/Monk_Banner.png/revision/latest?cb=20250225155633&path-prefix=en',
 	'oberon' => 'https://static.wikia.nocookie.net/tibia/images/4/49/Grand_Master_Oberon.gif/revision/latest?cb=20180615195759&path-prefix=en',
-	'paladinBanner' => 'https://static.wikia.nocookie.net/tibia/images/2/22/Paladin_Banner.png/revision/latest?cb=20241120235931&path-prefix=en',
-	'sorcererBanner' => 'https://static.wikia.nocookie.net/tibia/images/e/e5/Sorcerer_Banner.png/revision/latest?cb=20241120235908&path-prefix=en',
 	'storeChest' => 'https://static.wikia.nocookie.net/tibia/images/d/d1/Store_Chest.gif/revision/latest?cb=20230822174443&path-prefix=en',
-	'tibiaCoins' => 'https://static.wikia.nocookie.net/tibia/images/1/1a/Tibia_Coins.gif/revision/latest?cb=20180710225321&path-prefix=en',
 ];
 
 $rewardItemIds = [
@@ -142,7 +136,7 @@ $exerciseRewardItems = [
 $rewardGroups = [
 	[
 		'name' => 'Sorcerer',
-		'image' => $wikiImages['sorcererBanner'],
+		'image' => $imageBase . 'vocations/sorcererbanner.png',
 		'levels' => [
 			40 => ['wand of starstorm', 'spellbook of warding'],
 			50 => ['spellbook of mind control', 'batwing hat'],
@@ -161,7 +155,7 @@ $rewardGroups = [
 	],
 	[
 		'name' => 'Druid',
-		'image' => $wikiImages['druidBanner'],
+		'image' => $imageBase . 'vocations/druidbanner.png',
 		'levels' => [
 			40 => ['underworld rod', 'spellbook of warding'],
 			50 => ['spellbook of mind control', 'batwing hat'],
@@ -180,7 +174,7 @@ $rewardGroups = [
 	],
 	[
 		'name' => 'Paladin',
-		'image' => $wikiImages['paladinBanner'],
+		'image' => $imageBase . 'vocations/paladinbanner.png',
 		'levels' => [
 			50 => ['composite hornbow', 'Zaoan armor'],
 			60 => ['chain bolter', 'amazon armor'],
@@ -197,7 +191,7 @@ $rewardGroups = [
 	],
 	[
 		'name' => 'Knight',
-		'image' => $wikiImages['knightBanner'],
+		'image' => $imageBase . 'vocations/knightbanner.png',
 		'levels' => [
 			40 => ['mercenary sword', 'titan axe'],
 			50 => ['thaian sword', 'twin axe', 'war hammer', 'Zaoan armor'],
@@ -215,7 +209,7 @@ $rewardGroups = [
 	],
 	[
 		'name' => 'Monk',
-		'image' => $wikiImages['monkBanner'],
+		'image' => $imageBase . 'vocations/monkbanner.png',
 		'levels' => [
 			40 => ['nunchaku', 'legs of enlightenment'],
 			50 => ['nunchaku of enlightenment', 'Zaoan monk robe'],
@@ -237,7 +231,7 @@ $guideSteps = [
 	[
 		'kicker' => 'step_1_kicker',
 		'title' => 'step_1_title',
-		'image' => $wikiImages['knightArtwork'],
+		'image' => $imageBase . 'vocations/knightbanner.png',
 		'image_alt' => 'step_1_alt',
 		'text' => 'step_1_text',
 		'bullets' => ['step_1_bullet_1', 'step_1_bullet_2', 'step_1_bullet_3'],
@@ -260,22 +254,21 @@ $guideSteps = [
 		'kicker' => 'step_4_kicker',
 		'title' => 'step_4_title',
 		'image' => $imageBase . 'premiumfeatures/PremiumIcon-VIP.png',
+		'secondary_image' => $wikiImages['storeChest'],
 		'image_alt' => 'step_4_alt',
 		'text' => 'step_4_text',
 		'bullets' => ['step_4_bullet_1', 'step_4_bullet_2', 'step_4_bullet_3'],
-	],
-	[
-		'kicker' => 'step_5_kicker',
-		'title' => 'step_5_title',
-		'image' => $wikiImages['storeChest'],
-		'image_alt' => 'step_5_alt',
-		'text' => 'step_5_text',
-		'bullets' => ['step_5_bullet_1', 'step_5_bullet_2', 'step_5_bullet_3'],
+		'secondary' => [
+			'kicker' => 'step_5_kicker',
+			'title' => 'step_5_title',
+			'text' => 'step_5_text',
+			'bullets' => ['step_5_bullet_1', 'step_5_bullet_2', 'step_5_bullet_3'],
+		],
 	],
 	[
 		'kicker' => 'step_6_kicker',
 		'title' => 'step_6_title',
-		'image' => $wikiImages['imbuements'],
+		'image' => $wikiImages['evonary'],
 		'image_alt' => 'step_6_alt',
 		'text' => 'step_6_text',
 		'bullets' => ['step_6_bullet_1', 'step_6_bullet_2', 'step_6_bullet_3'],
@@ -408,6 +401,11 @@ $guideSteps = [
 		box-shadow: inset 0 1px 0 rgba(255, 252, 226, .72), 0 4px 12px rgba(64, 36, 9, .2);
 	}
 
+	.eclipse-guide .guide-image-card.has-multiple {
+		flex-direction: column;
+		gap: 16px;
+	}
+
 	.eclipse-guide .guide-image-card img {
 		display: block;
 		max-width: 100%;
@@ -466,6 +464,13 @@ $guideSteps = [
 		line-height: 1.45;
 	}
 
+	.eclipse-guide .guide-copy-section + .guide-copy-section {
+		margin-top: 14px;
+		padding-top: 14px;
+		border-top: 1px solid rgba(105, 55, 16, .4);
+		box-shadow: inset 0 1px 0 rgba(255, 248, 210, .78);
+	}
+
 	.eclipse-guide .guide-vocation-grid {
 		display: grid;
 		grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -475,7 +480,7 @@ $guideSteps = [
 
 	.eclipse-guide .guide-exercise-reward {
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) auto;
+		grid-template-columns: minmax(0, 1fr) minmax(236px, auto);
 		gap: 12px;
 		align-items: center;
 		margin: 12px 0 2px;
@@ -500,11 +505,10 @@ $guideSteps = [
 	}
 
 	.eclipse-guide .guide-exercise-items {
-		display: flex;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: repeat(4, 30px);
 		justify-content: flex-end;
 		gap: 4px;
-		max-width: 260px;
 	}
 
 	.eclipse-guide .guide-exercise-items img {
@@ -598,9 +602,10 @@ $guideSteps = [
 	}
 
 	.eclipse-guide .guide-reward-row {
-		display: flex;
+		display: grid;
+		grid-template-columns: 58px minmax(0, 1fr);
 		gap: 8px;
-		align-items: center;
+		align-items: flex-start;
 		padding: 5px 0;
 		border-bottom: 1px solid rgba(118, 70, 26, .2);
 	}
@@ -613,6 +618,7 @@ $guideSteps = [
 		display: flex;
 		flex-wrap: wrap;
 		gap: 5px;
+		min-width: 0;
 	}
 
 	.eclipse-guide .guide-reward-pill {
@@ -692,7 +698,6 @@ $guideSteps = [
 
 		.eclipse-guide .guide-exercise-items {
 			justify-content: flex-start;
-			max-width: none;
 		}
 
 		.eclipse-guide .guide-actions {
@@ -785,18 +790,35 @@ $guideSteps = [
 						</section>
 					<?php else: ?>
 						<section class="guide-panel">
-							<div class="guide-image-card">
+							<div class="guide-image-card<?php echo isset($step['secondary_image']) ? ' has-multiple' : ''; ?>">
 								<img src="<?php echo eclipseGuideEscape($step['image']); ?>" alt="<?php echo eclipseGuideEscape(eclipseGuideTranslate($step['image_alt'])); ?>">
+								<?php if (isset($step['secondary_image'])): ?>
+									<img src="<?php echo eclipseGuideEscape($step['secondary_image']); ?>" alt="<?php echo eclipseGuideEscape(eclipseGuideTranslate('step_5_alt')); ?>">
+								<?php endif; ?>
 							</div>
 							<div class="guide-copy">
-								<span class="guide-kicker"><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['kicker'])); ?></span>
-								<h2><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['title'])); ?></h2>
-								<p><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['text'])); ?></p>
-								<ul>
-									<?php foreach ($step['bullets'] as $bullet): ?>
-										<li><?php echo eclipseGuideEscape(eclipseGuideTranslate($bullet)); ?></li>
-									<?php endforeach; ?>
-								</ul>
+								<div class="guide-copy-section">
+									<span class="guide-kicker"><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['kicker'])); ?></span>
+									<h2><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['title'])); ?></h2>
+									<p><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['text'])); ?></p>
+									<ul>
+										<?php foreach ($step['bullets'] as $bullet): ?>
+											<li><?php echo eclipseGuideEscape(eclipseGuideTranslate($bullet)); ?></li>
+										<?php endforeach; ?>
+									</ul>
+								</div>
+								<?php if (isset($step['secondary'])): ?>
+									<div class="guide-copy-section">
+										<span class="guide-kicker"><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['secondary']['kicker'])); ?></span>
+										<h2><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['secondary']['title'])); ?></h2>
+										<p><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['secondary']['text'])); ?></p>
+										<ul>
+											<?php foreach ($step['secondary']['bullets'] as $bullet): ?>
+												<li><?php echo eclipseGuideEscape(eclipseGuideTranslate($bullet)); ?></li>
+											<?php endforeach; ?>
+										</ul>
+									</div>
+								<?php endif; ?>
 							</div>
 						</section>
 					<?php endif; ?>
