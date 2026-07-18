@@ -30,11 +30,11 @@ WHERE NOT EXISTS (
 );
 
 UPDATE `myaac_settings`
-SET `value` = '7173'
+SET `value` = '7171'
 WHERE `name` = 'core' AND `key` = 'status_port';
 
 INSERT INTO `myaac_settings` (`name`, `key`, `value`)
-SELECT 'core', 'status_port', '7173'
+SELECT 'core', 'status_port', '7171'
 WHERE NOT EXISTS (
   SELECT 1 FROM `myaac_settings`
   WHERE `name` = 'core' AND `key` = 'status_port'

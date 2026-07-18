@@ -66,6 +66,73 @@ function ToggleMaskedText(a_TextFieldID) {
 }
 
 (function () {
+    var storagePrefix = 'eclipseRightboxCollapsed:';
+
+    function getBoxKey(box) {
+        return box.getAttribute('data-eclipse-collapsible-box') || '';
+    }
+
+    function setBoxState(box, collapsed) {
+        var button = box.querySelector('[data-eclipse-box-toggle]');
+
+        box.classList.toggle('is-collapsed', collapsed);
+
+        if (button) {
+            button.textContent = collapsed ? '+' : '\u2212';
+            button.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+            button.setAttribute('title', collapsed ? 'Maximizar' : 'Minimizar');
+        }
+    }
+
+    function restoreBoxState(box) {
+        var key = getBoxKey(box);
+
+        if (!key) {
+            return;
+        }
+
+        setBoxState(box, window.localStorage.getItem(storagePrefix + key) === '1');
+    }
+
+    function toggleBox(box) {
+        var key = getBoxKey(box);
+        var collapsed = !box.classList.contains('is-collapsed');
+
+        setBoxState(box, collapsed);
+
+        if (key) {
+            window.localStorage.setItem(storagePrefix + key, collapsed ? '1' : '0');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var boxes = document.querySelectorAll('[data-eclipse-collapsible-box]');
+
+        boxes.forEach(function (box) {
+            restoreBoxState(box);
+        });
+    });
+
+    document.addEventListener('click', function (event) {
+        var button = event.target && event.target.closest ? event.target.closest('[data-eclipse-box-toggle]') : null;
+
+        if (!button) {
+            return;
+        }
+
+        var box = button.closest('[data-eclipse-collapsible-box]');
+
+        if (!box) {
+            return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+        toggleBox(box);
+    }, true);
+})();
+
+(function () {
     var loaderId = 'EclipsePageLoader';
     var activeClass = 'is-active';
     var showTimer = null;

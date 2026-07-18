@@ -261,8 +261,8 @@ Configure pelo menos:
 - `url`
 - `statusProtocolPort`
 
-No deploy Eclipse OT, mantenha `statusProtocolPort = 7173`. O MyAAC deve consultar
-o status em `127.0.0.1:7173`; aplique a migration
+No deploy Eclipse OT, mantenha `statusProtocolPort = 7171`. O MyAAC deve consultar
+o status em `127.0.0.1:7171`; aplique a migration
 `sql/023-set-canary-status-endpoint.sql` depois das migrations principais do site.
 
 Baixe o mapa compatível do Canary quando ele nao estiver no repo:

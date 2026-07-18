@@ -34,30 +34,6 @@
 		</div>
 	</section>
 
-	<section class="online-card online-world-card">
-		<div class="online-card-title">{{ t('online.world_info') }}</div>
-		<div class="online-info-list">
-			{% if not status.online %}
-				<div class="online-offline">
-					<strong>{{ t('online.server_offline', {'server': config.lua.serverName}) }}</strong>
-					<span>{{ t('online.try_again') }}</span>
-				</div>
-			{% else %}
-				<div><span>Status</span><strong class="online-status">Online</strong></div>
-				<div><span>{{ t('online.players_online') }}</span><strong>{{ players|length }}</strong></div>
-				<div><span>{{ t('online.online_record') }}</span><strong>{{ record|raw }}</strong></div>
-				<div>
-					<span>Datacenter</span>
-					<strong>{{ setting('core.online_datacenter')|raw }}</strong>
-				</div>
-				<div>
-					<span>{{ t('online.server_date') }}</span>
-					<strong>{{ "now"|date("d/m/Y H:i:s") }}</strong>
-				</div>
-			{% endif %}
-		</div>
-	</section>
-
 	<section class="online-card online-vocations-card">
 		<div class="online-card-title">{{ t('online.vocations_online') }}</div>
 		<div class="online-vocation-grid">

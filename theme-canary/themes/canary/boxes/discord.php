@@ -43,8 +43,11 @@
         color: #fff;
     }
 </style>
-<div class="eclipse-rightbox eclipse-discord-box discord">
-    <div class="eclipse-rightbox-title discord_header"><?= htmlspecialchars(t('box.discord.title')) ?></div>
+<div class="eclipse-rightbox eclipse-discord-box discord eclipse-collapsible-box" data-eclipse-collapsible-box="discord">
+    <div class="eclipse-rightbox-title discord_header">
+        <span class="eclipse-collapsible-title-text"><?= htmlspecialchars(t('box.discord.title')) ?></span>
+        <button type="button" class="eclipse-box-toggle" data-eclipse-box-toggle aria-expanded="true" title="Minimizar">−</button>
+    </div>
     <div class="eclipse-rightbox-content discord_content">
         <img class="eclipse-discord-icon" src="<?php echo $template_path ?>/images/global/header/icon-discord.svg" alt="<?= htmlspecialchars(t('box.discord.title')) ?>">
         <div class="eclipse-discord-text"><?= htmlspecialchars(t('box.discord.text')) ?></div>

@@ -20,8 +20,11 @@ $creatureLink = getLink('monsters') . '?name=' . rawurlencode($creatureName);
 $bossLink = getLink('bosses') . '?name=' . rawurlencode($bossName);
 $boostedSponsorLink = getLink('boosted-sponsor');
 ?>
-<div class="eclipse-rightbox eclipse-boosted">
-    <div class="eclipse-rightbox-title"><?= htmlspecialchars(t('box.boosted.title')) ?></div>
+<div class="eclipse-rightbox eclipse-boosted eclipse-collapsible-box" data-eclipse-collapsible-box="boosted">
+    <div class="eclipse-rightbox-title">
+        <span class="eclipse-collapsible-title-text"><?= htmlspecialchars(t('box.boosted.title')) ?></span>
+        <button type="button" class="eclipse-box-toggle" data-eclipse-box-toggle aria-expanded="true" title="Minimizar">−</button>
+    </div>
     <div class="eclipse-rightbox-content eclipse-boosted-grid">
         <div class="eclipse-boosted-item eclipse-boosted-boss">
             <a class="eclipse-boosted-card-link" href="<?= htmlspecialchars($bossLink) ?>" title="<?= htmlspecialchars(t('box.boosted.open_boss', ['name' => $bossName])) ?>">

@@ -66,8 +66,11 @@
         color: #fff;
     }
 </style>
-<div class="rank">
-    <div class="rank_header"><?= htmlspecialchars(t('box.highscores.title')) ?></div>
+<div class="rank eclipse-collapsible-box" data-eclipse-collapsible-box="highscores">
+    <div class="rank_header">
+        <span class="eclipse-collapsible-title-text"><?= htmlspecialchars(t('box.highscores.title')) ?></span>
+        <button type="button" class="eclipse-box-toggle" data-eclipse-box-toggle aria-expanded="true" title="Minimizar">−</button>
+    </div>
     <div class="rank_content">
         <?php
         $topPlayers = getTopPlayers(5);

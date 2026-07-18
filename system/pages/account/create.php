@@ -128,6 +128,7 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 	$characterNameText = eclipseCreateAccountEscape($characterName ?: $translate('account.initial_character', [], 'Initial character'));
 	$serverName = eclipseCreateAccountEscape(configLua('serverName'));
 	$characterCard = '';
+	$serverGuideUrl = eclipseCreateAccountEscape(getLink('server-guide'));
 	$serverHeroUrl = eclipseCreateAccountEscape($template_path . '/images/header/bgs/arise-red-fortress.png');
 	$heroImage = '<img class="eclipse-create-success-art eclipse-create-success-server-art" src="' . $serverHeroUrl . '" alt="">';
 	$intro = $characterEnabled
@@ -178,7 +179,6 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 		<div class="eclipse-create-success">
 			<section class="eclipse-create-success-hero">
 				' . $heroImage . '
-				<span>' . eclipseCreateAccountEscape($translate('account.server_banner', [], 'Server banner')) . '</span>
 				<h2>' . eclipseCreateAccountEscape($translate('account.welcome_to_server', ['server' => $serverName], 'Welcome to {server}')) . '</h2>
 				<p>' . eclipseCreateAccountEscape($intro) . '</p>
 			</section>
@@ -193,8 +193,11 @@ function eclipseRenderCreateAccountSuccess($twig, $accountType, $accountValue, $
 				' . $characterCard . '
 			</div>
 			<div class="eclipse-create-success-next">
-				<strong>' . eclipseCreateAccountEscape($translate('account.see_you', [], 'See you in Eclipse OT!')) . '</strong>
-				<span>' . eclipseCreateAccountEscape($translate('account.next_step_play', [], 'Open the client, log in with your account and begin your journey.')) . '</span>
+				<div class="eclipse-create-success-next-text">
+					<strong>' . eclipseCreateAccountEscape($translate('account.see_you', [], 'See you in Eclipse OT!')) . '</strong>
+					<span>' . eclipseCreateAccountEscape($translate('account.next_step_play', [], 'Open the client, log in with your account and begin your journey.')) . '</span>
+				</div>
+				<a class="eclipse-create-success-guide" href="' . $serverGuideUrl . '">' . eclipseCreateAccountEscape($translate('account.open_server_guide', [], 'Read the starter guide')) . '</a>
 			</div>
 		</div>';
 

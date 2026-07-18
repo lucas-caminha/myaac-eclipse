@@ -57,8 +57,11 @@
         color: #fff;
     }
 </style>
-<div class="donate">
-    <div class="donate_header"><?= htmlspecialchars(t('box.webshop.title')) ?></div>
+<div class="donate eclipse-collapsible-box" data-eclipse-collapsible-box="webshop">
+    <div class="donate_header">
+        <span class="eclipse-collapsible-title-text"><?= htmlspecialchars(t('box.webshop.title')) ?></span>
+        <button type="button" class="eclipse-box-toggle" data-eclipse-box-toggle aria-expanded="true" title="Minimizar">−</button>
+    </div>
     <div class="donate_content">
         <div data-exclusive-label="<?= htmlspecialchars(t('box.webshop.exclusive')) ?>">
             <img src="<?php echo $template_path ?>/images/themeboxes/donate/donate.png" alt="<?= htmlspecialchars(t('box.webshop.exclusive')) ?>">

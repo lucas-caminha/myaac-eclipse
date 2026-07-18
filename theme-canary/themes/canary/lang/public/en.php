@@ -399,6 +399,7 @@ return [
 	'account.success_keep_safe' => 'Keep this information in a safe place and never share it with anyone.',
 	'account.see_you' => 'See you in Eclipse OT!',
 	'account.next_step_play' => 'Open the client, log in with your account and begin your journey.',
+	'account.open_server_guide' => 'Read starter guide',
 	'account.logout_before_create' => 'Log out of the current account before creating a new one.',
 	'account.verify_email_subject' => 'New account on {server}',
 	'account.verify_email_warning' => 'Before logging in, confirm your email. The verification link was sent to {email}. If it does not arrive, also check your spam folder.',

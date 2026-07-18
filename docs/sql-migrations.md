@@ -25,7 +25,8 @@ Este guia documenta os scripts SQL incluidos no projeto e como gerenciar migraco
 | `sql/020-use-theme-rules-page.sql` | Faz Regras carregar a pagina PHP do tema |
 | `sql/021-normalize-canary-menu-and-settings.sql` | Normaliza menu Canary, template padrao e gifts/shop |
 | `sql/022-add-monk-character-sample.sql` | Adiciona Monk nas vocacoes disponiveis para criacao |
-| `sql/023-set-canary-status-endpoint.sql` | Configura o MyAAC para consultar o status local do Canary em `127.0.0.1:7173` |
+| `sql/023-set-canary-status-endpoint.sql` | Configura o MyAAC para consultar o status local do Canary em `127.0.0.1:7171` |
+| `sql/024-set-login-ban-time-5-minutes.sql` | Reduz o bloqueio por senha incorreta para 5 minutos |
 
 ## Aplicando Migracoes
 
@@ -55,29 +56,20 @@ mysql --verbose canary < sql/001-eclipse-news.sql 2>&1 | head -20
 
 ### 001-eclipse-news.sql
 
-Atualiza a primeira news do MyAAC com o conteudo de boas-vindas do Eclipse OT:
+Atualiza a primeira news do MyAAC com o conteudo de boas-vindas do Eclipse OT.
+O bloco atual apresenta o servidor em formato de chamada publica: servidor
+brasileiro, progressao de longo prazo, Monk, Task Board, Proficiency,
+anti-Pay2Win, anti-AFK bot, rates principais, party bonus, sistemas exclusivos
+e links para sobre, tutoriais e Discord.
 
 ```sql
-UPDATE myaac_news
-SET title = 'Welcome to Eclipse OT',
-    article_text = 'A dark custom PvP world built around boss gates, guild rivalry and long-term progression.',
-    body = '<div class="arise-news-intro">
-  <h1>Welcome to Eclipse OT</h1>
-  <p class="lead">A custom PvP world forged in shadow, boss gates, guild rivalry and long-term character progression.</p>
-  <div class="arise-feature-grid">
-    <div><strong>Eclipse Gates</strong><span>Boss access organized by tiers, with clear goals from early game to endgame.</span></div>
-    <div><strong>Brazilian PvP</strong><span>Fast access, active war potential and rules tuned for competitive play.</span></div>
-    <div><strong>Daily Objectives</strong><span>Daily bosses, tasks and rewards planned for the closed beta.</span></div>
-    <div><strong>Long-Term Economy</strong><span>Rates are accelerated, but rare rewards and boss drops are designed to last.</span></div>
-  </div>
-</div>'
-WHERE id = 1;
+mysql --verbose canary < sql/001-eclipse-news.sql
 ```
 
 **O que faz:**
 - Atualiza o titulo para "Welcome to Eclipse OT"
-- Define um resumo curto em `article_text`
-- Adiciona HTML formatado com as features do servidor em `body`
+- Define um resumo curto sobre a proposta do servidor em `article_text`
+- Adiciona HTML formatado com badges, bullets, rates, links uteis e chamada final em `body`
 
 ### 002-clean-eclipse-menu.sql
 
@@ -330,13 +322,13 @@ Configura o endpoint de status usado pelo MyAAC no deploy local do Canary:
 
 ```text
 core.status_ip=127.0.0.1
-core.status_port=7173
+core.status_port=7171
 ```
 
 **O que faz:**
 - Habilita o status do servidor no MyAAC
 - Faz o site consultar o Canary pela interface local da VPS, sem depender do IP publico
-- Usa a porta `7173`, que corresponde ao `statusProtocolPort` do servidor
+- Usa a porta `7171`, que corresponde ao `statusProtocolPort` do servidor
 - Remove o cache `status_%` de `myaac_config` para forcar novo calculo do status
 - Deve ser usada junto de `scripts/patch-myaac-status-port.sh.example` quando o MyAAC trata `core.status_port` como numero
 

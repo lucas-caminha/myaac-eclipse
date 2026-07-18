@@ -64,7 +64,7 @@ return [
 
 	'event_schedule.page_title' => 'Agenda de Eventos',
 	'event_schedule.note' => '* O evento começa/termina no server save deste dia.',
-	'layout.active_events_kicker' => 'Evento ativo',
+	'layout.active_events_kicker' => 'Evento ON',
 	'layout.active_events_open_schedule' => 'Abrir agenda de eventos',
 	'layout.active_event_default' => 'Evento ativo',
 
@@ -399,6 +399,7 @@ return [
 	'account.success_keep_safe' => 'Guarde esses dados em um lugar seguro e nunca compartilhe com outras pessoas.',
 	'account.see_you' => 'Nos vemos no Eclipse OT!',
 	'account.next_step_play' => 'Abra o client, entre com sua conta e comece sua jornada.',
+	'account.open_server_guide' => 'Ler guia inicial',
 	'account.logout_before_create' => 'Saia da conta atual antes de tentar criar uma nova conta.',
 	'account.verify_email_subject' => 'Nova conta no {server}',
 	'account.verify_email_warning' => 'Antes de entrar, você precisa confirmar seu email. O link de verificação foi enviado para {email}. Se a mensagem não chegar, verifique também a caixa de spam.',

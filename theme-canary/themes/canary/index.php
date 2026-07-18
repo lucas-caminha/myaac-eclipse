@@ -69,7 +69,7 @@ if (!function_exists('eclipseLayoutActiveEvents')) {
 	<link rel="icon" href="<?= $template_path; ?>/images/favicon.ico?v=2" type="image/x-icon"/>
 	<link rel="apple-touch-icon" href="<?= $template_path; ?>/images/favicon-eclipse.png?v=2"/>
 	<link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
-	<link href="<?= $template_path; ?>/arise-overrides.css?v=128" rel="stylesheet" type="text/css"/>
+	<link href="<?= $template_path; ?>/arise-overrides.css?v=129" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="<?= $template_path; ?>/basic.js"></script>
 	<script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
@@ -463,8 +463,11 @@ if (!function_exists('eclipseLayoutActiveEvents')) {
 					if (!empty($activeLayoutEvents)) {
 						$visibleEvents = array_slice($activeLayoutEvents, 0, 3);
 						?>
-						<a class="eclipse-left-active-events" href="<?= getLink('event-schedule'); ?>" aria-label="<?= htmlspecialchars(t('layout.active_events_open_schedule')); ?>">
-							<div class="eclipse-left-active-events-kicker"><?= htmlspecialchars(t('layout.active_events_kicker')); ?></div>
+						<a class="eclipse-left-active-events eclipse-collapsible-box" data-eclipse-collapsible-box="active-event" href="<?= getLink('event-schedule'); ?>" aria-label="<?= htmlspecialchars(t('layout.active_events_open_schedule')); ?>">
+							<div class="eclipse-left-active-events-kicker">
+								<span class="eclipse-collapsible-title-text"><?= htmlspecialchars(t('layout.active_events_kicker')); ?></span>
+								<button type="button" class="eclipse-box-toggle" data-eclipse-box-toggle aria-expanded="true" title="Minimizar">-</button>
+							</div>
 							<div class="eclipse-left-active-events-list">
 								<?php foreach ($visibleEvents as $activeEvent) { ?>
 									<span style="--event-color: <?= htmlspecialchars($activeEvent['color']); ?>;">
@@ -563,9 +566,6 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 					<script type="text/javascript">
 						InitializePage();
 					</script>
-			</div>
-			<div id="LeftDiscordBox">
-				<?php include __DIR__ . '/boxes/discord.php'; ?>
 			</div>
 			</div>
 
@@ -819,10 +819,6 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 					$twig_loader->prependPath(__DIR__ . '/boxes/templates');
 
 					foreach ($config['boxes'] as $box) {
-						if ($box === 'discord') {
-							continue;
-						}
-
 						/** @var string $template_name */
 						$file = __DIR__ . '/boxes/' . $box . '.php';
 						if (file_exists($file)) {
@@ -856,6 +852,20 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 	#Themeboxes .eclipse-rightbox, #Themeboxes .donate, #Themeboxes .discord, #Themeboxes .serversave, #Themeboxes .searchchar, #Themeboxes .rank { width: 188px !important; min-width: 188px !important; max-width: 188px !important; height: auto !important; margin: 0 !important; box-sizing: border-box !important; text-align: center !important; position: relative !important; }
 	#Themeboxes .eclipse-rightbox-title, #Themeboxes .donate_header, #Themeboxes .discord_header, #Themeboxes .serversave_header, #Themeboxes .searchchar_header, #Themeboxes .rank_header { width: 188px !important; height: 32px !important; line-height: 31px !important; box-sizing: border-box !important; background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important; border: 2px solid #a86b23 !important; border-radius: 4px 4px 0 0 !important; color: #f7e7bd !important; font-family: Georgia, 'Times New Roman', serif !important; font-size: 15px !important; font-weight: 800 !important; text-transform: uppercase !important; text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important; margin: 0 !important; padding: 0 !important; background-image: none !important; }
 	#Themeboxes .eclipse-rightbox-title::before, #Themeboxes .eclipse-rightbox-title::after, #Themeboxes .donate_header::before, #Themeboxes .donate_header::after, #Themeboxes .discord_header::before, #Themeboxes .discord_header::after, #Themeboxes .serversave_header::before, #Themeboxes .serversave_header::after, #Themeboxes .searchchar_header::before, #Themeboxes .searchchar_header::after, #Themeboxes .rank_header::before, #Themeboxes .rank_header::after { content: '*'; color: #ffcb66; font-size: 12px; padding: 0 5px; }
+	#Themeboxes .eclipse-collapsible-box .eclipse-rightbox-title,
+	#Themeboxes .eclipse-collapsible-box .donate_header,
+	#Themeboxes .eclipse-collapsible-box .rank_header { position: relative !important; padding: 0 28px 0 12px !important; cursor: default !important; overflow: hidden !important; }
+	#Themeboxes .eclipse-collapsible-box .eclipse-collapsible-title-text { display: inline-block !important; max-width: 126px !important; overflow: hidden !important; text-overflow: ellipsis !important; white-space: nowrap !important; vertical-align: top !important; }
+	#Themeboxes .eclipse-box-toggle { position: absolute !important; top: 6px !important; right: 7px !important; width: 20px !important; height: 18px !important; line-height: 15px !important; padding: 0 !important; border: 1px solid rgba(255,224,154,.9) !important; border-radius: 3px !important; background: linear-gradient(180deg, #7b3212 0%, #451307 100%) !important; color: #fff3c4 !important; font-family: Verdana, Arial, sans-serif !important; font-size: 14px !important; font-weight: 900 !important; text-align: center !important; text-shadow: 0 1px 1px #160301 !important; box-shadow: inset 0 1px 0 rgba(255,232,166,.32), 0 1px 3px rgba(0,0,0,.45) !important; cursor: pointer !important; z-index: 2 !important; }
+	#Themeboxes .eclipse-box-toggle:hover { background: linear-gradient(180deg, #a94717 0%, #681506 100%) !important; color: #fff !important; }
+	#Themeboxes .eclipse-collapsible-box.is-collapsed .eclipse-rightbox-title,
+	#Themeboxes .eclipse-collapsible-box.is-collapsed .donate_header,
+	#Themeboxes .eclipse-collapsible-box.is-collapsed .rank_header { border-radius: 4px !important; }
+	#Themeboxes .eclipse-collapsible-box.is-collapsed .eclipse-rightbox-content,
+	#Themeboxes .eclipse-collapsible-box.is-collapsed .donate_content,
+	#Themeboxes .eclipse-collapsible-box.is-collapsed .rank_content,
+	#Themeboxes .eclipse-collapsible-box.is-collapsed .donate_bottom,
+	#Themeboxes .eclipse-collapsible-box.is-collapsed .rank_bottom { display: none !important; }
 	#Themeboxes .eclipse-rightbox-content, #Themeboxes .donate_content, #Themeboxes .discord_content, #Themeboxes .serversave_content, #Themeboxes .searchchar_content, #Themeboxes .rank_content { width: 188px !important; min-width: 188px !important; max-width: 188px !important; height: auto !important; min-height: 0 !important; padding: 12px 10px !important; box-sizing: border-box !important; background-color: #d9b36d !important; background-image: linear-gradient(180deg, rgba(239,212,158,.97), rgba(202,156,86,.97)) !important; border: 2px solid #a86b23 !important; border-top: 0 !important; border-radius: 0 0 5px 5px !important; color: #432816 !important; box-shadow: inset 0 0 0 1px rgba(255,244,198,.55), 0 4px 12px rgba(0,0,0,.55) !important;  }
 	#Themeboxes .donate_content { padding: 9px !important; }
 	#Themeboxes .donate_content img { width: 166px !important; height: 78px !important; object-fit: cover !important; display: block !important; margin: 0 auto 8px !important; border: 1px solid rgba(69,24,16,.85) !important; filter: saturate(1.15) contrast(1.08) brightness(.88) !important; }
@@ -903,6 +913,15 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 	#LeftDiscordBox .discord_header,
 	#LeftDiscordBox .eclipse-rightbox-title { width: 188px !important; height: 32px !important; line-height: 31px !important; box-sizing: border-box !important; background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important; border: 2px solid #a86b23 !important; border-radius: 4px 4px 0 0 !important; color: #f7e7bd !important; font-family: Georgia, 'Times New Roman', serif !important; font-size: 15px !important; font-weight: 800 !important; text-transform: uppercase !important; text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important; margin: 0 !important; padding: 0 !important; background-image: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important; }
 	#LeftDiscordBox .discord_header::before, #LeftDiscordBox .discord_header::after { content: '*'; color: #ffcb66; font-size: 12px; padding: 0 5px; }
+	#LeftDiscordBox .eclipse-collapsible-box .discord_header { position: relative !important; padding: 0 28px 0 12px !important; overflow: hidden !important; }
+	#LeftDiscordBox .eclipse-collapsible-title-text { display: inline-block !important; max-width: 126px !important; overflow: hidden !important; text-overflow: ellipsis !important; white-space: nowrap !important; vertical-align: top !important; }
+	#LeftDiscordBox .eclipse-box-toggle,
+	.eclipse-left-active-events .eclipse-box-toggle { position: absolute !important; top: 6px !important; right: 7px !important; width: 20px !important; height: 18px !important; line-height: 15px !important; padding: 0 !important; border: 1px solid rgba(255,224,154,.9) !important; border-radius: 3px !important; background: linear-gradient(180deg, #7b3212 0%, #451307 100%) !important; color: #fff3c4 !important; font-family: Verdana, Arial, sans-serif !important; font-size: 14px !important; font-weight: 900 !important; text-align: center !important; text-shadow: 0 1px 1px #160301 !important; box-shadow: inset 0 1px 0 rgba(255,232,166,.32), 0 1px 3px rgba(0,0,0,.45) !important; cursor: pointer !important; z-index: 3 !important; }
+	#LeftDiscordBox .eclipse-box-toggle:hover,
+	.eclipse-left-active-events .eclipse-box-toggle:hover { background: linear-gradient(180deg, #a94717 0%, #681506 100%) !important; color: #fff !important; }
+	#LeftDiscordBox .eclipse-collapsible-box.is-collapsed .discord_header { border-radius: 4px !important; }
+	#LeftDiscordBox .eclipse-collapsible-box.is-collapsed .discord_content,
+	#LeftDiscordBox .eclipse-collapsible-box.is-collapsed .discord_bottom { display: none !important; }
 	#LeftDiscordBox .discord_content { width: 188px !important; min-width: 188px !important; max-width: 188px !important; height: auto !important; min-height: 116px !important; padding: 12px 10px !important; box-sizing: border-box !important; background-color: #d9b36d !important; background-image: linear-gradient(180deg, rgba(239,212,158,.97), rgba(202,156,86,.97)) !important; border: 2px solid #a86b23 !important; border-top: 0 !important; border-radius: 0 0 5px 5px !important; color: #432816 !important; box-shadow: inset 0 0 0 1px rgba(255,244,198,.55), 0 4px 12px rgba(0,0,0,.55) !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 9px !important; }
 	#LeftDiscordBox .discord_content::before, #LeftDiscordBox .discord_content::after, #LeftDiscordBox .discord_bottom { display: none !important; }
 	#LeftDiscordBox .eclipse-discord-icon { display: block !important; width: 58px !important; height: 58px !important; object-fit: contain !important; filter: drop-shadow(0 0 12px rgba(88,101,242,.58)) !important; }
@@ -911,6 +930,51 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 	#LeftDiscordBox .discord_button:hover { background: linear-gradient(180deg, #7c89ff 0%, #3f50e4 100%) !important; color: #fff !important; }
 	html.eclipse-theme-dark #LeftDiscordBox .discord_header,
 	html.eclipse-theme-dark #LeftDiscordBox .eclipse-rightbox-title { background: none !important; background-image: none !important; }
+
+	.eclipse-left-active-events.eclipse-collapsible-box { position: relative !important; display: block !important; padding-top: 0 !important; overflow: hidden !important; }
+	.eclipse-left-active-events .eclipse-left-active-events-kicker { position: relative !important; min-height: 32px !important; line-height: 31px !important; padding: 0 28px 0 12px !important; box-sizing: border-box !important; }
+	.eclipse-left-active-events .eclipse-collapsible-title-text { display: inline-block !important; max-width: 126px !important; overflow: hidden !important; text-overflow: ellipsis !important; white-space: nowrap !important; vertical-align: top !important; }
+	.eclipse-left-active-events.is-collapsed { padding-bottom: 0 !important; }
+	.eclipse-left-active-events.is-collapsed .eclipse-left-active-events-list { display: none !important; }
+	#Loginbox #LoginButton > div,
+	#LoginstatusText_2,
+	#DownloadBox .MediumButtonBackground { background: linear-gradient(180deg, #7b3212 0%, #451307 52%, #210704 100%) !important; border: 1px solid #f0bd52 !important; color: #fff1ba !important; box-shadow: inset 0 1px 0 rgba(255,239,174,.38), inset 0 -3px 0 rgba(30,5,2,.58), 0 0 0 1px #6f3b0e, 0 4px 10px rgba(0,0,0,.58) !important; }
+	#Loginbox #LoginButton > div:hover,
+	#LoginstatusText_2:hover,
+	#DownloadBox .MediumButtonBackground:hover { background: linear-gradient(180deg, #a94717 0%, #681506 54%, #380804 100%) !important; border-color: #fff0bd !important; box-shadow: inset 0 1px 0 rgba(255,241,193,.55), inset 0 -3px 0 rgba(36,3,1,.5), 0 4px 12px rgba(61,20,3,.68), 0 0 14px rgba(255,202,76,.54) !important; }
+	#Loginbox #ButtonText,
+	#Loginbox #ButtonText::before,
+	#LoginstatusText_2,
+	#LoginstatusText_2::before,
+	#DownloadBox .MediumButtonText,
+	#DownloadBox .MediumButtonText::before { color: #fff8dc !important; -webkit-text-fill-color: #fff8dc !important; font-weight: 900 !important; text-shadow: 0 1px 0 #170301, 0 0 7px rgba(255,209,91,.78) !important; }
+	.eclipse-left-active-events.eclipse-collapsible-box { width: 206px !important; margin: 0 0 14px !important; padding: 0 !important; border: 0 !important; border-radius: 5px !important; background: transparent !important; color: #432816 !important; text-decoration: none !important; box-shadow: 0 5px 14px rgba(0,0,0,.55) !important; }
+	.eclipse-left-active-events .eclipse-left-active-events-kicker { height: 32px !important; min-height: 32px !important; line-height: 31px !important; box-sizing: border-box !important; background: linear-gradient(180deg, #234d63 0%, #0d2535 55%, #07121b 100%) !important; border: 2px solid #a86b23 !important; border-radius: 4px 4px 0 0 !important; color: #f7e7bd !important; font-family: Georgia, 'Times New Roman', serif !important; font-size: 14px !important; font-weight: 800 !important; letter-spacing: 0 !important; text-transform: uppercase !important; text-shadow: 0 2px 0 #1c0905, 0 0 8px rgba(255,176,69,.55) !important; margin: 0 !important; padding: 0 28px 0 8px !important; background-image: none !important; white-space: nowrap !important; overflow: hidden !important; }
+	.eclipse-left-active-events .eclipse-left-active-events-kicker::before,
+	.eclipse-left-active-events .eclipse-left-active-events-kicker::after { content: '*' !important; color: #ffcb66 !important; font-size: 12px !important; padding: 0 4px !important; }
+	.eclipse-left-active-events .eclipse-collapsible-title-text { max-width: 106px !important; }
+	.eclipse-left-active-events .eclipse-left-active-events-list { display: grid !important; gap: 6px !important; width: 206px !important; min-height: 0 !important; margin: 0 !important; padding: 10px !important; box-sizing: border-box !important; background-color: #d9b36d !important; background-image: linear-gradient(180deg, rgba(239,212,158,.97), rgba(202,156,86,.97)) !important; border: 2px solid #a86b23 !important; border-top: 0 !important; border-radius: 0 0 5px 5px !important; box-shadow: inset 0 0 0 1px rgba(255,244,198,.55) !important; }
+	.eclipse-left-active-events .eclipse-left-active-events-list span { display: block !important; width: 100% !important; padding: 5px 7px !important; box-sizing: border-box !important; border: 1px solid rgba(72,34,13,.30) !important; border-left: 4px solid var(--event-color, #28516d) !important; border-radius: 3px !important; background: rgba(255,244,198,.30) !important; color: #432816 !important; font-family: Verdana, Arial, sans-serif !important; font-size: 10px !important; font-weight: 800 !important; line-height: 1.2 !important; text-shadow: none !important; }
+	.eclipse-left-active-events.is-collapsed .eclipse-left-active-events-kicker { border-radius: 4px !important; }
+	.eclipse-left-active-events.is-collapsed .eclipse-left-active-events-list { display: none !important; }
+	html.eclipse-theme-light #Loginbox #LoginButton > div,
+	html.eclipse-theme-light #LoginstatusText_2,
+	html.eclipse-theme-light #DownloadBox .MediumButtonBackground { background: linear-gradient(180deg, #2f9bd0 0%, #0c4f84 48%, #031f49 100%) !important; border: 1px solid rgba(255,224,137,.98) !important; color: #fff8dc !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.36), inset 0 -3px 0 rgba(0,20,49,.46), 0 0 0 1px rgba(13,77,125,.74), 0 4px 10px rgba(0,28,54,.36) !important; filter: none !important; }
+	html.eclipse-theme-light #Loginbox #LoginButton > div:hover,
+	html.eclipse-theme-light #LoginstatusText_2:hover,
+	html.eclipse-theme-light #DownloadBox .MediumButtonBackground:hover { background: linear-gradient(180deg, #4bb8ec 0%, #12679f 46%, #06285a 100%) !important; border-color: rgba(255,236,165,1) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.48), inset 0 -3px 0 rgba(0,20,49,.5), 0 4px 12px rgba(0,50,94,.46), 0 0 14px rgba(91,183,238,.45) !important; }
+	html.eclipse-theme-light #Loginbox #ButtonText,
+	html.eclipse-theme-light #Loginbox #ButtonText::before,
+	html.eclipse-theme-light #LoginstatusText_2,
+	html.eclipse-theme-light #LoginstatusText_2::before,
+	html.eclipse-theme-light #DownloadBox .MediumButtonText,
+	html.eclipse-theme-light #DownloadBox .MediumButtonText::before { color: #fff8dc !important; -webkit-text-fill-color: #fff8dc !important; font-weight: 900 !important; text-shadow: 0 1px 0 #170301, 0 0 7px rgba(255,209,91,.78) !important; }
+	html.eclipse-theme-light .eclipse-left-active-events.eclipse-collapsible-box { background: transparent !important; border: 0 !important; box-shadow: 0 5px 14px rgba(0,28,54,.32) !important; color: #432816 !important; -webkit-text-fill-color: #432816 !important; text-shadow: none !important; }
+	html.eclipse-theme-light .eclipse-left-active-events .eclipse-left-active-events-kicker { background: linear-gradient(180deg, #2f9bd0 0%, #0c4f84 48%, #031f49 100%) !important; border: 2px solid #a86b23 !important; color: #f7e7bd !important; -webkit-text-fill-color: #f7e7bd !important; text-shadow: 0 2px 0 #001a2b, 0 0 8px rgba(111,196,246,.50) !important; }
+	html.eclipse-theme-light .eclipse-left-active-events .eclipse-left-active-events-kicker::before,
+	html.eclipse-theme-light .eclipse-left-active-events .eclipse-left-active-events-kicker::after { color: #ffcb66 !important; -webkit-text-fill-color: #ffcb66 !important; text-shadow: 0 0 7px rgba(255,218,112,.85) !important; }
+	html.eclipse-theme-light .eclipse-left-active-events .eclipse-left-active-events-list { background-color: #d9b36d !important; background-image: linear-gradient(180deg, rgba(239,212,158,.97), rgba(202,156,86,.97)) !important; border-color: #a86b23 !important; }
+	html.eclipse-theme-light .eclipse-left-active-events .eclipse-left-active-events-list span { background: rgba(255,244,198,.30) !important; border-color: rgba(72,34,13,.30) !important; color: #432816 !important; -webkit-text-fill-color: #432816 !important; text-shadow: none !important; }
 
 
 
@@ -1162,11 +1226,13 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 		#EclipseCenteredLogo {
 		  position: absolute !important;
 		  top: 4px !important;
-		  left: 50% !important;
+		  left: calc(50vw - 143px) !important;
+		  right: auto !important;
 		  width: 286px !important;
 		  height: 208px !important;
 		  display: block !important;
-		  transform: translateX(-50%) !important;
+		  margin: 0 !important;
+		  transform: translateZ(0) !important;
 		  object-fit: contain !important;
 		  cursor: pointer !important;
 		  z-index: 999999 !important;
@@ -4722,7 +4788,7 @@ class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
 <div class="scrollToTop" title="To the top">
 	<img alt style="border:0;" src="<?= $template_path . '/images/global/content/back-to-top.gif' ?>">
 </div>
-<script src="<?= $template_path; ?>/js/generic.js?v=loading-cancel-1"></script>
+<script src="<?= $template_path; ?>/js/generic.js?v=rightbox-collapse-1"></script>
 <div id="HelperDivContainer" style="background-image: url(<?= $template_path; ?>/images/global/content/scroll.gif);">
 	<div class="HelperDivArrow"
 		 style="background-image: url(<?= $template_path; ?>/images/global/content/helper-div-arrow.png);"></div>

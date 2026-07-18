@@ -16,6 +16,11 @@ function eclipseGuideTranslate(string $key): string
 	return t('server_guide.' . $key);
 }
 
+function eclipseGuideStepLabel(int $index): string
+{
+	return eclipseGuideTranslate('step_label') . ' ' . ($index + 1);
+}
+
 $imageBase = '/plugins/theme-canary/themes/canary/images/';
 $itemImageBase = setting('core.item_images_url');
 $itemImageExtension = setting('core.item_images_extension');
@@ -33,7 +38,7 @@ $wikiImages = [
 ];
 
 $rewardItemIds = [
-	'amazon armor' => 3394,
+	'paladin armor' => 8063,
 	'avenger' => 6527,
 	'axe of destruction' => 27451,
 	'bambus jo' => 50270,
@@ -177,7 +182,7 @@ $rewardGroups = [
 		'image' => $imageBase . 'vocations/paladinbanner.png',
 		'levels' => [
 			50 => ['composite hornbow', 'Zaoan armor'],
-			60 => ['chain bolter', 'amazon armor'],
+			60 => ['chain bolter', 'paladin armor'],
 			80 => ['warsinger bow', 'yalahari leg piece'],
 			100 => ["master archer's armor", 'elite draken helmet'],
 			120 => ['rift bow', 'rift crossbow', 'prismatic armor'],
@@ -252,6 +257,7 @@ $guideSteps = [
 	],
 	[
 		'kicker' => 'step_4_kicker',
+		'stage' => 'step_4_stage_1',
 		'title' => 'step_4_title',
 		'image' => $imageBase . 'premiumfeatures/PremiumIcon-VIP.png',
 		'secondary_image' => $wikiImages['storeChest'],
@@ -259,7 +265,7 @@ $guideSteps = [
 		'text' => 'step_4_text',
 		'bullets' => ['step_4_bullet_1', 'step_4_bullet_2', 'step_4_bullet_3'],
 		'secondary' => [
-			'kicker' => 'step_5_kicker',
+			'stage' => 'step_4_stage_2',
 			'title' => 'step_5_title',
 			'text' => 'step_5_text',
 			'bullets' => ['step_5_bullet_1', 'step_5_bullet_2', 'step_5_bullet_3'],
@@ -304,15 +310,19 @@ $guideSteps = [
 	}
 
 	.eclipse-guide .guide-hero {
-		padding: 18px;
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		gap: 10px 14px;
+		align-items: center;
+		padding: 13px 16px;
 		border-bottom: 1px solid rgba(112, 65, 24, .48);
 		background: linear-gradient(180deg, #fff0bd 0%, #e8c27a 100%);
 	}
 
 	.eclipse-guide .guide-eyebrow {
 		display: inline-block;
-		margin-bottom: 10px;
-		padding: 5px 9px;
+		margin: 0;
+		padding: 5px 10px;
 		border: 1px solid rgba(91, 22, 9, .35);
 		border-radius: 4px;
 		background: linear-gradient(180deg, #6d1a0e 0%, #2b0604 100%);
@@ -325,76 +335,111 @@ $guideSteps = [
 	}
 
 	.eclipse-guide h1 {
-		margin: 0 0 8px;
-		color: #000 !important;
-		-webkit-text-fill-color: #000 !important;
-		font: 900 25px Georgia, "Times New Roman", serif;
+		grid-column: 2;
+		margin: 0;
+		color: #0b0502 !important;
+		-webkit-text-fill-color: #0b0502 !important;
+		font: 400 27px Georgia, "Times New Roman", serif;
+		line-height: 1.08;
 	}
 
 	.eclipse-guide .guide-lead {
-		max-width: 720px;
+		grid-column: 1 / -1;
+		max-width: none;
 		margin: 0;
-		font-size: 14px;
-		line-height: 1.5;
+		padding: 9px 11px;
+		border: 1px solid rgba(118, 70, 26, .28);
+		border-radius: 4px;
+		background: rgba(255, 248, 220, .45);
+		font-size: 13px;
+		line-height: 1.35;
 	}
 
 	.eclipse-guide .guide-steps {
-		display: flex;
-		gap: 8px;
-		align-items: center;
-		justify-content: center;
-		flex-wrap: wrap;
-		padding: 14px 12px;
+		display: grid;
+		grid-template-columns: repeat(7, minmax(0, 1fr));
+		gap: 6px;
+		padding: 10px;
 		background: rgba(81, 38, 9, .12);
 	}
 
 	.eclipse-guide .guide-step-button {
-		width: 34px;
-		height: 34px;
+		display: grid;
+		grid-template-columns: 24px minmax(0, 1fr);
+		gap: 5px;
+		align-items: center;
+		width: 100%;
+		min-height: 44px;
+		padding: 5px 7px 5px 5px;
 		border: 1px solid #8a4d17;
-		border-radius: 50%;
+		border-radius: 5px;
 		background: linear-gradient(180deg, #fff2bd 0%, #d5a456 100%);
 		box-shadow: inset 0 1px 0 rgba(255, 255, 255, .64), 0 2px 5px rgba(61, 31, 5, .24);
-		color: #4d1209 !important;
+		color: #050201 !important;
+		-webkit-text-fill-color: #050201 !important;
 		cursor: pointer;
-		font: 900 14px Arial, sans-serif;
+		text-align: left;
 	}
 
 	.eclipse-guide .guide-step-button.active {
-		border-color: #ffe0a0;
-		background: linear-gradient(180deg, #ff9b1f 0%, #df6505 100%);
-		color: #fff7d4 !important;
-		-webkit-text-fill-color: #fff7d4 !important;
-		text-shadow: 0 1px 1px #4c1600 !important;
+		border-color: #5d2606;
+		background: linear-gradient(180deg, #ffe08a 0%, #ec9f2e 100%);
+		color: #050201 !important;
+		-webkit-text-fill-color: #050201 !important;
+		text-shadow: none !important;
+	}
+
+	.eclipse-guide .guide-step-number {
+		display: grid;
+		place-items: center;
+		width: 24px;
+		height: 24px;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, .42);
+		color: #050201 !important;
+		-webkit-text-fill-color: #050201 !important;
+		font: 900 12px Arial, sans-serif;
+	}
+
+	.eclipse-guide .guide-step-label {
+		overflow: hidden;
+		color: #050201 !important;
+		-webkit-text-fill-color: #050201 !important;
+		font: 400 11px/1.16 Arial, sans-serif;
+		text-overflow: ellipsis;
 	}
 
 	.eclipse-guide .guide-track-wrap {
 		overflow: hidden;
+		transition: height .28s ease;
 	}
 
 	.eclipse-guide .guide-track {
 		display: flex;
+		align-items: flex-start;
 		transition: transform .28s ease;
 	}
 
 	.eclipse-guide .guide-panel {
 		display: grid;
-		grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
-		gap: 18px;
+		grid-template-columns: minmax(0, 210px) minmax(0, 1fr);
+		gap: 12px;
 		min-width: 100%;
-		padding: 18px;
-		align-items: stretch;
+		padding: 12px;
+		align-items: start;
 	}
 
 	.eclipse-guide .guide-panel.rewards {
-		display: block;
+		display: grid;
+		grid-template-columns: 1fr;
 	}
 
 	.eclipse-guide .guide-image-card {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		min-height: 250px;
+		min-height: 178px;
+		padding: 10px;
 		border: 1px solid rgba(118, 70, 26, .46);
 		border-radius: 5px;
 		background: linear-gradient(180deg, #f8e5b0 0%, #e3bd74 100%);
@@ -402,28 +447,29 @@ $guideSteps = [
 	}
 
 	.eclipse-guide .guide-image-card.has-multiple {
-		flex-direction: column;
-		gap: 16px;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 10px;
 	}
 
 	.eclipse-guide .guide-image-card img {
 		display: block;
 		max-width: 100%;
-		max-height: 230px;
+		max-height: 164px;
 		object-fit: contain;
 	}
 
 	.eclipse-guide .guide-image-card img[src*="static.wikia.nocookie.net"][src*=".gif"] {
-		width: 112px;
-		height: 112px;
-		max-height: 112px;
+		width: 82px;
+		height: 82px;
+		max-height: 82px;
 		image-rendering: pixelated;
 		filter: drop-shadow(0 10px 14px rgba(56, 24, 6, .36));
 	}
 
 	.eclipse-guide .guide-copy,
 	.eclipse-guide .guide-rewards-copy {
-		padding: 16px;
+		padding: 13px;
 		border: 1px solid rgba(118, 70, 26, .46);
 		border-radius: 5px;
 		background: linear-gradient(180deg, #fff2c4 0%, #e9c27a 100%);
@@ -432,26 +478,40 @@ $guideSteps = [
 
 	.eclipse-guide .guide-kicker {
 		display: inline-block;
-		margin-bottom: 8px;
+		margin-bottom: 5px;
 		color: #000 !important;
 		-webkit-text-fill-color: #000 !important;
-		font-size: 12px;
+		font-size: 11px;
 		text-transform: uppercase;
 		letter-spacing: .06em;
 	}
 
+	.eclipse-guide .guide-stage {
+		display: inline-block;
+		margin: 0 0 5px 6px;
+		padding: 2px 7px;
+		border: 1px solid rgba(112, 65, 24, .45);
+		border-radius: 999px;
+		background: rgba(255, 244, 199, .72);
+		color: #0b0502 !important;
+		-webkit-text-fill-color: #0b0502 !important;
+		font: 900 10px Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: .05em;
+	}
+
 	.eclipse-guide h2 {
-		margin: 0 0 10px;
-		color: #000 !important;
-		-webkit-text-fill-color: #000 !important;
-		font: 900 22px Georgia, "Times New Roman", serif;
+		margin: 0 0 7px;
+		color: #0b0502 !important;
+		-webkit-text-fill-color: #0b0502 !important;
+		font: 400 23px/1.1 Georgia, "Times New Roman", serif;
 	}
 
 	.eclipse-guide .guide-copy p,
 	.eclipse-guide .guide-rewards-copy p {
-		margin: 0 0 12px;
-		font-size: 14px;
-		line-height: 1.55;
+		margin: 0 0 9px;
+		font-size: 13px;
+		line-height: 1.42;
 	}
 
 	.eclipse-guide .guide-copy ul {
@@ -460,13 +520,14 @@ $guideSteps = [
 	}
 
 	.eclipse-guide .guide-copy li {
-		margin: 7px 0;
-		line-height: 1.45;
+		margin: 5px 0;
+		font-size: 12px;
+		line-height: 1.34;
 	}
 
 	.eclipse-guide .guide-copy-section + .guide-copy-section {
-		margin-top: 14px;
-		padding-top: 14px;
+		margin-top: 10px;
+		padding-top: 10px;
 		border-top: 1px solid rgba(105, 55, 16, .4);
 		box-shadow: inset 0 1px 0 rgba(255, 248, 210, .78);
 	}
@@ -474,17 +535,17 @@ $guideSteps = [
 	.eclipse-guide .guide-vocation-grid {
 		display: grid;
 		grid-template-columns: repeat(5, minmax(0, 1fr));
-		gap: 10px;
-		margin-top: 14px;
+		gap: 7px;
+		margin-top: 10px;
 	}
 
 	.eclipse-guide .guide-exercise-reward {
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) minmax(236px, auto);
-		gap: 12px;
+		gap: 10px;
 		align-items: center;
-		margin: 12px 0 2px;
-		padding: 10px;
+		margin: 8px 0 0;
+		padding: 8px;
 		border: 1px solid rgba(118, 70, 26, .36);
 		border-radius: 5px;
 		background: rgba(255, 247, 215, .62);
@@ -534,9 +595,11 @@ $guideSteps = [
 	.eclipse-guide .guide-vocation-card img {
 		display: block;
 		width: 100%;
-		height: 58px;
-		object-fit: cover;
-		object-position: center top;
+		height: 66px;
+		padding: 3px;
+		background: rgba(255, 246, 210, .55);
+		object-fit: contain;
+		object-position: center center;
 	}
 
 	.eclipse-guide .guide-vocation-card.active {
@@ -547,15 +610,16 @@ $guideSteps = [
 
 	.eclipse-guide .guide-vocation-card strong {
 		display: block;
-		padding: 7px 8px;
+		padding: 6px 6px;
 		text-align: center;
 		color: #000 !important;
 		-webkit-text-fill-color: #000 !important;
+		font-size: 12px;
 	}
 
 	.eclipse-guide .guide-reward-table-wrap {
 		overflow-x: auto;
-		margin-top: 14px;
+		margin-top: 10px;
 		border: 1px solid rgba(118, 70, 26, .46);
 		border-radius: 5px;
 		background: rgba(255, 246, 210, .64);
@@ -581,7 +645,7 @@ $guideSteps = [
 
 	.eclipse-guide .guide-reward-table th,
 	.eclipse-guide .guide-reward-table td {
-		padding: 8px;
+		padding: 6px 8px;
 		border-bottom: 1px solid rgba(118, 70, 26, .32);
 		text-align: left;
 		vertical-align: top;
@@ -603,10 +667,10 @@ $guideSteps = [
 
 	.eclipse-guide .guide-reward-row {
 		display: grid;
-		grid-template-columns: 58px minmax(0, 1fr);
-		gap: 8px;
+		grid-template-columns: 52px minmax(0, 1fr);
+		gap: 7px;
 		align-items: flex-start;
-		padding: 5px 0;
+		padding: 4px 0;
 		border-bottom: 1px solid rgba(118, 70, 26, .2);
 	}
 
@@ -625,7 +689,7 @@ $guideSteps = [
 		display: inline-flex;
 		align-items: center;
 		gap: 4px;
-		padding: 2px 6px 2px 3px;
+		padding: 2px 5px 2px 3px;
 		border: 1px solid rgba(118, 70, 26, .32);
 		border-radius: 4px;
 		background: rgba(255, 248, 220, .6);
@@ -644,12 +708,12 @@ $guideSteps = [
 		display: flex;
 		justify-content: space-between;
 		gap: 10px;
-		padding: 0 18px 18px;
+		padding: 0 12px 12px;
 	}
 
 	.eclipse-guide .guide-nav {
 		min-width: 120px;
-		padding: 10px 14px;
+		padding: 8px 14px;
 		border: 1px solid #ffe1a0;
 		border-radius: 4px;
 		background: linear-gradient(180deg, #173f54 0%, #08202d 100%);
@@ -680,6 +744,19 @@ $guideSteps = [
 	}
 
 	@media (max-width: 760px) {
+		.eclipse-guide .guide-hero {
+			grid-template-columns: 1fr;
+		}
+
+		.eclipse-guide h1,
+		.eclipse-guide .guide-lead {
+			grid-column: auto;
+		}
+
+		.eclipse-guide .guide-steps {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
 		.eclipse-guide .guide-panel {
 			grid-template-columns: 1fr;
 		}
@@ -717,18 +794,19 @@ $guideSteps = [
 		<div class="guide-steps" aria-label="<?php echo eclipseGuideEscape(eclipseGuideTranslate('steps_aria')); ?>">
 			<?php foreach ($guideSteps as $index => $step): ?>
 				<button class="guide-step-button<?php echo $index === 0 ? ' active' : ''; ?>" type="button" data-guide-step="<?php echo $index; ?>" aria-label="<?php echo eclipseGuideEscape(eclipseGuideTranslate('go_to_step') . ' ' . ($index + 1)); ?>">
-					<?php echo $index + 1; ?>
+					<span class="guide-step-number"><?php echo $index + 1; ?></span>
+					<span class="guide-step-label"><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['title'])); ?></span>
 				</button>
 			<?php endforeach; ?>
 		</div>
 
 		<div class="guide-track-wrap">
 			<div class="guide-track">
-				<?php foreach ($guideSteps as $step): ?>
+				<?php foreach ($guideSteps as $panelIndex => $step): ?>
 					<?php if (($step['type'] ?? '') === 'rewards'): ?>
 						<section class="guide-panel rewards">
 							<div class="guide-rewards-copy">
-								<span class="guide-kicker"><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['kicker'])); ?></span>
+								<span class="guide-kicker"><?php echo eclipseGuideEscape(eclipseGuideStepLabel($panelIndex)); ?></span>
 								<h2><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['title'])); ?></h2>
 								<p><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['text'])); ?></p>
 
@@ -798,7 +876,10 @@ $guideSteps = [
 							</div>
 							<div class="guide-copy">
 								<div class="guide-copy-section">
-									<span class="guide-kicker"><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['kicker'])); ?></span>
+									<span class="guide-kicker"><?php echo eclipseGuideEscape(eclipseGuideStepLabel($panelIndex)); ?></span>
+									<?php if (isset($step['stage'])): ?>
+										<span class="guide-stage"><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['stage'])); ?></span>
+									<?php endif; ?>
 									<h2><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['title'])); ?></h2>
 									<p><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['text'])); ?></p>
 									<ul>
@@ -809,7 +890,10 @@ $guideSteps = [
 								</div>
 								<?php if (isset($step['secondary'])): ?>
 									<div class="guide-copy-section">
-										<span class="guide-kicker"><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['secondary']['kicker'])); ?></span>
+										<span class="guide-kicker"><?php echo eclipseGuideEscape(eclipseGuideStepLabel($panelIndex)); ?></span>
+										<?php if (isset($step['secondary']['stage'])): ?>
+											<span class="guide-stage"><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['secondary']['stage'])); ?></span>
+										<?php endif; ?>
 										<h2><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['secondary']['title'])); ?></h2>
 										<p><?php echo eclipseGuideEscape(eclipseGuideTranslate($step['secondary']['text'])); ?></p>
 										<ul>
@@ -841,6 +925,8 @@ $guideSteps = [
 		}
 
 		var track = guide.querySelector('.guide-track');
+		var trackWrap = guide.querySelector('.guide-track-wrap');
+		var panels = Array.prototype.slice.call(guide.querySelectorAll('.guide-panel'));
 		var stepButtons = Array.prototype.slice.call(guide.querySelectorAll('[data-guide-step]'));
 		var rewardButtons = Array.prototype.slice.call(guide.querySelectorAll('[data-guide-reward-tab]'));
 		var rewardPanels = Array.prototype.slice.call(guide.querySelectorAll('[data-guide-reward-panel]'));
@@ -851,6 +937,9 @@ $guideSteps = [
 		function showStep(step) {
 			activeStep = Math.max(0, Math.min(step, stepButtons.length - 1));
 			track.style.transform = 'translateX(' + (-activeStep * 100) + '%)';
+			if (panels[activeStep] && trackWrap) {
+				trackWrap.style.height = panels[activeStep].offsetHeight + 'px';
+			}
 
 			stepButtons.forEach(function (button, index) {
 				button.classList.toggle('active', index === activeStep);
@@ -877,6 +966,9 @@ $guideSteps = [
 				rewardPanels.forEach(function (panel) {
 					panel.classList.toggle('active', panel.getAttribute('data-guide-reward-panel') === tab);
 				});
+				if (panels[activeStep] && trackWrap) {
+					trackWrap.style.height = panels[activeStep].offsetHeight + 'px';
+				}
 			});
 		});
 
@@ -894,6 +986,10 @@ $guideSteps = [
 			} else if (event.key === 'ArrowRight') {
 				showStep(activeStep + 1);
 			}
+		});
+
+		window.addEventListener('resize', function () {
+			showStep(activeStep);
 		});
 
 		showStep(0);
